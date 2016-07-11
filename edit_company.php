@@ -33,6 +33,22 @@
 
         });
     });
+
+       function file_viewer_load(controller) { //預覽圖片方法
+
+            var file=controller.files[0];
+             if (file==null) {
+                $('#file_view').html('');
+             }
+             else{
+                var fileReader= new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function(event){
+
+                $('#img_logo').html('<p>公司LOGO</p><img  src="'+this.result+'" alt="">');
+             }
+            };
+          }
     </script>
 </head>
 <body style="font-family: 微軟正黑體">
@@ -60,6 +76,14 @@
                                <div class="form-group">
                                    <label class="col-sm-2 control-label">*公司名稱</label>
                                     <div class="col-sm-4"><input name="com_name" type="text" class="form-control" value="<?php echo $com_name;?>"></div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-sm-2 control-label">*公司LOGO</label>
+                                    <div class="col-sm-4"><input name="com_LOGO" type="file" class="form-control" accept="image/*" onchange="file_viewer_load(this)" ></div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                  <div id="img_logo"></div>
                                 </div>
 
                                <!-- =========================== 分隔線 ============================ -->
