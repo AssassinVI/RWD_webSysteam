@@ -64,7 +64,15 @@ if ($_POST) {
       /* ============================ 權限判斷 ================================== */
       if (check_mobile()) {
         
-
+         if ($competence=='admin') {
+           echo "location.replace('admin_user.php');";
+         }
+         elseif($competence=='user'){
+           echo "location.replace('admin_project_ph.php');";
+         }
+         elseif(($competence=='case') OR ($competence=='company')){
+           echo "location.replace('admin_project_phcs.php');";
+         }
       }
       else{
 
