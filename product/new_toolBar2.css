@@ -1,0 +1,257 @@
+
+.tool_box_btn{
+  display: none;
+  position: fixed;
+  background-color: #0072E3;
+  left: 44%;
+  bottom: 0px;
+  padding: 10px;
+  z-index: 999;
+  border-radius: 40px 40px 0px 0px;
+  padding: 14px;
+ text-decoration: none;
+ margin:0px;
+ color: #fff;
+}
+
+.tool_box{
+ /*background-color: rgba(0,0,0,0);*/
+}
+.tool_lay{
+position: fixed;
+z-index: 100;
+}
+.tool_lay_base{
+  width: 45px;
+  height: 45px;
+  border-radius: 30px 30px;
+}
+.tool_lay_base img{
+ border-radius: 30px 30px;
+ width: 45px;
+ height: 45px;	
+}
+.btn_lay{
+  padding-top: 10px;
+  text-align: center;
+  font-size: 21px;
+  width: 47px;
+  height: 44px;
+  transition:width 0.5s;
+ -webkit-transition:width 0.5s  ;/* google*/
+ -moz-transition:width 0.5s;/* Firefox 4*/
+ -o-transition:width 0.5s;/* Opera*/
+}
+.btn_lay:hover{
+  text-decoration: none;
+  width: 70px;
+}
+.btn_lay:focus{
+  color: #fff; 
+  text-decoration: none; 
+}
+
+#phone_btn{ /* 電話 */
+ 
+  background-color: #00D6D6;
+  text-align: center;
+  font-size: 23px;
+  margin-left:6%;
+}
+#LINE_btn{ /* LINE */
+  margin-left:7%;
+}
+#fb_btn{ /* FB */
+background-color: #fff;
+ margin-left:23%;
+} 
+#gm_btn{ /* map */
+ margin-left:7%;
+}
+
+#gm_food_btn{ /* 食 */
+
+  background-color:rgb(255, 148, 88);
+  margin:0px;
+}
+#gm_phl_btn{ /* 醫 */
+  background-color: #7f7f7f;
+  margin:0px;
+}
+#gm_home_btn{ /* 住 */
+background-color: #c33d3d;
+margin:0px;
+}
+#gm_work_btn{ /* 行 */
+  background-color:rgb(243, 184, 4);
+  margin:0px;
+}
+#gm_school_btn{ /* 育 */
+background-color: #2c6697;
+margin:0px;
+}
+#gm_fun_btn{ /* 樂 */
+background-color: #adcf1d;
+margin:0px;
+}
+
+
+#other_food{   /* 食(其他) */
+    bottom: 637px;
+}
+#other_hospital{ /* 醫(其他) */
+    bottom: 593px;
+}
+#other_home{   /* 住(其他) */
+    bottom: 549px;
+}
+#other_traffic{   /* 行(其他) */
+    bottom: 505px;
+}
+#other_school{   /* 育(其他) */
+    bottom: 461px;
+}
+#other_fun{   /* 樂(其他) */
+    bottom: 417px;
+}
+.other_div{
+  display: none;
+    position: fixed;
+    z-index: 1000;
+    width: 170px;
+    right: 69px;
+}
+.other_btn{
+    font-size: 22px;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+.other_btn a{
+  display: block;
+  text-decoration: none;
+}
+.other_btn:hover{
+  width: 140px;
+}
+
+@media only screen and (min-width:768px){
+#gm_food_btn{ /* 食 */
+  right:22px;
+  bottom: 637px;
+}
+#gm_phl_btn{ /* 醫 */
+  right:22px;
+  bottom: 593px;
+}
+#gm_home_btn{ /* 住 */
+right:22px;
+bottom: 549px;
+}
+#gm_work_btn{ /* 行 */
+  right:22px;
+  bottom: 505px;
+}
+#gm_school_btn{ /* 育 */
+right:22px;
+bottom: 461px;
+}
+#gm_fun_btn{ /* 樂 */
+right:22px;
+bottom: 417px;
+}
+}
+
+ @media only screen and (max-width:768px){
+  .tool_box_btn{
+  	display: block;
+
+  }
+  #phone_btn{ /* 電話 */
+
+  margin-left:17%;
+}
+.tool_lay{
+  display: none;
+width:300px;
+height: 45px;
+border-radius: 0px;
+
+}
+.btn_lay:hover{
+  text-decoration: none;
+  width: 170px;
+}
+
+#gm_food_btn{ /* 食 */
+  left:28%;
+  bottom: 60px;
+}
+#gm_phl_btn{ /* 醫 */
+  left:28%;
+  bottom: 105px;
+}
+#gm_home_btn{ /* 住 */
+  left:28%;
+bottom: 150px;
+}
+#gm_work_btn{ /* 行 */
+  left:28%;
+ bottom: 195px;
+}
+#gm_school_btn{ /* 育 */
+ left:28%;
+bottom: 240px;
+}
+#gm_fun_btn{ /* 樂 */
+ left:28%;
+bottom: 285px;
+}
+
+
+#other_food{ /* 食(其他) */
+  bottom: 209px;
+  left: 41%;
+}
+#other_hospital{ /* 醫(其他) */
+    bottom: 118px;
+    left: 6%;
+}
+#other_home{ /* 住(其他) */
+    bottom: 172px;
+    left: 11%;
+}
+#other_traffic{ /* 行(其他) */
+    bottom: 209px;
+    left: 25%;
+}
+#other_school{ /* 育(其他) */
+    bottom: 171px;
+    left: 56%;
+}
+#other_fun{ /* 樂(其他) */
+    bottom: 330px;
+    left: 28%;
+}
+ }
+
+ @media only screen and (max-width:640px){
+
+  #phone_btn{ /* 電話 */
+
+  margin-left:15%;
+}
+.tool_lay{
+  width: 248px;
+}
+}
+ @media only screen and (max-width:430px){
+
+  #phone_btn{ /* 電話 */
+
+  margin-left:8%;
+}
+.tool_lay{
+  width: 170px;
+}
+}

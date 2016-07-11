@@ -1,0 +1,83 @@
+#tool_box_btn{
+	display: none;
+  position: fixed;	
+  background-color: #0072E3;
+  left: 44%;
+  bottom: 0px;
+  padding: 10px;
+  z-index: 999;
+  border-radius: 40px 40px 0px 0px;
+  padding: 11px;
+ text-decoration: none;
+}
+
+.tool_box{
+ /*background-color: rgba(0,0,0,0);*/
+}
+.tool_lay{
+position: fixed;
+width: 45px;
+height: 45px;
+border-radius: 30px 30px;
+  left: 44%;
+  bottom: 0px;
+transform: rotate(180deg);
+-ms-transform: rotate(180deg);   /* IE 9 */
+-webkit-transform: rotate(180deg); /* Safari and Chrome */
+-o-transform: rotate(180deg);    /* Opera */
+-moz-transform: rotate(180deg);    /* Firefox */
+opacity: 0;
+
+transition:transform 0.5s ,opacity 0.3s;
+ -webkit-transition: -webkit-transform 0.5s ,opacity 0.3s ;/* google*/
+ -moz-transition:-moz-transform 0.5s ,opacity 0.3s;/* Firefox 4*/
+ -o-transition:-o-transform 0.5s ,opacity 0.3s;/* Opera*/
+}
+.tool_lay img{
+ border-radius: 30px 30px;
+ width: 45px;
+height: 45px;	
+}
+#phone_btn{
+
+  background-color: #00D6D6;
+  margin:0px;
+  text-align: center;
+  font-size: 20px;
+}
+#LINE_btn{
+margin:0px;
+
+}
+#fb_btn{
+    background-color: #fff;
+margin:0px;
+}
+#gm_btn{
+margin:0px;
+}
+#gm_food_btn{
+
+  background-color:rgb(255, 148, 88);
+  margin-top:9px;
+  padding-top: 7px;
+  margin:0px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.tool_lay.rotate{
+opacity: 100;
+
+  transform: rotate(0deg);
+-ms-transform: rotate(0deg);   /* IE 9 */
+-webkit-transform: rotate(0deg); /* Safari and Chrome */
+-o-transform: rotate(0deg);    /* Opera */
+-moz-transform: rotate(0deg);    /* Firefox */
+}
+
+ @media only screen and (max-width:700px){
+  #tool_box_btn{
+  	display: block;
+  }
+ }

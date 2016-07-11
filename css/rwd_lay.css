@@ -1,0 +1,49 @@
+.fun_btn{
+        background-color:#0072E3;
+        color: #fff;
+        border-radius: 5px 5px;
+        padding: 7px;
+        font-size: 17px;
+        margin-left: 15px;
+        text-decoration: none;
+     }
+.fun_btn:hover{
+        color: #fff;
+     }
+
+.tra_shadow{
+        transition: box-shadow 0.25s;
+      }
+
+.tra_shadow:hover{
+        box-shadow: 0px 3px 4px #7B7B7B;
+      }
+
+
+
+/* ======================= 小螢幕 ========================== */
+ @media only screen and (max-width:1024px) {
+
+    .pro_case_id ,.pro_bu_phone{
+    	display: none;
+    }
+
+   .no_display1024{
+    	display: none;
+   }
+
+ }
+
+/* ======================= 手機 ========================== */
+ @media only screen and (max-width:768px){
+
+  /* 使用這介面 */
+
+   .no_display768{
+   	 display: none;
+   }
+   
+   .no_padding{
+   	 padding: 0px;
+   }
+ }

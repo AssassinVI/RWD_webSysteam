@@ -1,0 +1,908 @@
+body {
+        font-family:微軟正黑體;
+    }
+    #address_ul li{
+        display:inline-block;
+        padding:5px;
+        font-size: 20px;
+        color:  #FCFCFC;
+        text-align: center;
+    }
+    /* 導航按鈕 */
+    #adds_click{
+       display: block;
+       font-size: 40px;
+       text-decoration: none;
+       padding: 20px;
+       background-color: #fff;
+       transition:  background-color 0.5s,color 0.5s;
+    }
+    #adds_click:hover{
+        background-color: #005AB5;
+        color: #fff;
+    }
+    .mar_top {
+        position: absolute;
+        top: 20px;
+    }
+    
+    .nopadd {
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .carousel_box {
+        height: 700px;
+    }
+    
+    #format h3 {
+        background-color: #307F6D;
+        width: 30%;
+        padding: 10px;
+        font-family: 微軟正黑體;
+    }
+    
+    #format p {
+        border-bottom: 1px solid #4ECDC4;
+        font-family: 微軟正黑體;
+        width: 90%;
+        font-size: 22px;
+        padding-top: 10px;
+         letter-spacing:2px;
+    }
+    
+    #format span {
+        font-size: 15px;
+        background-color: #707070;
+        color: #91E2FF;
+        padding: 5px;
+    }
+    
+    #detail span {
+        color: #FFED76;
+        font-size: 25px;
+         letter-spacing:3px;
+    }
+    
+    #detail h3 {
+        background-color: #307F6D;
+        width: 30%;
+        padding: 10px;
+        font-family: 微軟正黑體;
+    }
+    
+    #detail p {
+        padding: 5px;
+        font-size: 18px;
+         letter-spacing:2px;
+    }
+    
+    #all {
+        width: 100%;
+    }
+    
+    .big_txt b{
+        font-size: 20px;
+        color:#fff;
+    }
+     .big_txt b:hover{
+            color:#FFF0AC;
+        }
+    .nav_active{
+        color: #FFF0AC;
+    }
+    
+    div.scor_top {
+        position: fixed;
+        bottom: 180px;
+        right: 50px;
+        height: 50px;
+        width: 50px;
+        padding: 8px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #5B5B5B;
+        font-size: 30px;
+        border-radius: 5px 5px;
+        z-index: 999;
+        cursor: pointer;
+        display: none;
+        text-align: center;
+    }
+    
+     .song_btn {
+        position: fixed;
+        bottom: 120px;
+        right: 20px;
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        background-color:  #3C3C3C;
+        color:#fff;
+        font-size: 23px;
+        border-radius: 5px 5px;
+        z-index: 999;
+    }
+
+    #magn_txt{
+        position: fixed;
+        bottom:240px;
+        right: 20px;
+        height: 55px;
+        width: 50px;
+        padding: 10px;
+        background-color: rgba(0, 115, 230,0.4);
+        color:#fff;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 5px 5px;
+        z-index: 999;
+    }
+    #magn_txt p{
+       color:#fff;
+       font-size: 10px; 
+    }
+    /* ================== 幻燈片 ====================== */
+    
+    .swiper-container {
+        width: 70%;
+    }
+    
+    .swiper-container img {
+        width: 100%;
+    }
+    /* ===================== GOOGLE地圖 =========================== */
+    
+    #googlemap {
+        width: 100%;
+        height: 500px;
+    }
+/* ============================ 環景 ================================ */
+    .img_div{
+        position: relative;
+    }
+    
+   .img_div .light_box img{
+    width: 135px;
+   }
+   .img_div a{
+    display: block;
+        padding: 15px;
+        position: absolute; 
+       z-index: 50;
+   }
+    .img_div .img_txt{
+       /* display: block;*/
+        padding: 15px;
+        width: 200px;
+        text-align: center;
+       /* position: absolute;*/
+        background-color: rgba(255, 255, 255,0.9); 
+        border-radius: 8px;
+       box-shadow: 0px 3px 6px  rgba(0, 0, 0,0.8); 
+        color: rgb(114, 66, 19);
+        text-decoration: none;
+        font-size: 40px;
+       z-index: 100;
+    }
+   #top1_a{
+    position: relative;
+   }
+   #top1_a p{
+    display: none;
+    position: absolute;
+    padding: 10px;
+    left:40%;
+
+    border-radius: 10px 10px;
+    background: rgba(255, 46, 46,0.6);
+       font-size: 50px;
+       color: #fff;
+   }
+
+/* ======================================= 導航按鈕 ============================================== */
+       #map_placeholder{
+        display: block;
+        padding: 20px;
+        background-color: red;
+        margin:10px;
+        border-radius: 8px 8px;
+        /*border: 3px solid #600000;*/
+        font-size: 40px;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        box-shadow: 0px 3px 5px #3C3C3C;
+    }
+
+    #map_placeholder img{
+        width: 50px;
+        margin:0px;
+    }
+
+    /* ===================== 內容字體 =========================== */
+     h2,
+    .p_txt,
+    .h1_txt,
+    .h1_txt_2,
+    .h2_txt,
+    .h3_txt,
+    .h2_txt_span,
+    .h3_1_txt,
+    .back_caseName,
+    .h3_2_txt{
+        font-family:微軟正黑體;
+    }
+    h2{
+            line-height: 1.4em;
+
+        }
+    .p_txt{
+        padding: 20px;
+        padding-left:18%;
+        padding-right:18%; 
+        margin-bottom: 100px;
+        font-size: 23px;
+        line-height: 1.8;
+        color:#fff;
+        /*左右對齊*/
+        text-align: center;
+        /*text-justify:inter-ideograph;*/
+    }
+
+    .p_txt a{
+         font-size: 23px;
+          text-align: center;
+    }
+    .p_txt li{
+        font-size: 23px;
+          text-align: center;
+    }
+    .h1_txt {
+        font-size: 80px;
+        font-weight: 600;
+        text-align: center;
+        color: #FFF0AC;
+        margin-top: 90px;
+        margin-bottom: 40px;
+        letter-spacing:0px;
+        line-height: 1.25em;
+    }
+    .h1_txt_2{
+        font-size: 80px;
+        font-weight: 600;
+        text-align: center;
+        color: #FFF0AC;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        letter-spacing:0px;
+        line-height: 1.25em;
+    }
+    
+    .h2_txt {
+        text-align: center;
+        font-size: 35px;
+        font-weight: 400;
+        margin-bottom: 15px;
+        letter-spacing:1px;
+        line-height: 1.8em;
+    }
+
+   .back_hr{
+    display: inline-block;
+    width: 40%;
+    margin: 10px; 
+    border-style: dashed;
+   }
+   .hr_div{
+    
+   }
+   .back_caseName{
+
+    margin-top: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+   }
+
+    .img_box{
+        margin-bottom: 50px;
+    }
+    .img_box iframe{
+        width: 100%;
+        height: 650px;
+    }
+    /* ================== 幻燈片 ====================== */
+        .swiper-container {
+            width: 100%;
+        }
+    .wr_more_img {
+        position: relative;
+        margin: 0px auto;
+        width: 70%;
+        padding-bottom: 50px;
+    }
+    
+    .wr_img {
+        width: 30%;
+        display: inline-block;
+    }
+    
+    .map{
+        width: 100%;
+        height:500px;
+        color: rgb(30,30,30);
+    }
+    .map_btn{
+        display:block;
+        width:50%;
+        padding:20px;
+        background-color:rgba(0, 127, 255,0.6);
+        color:#fff;
+        border:2px dashed rgba(255,255,255,0.5);
+        font-size:20px;
+        -webkit-transition:background-color 0.5s,color 0.5s ;
+    }
+    .map_btn:hover{
+        background-color:rgba(255,255,255,0.9);
+        color:rgba(0, 127, 255,0.8);
+        text-decoration:none;
+    }
+    #big_fb{ 
+    position: absolute;
+    z-index: 100;
+    right: 20px;
+        transform: scale(1.5);
+-ms-transform: scale(1.5); 
+-webkit-transform: scale(1.5); 
+-o-transform: scale(1.5); 
+-moz-transform: scale(1.5); 
+    }
+
+    /* =========================== 跑馬燈LAYOUT ================================= */
+    .marquee_lay{
+        position: absolute;
+        font-size:30px;
+        padding:10px;
+        width:50%;
+    }
+    .marquee_box{
+        position: absolute;
+        font-weight: 500;
+        font-size: 23px;
+        color: #fff;
+        left:-125px;
+        width:530px;
+        
+
+    }
+    .ph_mar{
+        display: none;
+    }
+    .com_mar{
+        display: block;
+    }
+    .tool_box {
+            display: none;
+        }
+    .LINE_tool{
+        position: fixed;
+        bottom: 300px;
+        right: 20px;
+        width: 50px;
+        z-index: 999;
+    }
+    .FB_tool{
+        position: fixed;
+        bottom: 360px;
+        right: 20px;
+        width: 50px;
+        z-index: 999;
+    }
+    .content {
+            position: relative;
+            margin: 0px auto;
+            width: 80%;
+        }
+        .content img {
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        #close_top{
+            display: none;
+        }
+
+        .tool_btn{
+            display: block;
+           text-decoration: none;
+           font-size: 30px;
+           text-align: center;
+           padding: 18px;
+           margin: 15px;
+           background-color: #003D79;
+           color: #fff;
+          border-radius: 8px 8px;
+         
+        }
+        .tool_btn:hover{
+            text-decoration: none;
+            color: #fff;
+        }
+        #zoom_a{
+            position: relative;
+        }
+        #big_zoom{
+    display: none;
+    position: absolute;
+    padding: 10px;
+    padding-top:29px; 
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+    line-height: 1.2em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    border-radius: 100px;
+    width: 130px;
+    height: 130px;
+    top: -55px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    z-index: 500;
+        }
+
+
+    /* =============================== 電腦畫面 =========================================== */
+    
+    @media only screen and (min-width:1280px) {
+       
+        #carousel_box img {
+            max-height: 700px;
+        }
+        
+        #format {
+            background: #404143;
+            margin: 0px auto;
+            margin-top: 30px;
+            border: 1px solid #4ECDC4;
+            padding: 12px;
+            width: 60%;
+            border-radius: 10px 10px;
+        }
+        #detail {
+            position: relative;
+            padding-top: 20px;
+            margin: 0px auto;
+            width: 40%;
+        }
+        #detail p {
+            font-size:22px;
+            line-height:30px;
+        }
+        .wr_more_table td {
+            padding: 10px;
+            background-color: rgb(41, 41, 41);
+        }
+        .wr_more_table {
+            position: relative;
+            margin: 0px auto;
+            width: 55%;
+            padding-bottom: 50px;
+        }
+        .to_phone_img{
+       display:none;
+    }
+
+        /* ===================== 內容字體 =========================== */
+        h2{
+            font-size: 35px;
+        }
+        .h2_txt_p{
+
+        padding-bottom:40px;
+        font-size: 33px;
+        border-bottom:1px solid #404143;
+        
+    }
+    .h2_txt_span {
+        
+        font-size: 35px;
+     
+    }
+
+    .show_height{
+        max-height: 850px;
+    }
+    
+    }
+
+    /* =============================== 小電腦畫面 =========================================== */
+    
+    @media only screen and (max-width:1280px) {
+       #address_ul li{
+        text-align: center;
+       }
+       .img_div .img_txt{
+         font-size: 30px;
+         width: 150px;
+         padding:10px;
+
+       }
+       .img_div .light_box img{
+           width: 100px;
+       }
+       h2{
+            font-size: 30px;
+        }
+
+    }
+
+     /* =============================== 小電腦畫面 =========================================== */
+    
+    @media only screen and (max-width:1024px) {
+        .marquee_box{
+            font-size: 20px;
+            left: -245px;
+        }
+
+        .h1_txt {
+        font-size: 70px;
+        margin-bottom: 30px;
+    }
+    .h1_txt_2{
+        font-size: 70px;
+         margin-bottom: 30px;
+    }
+    .h2_txt {
+        font-size: 30px;
+         margin-bottom: 30px;
+    }
+    .img_div .img_txt{
+         font-size: 25px;
+         width: 120px;
+         padding:8px;
+
+       }
+       .img_div .light_box img{
+           width: 75px;
+       }
+       #address_ul li{
+          font-size: 17px;
+       }
+    .back_hr{
+    width: 35%;
+    margin: 5px;
+   }
+
+    }
+
+
+
+    /* ===================================== 平板畫面 ================================================ */
+    
+    @media only screen and (max-width:800px) {
+
+         #close_top{
+            display: block;
+        }
+        #address_ul li{
+        text-align: center;
+        display: block;
+       }
+        .hide {
+            display: none;
+        }
+        .carousel_box {
+            height: 500px;
+        }
+        
+        .imgBig_box img {
+            width: 100%;
+            height: 100%;
+        }
+        .imgBig_box{
+            margin-top: 5px;
+            float: left;
+        }
+        #nav_ul>li{
+           text-align: center;
+           letter-spacing:4px;
+        }
+        .big_txt b{
+            font-size: 20px;
+           /* margin-left: 120px;*/
+        }
+        #topNav,
+        #header_shadow {
+            background-image: none;
+        }
+        .tool_box {
+            /* 手機功能棒 */
+            display: block;
+            position: fixed;
+            bottom: 0px;
+            background-color: rgba(255, 255, 255, 0.5);
+            /* 半透明效果 */
+            height: 60px;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .tool_box a {
+            display: block;
+            float: left;
+            margin-left: 14%;
+            margin-top: 5px;
+        }
+        div.scor_top{
+            bottom: 120px;
+        }
+        .content img {
+            width: 100%;
+        }
+        .content {
+            position: relative;
+            margin: 0px auto;
+            width: 95%;
+        }
+        /* ================== 幻燈片 ====================== */
+        .swiper-container {
+            width: 100%;
+        }
+        #googlemap {
+            height: 350px;
+        }
+        /* ===================== 內容字體 =========================== */
+        h2{
+            font-size: 25px;
+        }
+       .p_txt{
+            padding-left:20px;
+            padding-right:20px;
+            font-size: 20px; 
+        }
+        .p_txt li{
+        font-size: 20px;
+       }
+         .h1_txt {
+            font-size: 60px;
+        }
+        .h1_txt_2{
+            font-size: 60px;
+        }
+        .h2_txt {
+            font-size: 30px;
+        }
+        .h2_txt_table {
+            font-size: 20px;
+        }
+        .h3_txt {
+            position: relative;
+            font-size: 23px;
+            padding: 20px;
+        }
+        .h3_1_txt {
+            top: 10%;
+            right: 4%;
+            font-size: 40px;
+        }
+        .h3_2_txt {
+            top: 20%;
+            right: 4%;
+            font-size: 25px;
+        }
+
+        .wr_more_img {
+            width: 100%;
+            padding: 20px;
+        }
+        .song_btn{
+        position: relative;
+        bottom: 0px;
+        right: 0px;
+        }
+
+        #magn_txt{
+        position: fixed;
+        top:70px;
+        right: 13px;
+    }
+
+    /* =========================== 跑馬燈LAYOUT ================================= */
+    .marquee_lay{
+        left:100px;
+        width:75%;
+    }
+    .LINE_tool ,.FB_tool{
+      display: none;
+    }
+    .img_div .img_txt{
+         font-size: 20px;
+         width: 100px;
+         padding:6px;
+
+       }
+       .img_div .light_box img{
+           width: 65px;
+       }
+    .pc_mar{
+        display: none;
+    }
+     .ph_mar{
+        display: block;
+    }
+    .com_mar{
+        display: none;
+    }
+    .marquee_box{
+
+            font-size: 20px;
+            left: 60px;
+            width: 82%;
+            padding: 5px;
+        }
+    .tool_btn{
+        display: block;
+    }
+    }
+    /* ====================================== 7吋平板畫面 ======================================================= */
+    
+    @media only screen and (max-width:640px) {
+     .img_div .img_txt{
+         font-size: 17px;
+         width: 90px;
+         padding:5px;
+
+       }
+       .img_div .light_box img{
+           width: 55px;
+       }
+        #close_top{
+            display: block;
+        }
+    }
+    /* ====================================== 手機畫面 ======================================================= */
+    
+    @media only screen and (max-width:600px) {
+        #big_zoom{
+            display: block;
+        }
+         #close_top{
+            display: block;
+        }
+        .carousel_box {
+            height: 250px;
+        }
+        .content img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        #format h3 {
+            width: 40%;
+        }
+        #detail h3 {
+            width: 40%;
+        }
+        #googlemap {
+            height: 250px;
+        }
+
+     .map{
+        width: 100%;
+        height:250px;        
+    }
+ .img_div .img_txt{
+        padding: 0px;
+        font-size: 12px;
+        width: 60px;
+       border-radius: 3px 3px;
+    }
+    .img_div .light_box img{
+    width: 25px;
+   }
+    .song_btn{
+        width: 45px;
+        height: 45px;
+        }
+    #top1_a p{
+        display: block;
+    top:-40px;
+    left:35%;
+    padding: 5px;
+    border-radius: 5px 5px;
+   font-size: 20px;
+   }
+        /* ===================== 內容字體 =========================== */
+        h2{
+            font-size: 18px;
+            line-height: 30px;
+            margin-bottom: 0px;
+
+        }
+        .p_txt{
+            font-size: 18px;
+           margin-bottom: 30px; 
+        }
+        .p_txt li{
+        font-size: 13px;
+       }
+        .h1_txt {
+            font-size: 30px;
+            margin-top: 35px;
+        margin-bottom: 20px;
+        }
+        .h1_txt_2{
+        font-size: 30px;
+        margin-bottom: 20px;
+       }
+       .h2_txt {
+            font-size: 16px;
+            line-height: 30px;
+            margin-bottom: 0px;
+        }
+
+   .back_hr{
+    width: 30%;
+    margin: 5px;
+   }
+        .back_caseName{
+            font-size: 1em;
+        }
+   
+  .marquee_box{
+        left:60px;
+        width:250px;
+        padding: 8px;
+    }
+
+ #map_placeholder{
+        padding: 10px;
+        padding-top:12px; 
+        margin:10px;
+        /*border: 3px solid #600000;*/
+        font-size: 30px;
+    }
+
+    #map_placeholder img{
+        width: 50px;
+
+    }
+
+        .img_box{
+        margin-bottom: 20px;
+    }
+    .img_box iframe{
+        width: 100%;
+        height: 250px;
+    }
+        .wr_more_img {
+            width: 100%;
+        }
+        .wr_more_table>table img{
+            display:none;
+        }
+        .wr_img {
+            width: 100%;
+        }
+
+         /* =========================== 跑馬燈LAYOUT ================================= */
+    .marquee_lay{
+
+       left: 23%;
+        width:60%;
+        font-size:20px;
+    }
+    .ph_mar{
+        display: block;
+    }
+
+    #address_ul li{
+        display:block;
+       font-size: 13px;
+    }
+    .LINE_tool,.FB_tool{
+        display: none;
+    }
+    .tool_box a {
+            margin-left: 9%;
+        }
+    }

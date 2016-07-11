@@ -1,0 +1,270 @@
+body {
+        font-family:微軟正黑體;
+    }
+    h1{
+         font-family:微軟正黑體;
+    }
+    p{
+         font-family:微軟正黑體;
+    }
+    
+    
+    .btn-mobile{
+       background-color: #ACD6FF;
+    }
+    #format h3 {
+        color:#fff;
+        background-color: #307F6D;
+        font-family: 微軟正黑體;
+    }
+    
+    #format p {
+        border-bottom: 1px solid #4ECDC4;
+        font-family: 微軟正黑體;
+    }
+    
+    #format span {
+        font-size: 15px;
+        background-color: #707070;
+        color: #91E2FF;
+    }
+    
+    #detail span {
+        color:#FFD306;
+        font-size: 30px;
+        font-weight:600;
+        text-shadow:2px 2px 1px #977C00;
+    }
+    
+    #detail h3 {
+        color:#FFF;
+        background-color: #307F6D;
+        width: 30%;
+    }
+    
+    .big_txt b{
+        color: #3C3C3C;
+    }
+        
+    .song_btn {
+        background-color: #3C3C3C;
+        color:#fff;
+    }
+
+    div.scor_top {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+    }
+
+    /* ===================== 內容字體 =========================== */
+    
+    
+    .h1_txt {
+        font-weight: 600;
+        color: #00CACA;
+    }
+    .h1_txt_2{
+        color: #00CACA;
+    }
+    .h2_txt{
+        color:#3C3C3C; 
+    }
+    .p_txt{
+        color:#3C3C3C;
+    }
+    .img_05 h1, .img_06 h1, .img_07 h1,.img_08 h1, .img_09 h1, .img_10 h1 ,.img_11 h1,.img_12 h1{
+        color: #fff;
+    }
+    .img_05 p,.img_06 p, .img_08 p, .img_09 p, .img_12 p{
+        color: #3c3c3c;
+    }
+    .marquee_box{
+        color:#3C3C3C;
+    }
+    
+    
+    .h2_txt_table {
+        font-size: 30px;
+        font-weight: 600;
+         color: #408080;
+    }
+    .h2_txt_p{
+        font-size: 35px;
+        font-weight: 600;
+    }
+    .h2_txt_span {
+        font-size: 38px;
+        font-weight: 700;
+        color: #0F9FFF;
+    }
+    
+    .h3_txt {
+        font-size: 25px;
+        background-color: rgba(0, 76, 153, 0.7);
+        color:#fff;
+        font-weight: 600;
+    }
+    
+    .h3_1_txt {
+        color:#fff;
+        font-size: 45px;
+        font-weight: 800;
+    }
+    
+    .h3_2_txt {
+        color: #fff;
+        font-size: 25px;
+        font-weight: 500;
+    }
+    #map{
+        color: rgb(30,30,30);
+        
+    }
+    .map_btn{
+        
+        background-color:rgba(0, 127, 255,0.6);
+        color:#fff;
+        font-size:20px;
+    }
+    .map_btn:hover{
+        background-color:rgba(255,255,255,0.9);
+        color:rgba(0, 127, 255,0.8);
+    }
+
+    /* =========================== 跑馬燈LAYOUT ================================= */
+    .marquee_lay{
+        
+        font-size:30px;
+
+    }
+
+    /* =============================== 電腦畫面 =========================================== */
+    
+    @media only screen and (min-width:1000px) {
+        
+        
+        #detail p {
+            font-size:22px;
+            
+        }
+        .wr_more_table td {
+            
+            background-color:#D1E9E9;
+        }
+
+        /* ===================== 內容字體 =========================== */
+        .h2_txt_p{
+
+        font-size: 33px;
+        border-bottom:1px solid #404143;
+    }
+    .h2_txt_span {
+        font-size: 35px;
+    }
+    .big_txt b:hover{
+            color: #00CACA;
+        }
+    .nav_active {
+        color: #00CACA;
+    }
+    }
+
+    /* ===================================== 平板畫面 ================================================ */
+    
+    @media only screen and (max-width:1000px) {
+
+       
+        .tool_box {
+            /* 手機功能棒 */
+            background-color: rgba(10,10,10,0.5);
+            /* 半透明效果 */
+        }
+     .big_txt b{
+          color: #fff;
+      }
+        
+        /* ===================== 內容字體 =========================== */
+
+
+        .h2_txt_table {
+            font-size: 20px;
+        }
+        .h3_txt {
+            position: relative;
+            font-size: 23px;
+            padding: 20px;
+        }
+        .h3_1_txt {
+            top: 10%;
+            right: 4%;
+            font-size: 40px;
+        }
+        .h3_2_txt {
+            top: 20%;
+            right: 4%;
+            font-size: 25px;
+        }
+        .wr_more_img {
+            width: 100%;
+            padding: 20px;
+        }
+        .address_ul li{
+           color: #fff;
+        }
+    }
+
+    /* ====================================== 手機畫面 ======================================================= */
+    
+    @media only screen and (max-width:600px) {
+        .carousel_box {
+            height: 250px;
+        }
+        .content img {
+            width: 100%;
+        }
+        #format h3 {
+            width: 40%;
+        }
+        #detail h3 {
+            width: 40%;
+        }
+        #googlemap {
+            height: 250px;
+        }
+        /* ===================== 內容字體 =========================== */
+
+
+        .h2_txt_table {
+            font-size: 20px;
+        }
+        .h2_txt_p{
+            font-size: 14px;
+            padding-bottom:20px;
+            border-bottom:1px solid #404143;
+        }
+        .h2_txt_span {
+        padding: 10px;
+        font-size: 28px;
+    }
+        .h3_txt {
+            
+            font-size: 23px;
+            padding: 20px;
+        }
+        .h3_1_txt {
+      
+           color: #403F40;
+           font-weight: 700;
+           text-shadow: 0px 0px 0px #fff;
+            font-size: 25px;
+        }
+        .h3_2_txt {
+     
+           color: #004E78;
+           text-shadow: none;
+            font-size: 20px;
+        }
+        .marquee_lay{
+        font-size:20px;
+    }
+    }
