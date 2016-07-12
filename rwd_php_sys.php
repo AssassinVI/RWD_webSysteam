@@ -180,6 +180,8 @@ if ($_POST) {
 
     $User_id=$_SESSION['user_id'];
     $com_name=htmlspecialchars($_POST['com_name']);
+    $old_logo=addslashes($_POST['old_logo']);
+    
 
     /* ##################### 給公司ID ###################### */
 
@@ -206,17 +208,29 @@ if ($_POST) {
           }
 
    if (empty($_POST['com_id'])) {
-        db_conn("INSERT INTO company (User_id, com_id, com_name) VALUES ('$User_id', '$com_id', '$com_name')");
+
+      if (!empty($_FILES['com_LOGO']['name'])) { $com_logo=$com_id.".jpg"; }
+
+        db_conn("INSERT INTO company (User_id, com_id, com_name, com_logo) VALUES ('$User_id', '$com_id', '$com_name', '$com_logo')");
           $txt=iconv('utf-8', 'big5', '新增公司');
           location_up('admin_com.php',$txt);
    }
    else{
        $com_id=htmlspecialchars($_POST['com_id']);
-       db_conn("UPDATE company SET com_name='$com_name' WHERE com_id='$com_id'");
+
+       if (!empty($_FILES['com_LOGO']['name'])) { $com_logo=$com_id.".jpg"; }
+       elseif (!empty($old_logo)) { $com_logo=$com_id.".jpg"; }
+
+       db_conn("UPDATE company SET com_name='$com_name', com_logo='$com_logo' WHERE com_id='$com_id'");
           $txt=iconv('utf-8', 'big5', '更新公司');
           location_up('admin_com.php',$txt);
    } 
-
+  
+  if (!empty($_FILES['com_LOGO']['name'])) {
+     
+     file_upload_single('com_LOGO',$com_id,$com_logo);
+  }
+   
   }
 
 
@@ -1282,8 +1296,8 @@ function file_upload_single($Name,$case_id,$fName)
           if ($Name=='activity_song') { //活動背景音樂
             move_uploaded_file($_FILES[$Name]['tmp_name'], '../product_html/'.$case_id.'/music/'.iconv("utf-8", "big5",$fName));
           }
-          elseif ($Name=='view_file') { //環景壓縮檔
-            
+          elseif ($Name=='com_LOGO') { //公司LOGO
+            move_uploaded_file($_FILES[$Name]['tmp_name'], 'img/com_logo/'.iconv("utf-8", "big5",$fName));
           }
           else{
            move_uploaded_file($_FILES[$Name]['tmp_name'], '../product_html/'.$case_id.'/assets/images/'.iconv("utf-8", "big5",$fName));

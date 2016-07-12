@@ -10,6 +10,7 @@
   	if (mysql_num_rows($result)>0) {
   		while ($row=mysql_fetch_array($result)) {
   			$com_name=htmlspecialchars($row['com_name']);
+        $com_logo=addslashes($row['com_logo']);
   		}
   	}
   }
@@ -24,28 +25,44 @@
 	<title>編輯公司</title>
 		<!-- ================================== 外掛and CSS ====================================== -->
     <?php include 'shared_php/script_style.php';?>
+
+    <style type="text/css">
+      .img_logo{ border: 1px solid #c3c1c1; padding: 12px; width: 300px; }
+      .img_logo img{ width: 100%; }
+      #logo_div, #old_logo_div{ float: left; margin-left: 7%; }
+    </style>
+
     <script type="text/javascript">
     	 $(document).ready(function() {
       $("#build_back").click(function() {
          if (confirm("是否返回上一頁??")) {
             window.history.back();            
          }
-
         });
+
+
+      <?php 
+
+       if (!empty($com_logo)) { //目前公司LOGO
+
+        echo "$('#old_logo_div').html('<div class=\"img_logo\"><p>目前公司LOGO</p><img  src=\"img/com_logo/".$com_logo."\"></div><input type=\"hidden\" name=\"old_logo\" value=\"y\">');";
+       }
+
+      ?>
     });
 
        function file_viewer_load(controller) { //預覽圖片方法
 
             var file=controller.files[0];
              if (file==null) {
-                $('#file_view').html('');
+                $('#logo_div').html('');
              }
              else{
                 var fileReader= new FileReader();
                 fileReader.readAsDataURL(file);
                 fileReader.onload = function(event){
 
-                $('#img_logo').html('<p>公司LOGO</p><img  src="'+this.result+'" alt="">');
+                $('#logo_div').html('<div class="img_logo"><p>新公司LOGO</p><img  src="'+this.result+'" alt=""></div>');
              }
             };
           }
@@ -80,10 +97,10 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">*公司LOGO</label>
                                     <div class="col-sm-4"><input name="com_LOGO" type="file" class="form-control" accept="image/*" onchange="file_viewer_load(this)" ></div>
-                                    
                                 </div>
                                 <div class="form-group">
-                                  <div id="img_logo"></div>
+                                  <div id="logo_div"></div>
+                                  <div id="old_logo_div"></div>
                                 </div>
 
                                <!-- =========================== 分隔線 ============================ -->
