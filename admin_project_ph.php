@@ -26,18 +26,7 @@
        transition: box-shadow 0.25s;
        margin-right: 5px;
       }
-      .table >tbody>tr>td>a{
-        color:#fff;
-        background-color:#3DB8B8;
-         padding: 3px;
-         padding-left:10px;
-         padding-right: 10px;
-        border-radius: 5px 5px;
-       transition: box-shadow 0.25s;
-      }
-      .table >tbody>tr>td>a:hover,.ibox-tools a:hover{
-         box-shadow: 0px 2px 4px #7B7B7B;
-      }
+      
      .ibox-tools span{
       font-size: 15px;
      }
@@ -46,6 +35,11 @@
       margin-left: 30px;
       font-size: 12px;
      }
+     .logo_div{ display: block; width: 90px; height: 80px; padding: 5px; font-size: 24px; text-align: center; background-color: #bbbbbb; color: #dedede; }
+     .logo_img{ display: block; width: 90px; height: 80px; }
+     .logo_img img{ width: 100%; height: 100%; }
+     .name_td{  font-size: 20px; padding-top: 25px; }
+
     </style>
     <!-- FooTable -->
 <script src="js/footable.all.min.js"></script>
@@ -129,9 +123,16 @@ select_com();
                 $.each(json.com_array, function() {
 
                       var info='<tr>';
-                     info=info+'<td>'+this['com_name']+'</td>';
-                     info=info+'<td>'+this['com_name']+'</td>';
+                      if (this['com_logo']=='') { 
 
+                         info=info+'<td><a href="admin_project_phcs.php?com_id='+this['com_id']+'" class="logo_div">公司LOGO</a></td>';
+                       }
+                       else{
+
+                         info=info+'<td><a href="admin_project_phcs.php?com_id='+this['com_id']+'" class="logo_img"><img src="img/com_logo/'+this['com_logo']+'"></a></td>';
+                       }
+
+                     info=info+'<td><div class="name_td">'+this['com_name']+'</div></td>';
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -202,7 +203,7 @@ select_com();
                                 <div class="col-lg-12 no_padding">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>專案管理</h5>
+                            <h5>公司</h5>
                         </div>
                         <div class="ibox-content">
 
@@ -211,6 +212,7 @@ select_com();
                                 <tr>
                                     <th>公司LOGO</th>
                                     <th>公司名稱</th>
+
                                     
                                 </tr>
                                 </thead>

@@ -1015,11 +1015,12 @@ if ($_GET) {
     $User_id=htmlspecialchars($_SESSION['user_id']);
 
     $com_array=array();
-  $result=db_conn("SELECT com_id, com_name FROM company WHERE User_id='$User_id'");
+  $result=db_conn("SELECT com_id, com_name, com_logo FROM company WHERE User_id='$User_id'");
   if (mysql_num_rows($result)>0) {
       while ($row=mysql_fetch_array($result)) {
            array_push($com_array, array('com_id'=>$row['com_id'], 
                                       'com_name'=>$row['com_name'],
+                                      'com_logo'=>$row['com_logo']
                                         ));
       }
       echo json_encode(array('com_array'=>$com_array));
@@ -1059,8 +1060,42 @@ if ($_GET) {
     }
   }
 
+  /* ======================================== 專案(手機板) ================================================ */
+elseif($_GET['admin']=='project_ph'){
 
+  $com_id=htmlspecialchars($_GET['com_id']);
+    $case_id=addslashes($_GET['case_id']);
+    $pro_ph_array=array();
+    
+    if (!empty($com_id)) {
+      
+       $result = db_conn("SELECT case_id, case_name, case_logo FROM build_case WHERE com_id='$com_id'" );
+    }
+    else{
 
+        $result = db_conn("SELECT case_id, case_name, case_logo FROM build_case WHERE case_id='$case_id'" );
+    }
+
+    while ($row=mysql_fetch_array($result)) {
+       
+       $case_logo=$row['case_logo'];
+       $case_id=$row['case_id'];
+       $case_name=$row['case_name'];
+        $result_analytics = db_conn("SELECT week_user, month_user, total_user FROM google_analytics WHERE case_no='$case_id'");
+        while ($row_an=mysql_fetch_array($result_analytics)) {
+         
+           array_push($pro_ph_array, array(    'case_id'=> $case_id,
+                                             'case_name'=> $case_name,
+                                             'case_logo'=> $case_logo,
+                                             'week_user'=> $row_an['week_user'],
+                                            'month_user'=> $row_an['month_user'],
+                                            'total_user'=> $row_an['total_user']
+                                             ));
+        }
+        echo json_encode(array('pro_ph_array'=>$pro_ph_array));
+    }
+
+}
 
 /* ========================================= all刪除 ============================================ */
    elseif ($_GET['delete'] == 'admin_user') {

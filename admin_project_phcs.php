@@ -1,5 +1,7 @@
 <?php include 'shared_php/login_session.php';
       include 'shared_php/config.php';
+
+      $com_id=addslashes($_GET['com_id']); //USER 公司
 ?>
 
 <!DOCTYPE html>
@@ -26,18 +28,6 @@
        transition: box-shadow 0.25s;
        margin-right: 5px;
       }
-      .table >tbody>tr>td>a{
-        color:#fff;
-        background-color:#3DB8B8;
-         padding: 3px;
-         padding-left:10px;
-         padding-right: 10px;
-        border-radius: 5px 5px;
-       transition: box-shadow 0.25s;
-      }
-      .table >tbody>tr>td>a:hover,.ibox-tools a:hover{
-         box-shadow: 0px 2px 4px #7B7B7B;
-      }
      .ibox-tools span{
       font-size: 15px;
      }
@@ -46,6 +36,9 @@
       margin-left: 30px;
       font-size: 12px;
      }
+     .logo_div{ display: block; width: 90px; height: 80px; padding: 5px; font-size: 24px; text-align: center; background-color: #bbbbbb; color: #dedede; }
+     .logo_img{ display: block; width: 90px; height: 80px; }
+     .logo_img img{ width: 100%; height: 100%; }
     </style>
     <!-- FooTable -->
 <script src="js/footable.all.min.js"></script>
@@ -63,13 +56,18 @@
      $_SESSION['user_id']=$user_id;
   }*/
 
-  if (!empty($_SESSION['com_id'])) {
+  switch ($_SESSION['competence']) {
+    case 'user':
+       echo 'select_com("'.$com_id.'");';
+      break;
 
-     echo 'select_com("'.$_SESSION['com_id'].'");';
-  }
-  else{
+    case 'company':
+      echo 'select_com("'.$_SESSION['com_id'].'");';
+      break;
 
-     echo 'select_case("'.$_SESSION['case_id'].'")';
+    case 'case':
+      echo 'select_case("'.$_SESSION['case_id'].'")';
+      break;
   }
    
     
@@ -134,13 +132,20 @@
  
  /* ==================== 抓取建案(公司) ======================= */
      function select_com(com_id) {
-          $.getJSON('rwd_php_sys.php?admin=project&com_id='+com_id, function(json) {
-                $.each(json.pro_array, function() {
+          $.getJSON('rwd_php_sys.php?admin=project_ph&com_id='+com_id, function(json) {
+                $.each(json.pro_ph_array, function() {
 
                       var info='<tr>';
-                     info=info+'<td>'+this['case_name']+'</td>';
-                     info=info+'<td>'+this['case_name']+'</td>';
-
+                      if (this['case_logo']=='') {
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a></td>';
+                      }
+                      else{
+                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="img/com_logo/'+this['case_logo']+'"></a></td>';
+                      }
+                     
+                     info=info+'<td>'+this['week_user']+'</td>';
+                     info=info+'<td>'+this['month_user']+'</td>';
+                     info=info+'<td>'+this['total_user']+'</td>';
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -152,15 +157,22 @@
 
      /* ==================== 抓取建案(個案) ======================= */
      function select_case(case_id) {
-          $.getJSON('rwd_php_sys.php?admin=project&case_id='+case_id, function(json) {
-                $.each(json.pro_array, function() {
+          $.getJSON('rwd_php_sys.php?admin=project_ph&case_id='+case_id, function(json) {
+                $.each(json.pro_ph_array, function() {
 
                  
 
                       var info='<tr>';
 
-                      info=info+'<td>'+this['case_name']+'</td>';
-                     info=info+'<td>'+this['case_name']+'</td>';
+                     if (this['case_logo']=='') {
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a></td>';
+                      }
+                      else{
+                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="img/com_logo/'+this['case_logo']+'"></a></td>';
+                      }
+                     info=info+'<td>'+this['week_user']+'</td>';
+                     info=info+'<td>'+this['month_user']+'</td>';
+                     info=info+'<td>'+this['total_user']+'</td>';
 
                      info=info+'</tr>';
 
@@ -189,7 +201,7 @@
                                 <div class="col-lg-12 no_padding">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>專案管理</h5>
+                            <h5>專案</h5>
                         </div>
                         <div class="ibox-content">
 
@@ -197,7 +209,9 @@
                                 <thead>
                                 <tr>
                                     <th>專案LOGO</th>
-                                    <th>專案名稱</th>
+                                    <th>一周</th>
+                                    <th>一月</th>
+                                    <th>總</th>
                                     
                                 </tr>
                                 </thead>

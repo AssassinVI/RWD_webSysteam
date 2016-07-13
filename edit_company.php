@@ -30,6 +30,10 @@
       .img_logo{ border: 1px solid #c3c1c1; padding: 12px; width: 300px; }
       .img_logo img{ width: 100%; }
       #logo_div, #old_logo_div{ float: left; margin-left: 7%; }
+      @media only screen and (max-width:420px){
+         .img_logo{ width: 100%; }
+         #logo_div, #old_logo_div{ margin-left: 0%; }
+      }
     </style>
 
     <script type="text/javascript">
