@@ -151,9 +151,9 @@
                         info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="'+small_img+'"></a><span>'+this['case_name']+'</span></td>';
                       }
                      
-                     info=info+'<td id="case_td1">'+this['week_user']+'<span>人</span></td>';
-                     //info=info+'<td>'+this['month_user']+'</td>';
-                     info=info+'<td id="case_td2">'+this['total_user']+'<span>人</span></td>';
+                     //info=info+'<td id="case_td1">'+this['week_user']+'<span>人</span></td>';
+                     info=info+'<td id="case_td1">'+this['month_user']+'<span>人</span></td>';  //每日人數
+                     info=info+'<td id="case_td2">'+this['total_user']+'<span>人</span></td>'; //總人數
                      info=info+'</tr>';
 
                      
@@ -181,9 +181,9 @@
                       else{
                         info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="'+small_img+'"></a><span>'+this['case_name']+'</span></td>';
                       }
-                     info=info+'<td id="case_td1">'+this['week_user']+'<span>人</span></td>';
-                     //info=info+'<td>'+this['month_user']+'</td>';
-                     info=info+'<td id="case_td2">'+this['total_user']+'<span>人</span></td>';
+                     //info=info+'<td id="case_td1">'+this['week_user']+'<span>人</span></td>';
+                     info=info+'<td id="case_td1">'+this['month_user']+'<span>人</span></td>';  //每日人數
+                     info=info+'<td id="case_td2">'+this['total_user']+'<span>人</span></td>'; //總人數
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -219,7 +219,7 @@
                                 <thead>
                                 <tr id="case_tital">
                                     <th>專案LOGO</th>
-                                    <th>一周</th>
+                                    <th>當日</th>
                                     
                                     <th>總</th>
                                     
