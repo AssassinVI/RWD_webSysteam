@@ -39,6 +39,12 @@
      .logo_div{ display: block; width: 90px; height: 80px; padding: 5px; font-size: 24px; text-align: center; background-color: #bbbbbb; color: #dedede; }
      .logo_img{ display: block; width: 90px; height: 80px; }
      .logo_img img{ width: 100%; height: 100%; }
+     #case_tr1{ font-size: 18px; }
+     #case_td1, #case_td2{ padding-top: 38px; }
+
+     #case_tital{ font-size: 15px; }
+     #case_tr1>td>span{ font-size: 12px; }
+
     </style>
     <!-- FooTable -->
 <script src="js/footable.all.min.js"></script>
@@ -135,18 +141,23 @@
           $.getJSON('rwd_php_sys.php?admin=project_ph&com_id='+com_id, function(json) {
                 $.each(json.pro_ph_array, function() {
 
-                      var info='<tr>';
+                  var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/'+this['case_logo']+'&h=80&w=90&zc=1';
+
+                      var info='<tr id="case_tr1">';
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a></td>';
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a><span>'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="img/com_logo/'+this['case_logo']+'"></a></td>';
+                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="'+small_img+'"></a><span>'+this['case_name']+'</span></td>';
                       }
                      
-                     info=info+'<td>'+this['week_user']+'</td>';
-                     info=info+'<td>'+this['month_user']+'</td>';
-                     info=info+'<td>'+this['total_user']+'</td>';
+                     info=info+'<td id="case_td1">'+this['week_user']+'<span>人</span></td>';
+                     //info=info+'<td>'+this['month_user']+'</td>';
+                     info=info+'<td id="case_td2">'+this['total_user']+'<span>人</span></td>';
                      info=info+'</tr>';
+
+                     
+
 
                     $("#all_project").append(info);
                     //<td>'+this['build_com']+'</td><td>'+this['Consignment']+'</td><td>'+this['format']+'</td><td>'+this['floor']+'</td><td>'+this['build_adds']+'</td><td>'+this['google_an']+'</td>
@@ -160,20 +171,19 @@
           $.getJSON('rwd_php_sys.php?admin=project_ph&case_id='+case_id, function(json) {
                 $.each(json.pro_ph_array, function() {
 
-                 
-
-                      var info='<tr>';
+                     var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/'+this['case_logo']+'&h=80&w=90&zc=1';
+ 
+                      var info='<tr id="case_tr1">';
 
                      if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a></td>';
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a><span>'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="img/com_logo/'+this['case_logo']+'"></a></td>';
+                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="'+small_img+'"></a><span>'+this['case_name']+'</span></td>';
                       }
-                     info=info+'<td>'+this['week_user']+'</td>';
-                     info=info+'<td>'+this['month_user']+'</td>';
-                     info=info+'<td>'+this['total_user']+'</td>';
-
+                     info=info+'<td id="case_td1">'+this['week_user']+'<span>人</span></td>';
+                     //info=info+'<td>'+this['month_user']+'</td>';
+                     info=info+'<td id="case_td2">'+this['total_user']+'<span>人</span></td>';
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -207,10 +217,10 @@
 
                             <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
                                 <thead>
-                                <tr>
+                                <tr id="case_tital">
                                     <th>專案LOGO</th>
                                     <th>一周</th>
-                                    <th>一月</th>
+                                    
                                     <th>總</th>
                                     
                                 </tr>

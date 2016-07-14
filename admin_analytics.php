@@ -42,7 +42,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOOGLE分析</title>
+    <title>專案分析</title>
 
     <!-- ================================== 外掛and CSS ====================================== -->
     <?php include 'shared_php/script_style.php';?>
@@ -317,7 +317,7 @@ google.charts.load('current', {'packages': ['geochart']});
               <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>GOOGLE分析 </h5>
+                            <h5>分析結果 </h5>
                            <div class="ibox-tools">
                          <!--<button id="getuser" type="button">test</button>-->
 

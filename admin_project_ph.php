@@ -122,6 +122,8 @@ select_com();
           $.getJSON('rwd_php_sys.php?admin=company', function(json) {
                 $.each(json.com_array, function() {
 
+                  var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/com_logo/'+this['com_logo']+'&h=80&w=90&zc=1';
+
                       var info='<tr>';
                       if (this['com_logo']=='') { 
 
@@ -129,10 +131,10 @@ select_com();
                        }
                        else{
 
-                         info=info+'<td><a href="admin_project_phcs.php?com_id='+this['com_id']+'" class="logo_img"><img src="img/com_logo/'+this['com_logo']+'"></a></td>';
+                         info=info+'<td><a href="admin_project_phcs.php?com_id='+this['com_id']+'" class="logo_img"><img src="'+small_img+'"></a></td>';
                        }
 
-                     info=info+'<td><div class="name_td">'+this['com_name']+'</div></td>';
+                     info=info+'<td><div class="name_td"><a href="admin_project_phcs.php?com_id='+this['com_id']+'">'+this['com_name']+'</a></div></td>';
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -143,7 +145,7 @@ select_com();
 
 
      /* ==================== 抓取建案(個案) ======================= */
-     function select_case(case_id) {
+     /*function select_case(case_id) {
           $.getJSON('rwd_php_sys.php?admin=project&case_id='+case_id, function(json) {
                 $.each(json.pro_array, function() {
 
@@ -184,6 +186,7 @@ select_com();
                 }); 
           });
      } //fun END
+     */
  </script>
 </head>
 <body>

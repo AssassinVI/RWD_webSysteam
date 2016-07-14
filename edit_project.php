@@ -32,6 +32,7 @@ if ($_GET['NewOrEdit']=='edit') {
     //$bu_fb=$row['bu_fb'];
     $activity_img=$row['activity_img'];
     $activity_song=$row['activity_song'];
+    $case_logo=$row['case_logo'];
     $other=html_entity_decode($row['other'], ENT_QUOTES, "UTF-8"); 
 
     $inOrup='update';
@@ -73,7 +74,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
     <style type="text/css">
 
-     #file_view {
+     #file_view, #logo_view {
         width: 150px;
         box-shadow: 0px 3px 5px #3C3C3C;
         border-radius: 5px 5px;
@@ -84,12 +85,12 @@ if ($_GET['NewOrEdit']=='edit') {
       width: 300px;
      }
 
-     #file_view img, #old_file_view img{
+     #file_view img, #old_file_view img ,#logo_view img ,#old_logo_view img{
       width: 100%;
        border-radius: 5px 5px;
      }
 
-     #file_view p , #old_file_view p ,#file_music p, #old_file_music p{
+     #file_view p , #old_file_view p, #logo_view p, #old_logo_view p, #file_music p, #old_file_music p{
       padding:5px;
       font-size: 20px; 
       text-align: center;
@@ -103,7 +104,7 @@ if ($_GET['NewOrEdit']=='edit') {
       cursor:default;
      }
 
-     #old_file_view{
+     #old_file_view, #old_logo_view{
       float: right;
       width: 150px; 
       box-shadow: 0px 3px 5px #3C3C3C;
@@ -174,7 +175,22 @@ if ($_GET['NewOrEdit']=='edit') {
                     if (confirm('確定要取消??')) {
                          window.history.back();
                     }
-                });      
+                });    
+
+
+                /* 顯示目前LOGO圖 */
+
+                var active_img="<?php echo $case_logo;?>";
+
+                if (active_img!="") {
+
+                  var case_id="<?php echo $case_id;?>";
+
+                  var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/'+case_id+'.jpg&h=95&w=150&zc=1';//縮圖
+
+                   $("#old_logo_view").html('<p><i class="fa fa-times-circle"></i>目前LOGO圖</p><img  src="'+small_img+'" alt=""><input name="old_case_logo" type="hidden" value="'+case_id+'.jpg" />');
+
+                }    
 
 
 
@@ -259,7 +275,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
 
 
-    function file_viewer_load(controller) { //預覽圖片方法
+    function file_viewer_load(controller,html_id) { //預覽圖片方法
 
             var file=controller.files[0];
              if (file==null) {
@@ -269,7 +285,7 @@ if ($_GET['NewOrEdit']=='edit') {
                 var fileReader= new FileReader();
                 fileReader.readAsDataURL(file);
                 fileReader.onload = function(event){
-                $('#file_view').html('<p>活動圖瀏覽</p><img  src="'+this.result+'" alt=""><input name="activity_img" type="hidden" value="activ_img.jpg" />');
+                $(html_id).html('<p>圖片預覽</p><img  src="'+this.result+'" alt=""><input name="activity_img" type="hidden" value="activ_img.jpg" />');
              }
             };
           }
@@ -317,7 +333,7 @@ if ($_GET['NewOrEdit']=='edit') {
                         </div>
                         <div class="ibox-content">
                             <form method="POST" action="rwd_php_sys.php" class="form-horizontal" enctype="multipart/form-data">
-                                <div class="form-group"><label class="col-sm-2 control-label">公司選擇: </label>
+                                <div class="form-group"><label class="col-sm-2 control-label">公司選擇 : </label>
                                     <div class="col-sm-3">
                                     <select id="select_com" class="form-control">
                                     <option value="<?php echo $com_id;?>">請選擇</option>
@@ -346,9 +362,17 @@ if ($_GET['NewOrEdit']=='edit') {
                                         
                                         ?>
                                     </div>
-                                </div>                            
+                                </div>     
 
-                                <div class="form-group"><label class="col-sm-2 control-label">建案名稱</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">建案LOGO :</label>
+                                    <div class="col-sm-4">
+                                       <input name="case_logo" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this,'#logo_view')" >
+                                       <div id="old_logo_view" class="del_file"></div>
+                                       <div id="logo_view" class="del_file"></div>
+                                    </div>
+                                </div>                       
+
+                                <div class="form-group"><label class="col-sm-2 control-label">建案名稱 :</label>
 
                                     <div class="col-sm-8">
  <?php 
@@ -367,17 +391,17 @@ if ($_GET['NewOrEdit']=='edit') {
 
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">建設公司</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">建設公司 :</label>
 
                                     <div class="col-sm-4"><input name="build_com" type="text" class="form-control" value="<?php echo $build_com;?>"></div>
 
-                                    <label class="col-sm-1 control-label">代銷公司</label>
+                                    <label class="col-sm-1 control-label">代銷公司 :</label>
 
                                     <div class="col-sm-4"><input name="Consignment" type="text" class="form-control" value="<?php echo $Consignment;?>"></div>
 
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">格局說明</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">格局說明 :</label>
 
                                     <div class="col-sm-4"><input name="format" type="text" class="form-control" value="<?php echo $format;?>">
 
@@ -385,14 +409,14 @@ if ($_GET['NewOrEdit']=='edit') {
 
                                     </div>
 
-                                    <label class="col-sm-1 control-label">坪 數</label>
+                                    <label class="col-sm-1 control-label">坪 數 :</label>
 
                                     <div class="col-sm-4"><input name="floor" type="text" class="form-control" value="<?php echo $floor;?>"></div>
 
                                 </div>
                                 <div class="form-group">
 
-                                    <label class="col-sm-2 control-label">Line功能選擇:</label>
+                                    <label class="col-sm-2 control-label">Line功能選擇 :</label>
                                     <div class="col-sm-4">
                                       <select id="select_line" class="form-control">
                                         <option value="line_share">請選擇</option>
@@ -417,7 +441,7 @@ if ($_GET['NewOrEdit']=='edit') {
                                 <div id="cha_line" class="form-group">
       <?php 
       if ($line_tool=="line_plus") {
-        echo '<label class="col-sm-2 control-label">加Line</label>';
+        echo '<label class="col-sm-2 control-label">加Line :</label>';
         echo '<div class="col-sm-4">';
         echo '<input name="bu_line" type="text" placeholder="請輸入網址" class="form-control" value="'.$bu_line.'">';
         echo '<span class="help-block m-b-none"><a id="cat_line" href="catch_line.html" target="_blank">使用說明</a></span>';
@@ -425,7 +449,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
         }
         elseif ($line_tool=="line_share") {
-        echo '<label class="col-sm-2 control-label">LINE分享</label>';
+        echo '<label class="col-sm-2 control-label">LINE分享 :</label>';
         echo '<div class="col-sm-4">';
         echo '<input name="bu_line" type="text" placeholder="可同時輸入要分享的文字或網址" class="form-control" value="'.$bu_line.'">';
         echo '<span class="help-block m-b-none">輸入您要分享的文字、網址</span>';
@@ -435,13 +459,13 @@ if ($_GET['NewOrEdit']=='edit') {
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-2 control-label">電 話</label>
+                                    <label class="col-sm-2 control-label">電 話 :</label>
 
                                     <div class="col-sm-4"><input name="bu_phone" type="text" class="form-control" value="<?php echo $bu_phone;?>"></div>
 
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">基地位置</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">基地位置 :</label>
 
                                     <div class="col-sm-10"><input name="build_adds" type="text" class="form-control" value="<?php echo $build_adds;?>"></div>
 
@@ -449,7 +473,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
 
 
-                               <div class="form-group"><label class="col-sm-2 control-label">跑馬燈</label>
+                               <div class="form-group"><label class="col-sm-2 control-label">跑馬燈 :</label>
 
                                     <div class="col-sm-10"><input name="marquee" type="text" placeholder="請輸入文字" class="form-control" value="<?php echo $marquee;?>">
 
@@ -457,7 +481,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
                                 </div>
 
-                                <div id="file_box" class="form-group"><label class="col-sm-2 control-label">背景音樂</label>
+                                <div id="file_box" class="form-group"><label class="col-sm-2 control-label">背景音樂 :</label>
 
                                     <div class="col-sm-4">
 
@@ -475,13 +499,13 @@ if ($_GET['NewOrEdit']=='edit') {
 
 
 
-                                    <label class="col-sm-1 control-label">活動圖</label>
+                                    <label class="col-sm-1 control-label">活動圖 :</label>
 
                                     <div class="col-sm-4">
 
                                     <div id="img_div">
 
-                                    <input id="activity_img" name="activity_img" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this)" >
+                                    <input id="activity_img" name="activity_img" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this,'#file_view')" >
 
                                     </div>
 
@@ -493,13 +517,13 @@ if ($_GET['NewOrEdit']=='edit') {
 
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">google分析追蹤編號</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">google分析追蹤編號 :</label>
                                     <div class="col-sm-8">
                                     <input name="google_code" type="text" placeholder="請輸入追蹤編號" class="form-control" value="<?php echo $google_code?>">
                                     <span class="help-block m-b-none">例如:UA-12345678-1</span>
                                     </div>
                                 </div>
-                                <div class="form-group"><label class="col-sm-2 control-label">google分析檢視編號</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">google分析檢視編號 :</label>
                                     <div class="col-sm-8">
                                     <input name="google_view_code" type="text" placeholder="請輸入檢視編號" class="form-control" value="<?php echo $google_view_code?>">
                                     <span class="help-block m-b-none">例如:123456789，9碼</span>
