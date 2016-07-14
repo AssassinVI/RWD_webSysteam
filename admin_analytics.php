@@ -9,7 +9,7 @@
      while ($row=mysql_fetch_array($result)) {
       
        $week_user=$row['week_user'];
-       $month_user=$row['month_user'];
+      // $month_user=$row['month_user'];
        $total_user=$row['total_user'];
 
        $male=$row['male'];
@@ -30,6 +30,12 @@
 
        $user_date=explode(',', $row['user_date']);
        $user_num=explode(',', $row['user_num']);
+
+       $new_month_user=0;
+       for ($i=0; $i <count($user_num) ; $i++) { 
+         
+         $new_month_user+=$user_num[$i];
+       }
 
        $city_name=explode(',', $row['city_name']);
        $city_num=explode(',', $row['city_num']);
@@ -85,6 +91,9 @@
       border-radius: 7px 7px;
       text-align: center;
     }
+    .c3 svg{ font-size: 15px; }
+    .c3-legend-item{ font-size: 13px; }
+    
  </style>
 
  <script type="text/javascript">
@@ -270,33 +279,34 @@
 
    });
 
-google.charts.load('current', {'packages': ['geochart']});
-     google.charts.setOnLoadCallback(drawMarkersMap);
+        
 
-      function drawMarkersMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['城市',   '使用人數'],
+google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '地名');
+        data.addColumn('number', '人數');
+        
+        data.addRows([
 
         <?php 
+          for ($i=0; $i <count($city_name)-1 ; $i++) { 
 
-        for ($i=0; $i <count($city_name)-1 ; $i++) { 
-          
-          echo "['".$city_name[$i]."',      ".$city_num[$i]."],";
-        }
+            if ($city_num[$i]>5) {
+              echo "['".$city_name[$i]."',    ".$city_num[$i]." ],";
+            }
+          }
 
         ?>
 
-      ]);
+        ]);
 
-      var options = {
-        region: 'TW',
-        displayMode: 'markers',
-        colorAxis: {colors: ['green', 'blue']}
-      };
+        var table = new google.visualization.Table(document.getElementById('chart_div'));
 
-      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    };
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
  </script>
 </head>
 <body>
@@ -353,7 +363,7 @@ google.charts.load('current', {'packages': ['geochart']});
                         </div>
                         </div>
                         <div class="ibox-content">
-                            <p id="mouth" class="p_txt"><?php echo $month_user?>人</p>
+                            <p id="mouth" class="p_txt"><?php echo $new_month_user?>人</p>
                         </div>
                     </div>
                 </div>
@@ -447,23 +457,7 @@ google.charts.load('current', {'packages': ['geochart']});
                     </div>
                 </div>
 
-
                 <div class="col-lg-6">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>每日使用人數</h5>
-                           <div class="ibox-tools">
-                            
-                        </div>
-                        </div>
-                        <div class="ibox-content">
-                           <div id="date_use"></div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>地區使用人數</h5>
@@ -477,7 +471,19 @@ google.charts.load('current', {'packages': ['geochart']});
                     </div>
                 </div>
 
-
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>每日使用人數</h5>
+                           <div class="ibox-tools">
+                            
+                        </div>
+                        </div>
+                        <div class="ibox-content">
+                           <div id="date_use"></div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

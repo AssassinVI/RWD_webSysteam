@@ -1105,9 +1105,9 @@ elseif($_GET['admin']=='project_ph'){
                                             'total_user'=> $row_an['total_user']
                                              ));
         }
-        echo json_encode(array('pro_ph_array'=>$pro_ph_array));
+       
     }
-
+   echo json_encode(array('pro_ph_array'=>$pro_ph_array));
 }
 
 /* ========================================= all刪除 ============================================ */

@@ -250,12 +250,12 @@ $sql_query="SELECT * FROM build_case LEFT JOIN google_analytics ON build_case.ca
              //queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:avgSessionDuration', 'ga:date');
 
 
-          // ============================ 每日瀏覽人數 ====================================
+          // ============================ 每日瀏覽人數(直線圖) ====================================
              queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'ga:date', '#user_date', '#user_num');
 
 
-         // ============================ 每月覽人數 ====================================
-             queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'null', 'null', '#report_month');
+         // ============================ 每日瀏覽人數(特改) ====================================
+             queryCoreReportingApi(ids, 'today', 'today', 'ga:sessions', 'null', 'null', '#report_month');
 
 
          // ============================ 總瀏覽人數 ====================================
@@ -267,7 +267,7 @@ $sql_query="SELECT * FROM build_case LEFT JOIN google_analytics ON build_case.ca
 
              
          // ============================ 每日瀏覽人數 ====================================
-             //queryCoreReportingApi('119826159', 'today', 'today', 'ga:users', 'null');
+             //queryCoreReportingApi(ids, 'today', 'today', 'ga:sessions', 'null');
              
              if (sub_yn==1) {
                  $("#loading").css('display', 'block');

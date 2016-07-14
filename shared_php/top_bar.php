@@ -22,8 +22,15 @@
                             <i class="fa fa-sign-out"></i> 登出
                         </a>
                     </li>
+
+                    <li>
+                        <a href="javascript:history.back()">
+                            <i class="fa fa-reply"></i> 返回
+                        </a>
+                    </li>
         
                 </ul>
 
             </nav>
         </div>
+    
