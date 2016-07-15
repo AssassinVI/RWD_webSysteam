@@ -588,6 +588,7 @@ body {
         #address_ul li{
         text-align: center;
         display: block;
+        padding:5px; 
        }
         .hide {
             display: none;

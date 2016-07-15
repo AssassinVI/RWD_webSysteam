@@ -212,6 +212,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>專案</h5>
+                            <p style="float:right;">點擊LOGO查看詳細分析</p>
                         </div>
                         <div class="ibox-content">
 

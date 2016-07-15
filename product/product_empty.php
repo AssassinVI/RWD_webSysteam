@@ -726,7 +726,7 @@
                 if ($this_Top > $document_bottom) {
 
                     $(".tool_box").stop().animate({
-                        bottom: 190
+                        bottom: 231
                     }, 500);
                     
                     if ($(window).width()<=768) {

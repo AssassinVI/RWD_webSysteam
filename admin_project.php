@@ -141,7 +141,7 @@ $("#sel_com").change(function(event) {
                      info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
 
                      if (this['record_id']!=null) {
-                        info=info+'<td><a class="iframe_box" href="?record_id='+this['record_id']+'">顧客表單</a></td>';
+                        info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'">顧客表單</a></td>';
                      }else{
                         info=info+'<td>無擴充</td>';
                      }
@@ -185,7 +185,7 @@ $("#sel_com").change(function(event) {
                      info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
 
                      if (this['record_id']!=null) {
-                        info=info+'<td><a class="iframe_box" href="?record_id='+this['record_id']+'">顧客表單</a></td>';
+                        info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'">顧客表單</a></td>';
                      }else{
                         info=info+'<td>無擴充</td>';
                      }
