@@ -39,11 +39,12 @@
             //==================================== 權限判斷 ========================================
               if (($_SESSION['competence']=='admin') OR $_SESSION['competence']=='user' ) {
 
-                   if (check_mobile()) {//手機
+                   if (check_mobile() AND $_SESSION['competence']!='admin' ) {//手機
                     
                        admin_com('admin_project_ph.php');
                       // admin_project('admin_project_phcs.php');
-                    }else{
+
+                  }else{
 
                         admin_com('admin_com.php');
                         admin_project('admin_project.php');
