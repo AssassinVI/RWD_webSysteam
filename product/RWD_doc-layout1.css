@@ -2,9 +2,9 @@ body {
         font-family:微軟正黑體;
     }
     #address_ul li{
-        display:inline-block;
-        padding:5px;
-        font-size: 20px;
+        /*display:inline-block;*/
+        padding:10px;
+        font-size: 18px;
         color:  #FCFCFC;
         text-align: center;
     }
@@ -449,6 +449,7 @@ body {
     margin: auto;
     z-index: 500;
         }
+        #logo_a a{ font-size: 30px; color:#5fc3c3;  }
 
 
     /* =============================== 電腦畫面 =========================================== */
@@ -898,6 +899,7 @@ body {
     #address_ul li{
         display:block;
        font-size: 13px;
+       padding: 5px;
     }
     .LINE_tool,.FB_tool{
         display: none;
@@ -905,4 +907,5 @@ body {
     .tool_box a {
             margin-left: 9%;
         }
+    #logo_a a{ font-size: 25px; }
     }

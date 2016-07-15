@@ -279,6 +279,7 @@
                                 <li>
                                     <span class="glyphicon glyphicon-earphone"></span>　禮賓專線：<?php echo  $case['bu_phone']?>
                                 </li>
+                                <?php require_once'../../assets/php/logo_a.php'; ?>
                         </ul>
                     </div>
                     <!-- /FOOTER CONTACT INFO -->
