@@ -8,6 +8,9 @@ body {
         color:  #FCFCFC;
         text-align: center;
     }
+    #address_ul a{
+        text-decoration: none;
+    }
     /* 導航按鈕 */
     #adds_click{
        display: block;
@@ -369,7 +372,7 @@ body {
         font-weight: 500;
         font-size: 23px;
         color: #fff;
-        left:-125px;
+        left:-50px;
         width:530px;
         
 
@@ -400,7 +403,7 @@ body {
     .content {
             position: relative;
             margin: 0px auto;
-            width: 80%;
+            width: 68%;
         }
         .content img {
             width: 100%;
@@ -449,7 +452,7 @@ body {
     margin: auto;
     z-index: 500;
         }
-        #logo_a a{ font-size: 30px; color:#5fc3c3;  }
+        #logo_a{ font-size: 30px; color:#5fc3c3;  }
 
 
     /* =============================== 電腦畫面 =========================================== */
@@ -540,9 +543,10 @@ body {
      /* =============================== 小電腦畫面 =========================================== */
     
     @media only screen and (max-width:1024px) {
+        .content{ width: 85%; }
         .marquee_box{
             font-size: 20px;
-            left: -245px;
+            left: -130px;
         }
 
         .h1_txt {

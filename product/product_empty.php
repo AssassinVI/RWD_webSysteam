@@ -259,6 +259,7 @@
         </button>
 
         <!-- footer content -->
+        <a target="_blank" href="../../../RWD/HTML/Default2.html">
         <div class="footer-content">
             <div class="container">
                 <div class="row">
@@ -286,7 +287,7 @@
                 </div>
             </div>
         </div>
-
+     </a>
         <!-- footer content -->
     </footer>
 
@@ -726,7 +727,7 @@
                 if ($this_Top > $document_bottom) {
 
                     $(".tool_box").stop().animate({
-                        bottom: 231
+                        bottom: 255
                     }, 500);
                     
                     if ($(window).width()<=768) {
@@ -814,10 +815,17 @@
         var amgn_index = 1;
         $("#magn_txt").click(function() {
             var p_size = $(".p_txt").css('fontSize');
-            var p_size = parseInt(p_size.substr(0, 2));
+
+            if (p_size!=undefined) {
+              var p_size = parseInt(p_size.substr(0, 2));
+            }
+            
 
             var h2_size = $("h2").css('fontSize');
-            var h2_size = parseInt(h2_size.substr(0, 2));
+
+            if (h2_size!=undefined) {
+              var h2_size = parseInt(h2_size.substr(0, 2));
+            }
 
             if (amgn_index % 3 == 1) {
 
@@ -1119,7 +1127,10 @@
 
     }); //JQUERY END
 
-new WOW().init();
+var wow = new WOW({ boxClass: 'wow', animateClass: 'animated', offset: 0, mobile: false, live: true });
+      
+      wow.init();
+
 
     </script>
 <!--

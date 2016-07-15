@@ -10,6 +10,8 @@ session_start();
 
 
 if ($_POST) {
+
+  $conn = mysql_connect("localhost", "rxznet_work_test", "xm20926056565") OR die('無法連線'); //資料庫連結
 /* ===================================== 登入系統 =============================================== */
 	if ($_POST['page'] == 'login') {
     
@@ -37,8 +39,8 @@ if ($_POST) {
     //----------------GOOGLE recaptcha 驗證程式 --------------------
 
 
-		$user_id = addslashes($_POST['user_id']);
-		$user_pwd = addslashes($_POST['user_pwd']);
+		$user_id = mysql_real_escape_string($_POST['user_id']);
+		$user_pwd = mysql_real_escape_string($_POST['user_pwd']);
 		$result = db_conn("SELECT User_Name, User_id, competence, com_id, case_id FROM admin_user WHERE login_id='$user_id' and login_pwd='$user_pwd'");
 
 		if (mysql_num_rows($result)>0) {
@@ -106,20 +108,20 @@ if ($_POST) {
 /* =================================== 使用者 =============================================== */
   elseif ($_POST['page'] == 'admin_user') {
      
-     $User_Name=addslashes($_POST['User_name']);
-     $User_phone=addslashes($_POST['User_phone']);
-     $User_adds=addslashes($_POST['User_adds']);
-     $login_id=addslashes($_POST['login_id']);
-     $login_pwd=addslashes($_POST['login_pwd']);
-     $competence=addslashes($_POST['sel_cpe']);
+     $User_Name=mysql_real_escape_string($_POST['User_name']);
+     $User_phone=mysql_real_escape_string($_POST['User_phone']);
+     $User_adds=mysql_real_escape_string($_POST['User_adds']);
+     $login_id=mysql_real_escape_string($_POST['login_id']);
+     $login_pwd=mysql_real_escape_string($_POST['login_pwd']);
+     $competence=mysql_real_escape_string($_POST['sel_cpe']);
      if (empty($_POST['sel_com'])) {
        
-       $com_id=addslashes($_POST['sel_com_case']);
+       $com_id=mysql_real_escape_string($_POST['sel_com_case']);
      }else{
 
-       $com_id=addslashes($_POST['sel_com']);
+       $com_id=mysql_real_escape_string($_POST['sel_com']);
      }
-     $case_id=addslashes($_POST['sel_case']);
+     $case_id=mysql_real_escape_string($_POST['sel_case']);
 
      /* ##################### 給使用者ID ###################### */
 
@@ -179,8 +181,8 @@ if ($_POST) {
   elseif ($_POST['page'] == 'company') {
 
     $User_id=$_SESSION['user_id'];
-    $com_name=addslashes($_POST['com_name']);
-    $old_logo=addslashes($_POST['old_logo']);
+    $com_name=mysql_real_escape_string($_POST['com_name']);
+    $old_logo=mysql_real_escape_string($_POST['old_logo']);
     
 
     /* ##################### 給公司ID ###################### */
@@ -216,7 +218,7 @@ if ($_POST) {
           location_up('admin_com.php',$txt);
    }
    else{
-       $com_id=addslashes($_POST['com_id']);
+       $com_id=mysql_real_escape_string($_POST['com_id']);
 
        if (!empty($_FILES['com_LOGO']['name'])) { $com_logo=$com_id.".jpg"; }
        elseif (!empty($old_logo)) { $com_logo=$com_id.".jpg"; }
@@ -238,34 +240,34 @@ if ($_POST) {
 
 	elseif ($_POST['page'] == 'build_case') {
 		$User_id=$_SESSION['user_id'];
-    $com_id=addslashes($_POST['sel_com']);
-		$case_name=addslashes($_POST['case_name']);
+    $com_id=mysql_real_escape_string($_POST['sel_com']);
+		$case_name=mysql_real_escape_string($_POST['case_name']);
 
 		if (empty($_POST['google_an'])) {
 			$google_an='n';
 		}else{
-			$google_an=addslashes($_POST['google_an']);
+			$google_an=mysql_real_escape_string($_POST['google_an']);
 		}
 
-    $google_code=addslashes($_POST['google_code']);
-    $google_view_code=addslashes($_POST['google_view_code']);
-		$build_com=addslashes($_POST['build_com']);
-		$Consignment=addslashes($_POST['Consignment']);
-    $marquee=addslashes($_POST['marquee']);
-		$format=addslashes($_POST['format']);
-		$floor=addslashes($_POST['floor']);
-		$build_adds=addslashes($_POST['build_adds']);
-		$bu_phone=addslashes($_POST['bu_phone']);
-    $line_tool=addslashes($_POST['line_tool']);
-		$bu_line=addslashes($_POST['bu_line']);
-		//$bu_fb=addslashes($_POST['bu_fb']);
-    $activity_img=addslashes($_POST['activity_img']);
-    $activity_song=addslashes($_POST['activity_song']);
-    $old_case_logo=addslashes($_POST['old_case_logo']);
+    $google_code=mysql_real_escape_string($_POST['google_code']);
+    $google_view_code=mysql_real_escape_string($_POST['google_view_code']);
+		$build_com=mysql_real_escape_string($_POST['build_com']);
+		$Consignment=mysql_real_escape_string($_POST['Consignment']);
+    $marquee=mysql_real_escape_string($_POST['marquee']);
+		$format=mysql_real_escape_string($_POST['format']);
+		$floor=mysql_real_escape_string($_POST['floor']);
+		$build_adds=mysql_real_escape_string($_POST['build_adds']);
+		$bu_phone=mysql_real_escape_string($_POST['bu_phone']);
+    $line_tool=mysql_real_escape_string($_POST['line_tool']);
+		$bu_line=mysql_real_escape_string($_POST['bu_line']);
+		//$bu_fb=mysql_real_escape_string($_POST['bu_fb']);
+    $activity_img=mysql_real_escape_string($_POST['activity_img']);
+    $activity_song=mysql_real_escape_string($_POST['activity_song']);
+    $old_case_logo=mysql_real_escape_string($_POST['old_case_logo']);
 
 
-        $other=addslashes($_POST['other']);
-        $inOrup=addslashes($_POST['inOrup']);
+        $other=mysql_real_escape_string($_POST['other']);
+        $inOrup=mysql_real_escape_string($_POST['inOrup']);
 
 
 /* ##################### 給建案ID ###################### */
@@ -319,7 +321,7 @@ if ($_POST) {
 
         }elseif ($inOrup=='update') {
 
-          $case_id=addslashes($_POST['case_id']);
+          $case_id=mysql_real_escape_string($_POST['case_id']);
 
           if (!empty($_FILES['case_logo']['name'])) { $case_logo=$case_id.".jpg"; }
           elseif (!empty($old_case_logo)) { $case_logo=$case_id.".jpg"; }
@@ -366,10 +368,10 @@ if ($_POST) {
 	elseif ($_POST['page'] == 'slideshow'){
 
 
-		$case_id=addslashes($_POST['case_id']);//建案ID
-		$sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
-    $play_speed=addslashes($_POST['play_speed']); //輪播速度
+		$case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+		$sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
+    $play_speed=mysql_real_escape_string($_POST['play_speed']); //輪播速度
     $newFileIndex=new_showIndex('slideshow_tb','show_img');
     
 
@@ -445,13 +447,13 @@ for ($i=0; $i < count($_FILES['show']['name']); $i++) {
   elseif ($_POST['page'] == 'youtube') {
 
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
-    $you_title1=addslashes($_POST['you_title1']);
-    $you_title2=addslashes($_POST['you_title2']);
-    $you_title3=addslashes($_POST['you_title3']);
-    $you_adds=addslashes($_POST['you_adds']);
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
+    $you_title1=mysql_real_escape_string($_POST['you_title1']);
+    $you_title2=mysql_real_escape_string($_POST['you_title2']);
+    $you_title3=mysql_real_escape_string($_POST['you_title3']);
+    $you_adds=mysql_real_escape_string($_POST['you_adds']);
     
     $you_title=$you_title1."(*)".$you_title2."(*)".$you_title3; //使用"(*)"分斷
 
@@ -485,20 +487,20 @@ for ($i=0; $i < count($_FILES['show']['name']); $i++) {
   elseif ($_POST['page'] == 'base') {
 
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
-    $title1=addslashes($_POST['title1']);
-    $title2=addslashes($_POST['title2']);
-    $title3=addslashes($_POST['title3']);
-    $title_two=addslashes($_POST['title_two']);
-    $edit_word=addslashes($_POST['edit_word']);
-    $base_img=addslashes($_POST['base_img']);
-    $txt_fadein=addslashes($_POST['txt_fadein']);
-    $img_fadein=addslashes($_POST['img_fadein']);
-    $img_fadein_type=addslashes($_POST['img_fadein_type']);
-    $line_show=addslashes($_POST['line_show']);
-    $big_img=addslashes($_POST['big_img']); //空拍放大連結
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
+    $title1=mysql_real_escape_string($_POST['title1']);
+    $title2=mysql_real_escape_string($_POST['title2']);
+    $title3=mysql_real_escape_string($_POST['title3']);
+    $title_two=mysql_real_escape_string($_POST['title_two']);
+    $edit_word=mysql_real_escape_string($_POST['edit_word']);
+    $base_img=mysql_real_escape_string($_POST['base_img']);
+    $txt_fadein=mysql_real_escape_string($_POST['txt_fadein']);
+    $img_fadein=mysql_real_escape_string($_POST['img_fadein']);
+    $img_fadein_type=mysql_real_escape_string($_POST['img_fadein_type']);
+    $line_show=mysql_real_escape_string($_POST['line_show']);
+    $big_img=mysql_real_escape_string($_POST['big_img']); //空拍放大連結
     
     
     if (!empty($img_fadein)) {  $img_fadein=$img_fadein.','.$img_fadein_type;  }
@@ -580,14 +582,14 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
   elseif ($_POST['page'] == 'map') {
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
-    $map_position=addslashes($_POST['map_position']);//經緯度
-    $mark_txt=addslashes($_POST['mark_txt']);//座標文字
-    $map_title1=addslashes($_POST['map_title1']);//地圖抬頭
-    $map_title2=addslashes($_POST['map_title2']);//地圖抬頭
-    $map_title3=addslashes($_POST['map_title3']);//地圖抬頭
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
+    $map_position=mysql_real_escape_string($_POST['map_position']);//經緯度
+    $mark_txt=mysql_real_escape_string($_POST['mark_txt']);//座標文字
+    $map_title1=mysql_real_escape_string($_POST['map_title1']);//地圖抬頭
+    $map_title2=mysql_real_escape_string($_POST['map_title2']);//地圖抬頭
+    $map_title3=mysql_real_escape_string($_POST['map_title3']);//地圖抬頭
 
     $map_title=$map_title1."(*)".$map_title2."(*)".$map_title3; //使用"(*)"分段
    $select_funId=db_conn("SELECT map_position FROM googlemap_tb WHERE fun_id='$fun_id'");
@@ -614,21 +616,21 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
   elseif ($_POST['page'] == 'call') {
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
 
-    $re_name1=addslashes($_POST['re_name1']);
-    $re_name2=addslashes($_POST['re_name2']);
-    $re_name3=addslashes($_POST['re_name3']);
-    $re_name4=addslashes($_POST['re_name4']);
-    $re_name5=addslashes($_POST['re_name5']);
+    $re_name1=mysql_real_escape_string($_POST['re_name1']);
+    $re_name2=mysql_real_escape_string($_POST['re_name2']);
+    $re_name3=mysql_real_escape_string($_POST['re_name3']);
+    $re_name4=mysql_real_escape_string($_POST['re_name4']);
+    $re_name5=mysql_real_escape_string($_POST['re_name5']);
 
-    $re_mail1=addslashes($_POST['re_mail1']);
-    $re_mail2=addslashes($_POST['re_mail2']);
-    $re_mail3=addslashes($_POST['re_mail3']);
-    $re_mail4=addslashes($_POST['re_mail4']);
-    $re_mail5=addslashes($_POST['re_mail5']);
+    $re_mail1=mysql_real_escape_string($_POST['re_mail1']);
+    $re_mail2=mysql_real_escape_string($_POST['re_mail2']);
+    $re_mail3=mysql_real_escape_string($_POST['re_mail3']);
+    $re_mail4=mysql_real_escape_string($_POST['re_mail4']);
+    $re_mail5=mysql_real_escape_string($_POST['re_mail5']);
     
     $re_name=$re_name1.",".$re_name2.",".$re_name3.",".$re_name4.",".$re_name5;
     $re_mail=$re_mail1.",".$re_mail2.",".$re_mail3.",".$re_mail4.",".$re_mail5;
@@ -653,27 +655,27 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
   /* ==================================== 720環景 ================================================== */
   elseif ($_POST['page'] == 'view720') {
     
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
-    $view720_title1=addslashes($_POST['view720_title1']);//720抬頭
-    $view720_title2=addslashes($_POST['view720_title2']);
-    $view720_title3=addslashes($_POST['view720_title3']);
-    $x_point=addslashes($_POST['x_point']); //X座標
-    $y_point=addslashes($_POST['y_point']); //Y座標
-    $point_txt=addslashes($_POST['point_txt']); //名稱
-    $point_link=addslashes($_POST['point_link']); //連結
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
+    $view720_title1=mysql_real_escape_string($_POST['view720_title1']);//720抬頭
+    $view720_title2=mysql_real_escape_string($_POST['view720_title2']);
+    $view720_title3=mysql_real_escape_string($_POST['view720_title3']);
+    $x_point=mysql_real_escape_string($_POST['x_point']); //X座標
+    $y_point=mysql_real_escape_string($_POST['y_point']); //Y座標
+    $point_txt=mysql_real_escape_string($_POST['point_txt']); //名稱
+    $point_link=mysql_real_escape_string($_POST['point_link']); //連結
 
     if (!empty($_FILES['view_img']['name'])) {
-      $view_img=addslashes($fun_id.'.jpg'); //俯視圖
+      $view_img=mysql_real_escape_string($fun_id.'.jpg'); //俯視圖
     }else{
-      $view_img=addslashes($_POST['view_img']);
+      $view_img=mysql_real_escape_string($_POST['view_img']);
     }
 
      if (!empty($_FILES['view_file']['name'])) {
-        $view_file=addslashes($_FILES['view_file']['name']);//環景檔案名
+        $view_file=mysql_real_escape_string($_FILES['view_file']['name']);//環景檔案名
      }else{
-        $view_file=addslashes($_POST['view_file']);//環景檔案名
+        $view_file=mysql_real_escape_string($_POST['view_file']);//環景檔案名
      } 
      
      $view720_title=$view720_title1."(*)".$view720_title2."(*)".$view720_title3;
@@ -721,10 +723,10 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
      
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
-    $anchor_name=addslashes($_POST['anchor_name']);//錨點名稱
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
+    $anchor_name=mysql_real_escape_string($_POST['anchor_name']);//錨點名稱
 
     $select_funId=db_conn("SELECT * FROM anchor_tb WHERE fun_id='$fun_id'");
     if (mysql_num_rows($select_funId)<1) {
@@ -746,9 +748,9 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 /* ======================================== 房貸試算 ============================================== */
   elseif($_POST['page'] == 'house_math'){
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
 
     rel_insert($case_id, 'house_math', $fun_id, $sort);
     location_parent('edit_funBox.php?case_id='.$case_id,'新增房貸試算');
@@ -757,9 +759,9 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 /* ======================================== 索取DM ============================================== */
   elseif($_POST['page'] == 'catch_DM'){
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
 
     rel_insert($case_id, 'catch_DM', $fun_id, $sort);
     location_parent('edit_funBox.php?case_id='.$case_id,'新增索取DM');
@@ -768,13 +770,13 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 /* ======================================== 索取DM-客戶基本資料-AJAX ============================================== */
   elseif($_POST['page'] == 'catch_DM_data'){
 
-     $case_id=addslashes($_POST['case_id']);//建案ID
-     $dm_name=addslashes($_POST['dm_name']);
-     $dm_mail=addslashes($_POST['dm_mail']);
-     $dm_adds=addslashes($_POST['dm_adds']);
-     $dm_phone=addslashes($_POST['dm_phone']);
-     $dm_remark=addslashes($_POST['dm_remark']);
-     $dm_YN_news=addslashes($_POST['dm_YN_news']);
+     $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+     $dm_name=mysql_real_escape_string($_POST['dm_name']);
+     $dm_mail=mysql_real_escape_string($_POST['dm_mail']);
+     $dm_adds=mysql_real_escape_string($_POST['dm_adds']);
+     $dm_phone=mysql_real_escape_string($_POST['dm_phone']);
+     $dm_remark=mysql_real_escape_string($_POST['dm_remark']);
+     $dm_YN_news=mysql_real_escape_string($_POST['dm_YN_news']);
 
      
      $phone_head=substr($dm_phone, 0,2); //手機
@@ -798,9 +800,9 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
   /* ======================================== 電子報 ============================================== */
   elseif($_POST['page'] == 'newsletter'){
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $sort=addslashes($_POST['rel_sort']);//排序
-    $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $sort=mysql_real_escape_string($_POST['rel_sort']);//排序
+    $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
 
     rel_insert($case_id, 'newsletter', $fun_id, $sort);
     location_parent('edit_funBox.php?case_id='.$case_id,'新增電子報');
@@ -810,8 +812,8 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
   /* ======================================== 電子報-data-AJAX ============================================== */
   elseif($_POST['page'] == 'newsletter_data'){
 
-    $case_id=addslashes($_POST['case_id']);//建案ID
-    $news_mail=addslashes($_POST['news_mail']);
+    $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+    $news_mail=mysql_real_escape_string($_POST['news_mail']);
 
     db_conn("INSERT INTO newsletter (case_id, news_mail) VALUES ('$case_id', '$news_mail')");
   }
@@ -899,14 +901,14 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 /* ======================================== 顏色修改 ============================================== */
   elseif($_POST['page'] == 'color'){
  
-     $case_id=addslashes($_POST['case_id']);//建案ID
-     $h1_color=addslashes($_POST['h1_color']);
-     $h2_color=addslashes($_POST['h2_color']);
-     $p_color=addslashes($_POST['p_color']);
-     $marquee=addslashes($_POST['marquee']);
-     $top_txt=addslashes($_POST['top_txt']);
-     $top_bar=addslashes($_POST['top_bar']);
-     $back_color=addslashes($_POST['back_color']);
+     $case_id=mysql_real_escape_string($_POST['case_id']);//建案ID
+     $h1_color=mysql_real_escape_string($_POST['h1_color']);
+     $h2_color=mysql_real_escape_string($_POST['h2_color']);
+     $p_color=mysql_real_escape_string($_POST['p_color']);
+     $marquee=mysql_real_escape_string($_POST['marquee']);
+     $top_txt=mysql_real_escape_string($_POST['top_txt']);
+     $top_bar=mysql_real_escape_string($_POST['top_bar']);
+     $back_color=mysql_real_escape_string($_POST['back_color']);
 
     $select_caseId=db_conn("SELECT * FROM color WHERE case_id='$case_id'");
     if (mysql_num_rows($select_caseId)<1) {
@@ -928,10 +930,10 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 /* =============================================== 更改密碼 ======================================================= */
   elseif ($_POST['page'] == 'change_pwd') {
     
-    $User_id=addslashes($_POST['User_id']);//要更改密碼的使用者ID
-    $new_pwd=addslashes($_POST['new_pwd']);
-    $admin_num=addslashes($_POST['admin_num']);
-    $admin_pwd=addslashes($_POST['admin_pwd']);
+    $User_id=mysql_real_escape_string($_POST['User_id']);//要更改密碼的使用者ID
+    $new_pwd=mysql_real_escape_string($_POST['new_pwd']);
+    $admin_num=mysql_real_escape_string($_POST['admin_num']);
+    $admin_pwd=mysql_real_escape_string($_POST['admin_pwd']);
 
     $result=db_conn("SELECT User_id FROM admin_user WHERE login_id='$admin_num' AND login_pwd='$admin_pwd' AND competence='admin'");
     if (mysql_num_rows($result)>0) {
@@ -949,7 +951,7 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
     
   }
 
-
+ mysql_close($conn);
 }//$_POST END
 
 
@@ -960,10 +962,13 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
 if ($_GET) {
 
+   $conn = mysql_connect("localhost", "rxznet_work_test", "xm20926056565") OR die('無法連線'); //資料庫連結
+
   /* =================================== 建案表格 ============================================== */ 
 	if ($_GET['admin']=='project') {
-    $com_id=addslashes($_GET['com_id']);
-    $case_id=addslashes($_GET['case_id']);
+
+    $com_id=mysql_real_escape_string($_GET['com_id']);
+    $case_id=mysql_real_escape_string($_GET['case_id']);
 		$pro_array=array();
     
     if (!empty($com_id)) {
@@ -1004,7 +1009,7 @@ if ($_GET) {
 
  /* =================================== 使用者表格 ============================================== */ 
   elseif ($_GET['admin']=='user'){
-    $competence=addslashes($_GET['competence']);
+    $competence=mysql_real_escape_string($_GET['competence']);
     $user_array=array();
   $result=db_conn("SELECT User_id, User_Name, User_phone, User_adds, com_id, case_id FROM admin_user WHERE competence='$competence'");
   if (mysql_num_rows($result)>0) {
@@ -1025,7 +1030,7 @@ if ($_GET) {
    /* =================================== 公司表格 ============================================== */ 
   elseif ($_GET['admin']=='company'){
 
-    $User_id=addslashes($_SESSION['user_id']);
+    $User_id=mysql_real_escape_string($_SESSION['user_id']);
 
     $com_array=array();
   $result=db_conn("SELECT com_id, com_name, com_logo FROM company WHERE User_id='$User_id'");
@@ -1076,8 +1081,8 @@ if ($_GET) {
   /* ======================================== 專案(手機板) ================================================ */
 elseif($_GET['admin']=='project_ph'){
 
-  $com_id=addslashes($_GET['com_id']);
-    $case_id=addslashes($_GET['case_id']);
+  $com_id=mysql_real_escape_string($_GET['com_id']);
+    $case_id=mysql_real_escape_string($_GET['case_id']);
     $pro_ph_array=array();
     
     if (!empty($com_id)) {
@@ -1113,7 +1118,7 @@ elseif($_GET['admin']=='project_ph'){
 /* ========================================= all刪除 ============================================ */
    elseif ($_GET['delete'] == 'admin_user') {
     
-    $User_id=addslashes($_GET['User_id']);
+    $User_id=mysql_real_escape_string($_GET['User_id']);
     db_conn("DELETE FROM admin_user WHERE User_id='$User_id'");
 
     $txt=iconv('utf-8', 'big5', '成功刪除使用者!!');
@@ -1125,7 +1130,7 @@ elseif($_GET['admin']=='project_ph'){
 /* ====================================== 刪除公司 ============================================== */
     elseif ($_GET['delete'] == 'company') {
     
-    $com_id=addslashes($_GET['com_id']);
+    $com_id=mysql_real_escape_string($_GET['com_id']);
     db_conn("DELETE FROM company WHERE com_id='$com_id'");
 
     $txt=iconv('utf-8', 'big5', '成功刪除公司!!');
@@ -1137,11 +1142,11 @@ elseif($_GET['admin']=='project_ph'){
 
  /* =================== 建案刪除 ===================== */
 	elseif ($_GET['delete'] == 'build_case') {
-		$case_id=addslashes($_GET['case']);
+		$case_id=mysql_real_escape_string($_GET['case']);
     $result=db_conn("SELECT fun_name, fun_id FROM Related_tb WHERE case_id='$case_id'" );
     while ($row=mysql_fetch_array($result)) {
-      $fun_name=addslashes($row['fun_name']);
-      $fun_id=addslashes($row['fun_id']);
+      $fun_name=mysql_real_escape_string($row['fun_name']);
+      $fun_id=mysql_real_escape_string($row['fun_id']);
        db_conn("DELETE FROM $fun_name WHERE fun_id='$fun_id'");
     }
 
@@ -1163,12 +1168,12 @@ elseif($_GET['admin']=='project_ph'){
 
   elseif ($_GET['delete'] == 'funBox') {
 
-    $fun_id=addslashes($_GET['fun_id']);
-    $case_id=addslashes($_GET['case_id']);
+    $fun_id=mysql_real_escape_string($_GET['fun_id']);
+    $case_id=mysql_real_escape_string($_GET['case_id']);
      $result=db_conn("SELECT fun_name FROM Related_tb WHERE fun_id='$fun_id'");
 
      while ($row=mysql_fetch_array($result)) {
-        $fun_name=addslashes($row['fun_name']);
+        $fun_name=mysql_real_escape_string($row['fun_name']);
 
       /* ===================== 刪幻燈片圖 ======================== */
 
@@ -1227,7 +1232,7 @@ elseif($_GET['admin']=='project_ph'){
     $sel_num=db_conn("SELECT fun_id FROM Related_tb WHERE case_id='$case_id' ORDER BY sort");
 
     while ($row=mysql_fetch_array($sel_num)) {
-       $fun_id=addslashes($row['fun_id']);
+       $fun_id=mysql_real_escape_string($row['fun_id']);
       db_conn("UPDATE Related_tb SET sort=$new_sort WHERE fun_id='$fun_id'");
       ++$new_sort;
     }
@@ -1241,8 +1246,8 @@ elseif($_GET['admin']=='project_ph'){
  /* ================================================== 重新排序 ========================================================== */ 
   elseif (!empty($_GET['sort']) ) {
 
-     $case_id=addslashes($_GET['case_id']);
-     $sort=addslashes($_GET['sort']);
+     $case_id=mysql_real_escape_string($_GET['case_id']);
+     $sort=mysql_real_escape_string($_GET['sort']);
      $sort=explode(',', $sort);
 
      for ($i=0; $i <count($sort)-1 ; $i++) { 
@@ -1256,6 +1261,8 @@ elseif($_GET['admin']=='project_ph'){
     location_up('edit_funBox.php?case_id='.$case_id, $txt);
 
   }
+
+  mysql_close($conn);
 }
 
 
