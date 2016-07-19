@@ -1,4 +1,9 @@
 <?php
+/* ================================= 連接資料庫 ======================================= */
+require_once 'config.php';
+require_once 'login_session.php';
+session_start();
+
 if ($_POST) {
 
 	$conn = mysql_connect("localhost", "rxznet_work_test", "xm20926056565") OR die('無法連線'); //資料庫連結

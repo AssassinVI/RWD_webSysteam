@@ -1,5 +1,5 @@
-<?php include 'shared_php/login_session.php';
-      include 'shared_php/config.php';
+<?php require_once 'shared_php/login_session.php';
+      require_once 'shared_php/config.php';
 ?>
 
 
@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>顧客問卷-編輯</title>
 		<!-- ================================== 外掛and CSS ====================================== -->
-    <?php include 'shared_php/script_style.php';?>
+    <?php require_once 'shared_php/script_style.php';?>
     <script type="text/javascript" src="js/plugins/twzipcode/jquery.twzipcode.js"></script> <!-- 台灣地址 -->
 
     <style type="text/css">
@@ -89,8 +89,8 @@
                                    <label class="col-sm-2 control-label">顧客姓名：</label>
                                     <div class="col-sm-2">
                                        <input name="name" type="text" class="form-control" value="">
-                                        <input type="radio" name="gender" value="m">先生
-                                        <input type="radio" name="gender" value="f">小姐
+                                        <input type="radio" id="gender1" name="gender" value="m"><label for="gender1">先生</label>
+                                        <input type="radio" id="gender2" name="gender" value="f"><label for="gender2">小姐</label>
                                     </div>
                                 </div>
 
@@ -150,11 +150,11 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">婚姻狀況：</label>
                                     <div class="col-sm-4">
-                                       <input type="radio" value="已婚" name="mar_state">已婚
+                                       <input type="radio" id="mar_state1" value="已婚" name="mar_state"><label for="mar_state1">已婚</label>
                                        <input name="mar_child" type="text"  value="">個小孩<br>
-                                       <input type="radio" value="已婚無子" name="mar_state">已婚無子<br>
-                                       <input type="radio" value="未婚" name="mar_state">未婚<br>
-                                       <input type="radio" value="其他" name="mar_state">其他
+                                       <input type="radio" id="mar_state2" value="已婚無子" name="mar_state"><label for="mar_state2">已婚無子</label><br>
+                                       <input type="radio" id="mar_state3" value="未婚" name="mar_state"><label for="mar_state3">未婚</label><br>
+                                       <input type="radio" id="mar_state4" value="其他" name="mar_state"><label for="mar_state4">其他</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -194,10 +194,10 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">現住房屋型態：</label>
                                     <div class="col-sm-2">
-                                       <input type="radio" value="公寓" name="house_type">公寓<br>
-                                       <input type="radio" value="大樓" name="house_type">大樓<br>
-                                       <input type="radio" value="套房" name="house_type">套房<br>
-                                       <input type="radio" value="透天" name="house_type">透天<br>
+                                       <input type="radio" id="house_type1" value="公寓" name="house_type"><label for="house_type1">公寓</label><br>
+                                       <input type="radio" id="house_type2" value="大樓" name="house_type"><label for="house_type2">大樓</label><br>
+                                       <input type="radio" id="house_type3" value="套房" name="house_type"><label for="house_type3">套房</label><br>
+                                       <input type="radio" id="house_type4" value="透天" name="house_type"><label for="house_type4">透天</label><br>
                                        屋齡<input type="text" name="house_old">年
                                     </div>
                                 </div>
@@ -221,22 +221,22 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">媒體(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="中時" name="media[]">中時　
-                                       <input type="checkbox" value="聯合" name="media[]">聯合　
-                                       <input type="checkbox" value="自由" name="media[]">自由　
-                                       <input type="checkbox" value="聯晚" name="media[]">聯晚　
-                                       <input type="checkbox" value="蘋果日報" name="media[]">蘋果日報　
-                                       <input type="checkbox" value="網路" name="media[]">網路　
-                                       <input type="checkbox" value="車箱" name="media[]">車箱　
-                                       <input type="checkbox" value="廣告" name="media[]">廣告　
-                                       <input type="checkbox" value="CF" name="media[]">CF　
-                                       <input type="checkbox" value="RD" name="media[]">RD　
-                                       <input type="checkbox" value="POP" name="media[]">POP　
-                                       <input type="checkbox" value="雜誌" name="media[]">雜誌　
-                                       <input type="checkbox" value="派報" name="media[]">派報　
-                                       <input type="checkbox" value="夾報" name="media[]">夾報　
-                                       <input type="checkbox" value="介紹" name="media[]">介紹　
-                                       <input type="checkbox" value="其他" name="media[]">其他 <input type="text" name="media17">
+                                       <input type="checkbox" id="media1" value="中時" name="media[]"><label for="media1">中時</label>　
+                                       <input type="checkbox" id="media2" value="聯合" name="media[]"><label for="media2">聯合</label>　
+                                       <input type="checkbox" id="media3" value="自由" name="media[]"><label for="media3">自由</label>　
+                                       <input type="checkbox" id="media4" value="聯晚" name="media[]"><label for="media4">聯晚</label>　
+                                       <input type="checkbox" id="media5" value="蘋果日報" name="media[]"><label for="media5">蘋果日報</label>　
+                                       <input type="checkbox" id="media6" value="網路" name="media[]"><label for="media6">網路</label>　
+                                       <input type="checkbox" id="media7" value="車箱" name="media[]"><label for="media7">車箱</label>　
+                                       <input type="checkbox" id="media8" value="廣告" name="media[]"><label for="media8">廣告</label>　
+                                       <input type="checkbox" id="media9" value="CF" name="media[]"><label for="media9">CF</label>　
+                                       <input type="checkbox" id="media10" value="RD" name="media[]"><label for="media10">RD</label>　
+                                       <input type="checkbox" id="media11" value="POP" name="media[]"><label for="media11">POP</label>　
+                                       <input type="checkbox" id="media12" value="雜誌" name="media[]"><label for="media12">雜誌</label>　
+                                       <input type="checkbox" id="media13" value="派報" name="media[]"><label for="media13">派報</label>　
+                                       <input type="checkbox" id="media14" value="夾報" name="media[]"><label for="media14">夾報</label>　
+                                       <input type="checkbox" id="media15" value="介紹" name="media[]"><label for="media15">介紹</label>　
+                                       <input type="checkbox" id="media16" value="其他" name="media[]"><label for="media16">其他</label> <input type="text" name="media17">
                                     </div>
                                 </div>
 
@@ -246,12 +246,12 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">產品需求(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="大樓" name="dem_product[]">大樓　
-                                       <input type="checkbox" value="透天" name="dem_product[]">透天　
-                                       <input type="checkbox" value="套房" name="dem_product[]">套房　
-                                       <input type="checkbox" value="店面" name="dem_product[]">店面　
-                                       <input type="checkbox" value="辦公室" name="dem_product[]">辦公室　
-                                       <input type="checkbox" value="其他" name="dem_product[]">其它 <input type="text" name="dem_product7">
+                                       <input type="checkbox" id="dem_product1" value="大樓" name="dem_product[]"><label for="dem_product1">大樓</label>　
+                                       <input type="checkbox" id="dem_product2" value="透天" name="dem_product[]"><label for="dem_product2">透天</label>　
+                                       <input type="checkbox" id="dem_product3" value="套房" name="dem_product[]"><label for="dem_product3">套房</label>　
+                                       <input type="checkbox" id="dem_product4" value="店面" name="dem_product[]"><label for="dem_product4">店面</label>　
+                                       <input type="checkbox" id="dem_product5" value="辦公室" name="dem_product[]"><label for="dem_product5">辦公室</label>　
+                                       <input type="checkbox" id="dem_product6" value="其他" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" name="dem_product7">
                                     </div>
                                 </div>
                                 
@@ -260,12 +260,12 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">坪數需求(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="30坪以下" name="dem_floor_num[]">30坪以下　
-                                       <input type="checkbox" value="31~40坪" name="dem_floor_num[]">31~40坪　
-                                       <input type="checkbox" value="41~50坪" name="dem_floor_num[]">41~50坪　
-                                       <input type="checkbox" value="51~70坪" name="dem_floor_num[]">51~70坪　
-                                       <input type="checkbox" value="71~90坪" name="dem_floor_num[]">71~90坪　
-                                       <input type="checkbox" value="91坪以上" name="dem_floor_num[]">91坪以上
+                                       <input type="checkbox" id="dem_floor_num1" value="30坪以下" name="dem_floor_num[]"><label for="dem_floor_num1">30坪以下</label>　
+                                       <input type="checkbox" id="dem_floor_num2" value="31~40坪" name="dem_floor_num[]"><label for="dem_floor_num2">31~40坪</label>　
+                                       <input type="checkbox" id="dem_floor_num3" value="41~50坪" name="dem_floor_num[]"><label for="dem_floor_num3">41~50坪</label>　
+                                       <input type="checkbox" id="dem_floor_num4" value="51~70坪" name="dem_floor_num[]"><label for="dem_floor_num4">51~70坪</label>　
+                                       <input type="checkbox" id="dem_floor_num5" value="71~90坪" name="dem_floor_num[]"><label for="dem_floor_num5">71~90坪</label>　
+                                       <input type="checkbox" id="dem_floor_num6" value="91坪以上" name="dem_floor_num[]"><label for="dem_floor_num6">91坪以上</label>
                                     </div>
                                 </div>
                               
@@ -275,13 +275,13 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">購屋預算(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="301~400萬" name="dem_money[]">301~400萬　
-                                       <input type="checkbox" value="401~600萬" name="dem_money[]">401~600萬　
-                                       <input type="checkbox" value="601~800萬" name="dem_money[]">601~800萬　
-                                       <input type="checkbox" value="801~1200萬" name="dem_money[]">801~1200萬　
-                                       <input type="checkbox" value="1201~2000萬" name="dem_money[]">1201~2000萬　
-                                       <input type="checkbox" value="2001~3000萬" name="dem_money[]">2001~3000萬　
-                                       <input type="checkbox" value="3001萬以上" name="dem_money[]">3001萬以上
+                                       <input type="checkbox" id="dem_money1" value="301~400萬" name="dem_money[]"><label for="dem_money1">301~400萬</label>　
+                                       <input type="checkbox" id="dem_money2" value="401~600萬" name="dem_money[]"><label for="dem_money2">401~600萬</label>　
+                                       <input type="checkbox" id="dem_money3" value="601~800萬" name="dem_money[]"><label for="dem_money3">601~800萬</label>　
+                                       <input type="checkbox" id="dem_money4" value="801~1200萬" name="dem_money[]"><label for="dem_money4">801~1200萬</label>　
+                                       <input type="checkbox" id="dem_money5" value="1201~2000萬" name="dem_money[]"><label for="dem_money5">1201~2000萬</label>　
+                                       <input type="checkbox" id="dem_money6" value="2001~3000萬" name="dem_money[]"><label for="dem_money6">2001~3000萬</label>　
+                                       <input type="checkbox" id="dem_money7" value="3001萬以上" name="dem_money[]"><label for="dem_money7">3001萬以上</label>
                                     </div>
                                 </div>
 
@@ -291,13 +291,13 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">希望月付款(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="20,000以下" name="dem_mon_pay[]">20,000以下　
-                                       <input type="checkbox" value="20,001~27,000" name="dem_mon_pay[]">20,001~27,000　
-                                       <input type="checkbox" value="27,001~35,000" name="dem_mon_pay[]">27,001~35,000　
-                                       <input type="checkbox" value="35,001~42,000" name="dem_mon_pay[]">35,001~42,000　
-                                       <input type="checkbox" value="42,001~50,000" name="dem_mon_pay[]">42,001~50,000　
-                                       <input type="checkbox" value="50,001~60,000" name="dem_mon_pay[]">50,001~60,000　
-                                       <input type="checkbox" value="60,001以上" name="dem_mon_pay[]">60,001以上
+                                       <input type="checkbox" id="dem_mon_pay1" value="20,000以下" name="dem_mon_pay[]"><label for="dem_mon_pay1">20,000以下</label>　
+                                       <input type="checkbox" id="dem_mon_pay2" value="20,001~27,000" name="dem_mon_pay[]"><label for="dem_mon_pay2">20,001~27,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay3" value="27,001~35,000" name="dem_mon_pay[]"><label for="dem_mon_pay3">27,001~35,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay4" value="35,001~42,000" name="dem_mon_pay[]"><label for="dem_mon_pay4">35,001~42,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay5" value="42,001~50,000" name="dem_mon_pay[]"><label for="dem_mon_pay5">42,001~50,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay6" value="50,001~60,000" name="dem_mon_pay[]"><label for="dem_mon_pay6">50,001~60,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay7" value="60,001以上" name="dem_mon_pay[]"><label for="dem_mon_pay7">60,001以上</label>
                                     </div>
                                 </div>
 
@@ -307,11 +307,11 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">自備款(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="50萬以下" name="dem_have[]">50萬以下　
-                                       <input type="checkbox" value="50~100萬" name="dem_have[]">50~100萬　
-                                       <input type="checkbox" value="101~200萬" name="dem_have[]">101~200萬　
-                                       <input type="checkbox" value="201~300萬" name="dem_have[]">201~300萬　
-                                       <input type="checkbox" value="300萬以上" name="dem_have[]">300萬以上　
+                                       <input type="checkbox" id="dem_have1" value="50萬以下" name="dem_have[]"><label for="dem_have1">50萬以下</label>　
+                                       <input type="checkbox" id="dem_have2" value="50~100萬" name="dem_have[]"><label for="dem_have2">50~100萬</label>　
+                                       <input type="checkbox" id="dem_have3" value="101~200萬" name="dem_have[]"><label for="dem_have3">101~200萬</label>　
+                                       <input type="checkbox" id="dem_have4" value="201~300萬" name="dem_have[]"><label for="dem_have4">201~300萬</label>　
+                                       <input type="checkbox" id="dem_have5" value="300萬以上" name="dem_have[]"><label for="dem_have5">300萬以上</label>　
                                     </div>
                                 </div>
 
@@ -321,15 +321,15 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">購屋動機(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="交通因素" name="pay_motive[]">交通因素　
-                                       <input type="checkbox" value="工作因素" name="pay_motive[]">工作因素　
-                                       <input type="checkbox" value="環境因素" name="pay_motive[]">環境因素　
-                                       <input type="checkbox" value="投資置產" name="pay_motive[]">投資置產　
-                                       <input type="checkbox" value="小換大" name="pay_motive[]">小換大　
-                                       <input type="checkbox" value="新婚用" name="pay_motive[]">新婚用　
-                                       <input type="checkbox" value="營業用" name="pay_motive[]">營業用　
-                                       <input type="checkbox" value="舊換新" name="pay_motive[]">舊換新　
-                                       <input type="checkbox" value="其它" name="pay_motive[]">其它　
+                                       <input type="checkbox" id="pay_motive1" value="交通因素" name="pay_motive[]"><label for="pay_motive1">交通因素</label>　
+                                       <input type="checkbox" id="pay_motive2" value="工作因素" name="pay_motive[]"><label for="pay_motive2">工作因素</label>　
+                                       <input type="checkbox" id="pay_motive3" value="環境因素" name="pay_motive[]"><label for="pay_motive3">環境因素</label>　
+                                       <input type="checkbox" id="pay_motive4" value="投資置產" name="pay_motive[]"><label for="pay_motive4">投資置產</label>　
+                                       <input type="checkbox" id="pay_motive5" value="小換大" name="pay_motive[]"><label for="pay_motive5">小換大</label>　
+                                       <input type="checkbox" id="pay_motive6" value="新婚用" name="pay_motive[]"><label for="pay_motive6">新婚用</label>　
+                                       <input type="checkbox" id="pay_motive7" value="營業用" name="pay_motive[]"><label for="pay_motive7">營業用</label>　
+                                       <input type="checkbox" id="pay_motive8" value="舊換新" name="pay_motive[]"><label for="pay_motive8">舊換新</label>　
+                                       <input type="checkbox" id="pay_motive9" value="其它" name="pay_motive[]"><label for="pay_motive9">其它</label>　
                                     </div>
                                 </div>
 
@@ -339,9 +339,9 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">欲購屋時間：</label>
                                     <div class="col-sm-10">
-                                       <input type="radio" value="立即購買" name="pay_time">立即購買　
-                                       <input type="radio" value="半年之內" name="pay_time">半年之內　
-                                       <input type="radio" value="半年~二年" name="pay_time">半年~二年
+                                       <input type="radio" id="pay_time1" value="立即購買" name="pay_time"><label for="pay_time1">立即購買</label>　
+                                       <input type="radio" id="pay_time2" value="半年之內" name="pay_time"><label for="pay_time2">半年之內</label>　
+                                       <input type="radio" id="pay_time3" value="半年~二年" name="pay_time"><label for="pay_time3">半年~二年</label>
                                     </div>　
                                 </div>
 
@@ -362,8 +362,8 @@
                                  <div class="form-group">
                                    <label class="col-sm-2 control-label">車位需求：</label>
                                     <div class="col-sm-10">
-                                       <input type="radio" value="n" name="dem_car">不需要　
-                                       <input type="radio" value="y" name="dem_car">需要　
+                                       <input type="radio" id="dem_car1" value="n" name="dem_car"><label for="dem_car1">不需要</label>　
+                                       <input type="radio" id="dem_car2" value="y" name="dem_car"><label for="dem_car2">需要</label>　
                                        <input type="text" name="dem_car_txt">位　
                                     </div>
                                 </div>
@@ -372,9 +372,9 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">樓層需求(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="低樓層" name="dem_floor[]">低樓層　
-                                       <input type="checkbox" value="中樓層" name="dem_floor[]">中樓層　
-                                       <input type="checkbox" value="高樓層" name="dem_floor[]">高樓層　
+                                       <input type="checkbox" id="dem_floor1" value="低樓層" name="dem_floor[]"><label for="dem_floor1">低樓層</label>　
+                                       <input type="checkbox" id="dem_floor2" value="中樓層" name="dem_floor[]"><label for="dem_floor2">中樓層</label>　
+                                       <input type="checkbox" id="dem_floor3" value="高樓層" name="dem_floor[]"><label for="dem_floor3">高樓層</label>　
                                     </div>
                                 </div>
 
@@ -382,10 +382,10 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">座向需求(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" value="東" name="dem_side[]">東　
-                                       <input type="checkbox" value="南" name="dem_side[]">南　
-                                       <input type="checkbox" value="西" name="dem_side[]">西　
-                                       <input type="checkbox" value="北" name="dem_side[]">北　
+                                       <input type="checkbox" id="dem_side1" value="東" name="dem_side[]"><label for="dem_side1">東</label>　
+                                       <input type="checkbox" id="dem_side2" value="南" name="dem_side[]"><label for="dem_side2">南</label>　
+                                       <input type="checkbox" id="dem_side3" value="西" name="dem_side[]"><label for="dem_side3">西</label>　
+                                       <input type="checkbox" id="dem_side4" value="北" name="dem_side[]"><label for="dem_side4">北</label>　
                                     </div>
                                 </div>
 
@@ -413,8 +413,8 @@
                                        <input type="text" name="com_name" readonly="readyonly" value="XXX公司">　
                                     </div>
                                     <div class="col-sm-2">
-                                       <input type="radio" value="已購" name="is_buy">已購　
-                                       <input type="radio" value="未購" name="is_buy">未購　
+                                       <input type="radio" id="is_buy1" value="已購" name="is_buy"><label for="is_buy1">已購</label>　
+                                       <input type="radio" id="is_buy2" value="未購" name="is_buy"><label for="is_buy2">未購</label>　
                                     </div>
                                     <div class="col-sm-2">
 

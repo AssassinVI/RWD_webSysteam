@@ -45,7 +45,7 @@
                   info=info+"<td>呂先生</td>";                                    //顧客姓名
                   info=info+"<td class='no_display768'>03-4512345</td>";          //連絡電話
                   info=info+"<td class='no_display768'>0926000111</td>";          //行動電話
-                  info=info+"<td><a href='#'><i class='fa fa-print'></i>列印</a></td>";
+                  info=info+"<td><a href='shared_php/from_print.php' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
                   info=info+"<td class='no_display768'><a href='from_edit.php'><i class='fa fa-edit'></i>編輯</a></td>";
                   info=info+"<td class='no_display768'><a class='del_user_"+this['com_id']+"' href='#'><i class='fa fa-ban'></i>刪除</a></td>";
                   info=info+"</tr>";
@@ -84,7 +84,7 @@
                         <div class="ibox-title">
                             <h5>顧客問卷資料表 </h5>
                            <div class="ibox-tools">
-                           
+                          
                         </div>
                         </div>
                         <div class="ibox-content">
