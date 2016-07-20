@@ -11,13 +11,13 @@ session_start();
 
 if ($_POST) {
 
-  $conn = mysql_connect("localhost", "rxznet_work_test", "xm20926056565") OR die('無法連線'); //資料庫連結
+  $conn = mysql_connect("localhost", "rxznet2_admin", "xm20926056565") OR die('無法連線'); //資料庫連結
 /* ===================================== 登入系統 =============================================== */
 	if ($_POST['page'] == 'login') {
     
     
     //----------------GOOGLE recaptcha 驗證程式 --------------------
-    if (!empty($_POST['g-recaptcha-response'])) {
+   /* if (!empty($_POST['g-recaptcha-response'])) {
       
       $ReCaptchaResponse=filter_input(INPUT_POST, 'g-recaptcha-response');
       $Response=file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6Ldt2SETAAAAAM4-x875Zk7-EAwyW_Fyzn9KWT-w&response='.$ReCaptchaResponse);
@@ -35,7 +35,7 @@ if ($_POST) {
       $txt=iconv('utf-8', 'big5', '請確定您不是機器人');
          location_up('login.php',$txt);
          exit();
-    }
+    }*/
     //----------------GOOGLE recaptcha 驗證程式 --------------------
 
 
@@ -962,7 +962,7 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
 if ($_GET) {
 
-   $conn = mysql_connect("localhost", "rxznet_work_test", "xm20926056565") OR die('無法連線'); //資料庫連結
+   $conn = mysql_connect("localhost", "rxznet2_admin", "xm20926056565") OR die('無法連線'); //資料庫連結
 
   /* =================================== 建案表格 ============================================== */ 
 	if ($_GET['admin']=='project') {
