@@ -46,7 +46,7 @@ session_start();
                     <input type="password" name="user_pwd" class="form-control" placeholder="Password" required="">
                 </div>
                 <!-- google 驗證碼 -->
-                <div class="g-recaptcha" data-sitekey="6Ldt2SETAAAAACcOFFdBiDesbUSO3a4T_TlZeBY5"></div>
+                <div class="g-recaptcha" data-sitekey="6Le-hSUTAAAAABhfvrZeqewWS6hENhApDVtdAJfr"></div>
                 <input type="hidden" name="page" value="login" />
                 <button type="submit" class="btn btn-primary block full-width m-b">登入</button>
 
