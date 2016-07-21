@@ -7,6 +7,9 @@
                 <ul class="nav navbar-top-links navbar-right">
 
         <?php 
+
+          require_once 'check_phone.php';
+
           if ($_SESSION['competence']=="admin") {
   
             $info="<li>";
@@ -22,12 +25,19 @@
                             <i class="fa fa-sign-out"></i> 登出
                         </a>
                     </li>
+            
+            <?php
 
-                    <li>
-                        <a href="javascript:history.back()">
-                            <i class="fa fa-reply"></i> 返回
-                        </a>
-                    </li>
+              if (check_mobile()) {
+                  
+                  $back='<li>';
+                 $back.=   '<a href="javascript:history.back()">'; 
+                 $back.=      '<i class="fa fa-reply"></i> 返回'; 
+                 $back.=   '</a>'; 
+                 $back.='</li>';
+                 echo $back;
+              }
+            ?>
         
                 </ul>
 

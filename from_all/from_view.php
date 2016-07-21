@@ -1,7 +1,7 @@
 <?php
  /* ================================= 連接資料庫 ======================================= */
-require_once 'config.php';
-require_once 'login_session.php';
+require_once '../shared_php/config.php';
+require_once '../shared_php/login_session.php';
 session_start();
 
 ?>

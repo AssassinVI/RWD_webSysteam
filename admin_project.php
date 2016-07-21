@@ -141,7 +141,7 @@ $("#sel_com").change(function(event) {
                      info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
 
                      if (this['record_id']!=null) {
-                        info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'">顧客表單</a></td>';
+                        info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'&case_name='+this['case_name']+'">顧客表單</a></td>';
                      }else{
                         info=info+'<td>無擴充</td>';
                      }
@@ -185,7 +185,7 @@ $("#sel_com").change(function(event) {
                      info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
 
                      if (this['record_id']!=null) {
-                        info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'">顧客表單</a></td>';
+                        info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'&case_name='+this['case_name']+'">顧客表單</a></td>';
                      }else{
                         info=info+'<td>無擴充</td>';
                      }
@@ -233,7 +233,7 @@ $("#sel_com").change(function(event) {
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>專案管理</h5>
-
+                            
                             <div class="ibox-tools">
                               <span class="no_display768">(點新增產生新建案)</span>
                                 <a href="edit_project.php?NewOrEdit=new" >

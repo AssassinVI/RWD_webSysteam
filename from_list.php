@@ -31,13 +31,12 @@
      $(document).ready(function() {
          $("#admin_com").addClass('active');
          $('.footable').footable();
-
+       
        $.getJSON('rwd_php_sys.php?admin=company',  function(json) {
               
               $.each(json.com_array, function() {
 
-                
-
+              
                    var info="<tr>";
                   info=info+"<td class='no_display768'>"+this['com_id']+"</td>"; //表單ID
                   info=info+"<td >2001/01/01</td>";                              //填表日期
@@ -45,7 +44,7 @@
                   info=info+"<td>呂先生</td>";                                    //顧客姓名
                   info=info+"<td class='no_display768'>03-4512345</td>";          //連絡電話
                   info=info+"<td class='no_display768'>0926000111</td>";          //行動電話
-                  info=info+"<td><a href='shared_php/from_print.php' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
+                  info=info+"<td><a href='from_all/from_print.php' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
                   info=info+"<td class='no_display768'><a href='from_edit.php'><i class='fa fa-edit'></i>編輯</a></td>";
                   info=info+"<td class='no_display768'><a class='del_user_"+this['com_id']+"' href='#'><i class='fa fa-ban'></i>刪除</a></td>";
                   info=info+"</tr>";
@@ -61,8 +60,9 @@
                     });
               });
        });
-
      });
+
+     // from_all/from_sql.php?type=list&record_id=<?php //echo $_GET['record_id'];?>&case_name=<?php //echo $_GET['case_name'];?>
  </script>
 </head>
 <body>

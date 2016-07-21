@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="ibox-content">
-                            <form method="POST" action="shared_php/from_sql.php" class="form-horizontal" enctype="multipart/form-data">
+                            <form method="POST" action="from_all/from_sql.php" class="form-horizontal" enctype="multipart/form-data">
                                <div class="form-group">
                                    <label class="col-sm-2 control-label">表單序號：</label>
                                     <div class="col-sm-2"><input type="text" class="form-control" readonly="readonly" value="ABC123456"></div>
@@ -74,11 +74,11 @@
 
                                     <label class="col-sm-2 control-label">專案名稱：</label>
                                     <div class="col-sm-2">
-                                       <select name="case_name" class="form-control">
-                                         <option>專案1</option>
-                                         <option>專案2</option>
-                                         <option>專案3</option>
-                                         <option>專案4</option>
+                                       <select name="record_id" class="form-control">
+                                         <option value="">專案1</option>
+                                         <option value="">專案2</option>
+                                         <option value="">專案3</option>
+                                         <option value="">專案4</option>
                                        </select>
                                     </div>
                                 </div>
@@ -164,10 +164,10 @@
                                      <label class="col-sm-2 control-label">交通工具：</label>
                                     <div class="col-sm-2">
                                        <select name="transportation" class="form-control">
-                                         <option>汽車</option>
-                                         <option>機車</option>
-                                         <option>大眾運輸</option>
-                                         <option>其他</option>
+                                         <option value="汽車">汽車</option>
+                                         <option value="機車">機車</option>
+                                         <option value="大眾運輸">大眾運輸</option>
+                                         <option value="其他">其他</option>
                                        </select>
                                     </div>
                                 </div>
@@ -180,12 +180,12 @@
                                     <label class="col-sm-2 control-label">現住房屋：</label>
                                     <div class="col-sm-2">
                                        <select name="homeowner" class="form-control">
-                                          <option>租賃</option>
-                                          <option>宿舍</option>
-                                          <option>父母所有</option>
-                                          <option>配偶所有</option>
-                                          <option>本人所有</option>
-                                          <option>其他</option>
+                                          <option value="租賃">租賃</option>
+                                          <option value="宿舍">宿舍</option>
+                                          <option value="父母所有">父母所有</option>
+                                          <option value="配偶所有">配偶所有</option>
+                                          <option value="本人所有">本人所有</option>
+                                          <option value="其他">其他</option>
                                        </select>
                                     </div>
 
@@ -236,7 +236,7 @@
                                        <input type="checkbox" id="media13" value="派報" name="media[]"><label for="media13">派報</label>　
                                        <input type="checkbox" id="media14" value="夾報" name="media[]"><label for="media14">夾報</label>　
                                        <input type="checkbox" id="media15" value="介紹" name="media[]"><label for="media15">介紹</label>　
-                                       <input type="checkbox" id="media16" value="其他" name="media[]"><label for="media16">其他</label> <input type="text" name="media17">
+                                       <input type="checkbox" id="media16" value="其他" name="media[]"><label for="media16">其他</label> <input type="text" name="media_txt">
                                     </div>
                                 </div>
 
@@ -251,7 +251,7 @@
                                        <input type="checkbox" id="dem_product3" value="套房" name="dem_product[]"><label for="dem_product3">套房</label>　
                                        <input type="checkbox" id="dem_product4" value="店面" name="dem_product[]"><label for="dem_product4">店面</label>　
                                        <input type="checkbox" id="dem_product5" value="辦公室" name="dem_product[]"><label for="dem_product5">辦公室</label>　
-                                       <input type="checkbox" id="dem_product6" value="其他" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" name="dem_product7">
+                                       <input type="checkbox" id="dem_product6" value="其他" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" name="dem_product_txt">
                                     </div>
                                 </div>
                                 

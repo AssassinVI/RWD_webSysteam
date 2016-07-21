@@ -207,6 +207,7 @@ select_com();
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>公司</h5>
+                            <p style="float:right;">點擊LOGO查看專案</p>
                         </div>
                         <div class="ibox-content">
 
