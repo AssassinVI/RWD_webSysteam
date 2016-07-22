@@ -23,8 +23,8 @@
 
 
 <!-- Custom and plugin javascript -->
-<script src="js/inspinia.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<!--<script src="js/inspinia.js"></script>-->
+<!--<script src="js/plugins/pace/pace.min.js"></script>-->
 
 <!-- ================================== file Upload(DropZone) ====================================== -->
      <link href="css/plugins/dropzone/basic.css" rel="stylesheet">
@@ -32,8 +32,8 @@
     <script src="js/plugins/dropzone/dropzone.js"></script>
 
     <!-- ICheck -->
-     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-     <script src="js/plugins/iCheck/icheck.min.js"></script>
+     <!--<link href="css/plugins/iCheck/custom.css" rel="stylesheet">-->
+     <!--<script src="js/plugins/iCheck/icheck.min.js"></script>-->
 
      <!-- SUMMERNOTE -->
    <!-- <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
@@ -51,4 +51,4 @@
     <link rel="stylesheet" type="text/css" href="css/rwd_lay.css">
 
     <!-- html轉圖片 -->
-    <script type="text/javascript" src="js/html2canvas.js"></script>
+    <!--<script type="text/javascript" src="js/html2canvas.js"></script>-->
