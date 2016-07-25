@@ -1,7 +1,15 @@
-<?php 
+<?php require_once 'shared_php/config.php';
 
  $case_id=htmlspecialchars($_GET['case_id']);
 
+  $pdo=pdo_conn(); //資料庫連線
+  $sql_q=$pdo->prepare("SELECT record_id FROM expand_record WHERE case_id=:case_id AND tool_id='tool20160624002' AND is_use='1'");
+  $sql_q->bindparam(":case_id", $case_id);
+  $sql_q->execute();
+  while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+    $record_id=$row['record_id'];
+  }
+  $pdo=NULL;
 ?>
 
 <!DOCTYPE html>
@@ -194,6 +202,16 @@
    <p><a target="_blank" id="short_url"></a></p>
    <h3>簡訊短網址:</h3>
    <p><a target="_blank" id="ph_short_url"></a></p>
+
+   <?php
+
+    if (!empty($record_id)) {
+      
+      echo '<h3>顧客問卷網址:</h3>';
+      echo '<p><a target="_blank" href="from_all/from_view.php?record_id='.$record_id.'" >http://rx.znet.tw/rwd_system/Static_Seed_Project/from_all/from_view.php?record_id='.$record_id.'</a></p>';
+    }
+   ?>
+   
   <hr><!-- 分隔線 -->
 <h3>QR Code:</h3>
 <form method="POST" action="shared_php/qr_code_merger.php" enctype='multipart/form-data'>

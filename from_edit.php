@@ -447,6 +447,8 @@
                                     </div>
                                     <div class="col-sm-3"><button id="insert_view" class="btn btn-primary" type="button">新增記錄</button></div>
                             </div>
+
+                                <input type="hidden" name="sql_type" value="update"> <!-- 更新 -->
                             </form>
 
                          </div>

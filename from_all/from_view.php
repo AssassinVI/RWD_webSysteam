@@ -4,6 +4,8 @@ require_once '../shared_php/config.php';
 //require_once '../shared_php/login_session.php';
 session_start();
 
+$record_id=$_GET['record_id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +39,7 @@ session_start();
 	</style>
 </head>
 <body>
+<form action="from_sql.php" method="POST">
 	<div id="wid_steps">
     <h3>基本資料</h3>
     <section>
@@ -54,7 +57,6 @@ session_start();
     <h3>公司資料</h3>
     <section>
         <div class="input_div"><label>職業：</label>
-
           <select name="job" class="big_select">
             <option>請選擇</option>
             <option value="作業員">作業員</option>
@@ -71,7 +73,7 @@ session_start();
         <div class="input_div"><input type="text" name="job_txt" placeholder="其他職業"></div>
         <div class="input_div"><label>職稱：</label><input type="text" name="job_title" placeholder="職稱"></div>
         <div class="input_div"><label>年齡：</label><input type="text" name="cust_old" placeholder="年齡"></div>
-        <div class="input_div"><label>工作區域：</label><input type="text" name="job_area" placeholder="工作區域"></div>
+        <!--<div class="input_div"><label>工作區域：</label><input type="text" name="job_area" placeholder="工作區域"></div>-->
         <div class="input_div"><label>公司名稱：</label><input type="text" name="job_comapny" placeholder="公司名稱"></div>
     </section>
 
@@ -110,7 +112,7 @@ session_start();
          </div>
        <div class="input_div">
           <label>家庭成員人數：</label>
-            <select name="" class="big_select">
+            <select name="live_people" class="big_select">
                <option value="1">1人</option>
                <option value="2">2人</option>
                <option value="3">3人</option>
@@ -150,6 +152,9 @@ session_start();
                                   <!-- <label></label><input type="text" name="house_pattern2" placeholder="幾廳"><br>
                                    <label></label><input type="text" name="house_pattern2" placeholder="幾衛浴">-->
         </div>
+        <div class="input_div"><label>坪數：</label><input type="text" name="floor_num"></div>
+
+
     </section>
 
 
@@ -184,7 +189,7 @@ session_start();
                               </div>
                               <div class="check_div">
                               	<input type="checkbox" id="media16" name="media[]" value="其他"> <label for="media16"> 其他</label>
-                                <input type="text" name="media17" value="" placeholder="其他媒體">
+                                <input type="text" name="media_txt" value="" placeholder="其他媒體">
                               </div>
 
         </div>
@@ -204,7 +209,7 @@ session_start();
                                 <input type="checkbox" id="dem_product6" name="dem_product[]" value="其他"> <label for="dem_product6"> 其他</label>
                               </div>
                               <div class="check_div">
-                              	<input type="text" name="dem_product7" value="" placeholder="其他產品">
+                              	<input type="text" name="dem_product_txt" value="" placeholder="其他產品">
                               </div>
               
         </div>
@@ -331,7 +336,7 @@ session_start();
             <input type="radio" value="n" name="dem_car" > 不需要　 
             <input type="radio" value="y" name="dem_car" > 需要　<br>
             <label></label> 
-            <input type="text" name="mar_child" placeholder="幾位">
+            <input type="text" name="dem_car_txt" placeholder="幾位">
        </div>
 
        <div class="input_div">
@@ -367,11 +372,15 @@ session_start();
 
         
     </section>
-</div>
+
+    <input type="hidden" name="sql_type" value="insert">
+    <input type="hidden" name="record_id" value="<?php echo $record_id?>">
+  </div>
+</form>
 
 	<script type="text/javascript" src="../js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="../js/jquery.steps.js"></script>
-	<script type="text/javascript" src="../js/plugins/twzipcode/jquery.twzipcode.js"></script>
+  <script type="text/javascript" src="../js/plugins/twzipcode/jquery.twzipcode.js"></script>
     <script type="text/javascript">
 $(document).ready(function() {
 	

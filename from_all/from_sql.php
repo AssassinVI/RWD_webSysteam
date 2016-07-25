@@ -6,15 +6,13 @@ session_start();
 
 if ($_POST) {
   
-	
-	$set_time=$_POST['set_time'];
+	date_default_timezone_set('Asia/Taipei');
+	$set_time=date("Y-m-d H:i:s");
 	$record_id=$_POST['record_id'];  //專案-紀錄ID
 
 
 	$name=$_POST['name'];
 	$gender=$_POST['gender'];
-	$tel_H=$_POST['tel_H'];
-	$tel_O=$_POST['tel_O'];
 	$phone=$_POST['phone'];
 	$email=$_POST['email'];
 
@@ -27,7 +25,7 @@ if ($_POST) {
 	$cust_old=$_POST['cust_old'];
 
 
-	$job_area=$_POST['job_area'];
+	//$job_area=$_POST['job_area'];
 	$job_company=$_POST['job_company'];
 
 
@@ -43,7 +41,7 @@ if ($_POST) {
     $house_old=$_POST['house_old'];
 
 
-    $house_pattern=$_POST['house_pattern1'].",".$_POST['house_pattern2'].",".$_POST['house_pattern3'];
+    $house_pattern=$_POST['house_pattern1'];
 
     $floor_num=$_POST['floor_num'];
 
@@ -82,7 +80,7 @@ if ($_POST) {
     
 
 
-    $dem_pattern1=$_POST['dem_pattern1'].",".$_POST['dem_pattern2'].",".$_POST['dem_pattern3'];
+    $dem_pattern1=$_POST['dem_pattern1'];
     $dem_car=$_POST['dem_car'];
     if (!empty($_POST['dem_car_txt'])) { $dem_car.=",".$_POST['dem_car_txt']; }
 
@@ -103,22 +101,100 @@ if ($_POST) {
     $buy_name=$_POST['buy_name'];
 
 
+  $pdo=pdo_conn(); //資料庫連線
 
+    if($_POST['sql_type']=="insert"){
 
-    $pdo=pdo_conn(); //資料庫連線
-    $sql_q=$pdo->prepare("UPDATE from_question SET set_time=:set_time, 
+         $sql_q=$pdo->prepare("INSERT INTO from_question (
+                                                      set_time,
+                                                      record_id, 
+                                                      name, 
+                                                      gender, 
+                                                      phone, 
+                                                      email, 
+                                                      adds, 
+                                                      job, 
+                                                      job_title, 
+                                                      cust_old, 
+                                                      job_company, 
+                                                      mar_state, 
+                                                      mar_child, 
+                                                      mon_income, 
+                                                      transportation, 
+                                                      live_people, 
+                                                      homeowner, 
+                                                      house_type, 
+                                                      house_old, 
+                                                      house_pattern, 
+                                                      floor_num, 
+                                                      media, 
+                                                      dem_product, 
+                                                      dem_floor_num, 
+                                                      dem_money, 
+                                                      dem_mon_pay, 
+                                                      dem_have, 
+                                                      pay_motive, 
+                                                      pay_time, 
+                                                      dem_pattern, 
+                                                      dem_car, 
+                                                      dem_floor, 
+                                                      dem_side, 
+                                                      pay_num, 
+                                                      Introduction 
+
+                                                      ) VALUES ( 
+                                                     
+                                                      :set_time,
+                                                      :record_id, 
+                                                      :name, 
+                                                      :gender, 
+                                                      :phone, 
+                                                      :email, 
+                                                      :adds, 
+                                                      :job, 
+                                                      :job_title, 
+                                                      :cust_old, 
+                                                      :job_company, 
+                                                      :mar_state, 
+                                                      :mar_child, 
+                                                      :mon_income, 
+                                                      :transportation, 
+                                                      :live_people, 
+                                                      :homeowner, 
+                                                      :house_type, 
+                                                      :house_old, 
+                                                      :house_pattern, 
+                                                      :floor_num, 
+                                                      :media, 
+                                                      :dem_product, 
+                                                      :dem_floor_num, 
+                                                      :dem_money, 
+                                                      :dem_mon_pay, 
+                                                      :dem_have, 
+                                                      :pay_motive, 
+                                                      :pay_time, 
+                                                      :dem_pattern, 
+                                                      :dem_car, 
+                                                      :dem_floor, 
+                                                      :dem_side, 
+                                                      :pay_num, 
+                                                      :Introduction  )");
+    }
+    else if( $_POST['sql_type']=="update" ){
+
+      $sql_q=$pdo->prepare("UPDATE from_question SET set_time=:set_time, 
                                                   record_id=:record_id, 
                                                        name=:name, 
                                                      gender=:gender, 
-                                                      tel_H=:tel_H, 
-                                                      tel_O=:tel_O, 
+                                                      /*tel_H=:tel_H, 
+                                                      tel_O=:tel_O,*/ 
                                                       phone=:phone, 
                                                       email=:email, 
                                                        adds=:adds, 
                                                         job=:job, 
                                                   job_title=:job_title, 
                                                    cust_old=:cust_old,
-                                                   job_area=:job_area, 
+                                                  /* job_area=:job_area, */
                                                 job_company=:job_company, 
                                                   mar_state=:mar_state, 
                                                   mar_child=:mar_child, 
@@ -147,6 +223,8 @@ if ($_POST) {
                                                      is_buy=:is_buy, 
                                                    buy_name=:buy_name
                                                           ");
+    }
+        
     $sql_q->bindparam(':set_time',$set_time);
     $sql_q->bindparam(':record_id',$record_id);
     $sql_q->bindparam(':name',$name);
@@ -190,6 +268,16 @@ if ($_POST) {
     $sql_q->execute();
 
 	$pdo=NULL; //關閉資料庫
+
+  if ($_POST['sql_type']=="insert") {
+    
+     $txt=iconv('utf-8', 'big5', '感謝您耐心填寫');
+     location_up('from_view.php?record_id='.$record_id,$txt);
+  }
+  elseif ($_POST['sql_type']=="update") {
+     $txt=iconv('utf-8', 'big5', '更新資料');
+     location_up('../from_edit.php?record_id='.$record_id,$txt);
+  }
 }
 
 
@@ -215,9 +303,24 @@ if ($_GET) {
        }
 
        echo json_encode(array('from_array'=>$from_array));
+
+       $pdo=NULL;
    }
 }
 
 
+/* =============================== 網頁跳轉 ======================================== */
+function location_up($location_path,$alert_txt)
+{
+
+  //$txt=iconv('utf-8', 'big5', $alert_txt);
+   echo "<script>";
+   echo "location.replace('".$location_path."');"; //網頁跳轉
+
+   if (!empty($alert_txt)) {
+    echo "alert('" . $alert_txt . "');";
+   }
+   echo "</script>";
+}
 
 ?>
