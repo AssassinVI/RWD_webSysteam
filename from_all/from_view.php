@@ -1,7 +1,7 @@
 <?php
  /* ================================= 連接資料庫 ======================================= */
 require_once '../shared_php/config.php';
-//require_once '../shared_php/login_session.php';
+require_once '../shared_php/login_session.php';
 session_start();
 
 $record_id=$_GET['record_id'];
@@ -39,7 +39,7 @@ $record_id=$_GET['record_id'];
 	</style>
 </head>
 <body>
-<form action="from_sql.php" method="POST">
+<form id="view_form" action="from_sql.php" method="POST">
 	<div id="wid_steps">
     <h3>基本資料</h3>
     <section>
@@ -58,7 +58,7 @@ $record_id=$_GET['record_id'];
     <section>
         <div class="input_div"><label>職業：</label>
           <select name="job" class="big_select">
-            <option>請選擇</option>
+            <option value="">請選擇</option>
             <option value="作業員">作業員</option>
             <option value="農林漁牧">農林漁牧</option>
             <option value="交通運輸業">交通運輸業</option>
@@ -74,7 +74,7 @@ $record_id=$_GET['record_id'];
         <div class="input_div"><label>職稱：</label><input type="text" name="job_title" placeholder="職稱"></div>
         <div class="input_div"><label>年齡：</label><input type="text" name="cust_old" placeholder="年齡"></div>
         <!--<div class="input_div"><label>工作區域：</label><input type="text" name="job_area" placeholder="工作區域"></div>-->
-        <div class="input_div"><label>公司名稱：</label><input type="text" name="job_comapny" placeholder="公司名稱"></div>
+        <div class="input_div"><label>公司名稱：</label><input type="text" name="job_company" placeholder="公司名稱"></div>
     </section>
 
 
@@ -92,6 +92,7 @@ $record_id=$_GET['record_id'];
        <div class="input_div">
           <label>月收入：</label>
           <select name="mon_income" class="big_select">
+             <option value="">請選擇</option>
              <option value="2萬~3萬">2萬~3萬</option>
              <option value="3萬~5萬">3萬~5萬</option>
              <option value="5萬~8萬">5萬~8萬</option>
@@ -103,7 +104,7 @@ $record_id=$_GET['record_id'];
        <div class="input_div">
           <label>交通工具：</label>
           <select name="transportation" class="big_select">
-             <option>請選擇</option>
+             <option value="">請選擇</option>
        	     <option value="汽車">汽車</option>
        	     <option value="機車">機車</option>
        	     <option value="大眾運輸">大眾運輸</option>
@@ -113,6 +114,7 @@ $record_id=$_GET['record_id'];
        <div class="input_div">
           <label>家庭成員人數：</label>
             <select name="live_people" class="big_select">
+               <option value="">請選擇</option>
                <option value="1">1人</option>
                <option value="2">2人</option>
                <option value="3">3人</option>
@@ -123,7 +125,7 @@ $record_id=$_GET['record_id'];
        <div class="input_div">
           <label>現住房屋：</label>
           <select name="homeowner" class="big_select">
-             <option>請選擇</option>
+             <option value="">請選擇</option>
        	     <option value="租賃">租賃</option>
        	     <option value="宿舍">宿舍</option>
        	     <option value="父母所有">父母所有</option>
@@ -161,7 +163,7 @@ $record_id=$_GET['record_id'];
     <h3>需求</h3>
     <section>
         <div class="input_div">
-          <label>媒體(可複選)：</label>
+          <label>您如何知道(可複選)：</label>
                               <div class="check_div">
                               	<input type="checkbox" id="media1" name="media[]" value="中時"> <label for="media1"> 中時</label>
                                 <input type="checkbox" id="media2" name="media[]" value="聯合"> <label for="media2"> 聯合</label>
@@ -390,6 +392,13 @@ $(document).ready(function() {
            transitionEffect: "slideLeft",
            stepsOrientation: "vertical"
 });
+
+   $("[href='#finish']").click(function(event) {
+        
+        if (confirm('是否確定送出')) {
+           $("#view_form").submit();
+        }
+   });
 
    $("#twzipcode").twzipcode();
 

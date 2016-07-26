@@ -24,6 +24,7 @@ function pdo_conn()
 {
 	$dsn="mysql:host=localhost;dbname=rxznet2_system_db";
     $db = new PDO($dsn, 'rxznet2_admin','xm20926056565' );
+    $db->exec("SET NAMES UTF8");
     return $db;
 }
 
