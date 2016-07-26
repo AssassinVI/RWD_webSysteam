@@ -1,5 +1,69 @@
 <?php require_once 'shared_php/login_session.php';
       require_once 'shared_php/config.php';
+
+      $from_id=$_GET['from_id'];
+
+      $pdo=pdo_conn(); //資料庫連線
+      $sql_q=$pdo->prepare("SELECT * FROM from_question WHERE from_id=:from_id");
+      $sql_q->bindparam(':from_id', $from_id);
+      $sql_q->execute();
+      while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+         
+         $from_id=$row['from_id'];
+         $set_time=$row['set_time'];
+         $name=$row['name'];
+         $gender=$row['gender'];
+         $phone=$row['phone'];
+         $email=$row['email'];
+         $adds=$row['adds'];
+         $zipcode=substr($adds, 0,3);
+         $adds_detial=explode(',', $adds);
+    
+
+         $job=$row['job'];
+         $job_txt=$row['job_txt'];
+         $job_title=$row['job_title'];
+         $cust_old=$row['cust_old'];
+         $job_company=$row['job_company'];
+
+
+         $mar_state=$row['mar_state'];
+         $mar_child=$row['mar_child'];
+         $mon_income=$row['mon_income'];
+         $transportation=$row['transportation'];
+         $live_people=$row['live_people'];
+         $homeowner=$row['homeowner'];
+         $house_type=$row['house_type'];
+         $house_old=$row['house_old'];
+         $house_pattern=$row['house_pattern'];
+         $floor_num=$row['floor_num'];
+
+
+         $media=explode(',', $row['media']);
+
+         $dem_product=explode(',', $row['dem_product']);
+         $dem_floor_num=explode(',', $row['dem_floor_num']);
+         $dem_money=explode(',', $row['dem_money']);
+         $dem_mon_pay=explode(',', $row['dem_mon_pay']);
+         $dem_have=explode(',', $row['dem_have']);
+         $pay_motive=explode(',', $row['pay_motive']);
+         $pay_time=$row['pay_time'];
+
+
+         $dem_pattern=$row['dem_pattern'];
+         $dem_car=explode(',', $row['dem_car']);
+         $dem_floor=explode(',', $row['dem_floor']);
+         $dem_side=explode(',', $row['dem_side']);
+         $pay_num=$row['pay_num'];
+         $Introduction=$row['Introduction'];
+
+         $is_buy=$row['is_buy'];
+         $buy_name=$row['buy_name'];
+
+         if ($job=="其他") { $job=$job_txt; }
+      }
+
+      $pdo=NULL;
 ?>
 
 
@@ -37,8 +101,93 @@
          }
         });
 
-      $("#twzipcode").twzipcode();
+      $("#twzipcode").twzipcode({
+          'zipcodeSel'  : '<?php echo $zipcode;?>', // 此參數會優先於 countySel, districtSel
+      });
+     
 
+    
+     <?php 
+
+      //性別
+      echo "$('[value=\"".$gender."\"]').attr('checked', 'checked');";
+      //婚姻狀況
+      echo "$('[value=\"".$mar_state."\"]').attr('checked', 'checked');";
+      //月收入
+      echo "$('[value=\"".$mon_income."\"]').attr('selected', 'selected');";
+      //交通工具
+      echo "$('[value=\"".$transportation."\"]').attr('selected', 'selected');";
+      //家庭成員數
+      echo "$('[value=\"".$live_people."\"]').attr('selected', 'selected');";
+      //現住房屋
+      echo "$('[value=\"".$homeowner."\"]').attr('selected', 'selected');";
+      //現住房屋型態
+      echo "$('[value=\"".$house_type."\"]').attr('checked', 'checked');";
+
+      //媒體
+      for ($i=0; $i < count($media) ; $i++) { 
+         
+        echo "$('[value=\"".$media[$i]."\"]').attr('checked', 'checked');";
+
+        if ($media[$i]=="其他") {
+           echo "$('[name=\"media_txt\"]').val('".$media[$i+1]."');";
+           break;
+        }
+      }
+
+      //產品需求
+      for ($i=0; $i <count($dem_product) ; $i++) { 
+        
+        echo "$('[value=\"".$dem_product[$i]."\"]').attr('checked', 'checked');";
+
+        if ($dem_product[$i]=="其他") {
+           echo "$('[name=\"dem_product_txt\"]').val('".$dem_product[$i+1]."');";
+           break;
+        }
+      }
+
+      //坪數需求
+      for ($i=0; $i <count($dem_floor_num) ; $i++) { 
+       echo "$('[value=\"".$dem_floor_num[$i]."\"]').attr('checked', 'checked');";
+      }
+
+      //購屋預算
+      for ($i=0; $i <count($dem_money) ; $i++) { 
+       echo "$('[value=\"".$dem_money[$i]."\"]').attr('checked', 'checked');";
+      }
+
+      //希望月付款
+      for ($i=0; $i <count($dem_mon_pay) ; $i++) { 
+       echo "$('[value=\"".$dem_mon_pay[$i]."\"]').attr('checked', 'checked');";
+      }
+
+      //自備款
+      for ($i=0; $i <count($dem_have) ; $i++) { 
+       echo "$('[value=\"".$dem_have[$i]."\"]').attr('checked', 'checked');";
+      }
+
+      //購屋動機
+      for ($i=0; $i <count($pay_motive) ; $i++) { 
+       echo "$('[value=\"".$pay_motive[$i]."\"]').attr('checked', 'checked');";
+      }
+      //欲購屋時間
+      echo "$('[value=\"".$pay_time."\"]').attr('checked', 'checked');";
+      //車位需求
+      echo "$('[value=\"".$dem_car[0]."\"]').attr('checked', 'checked');";
+      echo "$('[name=\"dem_car_txt\"]').val('".$dem_car[1]."');";
+      
+      //樓層需求
+      for ($i=0; $i <count($dem_floor) ; $i++) { 
+       echo "$('[value=\"".$dem_floor[$i]."\"]').attr('checked', 'checked');";
+      }
+
+      //座向需求
+      for ($i=0; $i <count($dem_side) ; $i++) { 
+       echo "$('[value=\"".$dem_side[$i]."\"]').attr('checked', 'checked');";
+      }
+      //已購未購
+      echo "$('[value=\"".$is_buy."\"]').attr('checked', 'checked');";
+     ?>
     });
 
     </script>
@@ -67,19 +216,14 @@
                             <form method="POST" action="from_all/from_sql.php" class="form-horizontal" enctype="multipart/form-data">
                                <div class="form-group">
                                    <label class="col-sm-2 control-label">表單序號：</label>
-                                    <div class="col-sm-2"><input type="text" class="form-control" readonly="readonly" value="ABC123456"></div>
+                                    <div class="col-sm-2"><input type="text" class="form-control" name="from_id" readonly="readonly" value="<?php echo $from_id;?>"></div>
 
                                     <label class="col-sm-2 control-label">填表日期：</label>
-                                    <div class="col-sm-2"><input name="set_time" type="date" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name="set_time" type="date" class="form-control" value="<?php echo $set_time;?>"></div>
 
                                     <label class="col-sm-2 control-label">專案名稱：</label>
                                     <div class="col-sm-2">
-                                       <select name="record_id" class="form-control">
-                                         <option value="">專案1</option>
-                                         <option value="">專案2</option>
-                                         <option value="">專案3</option>
-                                         <option value="">專案4</option>
-                                       </select>
+                                       <input type="text" name="case_name" class="form-control" readonly="readonly" value="XXX專案">
                                     </div>
                                 </div>
 
@@ -88,7 +232,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">顧客姓名：</label>
                                     <div class="col-sm-2">
-                                       <input name="name" type="text" class="form-control" value="">
+                                       <input name="name" type="text" class="form-control" value="<?php echo $name;?>">
                                         <input type="radio" id="gender1" name="gender" value="m"><label for="gender1">先生</label>
                                         <input type="radio" id="gender2" name="gender" value="f"><label for="gender2">小姐</label>
                                     </div>
@@ -97,20 +241,12 @@
                               <div class="hr-line-dashed"></div>
 
                                 <div class="form-group">
-                                   <label class="col-sm-2 control-label">電話(家)：</label>
-                                    <div class="col-sm-2"><input name="tel_H" type="text" class="form-control" value=""></div>
-                                </div>
-                                <div class="form-group">
-                                   <label class="col-sm-2 control-label">電話(公)：</label>
-                                    <div class="col-sm-2"><input name="tel_O" type="text" class="form-control" value=""></div>
-                                </div>
-                                <div class="form-group">
                                    <label class="col-sm-2 control-label">手機：</label>
-                                    <div class="col-sm-2"><input name="phone" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name="phone" type="text" class="form-control" value="<?php echo $phone;?>"></div>
                                 </div>
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">E-mail：</label>
-                                    <div class="col-sm-2"><input name="email" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name="email" type="text" class="form-control" value="<?php echo $email;?>"></div>
                                 </div>
 
                              <div class="hr-line-dashed"></div>
@@ -119,7 +255,7 @@
                                    <label class="col-sm-2 control-label">住址：</label>
                                     <div id="twzipcode" class="col-sm-10" ></div>
                                     <label class="col-sm-2 control-label"></label>
-                                    <div class="col-sm-4"><input name="adds" type="text" class="form-control" value="" placeholder="詳細住址"></div>
+                                    <div class="col-sm-4"><input name="adds" type="text" class="form-control" value="<?php echo $adds_detial[1];?>" placeholder="詳細住址"></div>
                                 </div>
 
 
@@ -127,22 +263,20 @@
 
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">職業：</label>
-                                    <div class="col-sm-2"><input name="job" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name="job" type="text" class="form-control" value="<?php echo $job;?>"></div>
 
                                      <label class="col-sm-2 control-label">職稱：</label>
-                                    <div class="col-sm-2"><input name="job_title" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name="job_title" type="text" class="form-control" value="<?php echo $job_title;?>"></div>
 
                                      <label class="col-sm-2 control-label">年齡：</label>
-                                    <div class="col-sm-2"><input name="cust_old" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name="cust_old" type="text" class="form-control" value="<?php echo $cust_old;?>"></div>
                                 </div>
 
                              <div class="hr-line-dashed"></div>   
 
                                 <div class="form-group">
-                                   <label class="col-sm-2 control-label">工作區域：</label>
-                                    <div class="col-sm-2"><input name="job_area" type="text" class="form-control" value=""></div>
                                     <label class="col-sm-2 control-label">公司名稱：</label>
-                                    <div class="col-sm-2"><input name=" job_company" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2"><input name=" job_company" type="text" class="form-control" value="<?php echo $job_company;?>"></div>
                                 </div>
 
                               <div class="hr-line-dashed"></div>  
@@ -151,19 +285,30 @@
                                    <label class="col-sm-2 control-label">婚姻狀況：</label>
                                     <div class="col-sm-4">
                                        <input type="radio" id="mar_state1" value="已婚" name="mar_state"><label for="mar_state1">已婚</label>
-                                       <input name="mar_child" type="text"  value="">個小孩<br>
+                                       <input name="mar_child" type="text"  value="<?php echo $mar_child;?>">個小孩<br>
                                        <input type="radio" id="mar_state2" value="已婚無子" name="mar_state"><label for="mar_state2">已婚無子</label><br>
                                        <input type="radio" id="mar_state3" value="未婚" name="mar_state"><label for="mar_state3">未婚</label><br>
-                                       <input type="radio" id="mar_state4" value="其他" name="mar_state"><label for="mar_state4">其他</label>
+                                       
                                     </div>
                                 </div>
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">月收入：</label>
-                                    <div class="col-sm-2"><input name="mon_income" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-2">
+                                       <select name="mon_income" class="form-control">
+                                              <option value="">請選擇</option>
+                                              <option value="2萬~3萬">2萬~3萬</option>
+                                              <option value="3萬~5萬">3萬~5萬</option>
+                                              <option value="5萬~8萬">5萬~8萬</option>
+                                              <option value="8萬~12萬">8萬~12萬</option>
+                                              <option value="12萬~20萬">12萬~20萬</option>
+                                              <option value="20萬以上">20萬以上</option>
+                                       </select>
+                                    </div>
 
                                      <label class="col-sm-2 control-label">交通工具：</label>
                                     <div class="col-sm-2">
                                        <select name="transportation" class="form-control">
+                                         <option value="">請選擇</option>
                                          <option value="汽車">汽車</option>
                                          <option value="機車">機車</option>
                                          <option value="大眾運輸">大眾運輸</option>
@@ -175,11 +320,21 @@
                              <div class="hr-line-dashed"></div>   
 
                                 <div class="form-group">
-                                   <label class="col-sm-2 control-label">居住人口：</label>
-                                    <div class="col-sm-2"><input name="live_people" type="text" class="form-control" value="" placeholder="供幾人"></div>
+                                   <label class="col-sm-2 control-label">家庭成員人數：</label>
+                                    <div class="col-sm-2">
+                                        <select name="live_people" class="form-control">
+                                             <option value="">請選擇</option>
+                                             <option value="1">1人</option>
+                                             <option value="2">2人</option>
+                                             <option value="3">3人</option>
+                                             <option value="4">4人</option>
+                                             <option value="5">5人以上</option>
+                                         </select>
+                                    </div>
                                     <label class="col-sm-2 control-label">現住房屋：</label>
                                     <div class="col-sm-2">
                                        <select name="homeowner" class="form-control">
+                                          <option value="">請選擇</option>
                                           <option value="租賃">租賃</option>
                                           <option value="宿舍">宿舍</option>
                                           <option value="父母所有">父母所有</option>
@@ -194,11 +349,13 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">現住房屋型態：</label>
                                     <div class="col-sm-2">
-                                       <input type="radio" id="house_type1" value="公寓" name="house_type"><label for="house_type1">公寓</label><br>
-                                       <input type="radio" id="house_type2" value="大樓" name="house_type"><label for="house_type2">大樓</label><br>
-                                       <input type="radio" id="house_type3" value="套房" name="house_type"><label for="house_type3">套房</label><br>
-                                       <input type="radio" id="house_type4" value="透天" name="house_type"><label for="house_type4">透天</label><br>
-                                       屋齡<input type="text" name="house_old">年
+                                       <input type="radio" id="house_type1" value="house1" name="house_type"><label for="house_type1">公寓</label><br>
+                                       <input type="radio" id="house_type2" value="house2" name="house_type"><label for="house_type2">大樓</label><br>
+                                       <input type="radio" id="house_type3" value="house3" name="house_type"><label for="house_type3">套房</label><br>
+                                       <input type="radio" id="house_type4" value="house4" name="house_type"><label for="house_type4">租屋</label><br>
+                                       <input type="radio" id="house_type4" value="house5" name="house_type"><label for="house_type4">華廈</label><br>
+                                       <input type="radio" id="house_type4" value="house6" name="house_type"><label for="house_type4">透天</label><br>
+                                       屋齡<input type="text" name="house_old" value="<?php echo $house_old;?>">年
                                     </div>
                                 </div>
 
@@ -208,12 +365,10 @@
                               <div class="form-group">
                                    <label class="col-sm-2 control-label">現住：</label>
                                     <div class="col-sm-4">
-                                       <input name="house_pattern1" type="text"  value="">房　
-                                       <input name="house_pattern2" type="text"  value="">廳　
-                                       <input name="house_pattern3" type="text"  value="">衛浴
+                                       <input name="house_pattern" type="text"  value="<?php echo $house_pattern;?>">房　
                                     </div>
                                     <label class="col-sm-2 control-label">室內(坪)：</label>
-                                    <div class="col-sm-2"><input name=" floor_num" type="text" class="form-control" value="" placeholder="坪數"></div>
+                                    <div class="col-sm-2"><input name=" floor_num" type="text" class="form-control" value="<?php echo $floor_num;?>" placeholder="坪數"></div>
                                 </div>
 
                             <div class="hr-line-dashed"></div>
@@ -246,12 +401,12 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">產品需求(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" id="dem_product1" value="大樓" name="dem_product[]"><label for="dem_product1">大樓</label>　
-                                       <input type="checkbox" id="dem_product2" value="透天" name="dem_product[]"><label for="dem_product2">透天</label>　
-                                       <input type="checkbox" id="dem_product3" value="套房" name="dem_product[]"><label for="dem_product3">套房</label>　
-                                       <input type="checkbox" id="dem_product4" value="店面" name="dem_product[]"><label for="dem_product4">店面</label>　
-                                       <input type="checkbox" id="dem_product5" value="辦公室" name="dem_product[]"><label for="dem_product5">辦公室</label>　
-                                       <input type="checkbox" id="dem_product6" value="其他" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" name="dem_product_txt">
+                                       <input type="checkbox" id="dem_product1" value="product1" name="dem_product[]"><label for="dem_product1">大樓</label>　
+                                       <input type="checkbox" id="dem_product2" value="product2" name="dem_product[]"><label for="dem_product2">透天</label>　
+                                       <input type="checkbox" id="dem_product3" value="product3" name="dem_product[]"><label for="dem_product3">套房</label>　
+                                       <input type="checkbox" id="dem_product4" value="product4" name="dem_product[]"><label for="dem_product4">店面</label>　
+                                       <input type="checkbox" id="dem_product5" value="product5" name="dem_product[]"><label for="dem_product5">辦公室</label>　
+                                       <input type="checkbox" id="dem_product6" value="other" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" name="dem_product_txt">
                                     </div>
                                 </div>
                                 
@@ -291,13 +446,13 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">希望月付款(可複選)：</label>
                                     <div class="col-sm-10">
-                                       <input type="checkbox" id="dem_mon_pay1" value="20,000以下" name="dem_mon_pay[]"><label for="dem_mon_pay1">20,000以下</label>　
-                                       <input type="checkbox" id="dem_mon_pay2" value="20,001~27,000" name="dem_mon_pay[]"><label for="dem_mon_pay2">20,001~27,000</label>　
-                                       <input type="checkbox" id="dem_mon_pay3" value="27,001~35,000" name="dem_mon_pay[]"><label for="dem_mon_pay3">27,001~35,000</label>　
-                                       <input type="checkbox" id="dem_mon_pay4" value="35,001~42,000" name="dem_mon_pay[]"><label for="dem_mon_pay4">35,001~42,000</label>　
-                                       <input type="checkbox" id="dem_mon_pay5" value="42,001~50,000" name="dem_mon_pay[]"><label for="dem_mon_pay5">42,001~50,000</label>　
-                                       <input type="checkbox" id="dem_mon_pay6" value="50,001~60,000" name="dem_mon_pay[]"><label for="dem_mon_pay6">50,001~60,000</label>　
-                                       <input type="checkbox" id="dem_mon_pay7" value="60,001以上" name="dem_mon_pay[]"><label for="dem_mon_pay7">60,001以上</label>
+                                       <input type="checkbox" id="dem_mon_pay1" value="20000以下" name="dem_mon_pay[]"><label for="dem_mon_pay1">20,000以下</label>　
+                                       <input type="checkbox" id="dem_mon_pay2" value="20001~27000" name="dem_mon_pay[]"><label for="dem_mon_pay2">20,001~27,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay3" value="27001~35000" name="dem_mon_pay[]"><label for="dem_mon_pay3">27,001~35,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay4" value="35001~42000" name="dem_mon_pay[]"><label for="dem_mon_pay4">35,001~42,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay5" value="42001~50000" name="dem_mon_pay[]"><label for="dem_mon_pay5">42,001~50,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay6" value="50001~60000" name="dem_mon_pay[]"><label for="dem_mon_pay6">50,001~60,000</label>　
+                                       <input type="checkbox" id="dem_mon_pay7" value="60001以上" name="dem_mon_pay[]"><label for="dem_mon_pay7">60,001以上</label>
                                     </div>
                                 </div>
 
@@ -352,9 +507,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">格局需求：</label>
                                     <div class="col-sm-10">
-                                       <input type="text" name="dem_pattern1">房　
-                                       <input type="text" name="dem_pattern2">廳　
-                                       <input type="text" name="dem_pattern3">衛浴　
+                                       <input type="text" name="dem_pattern" value="<?php echo $dem_pattern;?>">房　
                                     </div>
                                 </div>
 
@@ -393,7 +546,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">購屋次數：</label>
                                     <div class="col-sm-10">
-                                       <input type="text" name="pay_num">次　
+                                       <input type="text" name="pay_num" value="<?php echo $pay_num;?>">次　
                                     </div>
                                 </div>
 
@@ -401,7 +554,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">介紹戶別：</label>
                                     <div class="col-sm-10">
-                                       <input type="text" name="Introduction">　
+                                       <input type="text" name="Introduction" value="<?php echo $Introduction;?>">　
                                     </div>
                                 </div>
                                
@@ -418,7 +571,7 @@
                                     </div>
                                     <div class="col-sm-2">
 
-                                      購買戶別 <input type="text" name="buy_name">
+                                      購買戶別 <input type="text" name="buy_name" value="<?php echo $buy_name;?>">
                                        
                                     </div>
                                 </div>
@@ -435,7 +588,6 @@
                                         <button id="build_save" class="btn btn-primary" type="submit">儲存</button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="page" value="from_edit" />
                                 
                                <div id="inter_hr" class="hr-line-dashed"></div> 
 

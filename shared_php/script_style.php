@@ -23,8 +23,8 @@
 
 
 <!-- Custom and plugin javascript -->
-<!--<script src="js/inspinia.js"></script>-->
-<!--<script src="js/plugins/pace/pace.min.js"></script>-->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
 
 <!-- ================================== file Upload(DropZone) ====================================== -->
      <link href="css/plugins/dropzone/basic.css" rel="stylesheet">

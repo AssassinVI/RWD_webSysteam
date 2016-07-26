@@ -1,6 +1,7 @@
 <?php include 'shared_php/login_session.php';
       include 'shared_php/config.php';
-
+   $case_name=$_GET['case_name'];
+   $record_id=$_GET['record_id'];
 ?>
 
 <!DOCTYPE html>
@@ -32,30 +33,28 @@
          $("#admin_com").addClass('active');
          $('.footable').footable();
        
-       $.getJSON('rwd_php_sys.php?admin=company',  function(json) {
+       $.getJSON('from_all/from_sql.php?type=list&record_id=<?php echo $record_id;?>',  function(json) {
               
-              $.each(json.com_array, function() {
+              $.each(json.from_array, function() {
 
               
                    var info="<tr>";
-                  info=info+"<td class='no_display768'>"+this['com_id']+"</td>"; //表單ID
-                  info=info+"<td >2001/01/01</td>";                              //填表日期
-                  info=info+"<td>"+this['com_name']+"</td>";                     //專案名稱
-                  info=info+"<td>呂先生</td>";                                    //顧客姓名
-                  info=info+"<td class='no_display768'>03-4512345</td>";          //連絡電話
-                  info=info+"<td class='no_display768'>0926000111</td>";          //行動電話
-                  info=info+"<td><a href='from_all/from_print.php' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
-                  info=info+"<td class='no_display768'><a href='from_edit.php'><i class='fa fa-edit'></i>編輯</a></td>";
-                  info=info+"<td class='no_display768'><a class='del_user_"+this['com_id']+"' href='#'><i class='fa fa-ban'></i>刪除</a></td>";
+                  info=info+"<td class='no_display768'>"+this['from_id']+"</td>"; //表單ID
+                  info=info+"<td >"+this['set_time']+"</td>";                    //填表日期
+                  info=info+"<td><?php echo $case_name;?></td>";                     //專案名稱
+                  info=info+"<td>"+this['name']+"</td>";                                    //顧客姓名
+                  info=info+"<td class='no_display768'></td>";          //連絡電話
+                  info=info+"<td class='no_display768'>"+this['phone']+"</td>";          //行動電話
+                  info=info+"<td><a href='from_all/from_print.php?from_id="+this['from_id']+"' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
+                  info=info+"<td class='no_display768'><a href='from_edit.php?from_id="+this['from_id']+"'><i class='fa fa-edit'></i>編輯</a></td>";
+                  info=info+"<td class='no_display768'><a class='del_user' href='#'><i class='fa fa-ban'></i>刪除</a></td>";
                   info=info+"</tr>";
 
                     $("#com_tb").append(info);
                     
-                    var comId=this['com_id'];
-
-                    $(".del_user_"+comId).click(function() {
+                    $(".del_user_").click(function() {
                         if (confirm('確定要刪除??')) {
-                            location.href="rwd_php_sys.php?delete=company&com_id="+comId;
+                            location.href="rwd_php_sys.php?delete=company&com_id=";
                         }
                     });
               });

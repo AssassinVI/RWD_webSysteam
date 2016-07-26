@@ -8,14 +8,21 @@ if ($_POST) {
 
   date_default_timezone_set('Asia/Taipei');
   
-  $rand=rand(0,99);
-  $rand=$rand<10 ? '0'.$rand : $rand;
+  if ($_POST['sql_type']=="insert") {
+    
+    $rand=rand(0,99);
+    $rand=$rand<10 ? '0'.$rand : $rand;
+    $from_id="qf".date("YmdHis").$rand;
 
-  $from_id="qf".date("YmdHis").$rand;
+    $set_time=date("Y-m-d");
+  }
+  elseif($_POST['sql_type']=="update"){
+    $from_id=$_POST['from_id'];
 
+    $set_time=$_POST['set_time'];
+  }
+  
 
-	
-	$set_time=date("Y-m-d H:i:s");
 	$record_id=$_POST['record_id'];  //專案-紀錄ID
 
 
@@ -25,7 +32,7 @@ if ($_POST) {
 	$email=$_POST['email'];
 
 
-	$adds=$_POST['zipcode'].$_POST['county'].$_POST['district'].$_POST['adds'];
+	$adds=$_POST['zipcode'].$_POST['county'].$_POST['district'].",".$_POST['adds'];
 
 
 	$job=$_POST['job'];
@@ -50,7 +57,7 @@ if ($_POST) {
     $house_old=$_POST['house_old'];
 
 
-    $house_pattern=$_POST['house_pattern1'];
+    $house_pattern=$_POST['house_pattern'];
 
     $floor_num=$_POST['floor_num'];
 
@@ -136,7 +143,6 @@ if ($_POST) {
 
     if($_POST['sql_type']=="insert"){
 
-     // $sql_q=$pdo->prepare("INSERT INTO from_question (from_id ,set_time) VALUES (:from_id, :set_time)");
 
          $sql_q=$pdo->prepare("INSERT INTO from_question (
                                                       from_id,
@@ -221,11 +227,10 @@ if ($_POST) {
     else if( $_POST['sql_type']=="update" ){
 
       $sql_q=$pdo->prepare("UPDATE from_question SET set_time=:set_time, 
-                                                  record_id=:record_id, 
+                                                  
                                                        name=:name, 
                                                      gender=:gender, 
-                                                      /*tel_H=:tel_H, 
-                                                      tel_O=:tel_O,*/ 
+                                                      
                                                       phone=:phone, 
                                                       email=:email, 
                                                        adds=:adds, 
@@ -233,7 +238,7 @@ if ($_POST) {
                                                     job_txt=:job_txt, 
                                                   job_title=:job_title, 
                                                    cust_old=:cust_old,
-                                                  /* job_area=:job_area, */
+                                                  
                                                 job_company=:job_company, 
                                                   mar_state=:mar_state, 
                                                   mar_child=:mar_child, 
@@ -260,12 +265,11 @@ if ($_POST) {
                                                     pay_num=:pay_num, 
                                                Introduction=:Introduction, 
                                                      is_buy=:is_buy, 
-                                                   buy_name=:buy_name
-                                                          ");
+                                                   buy_name=:buy_name WHERE from_id=:from_id");
     }
-        
+    $sql_q->bindparam(':from_id',$from_id);
     $sql_q->bindparam(':set_time',$set_time);
-    $sql_q->bindparam(':record_id',$record_id);
+    
     $sql_q->bindparam(':name',$name);
     $sql_q->bindparam(':gender',$gender);
 
@@ -302,18 +306,16 @@ if ($_POST) {
     $sql_q->bindparam(':dem_side',$dem_side);
     $sql_q->bindparam(':pay_num',$pay_num);
     $sql_q->bindparam(':Introduction',$Introduction);
-
-
-    if ($_POST['sql_type']=="insert"){
-
-       $sql_q->bindparam(':from_id',$from_id);
-    }
-    elseif ($_POST['sql_type']=="update") {
+    
+    
+    if ($_POST['sql_type']=="update") {
       
       $sql_q->bindparam(':is_buy',$is_buy);
      $sql_q->bindparam(':buy_name',$buy_name);
     }
-    
+    elseif ($_POST['sql_type']=="insert") {
+     $sql_q->bindparam(':record_id',$record_id);
+    }
 
     $sql_q->execute();
 
@@ -326,7 +328,7 @@ if ($_POST) {
   }
   elseif ($_POST['sql_type']=="update") {
      $txt=iconv('utf-8', 'big5', '更新資料');
-     location_up('../from_edit.php?record_id='.$record_id,$txt);
+     location_up('../from_edit.php?from_id='.$from_id,$txt);
   }
 }
 
@@ -347,9 +349,9 @@ if ($_GET) {
            
             array_push($from_array, array('from_id'=>$row['from_id'], 
                                          'set_time'=>$row['set_time'], 
-                                             'name'=>$rwo['name'], 
-                                            'tel_H'=>$rwo['tel_H'], 
-                                            'phone'=>$rwo['phone']));
+                                             'name'=>$row['name'], 
+                                            'tel_H'=>$row['tel_H'], 
+                                            'phone'=>$row['phone']));
        }
 
        echo json_encode(array('from_array'=>$from_array));
