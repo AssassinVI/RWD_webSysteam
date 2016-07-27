@@ -82,9 +82,9 @@ $record_id=$_GET['record_id'];
     <section>
        <div class="input_div">
            <label>婚姻狀況：</label><br>
-            <input type="radio" value="mar1" name="mar_state" > 已婚　
-            <input type="radio" value="mar2" name="mar_state" > 已婚無子　 
-            <input type="radio" value="mar3" name="mar_state" > 未婚　 
+            <input type="radio" value="已婚" name="mar_state" > 已婚　
+            <input type="radio" value="已婚無子" name="mar_state" > 已婚無子　 
+            <input type="radio" value="未婚" name="mar_state" > 未婚　 
             <br>
             <label></label> 
             <input type="text" name="mar_child" placeholder="幾個小孩">
@@ -93,21 +93,21 @@ $record_id=$_GET['record_id'];
           <label>月收入：</label>
           <select name="mon_income" class="big_select">
              <option value="">請選擇</option>
-             <option value="income1">2萬~3萬</option>
-             <option value="income2">3萬~5萬</option>
-             <option value="income3">5萬~8萬</option>
-             <option value="income4">8萬~12萬</option>
-             <option value="income5">12萬~20萬</option>
-             <option value="income6">20萬以上</option>
+             <option value="2萬~3萬">2萬~3萬</option>
+             <option value="3萬~5萬">3萬~5萬</option>
+             <option value="5萬~8萬">5萬~8萬</option>
+             <option value="8萬~12萬">8萬~12萬</option>
+             <option value="12萬~20萬">12萬~20萬</option>
+             <option value="20萬以上">20萬以上</option>
           </select>
        </div>
        <div class="input_div">
           <label>交通工具：</label>
           <select name="transportation" class="big_select">
              <option value="">請選擇</option>
-       	     <option value="transportation1">汽車</option>
-       	     <option value="transportation2">機車</option>
-       	     <option value="transportation3">大眾運輸</option>
+       	     <option value="汽車">汽車</option>
+       	     <option value="機車">機車</option>
+       	     <option value="大眾運輸">大眾運輸</option>
        	     <option value="其他">其他</option>
           </select>
          </div>
@@ -126,11 +126,11 @@ $record_id=$_GET['record_id'];
           <label>現住房屋：</label>
           <select name="homeowner" class="big_select">
              <option value="">請選擇</option>
-       	     <option value="homeowner1">租賃</option>
-       	     <option value="homeowner2">宿舍</option>
-       	     <option value="homeowner3">父母所有</option>
-       	     <option value="homeowner4">配偶所有</option>
-       	     <option value="homeowner5">本人所有</option>
+       	     <option value="租賃">租賃</option>
+       	     <option value="宿舍">宿舍</option>
+       	     <option value="父母所有">父母所有</option>
+       	     <option value="配偶所有">配偶所有</option>
+       	     <option value="本人所有">本人所有</option>
        	     <option value="其他">其他</option>
           </select>
          </div>
@@ -138,14 +138,14 @@ $record_id=$_GET['record_id'];
         <div class="input_div">
            <label>現住房屋型態：</label><br>
            <div class="check_div">
-              <input type="radio" value="house1" name="house_type" > 公寓　
-              <input type="radio" value="house2" name="house_type" > 大樓　
-              <input type="radio" value="house3" name="house_type" > 套房　
+              <input type="radio" value="公寓" name="house_type" > 公寓　
+              <input type="radio" value="大樓" name="house_type" > 大樓　
+              <input type="radio" value="套房" name="house_type" > 套房　
            </div>
            <div class="check_div">
-             <input type="radio" value="house4" name="house_type" > 租屋　
-             <input type="radio" value="house5" name="house_type" > 華廈　
-             <input type="radio" value="house6" name="house_type" > 透天　
+             <input type="radio" value="租屋" name="house_type" > 租屋　
+             <input type="radio" value="華廈" name="house_type" > 華廈　
+             <input type="radio" value="透天" name="house_type" > 透天　
            </div>
             <label>屋齡：</label><input type="text" name="house_old" placeholder="幾年"> 
        </div>
@@ -201,13 +201,13 @@ $record_id=$_GET['record_id'];
         <div class="input_div">
            <label>產品需求(可複選)：</label>
                               <div class="check_div">
-                              	<input type="checkbox" id="dem_product1" name="dem_product[]" value="product1"> <label for="dem_product1"> 大樓</label>
-                                <input type="checkbox" id="dem_product2" name="dem_product[]" value="product2"> <label for="dem_product2"> 透天</label>
-                                <input type="checkbox" id="dem_product3" name="dem_product[]" value="product3"> <label for="dem_product3"> 套房</label>
+                              	<input type="checkbox" id="dem_product1" name="dem_product[]" value="大樓"> <label for="dem_product1"> 大樓</label>
+                                <input type="checkbox" id="dem_product2" name="dem_product[]" value="透天"> <label for="dem_product2"> 透天</label>
+                                <input type="checkbox" id="dem_product3" name="dem_product[]" value="套房"> <label for="dem_product3"> 套房</label>
                               </div>
                               <div class="check_div">
-                              	<input type="checkbox" id="dem_product4" name="dem_product[]" value="product4"> <label for="dem_product4"> 店面</label>
-                                <input type="checkbox" id="dem_product5" name="dem_product[]" value="product5"> <label for="dem_product5"> 辦公室</label>
+                              	<input type="checkbox" id="dem_product4" name="dem_product[]" value="店面"> <label for="dem_product4"> 店面</label>
+                                <input type="checkbox" id="dem_product5" name="dem_product[]" value="辦公室"> <label for="dem_product5"> 辦公室</label>
                                 <input type="checkbox" id="dem_product6" name="dem_product[]" value="其他"> <label for="dem_product6"> 其他</label>
                               </div>
                               <div class="check_div">
@@ -328,7 +328,7 @@ $record_id=$_GET['record_id'];
 
     <h3>需求2</h3>
     <section>
-        <div class="input_div"><label>格局需求：</label><input type="text" name="dem_pattern1" placeholder="幾房"><br>
+        <div class="input_div"><label>格局需求：</label><input type="text" name="dem_pattern" placeholder="幾房"><br>
                                    <!--<label></label><input type="text" name="dem_pattern2" placeholder="幾廳"><br>
                                    <label></label><input type="text" name="dem_pattern3" placeholder="幾衛浴">-->
         </div>

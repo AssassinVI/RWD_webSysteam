@@ -1132,9 +1132,14 @@ elseif($_GET['admin']=='project_ph'){
 
 /* ========================================= all刪除 ============================================ */
    elseif ($_GET['delete'] == 'admin_user') {
+    $se_user_id=$_SESSION['user_id'];//刪除的使用者
+    $del_time=date('Y-m-d H:i:s');//刪除時間
     
     $User_id=mysql_real_escape_string($_GET['User_id']);
+    
     db_conn("DELETE FROM admin_user WHERE User_id='$User_id'");
+
+    db_conn("INSERT INTO delete_record ( User_id, del_time, del_user) VALUES ( '$se_user_id', '$del_time' ,'$User_id')");//刪除紀錄
 
     $txt=iconv('utf-8', 'big5', '成功刪除使用者!!');
     location_up('admin_user.php', $txt);
@@ -1144,9 +1149,12 @@ elseif($_GET['admin']=='project_ph'){
 
 /* ====================================== 刪除公司 ============================================== */
     elseif ($_GET['delete'] == 'company') {
-    
+     $se_user_id=$_SESSION['user_id'];//刪除的使用者
+     $del_time=date('Y-m-d H:i:s');//刪除時間
     $com_id=mysql_real_escape_string($_GET['com_id']);
     db_conn("DELETE FROM company WHERE com_id='$com_id'");
+
+    db_conn("INSERT INTO delete_record ( User_id, del_time, del_company) VALUES ( '$se_user_id', '$del_time' ,'$com_id')");//刪除紀錄
 
     $txt=iconv('utf-8', 'big5', '成功刪除公司!!');
     location_up('admin_com.php', $txt);
@@ -1157,6 +1165,10 @@ elseif($_GET['admin']=='project_ph'){
 
  /* =================== 建案刪除 ===================== */
 	elseif ($_GET['delete'] == 'build_case') {
+
+    $se_user_id=$_SESSION['user_id'];//刪除的使用者
+     $del_time=date('Y-m-d H:i:s'); //刪除時間
+
 		$case_id=mysql_real_escape_string($_GET['case']);
     $result=db_conn("SELECT fun_name, fun_id FROM Related_tb WHERE case_id='$case_id'" );
     while ($row=mysql_fetch_array($result)) {
@@ -1167,6 +1179,8 @@ elseif($_GET['admin']=='project_ph'){
 
     db_conn("DELETE FROM Related_tb WHERE case_id='$case_id'");
 		db_conn("DELETE FROM build_case WHERE case_id='".$case_id."'");
+
+     db_conn("INSERT INTO delete_record ( User_id, del_time, del_case) VALUES ( '$se_user_id', '$del_time' ,'$case_id')"); //刪除紀錄
 
      SureRemoveDir('../product_html/'.$case_id , true);
 

@@ -2,6 +2,8 @@
       require_once 'shared_php/config.php';
 
       $from_id=$_GET['from_id'];
+      $case_name=$_SESSION['case_name'];
+      $record_id=$_SESSION['record_id'];
 
       $pdo=pdo_conn(); //資料庫連線
       $sql_q=$pdo->prepare("SELECT * FROM from_question WHERE from_id=:from_id");
@@ -9,7 +11,7 @@
       $sql_q->execute();
       while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
          
-         $from_id=$row['from_id'];
+        // $from_id=$row['from_id'];
          $set_time=$row['set_time'];
          $name=$row['name'];
          $gender=$row['gender'];
@@ -83,10 +85,13 @@
       .img_logo img{ width: 100%; }
       #logo_div, #old_logo_div{ float: left; margin-left: 7%; }
       #twzipcode select, #twzipcode input{ font-size: 15px; padding:3px;  }
-      .view_p{ padding:5px 0px; }
-      .view_span{ padding: 5px; background-color: #78dcc8; border: 1px solid #1ab394;}
+      .view_p{ padding:5px 0px; margin:15px 0px 0px 0px;}
+      .view_span{ padding: 5px; color: #fff; background-color: #43c4aa; border: 1px solid #1ab394;}
+      .view_div{ white-space: pre-wrap; padding: 10px; border: 1px solid #78dcc8; }
       #inter_hr{ border-color: #1ab394; }
       #interview{ height: 150px; }
+      .new_text{ padding: 2px 7px; }
+     
       @media only screen and (max-width:420px){
          .img_logo{ width: 100%; }
          #logo_div, #old_logo_div{ margin-left: 0%; }
@@ -97,7 +102,7 @@
     	 $(document).ready(function() {
       $("#build_back").click(function() {
          if (confirm("是否返回上一頁??")) {
-            window.history.back();            
+            location.replace('from_list.php?record_id=<?php echo $record_id;?>&case_name=<?php echo $case_name;?>');           
          }
         });
 
@@ -120,9 +125,9 @@
       //家庭成員數
       echo "$('[value=\"".$live_people."\"]').attr('selected', 'selected');";
       //現住房屋
-      echo "$('[value=\"".$homeowner."\"]').attr('selected', 'selected');";
+      echo "$('#homeowner [value=\"".$homeowner."\"]').attr('selected', 'selected');";
       //現住房屋型態
-      echo "$('[value=\"".$house_type."\"]').attr('checked', 'checked');";
+      echo "$('#house_type [value=\"".$house_type."\"]').attr('checked', 'checked');";
 
       //媒體
       for ($i=0; $i < count($media) ; $i++) { 
@@ -138,7 +143,7 @@
       //產品需求
       for ($i=0; $i <count($dem_product) ; $i++) { 
         
-        echo "$('[value=\"".$dem_product[$i]."\"]').attr('checked', 'checked');";
+        echo "$('#dem_product [value=\"".$dem_product[$i]."\"]').attr('checked', 'checked');";
 
         if ($dem_product[$i]=="其他") {
            echo "$('[name=\"dem_product_txt\"]').val('".$dem_product[$i+1]."');";
@@ -213,7 +218,7 @@
                         </div>
 
                         <div class="ibox-content">
-                            <form method="POST" action="from_all/from_sql.php" class="form-horizontal" enctype="multipart/form-data">
+                            <form method="POST" action="from_all/from_sql.php" class="form-horizontal" >
                                <div class="form-group">
                                    <label class="col-sm-2 control-label">表單序號：</label>
                                     <div class="col-sm-2"><input type="text" class="form-control" name="from_id" readonly="readonly" value="<?php echo $from_id;?>"></div>
@@ -223,7 +228,7 @@
 
                                     <label class="col-sm-2 control-label">專案名稱：</label>
                                     <div class="col-sm-2">
-                                       <input type="text" name="case_name" class="form-control" readonly="readonly" value="XXX專案">
+                                       <input type="text" name="case_name" class="form-control" readonly="readonly" value="<?php echo $case_name;?>">
                                     </div>
                                 </div>
 
@@ -246,7 +251,7 @@
                                 </div>
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">E-mail：</label>
-                                    <div class="col-sm-2"><input name="email" type="text" class="form-control" value="<?php echo $email;?>"></div>
+                                    <div class="col-sm-4"><input name="email" type="text" class="form-control" value="<?php echo $email;?>"></div>
                                 </div>
 
                              <div class="hr-line-dashed"></div>
@@ -285,7 +290,7 @@
                                    <label class="col-sm-2 control-label">婚姻狀況：</label>
                                     <div class="col-sm-4">
                                        <input type="radio" id="mar_state1" value="已婚" name="mar_state"><label for="mar_state1">已婚</label>
-                                       <input name="mar_child" type="text"  value="<?php echo $mar_child;?>">個小孩<br>
+                                       <input name="mar_child" type="text" class="new_text" value="<?php echo $mar_child;?>">個小孩<br>
                                        <input type="radio" id="mar_state2" value="已婚無子" name="mar_state"><label for="mar_state2">已婚無子</label><br>
                                        <input type="radio" id="mar_state3" value="未婚" name="mar_state"><label for="mar_state3">未婚</label><br>
                                        
@@ -333,7 +338,7 @@
                                     </div>
                                     <label class="col-sm-2 control-label">現住房屋：</label>
                                     <div class="col-sm-2">
-                                       <select name="homeowner" class="form-control">
+                                       <select id="homeowner" name="homeowner" class="form-control">
                                           <option value="">請選擇</option>
                                           <option value="租賃">租賃</option>
                                           <option value="宿舍">宿舍</option>
@@ -348,14 +353,14 @@
 
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">現住房屋型態：</label>
-                                    <div class="col-sm-2">
-                                       <input type="radio" id="house_type1" value="house1" name="house_type"><label for="house_type1">公寓</label><br>
-                                       <input type="radio" id="house_type2" value="house2" name="house_type"><label for="house_type2">大樓</label><br>
-                                       <input type="radio" id="house_type3" value="house3" name="house_type"><label for="house_type3">套房</label><br>
-                                       <input type="radio" id="house_type4" value="house4" name="house_type"><label for="house_type4">租屋</label><br>
-                                       <input type="radio" id="house_type4" value="house5" name="house_type"><label for="house_type4">華廈</label><br>
-                                       <input type="radio" id="house_type4" value="house6" name="house_type"><label for="house_type4">透天</label><br>
-                                       屋齡<input type="text" name="house_old" value="<?php echo $house_old;?>">年
+                                    <div id="house_type" class="col-sm-2">
+                                       <input type="radio" id="house_type1" value="公寓" name="house_type"><label for="house_type1">公寓</label><br>
+                                       <input type="radio" id="house_type2" value="大樓" name="house_type"><label for="house_type2">大樓</label><br>
+                                       <input type="radio" id="house_type3" value="套房" name="house_type"><label for="house_type3">套房</label><br>
+                                       <input type="radio" id="house_type4" value="租屋" name="house_type"><label for="house_type4">租屋</label><br>
+                                       <input type="radio" id="house_type4" value="華廈" name="house_type"><label for="house_type4">華廈</label><br>
+                                       <input type="radio" id="house_type4" value="透天" name="house_type"><label for="house_type4">透天</label><br>
+                                       屋齡<input type="text" name="house_old" class="new_text" value="<?php echo $house_old;?>">年
                                     </div>
                                 </div>
 
@@ -365,7 +370,7 @@
                               <div class="form-group">
                                    <label class="col-sm-2 control-label">現住：</label>
                                     <div class="col-sm-4">
-                                       <input name="house_pattern" type="text"  value="<?php echo $house_pattern;?>">房　
+                                       <input name="house_pattern" type="text" class="new_text" value="<?php echo $house_pattern;?>">房　
                                     </div>
                                     <label class="col-sm-2 control-label">室內(坪)：</label>
                                     <div class="col-sm-2"><input name=" floor_num" type="text" class="form-control" value="<?php echo $floor_num;?>" placeholder="坪數"></div>
@@ -391,7 +396,7 @@
                                        <input type="checkbox" id="media13" value="派報" name="media[]"><label for="media13">派報</label>　
                                        <input type="checkbox" id="media14" value="夾報" name="media[]"><label for="media14">夾報</label>　
                                        <input type="checkbox" id="media15" value="介紹" name="media[]"><label for="media15">介紹</label>　
-                                       <input type="checkbox" id="media16" value="其他" name="media[]"><label for="media16">其他</label> <input type="text" name="media_txt">
+                                       <input type="checkbox" id="media16" value="其他" name="media[]"><label for="media16">其他</label> <input type="text" class="new_text" name="media_txt">
                                     </div>
                                 </div>
 
@@ -400,13 +405,13 @@
 
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">產品需求(可複選)：</label>
-                                    <div class="col-sm-10">
-                                       <input type="checkbox" id="dem_product1" value="product1" name="dem_product[]"><label for="dem_product1">大樓</label>　
-                                       <input type="checkbox" id="dem_product2" value="product2" name="dem_product[]"><label for="dem_product2">透天</label>　
-                                       <input type="checkbox" id="dem_product3" value="product3" name="dem_product[]"><label for="dem_product3">套房</label>　
-                                       <input type="checkbox" id="dem_product4" value="product4" name="dem_product[]"><label for="dem_product4">店面</label>　
-                                       <input type="checkbox" id="dem_product5" value="product5" name="dem_product[]"><label for="dem_product5">辦公室</label>　
-                                       <input type="checkbox" id="dem_product6" value="other" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" name="dem_product_txt">
+                                    <div id="dem_product" class="col-sm-10">
+                                       <input type="checkbox" id="dem_product1" value="大樓" name="dem_product[]"><label for="dem_product1">大樓</label>　
+                                       <input type="checkbox" id="dem_product2" value="透天" name="dem_product[]"><label for="dem_product2">透天</label>　
+                                       <input type="checkbox" id="dem_product3" value="套房" name="dem_product[]"><label for="dem_product3">套房</label>　
+                                       <input type="checkbox" id="dem_product4" value="店面" name="dem_product[]"><label for="dem_product4">店面</label>　
+                                       <input type="checkbox" id="dem_product5" value="辦公室" name="dem_product[]"><label for="dem_product5">辦公室</label>　
+                                       <input type="checkbox" id="dem_product6" value="other" name="dem_product[]"><label for="dem_product6">其它</label> <input type="text" class="new_text" name="dem_product_txt">
                                     </div>
                                 </div>
                                 
@@ -507,7 +512,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">格局需求：</label>
                                     <div class="col-sm-10">
-                                       <input type="text" name="dem_pattern" value="<?php echo $dem_pattern;?>">房　
+                                       <input type="text" class="new_text" name="dem_pattern" value="<?php echo $dem_pattern;?>">房　
                                     </div>
                                 </div>
 
@@ -517,7 +522,7 @@
                                     <div class="col-sm-10">
                                        <input type="radio" id="dem_car1" value="n" name="dem_car"><label for="dem_car1">不需要</label>　
                                        <input type="radio" id="dem_car2" value="y" name="dem_car"><label for="dem_car2">需要</label>　
-                                       <input type="text" name="dem_car_txt">位　
+                                       <input type="text" class="new_text" name="dem_car_txt">位　
                                     </div>
                                 </div>
 
@@ -546,7 +551,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">購屋次數：</label>
                                     <div class="col-sm-10">
-                                       <input type="text" name="pay_num" value="<?php echo $pay_num;?>">次　
+                                       <input type="text" class="new_text" name="pay_num" value="<?php echo $pay_num;?>">次　
                                     </div>
                                 </div>
 
@@ -554,7 +559,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">介紹戶別：</label>
                                     <div class="col-sm-10">
-                                       <input type="text" name="Introduction" value="<?php echo $Introduction;?>">　
+                                       <input type="text" class="new_text" name="Introduction" value="<?php echo $Introduction;?>">　
                                     </div>
                                 </div>
                                
@@ -563,7 +568,7 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">代銷公司：</label>
                                     <div class="col-sm-4">
-                                       <input type="text" name="com_name" readonly="readyonly" value="XXX公司">　
+                                       <input type="text" class="new_text" name="com_name" readonly="readyonly" value="XXX公司">　
                                     </div>
                                     <div class="col-sm-2">
                                        <input type="radio" id="is_buy1" value="已購" name="is_buy"><label for="is_buy1">已購</label>　
@@ -571,7 +576,7 @@
                                     </div>
                                     <div class="col-sm-2">
 
-                                      購買戶別 <input type="text" name="buy_name" value="<?php echo $buy_name;?>">
+                                      購買戶別 <input type="text" class="new_text" name="buy_name" value="<?php echo $buy_name;?>">
                                        
                                     </div>
                                 </div>
@@ -588,19 +593,41 @@
                                         <button id="build_save" class="btn btn-primary" type="submit">儲存</button>
                                     </div>
                                 </div>
-                                
-                               <div id="inter_hr" class="hr-line-dashed"></div> 
+                                <input type="hidden" name="sql_type" value="update"> <!-- 更新 -->
 
+                               <div id="inter_hr" class="hr-line-dashed"></div> 
+                            </form>
+
+
+                            <form method="GET" action="from_all/from_sql.php" class="form-horizontal">
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">訪談紀錄：</label>
                                     <div class="col-sm-7">
                                        　<textarea id="interview" name="interview" class="form-control"></textarea>
-                                       <p class="view_p"><span class="view_span">2016-07-18</span>XXXXX看房子</p>
-                                    </div>
-                                    <div class="col-sm-3"><button id="insert_view" class="btn btn-primary" type="button">新增記錄</button></div>
-                            </div>
 
-                                <input type="hidden" name="sql_type" value="update"> <!-- 更新 -->
+                      <?php 
+
+                              /* ==================================== 訪談紀錄 ======================================= */
+                                 $pdo=pdo_conn(); //資料庫連線
+                                 $sql_q=$pdo->prepare("SELECT * FROM from_callback WHERE from_id=:from_id");
+                                 $sql_q->bindparam(":from_id", $from_id);
+                                 $sql_q->execute();
+                                 while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+                                    $back_content=$row['back_content'];
+                                    $back_time=$row['back_time'];
+                                    echo '<p class="view_p"><span class="view_span">'.$back_time.'</span></p>';
+                                    echo '<div class="view_div">'.$back_content.'</div>';
+                                 }
+                                $pdo=NULL;
+
+                      ?>
+
+                                    </div>
+                                    <div class="col-sm-3"><button id="insert_view" class="btn btn-primary" type="submit">新增記錄</button></div>
+                                </div>
+
+                                <input type="hidden" name="sql_type" value="callback"> <!-- 回訪紀錄 -->
+                                <input type="hidden" name="from_id" value="<?php echo $from_id;?>">
                             </form>
 
                          </div>

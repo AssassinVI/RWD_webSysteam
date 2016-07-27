@@ -1,7 +1,18 @@
 <?php include 'shared_php/login_session.php';
       include 'shared_php/config.php';
-   $case_name=$_GET['case_name'];
-   $record_id=$_GET['record_id'];
+      if (empty($_GET['case_name'])) {
+        $case_name=$_SESSION['case_name'];
+      }else{
+        $case_name=$_GET['case_name'];
+        $_SESSION['case_name']=$case_name;
+      }
+
+      if (empty($_GET['record_id'])) {
+        $record_id=$_SESSION['record_id'];
+      }else{
+        $record_id=$_GET['record_id'];
+        $_SESSION['record_id']=$record_id;
+      }
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +41,7 @@
     </style>
     <script type="text/javascript">
      $(document).ready(function() {
-         $("#admin_com").addClass('active');
+
          $('.footable').footable();
        
        $.getJSON('from_all/from_sql.php?type=list&record_id=<?php echo $record_id;?>',  function(json) {
@@ -47,14 +58,16 @@
                   info=info+"<td class='no_display768'>"+this['phone']+"</td>";          //行動電話
                   info=info+"<td><a href='from_all/from_print.php?from_id="+this['from_id']+"' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
                   info=info+"<td class='no_display768'><a href='from_edit.php?from_id="+this['from_id']+"'><i class='fa fa-edit'></i>編輯</a></td>";
-                  info=info+"<td class='no_display768'><a class='del_user' href='#'><i class='fa fa-ban'></i>刪除</a></td>";
+                  info=info+"<td class='no_display768'><a class='del_from_"+this['from_id']+"' href='#'><i class='fa fa-ban'></i>刪除</a></td>";
                   info=info+"</tr>";
 
                     $("#com_tb").append(info);
+
+                    var from_id=this['from_id'];
                     
-                    $(".del_user_").click(function() {
+                    $(".del_from_"+this['from_id']).click(function() {
                         if (confirm('確定要刪除??')) {
-                            location.href="rwd_php_sys.php?delete=company&com_id=";
+                            location.href="from_all/from_sql.php?type=delete&from_id="+from_id;
                         }
                     });
               });

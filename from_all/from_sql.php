@@ -109,7 +109,7 @@ if ($_POST) {
     
 
 
-    $dem_pattern=$_POST['dem_pattern1'];
+    $dem_pattern=$_POST['dem_pattern'];
 
     if (!empty($_POST['dem_car'])) {
      
@@ -330,6 +330,7 @@ if ($_POST) {
      $txt=iconv('utf-8', 'big5', '更新資料');
      location_up('../from_edit.php?from_id='.$from_id,$txt);
   }
+
 }
 
 
@@ -358,6 +359,81 @@ if ($_GET) {
 
        $pdo=NULL;
    }
+
+   elseif ($_GET['type']=='delete') {  //---------------------- 刪除顧客資料 --------------------------
+     
+      $from_id=$_GET['from_id'];
+
+      $pdo=pdo_conn();
+      $sql_q=$pdo->prepare("DELETE FROM from_question WHERE from_id=:from_id");
+      $sql_q->bindparam(":from_id", $from_id);
+      $sql_q->execute();
+      $pdo=NULL;
+
+      $pdo=pdo_conn();
+      $sql_q=$pdo->prepare("DELETE FROM from_callback WHERE from_id=:from_id");
+      $sql_q->bindparam(":from_id", $from_id);
+      $sql_q->execute();
+      $pdo=NULL;
+
+      $txt=iconv('utf-8', 'big5', '成功刪除');
+     location_up('../from_list.php?record_id='.$_SESSION['record_id'], $txt);
+   }
+
+  elseif ($_GET['sql_type']=='callback') { //--------------------------- 回訪紀錄 ----------------------------------
+    
+     date_default_timezone_set('Asia/Taipei');
+     $back_time=date('Y-m-d H:i:s');
+     $back_content=$_GET['interview'];
+     $from_id=$_GET['from_id'];
+     $back_type='基本訪談';
+
+    $pdo=pdo_conn();
+    $sql_q=$pdo->prepare("INSERT INTO from_callback (from_id, back_type, back_content, back_time) VALUES (:from_id, :back_type, :back_content, :back_time)");
+    $sql_q->bindparam(":from_id", $from_id);
+    $sql_q->bindparam(":back_type", $back_type);
+    $sql_q->bindparam(":back_content", $back_content);
+    $sql_q->bindparam(":back_time", $back_time);
+    $sql_q->execute();
+    $pdo=NULL;
+
+     $txt=iconv('utf-8', 'big5', '新增訪談紀錄');
+     location_up('../from_edit.php?from_id='.$from_id,$txt);
+  }
+
+  elseif ($_GET['type']=='project_ph') {
+    
+     $com_id=$_GET['com_id'];
+     $case_id=$_GET['case_id'];
+
+     $from_array=array();
+
+     $pdo=pdo_conn();
+     if (!empty($com_id)) {
+       
+       $sql_q=$pdo->prepare("SELECT bc.case_logo, bc.case_name, er.record_id, count(*) as total FROM build_case as bc INNER JOIN expand_record as er ON bc.case_id=er.case_id INNER JOIN from_question as fq ON er.record_id=fq.record_id  WHERE bc.com_id=:com_id AND er.tool_id='tool20160624002' AND er.is_use='1'");
+        $sql_q->bindparam(":com_id", $com_id);
+     }else{
+
+       $sql_q=$pdo->prepare("SELECT bc.case_logo, bc.case_name, er.record_id, count(*) as total FROM build_case as bc INNER JOIN expand_record as er ON bc.case_id=er.case_id INNER JOIN from_question as fq ON er.record_id=fq.record_id  WHERE bc.case_id=:case_id AND er.tool_id='tool20160624002' AND er.is_use='1'");
+       $sql_q->bindparam(":case_id", $case_id);
+     }
+     
+    
+     
+     $sql_q->execute();
+     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+
+      $record_id=$row['record_id'];
+       
+        array_push($from_array, array('case_logo'=>$row['case_logo'], 
+                                      'case_name'=>$row['case_name'], 
+                                          'total'=>$row['total']
+                                      ));
+     }
+     $pdo=NULL;
+     echo json_encode(array('from_array'=>$from_array));
+  }
 }
 
 
