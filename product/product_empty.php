@@ -49,7 +49,7 @@
 // -- facebook 分享 或 紛絲團 --
    if (empty($case['bu_fb'])) { //分享
      
-      $bu_fb='https://www.facebook.com/dialog/feed?app_id=563666290458260&display=popup&link='.$URL.'>&redirect_uri=https://www.facebook.com/';
+      $bu_fb='https://www.facebook.com/dialog/feed?app_id=563666290458260&display=popup&link='.$URL.'&redirect_uri=https://www.facebook.com/';
    }
    else{
       
@@ -81,7 +81,7 @@
     <meta property="og:url" content="<?php echo $URL;?>" />
 
     <!-- 分享主圖 -->
-    <meta property="og:image" content="assets/images/activ_img.jpg" />
+    <meta property="og:image" content="http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/<?php echo $case_id;?>.jpg" />
     <meta property="og:type" content="website" />
     <meta name="description" content="<?php echo $other;?>" />
     <meta name="Author" content="聯創數位整合" />

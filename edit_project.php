@@ -116,10 +116,10 @@ if ($_GET['NewOrEdit']=='edit') {
       font-size: 18px;
      }
      #summernote{
-      width: 1000px;
-      height: 300px;
+      width: 100%;
+      height: 200px;
      }
-
+    .hr_style{ border-top: 1px dashed #e6e6e6; margin: 50px 0px; }
 
     </style>
 
@@ -231,6 +231,12 @@ if ($_GET['NewOrEdit']=='edit') {
                    }  
                 });
 
+               $('#case_logo_div').find('p').click(function() {
+                 if(confirm('確定要刪除??')){ 
+                     $(this).parent('.del_file').remove(); 
+                   }  
+                });
+
                 //更改公司
                $("#select_com").change(function(event) {
                   
@@ -299,7 +305,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
 
 
-    function file_viewer_load(controller,html_id) { //預覽圖片方法
+    function file_viewer_load(controller,html_id,input_name,input_val) { //預覽圖片方法
 
             var file=controller.files[0];
              if (file==null) {
@@ -309,7 +315,7 @@ if ($_GET['NewOrEdit']=='edit') {
                 var fileReader= new FileReader();
                 fileReader.readAsDataURL(file);
                 fileReader.onload = function(event){
-                $(html_id).html('<p>圖片預覽</p><img  src="'+this.result+'" alt=""><input name="activity_img" type="hidden" value="activ_img.jpg" />');
+                $(html_id).html('<p>圖片預覽</p><img  src="'+this.result+'" alt=""><input name="'+input_name+'" type="hidden" value="'+input_val+'" />');
              }
             };
           }
@@ -388,11 +394,11 @@ if ($_GET['NewOrEdit']=='edit') {
                                     </div>
                                 </div>     
 
-                                <div class="form-group"><label class="col-sm-2 control-label">建案LOGO :</label>
+                                <div id="case_logo_div" class="form-group"><label class="col-sm-2 control-label">建案LOGO :</label>
                                     <div class="col-sm-4">
-                                       <input name="case_logo" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this,'#logo_view')" >
+                                       <input name="case_logo" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this,'#logo_view','old_case_logo','<?php echo $case_id;?>.jpg')" >
                                        <div id="old_logo_view" class="del_file"></div>
-                                       <div id="logo_view" class="del_file"></div>
+                                       <div id="logo_view" ></div>
                                     </div>
                                 </div>                       
 
@@ -438,6 +444,9 @@ if ($_GET['NewOrEdit']=='edit') {
                                     <div class="col-sm-4"><input name="floor" type="text" class="form-control" value="<?php echo $floor;?>"></div>
 
                                 </div>
+
+                                <hr class="hr_style">
+
                                 <div class="form-group">
 
                                     <label class="col-sm-2 control-label">Line功能選擇 :</label>
@@ -497,6 +506,8 @@ if ($_GET['NewOrEdit']=='edit') {
                                    <div class="col-sm-4"><input name="bu_fb" type="text" class="form-control" placeholder="請輸入臉書紛絲團網址" value="<?php echo $bu_fb;?>"></div>
                                 </div>
 
+                                <hr class="hr_style">
+
                                   <div class="form-group">
                                     <label class="col-sm-2 control-label">電 話 :</label>
                                     <div class="col-sm-4"><input name="bu_phone" type="text" class="form-control" value="<?php echo $bu_phone;?>"></div>
@@ -504,7 +515,7 @@ if ($_GET['NewOrEdit']=='edit') {
 
                                 <div class="form-group"><label class="col-sm-2 control-label">基地位置 :</label>
 
-                                    <div class="col-sm-10"><input name="build_adds" type="text" class="form-control" value="<?php echo $build_adds;?>"></div>
+                                    <div class="col-sm-5"><input name="build_adds" type="text" class="form-control" value="<?php echo $build_adds;?>"></div>
 
                                 </div>
 
@@ -529,76 +540,49 @@ if ($_GET['NewOrEdit']=='edit') {
                                     </div>
 
                                     <div id="old_file_music" class="del_file"></div>
-
                                     <div id="file_music" class="del_file"></div>
-
                                     </div>
-
-
 
                                     <label class="col-sm-1 control-label">活動圖 :</label>
-
                                     <div class="col-sm-4">
-
                                     <div id="img_div">
-
-                                    <input id="activity_img" name="activity_img" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this,'#file_view')" >
-
+                                    <input id="activity_img" name="activity_img" type="file" accept="image/*" class="form-control" onchange="file_viewer_load(this,'#file_view','activity_img','activ_img.jpg')" >
                                     </div>
-
                                     <div id="old_file_view" class="del_file"></div>
-
-                                    <div id="file_view" class="del_file"></div>
-
+                                    <div id="file_view" ></div>
                                     </div>
 
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">google分析追蹤編號 :</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-4">
                                     <input name="google_code" type="text" placeholder="請輸入追蹤編號" class="form-control" value="<?php echo $google_code?>">
                                     <span class="help-block m-b-none">例如:UA-12345678-1</span>
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-2 control-label">google分析檢視編號 :</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-4">
                                     <input name="google_view_code" type="text" placeholder="請輸入檢視編號" class="form-control" value="<?php echo $google_view_code?>">
                                     <span class="help-block m-b-none">例如:123456789，9碼</span>
                                     </div>
                                 </div>
 
-
+                                <hr class="hr_style">
 
  <!-- ========================================== 分隔線 ====================================================== -->
-
-                                <div class="hr-line-dashed"></div>
-
-
-
-                                  <div class="ibox-content no-padding">
-
-                                  <div class="ibox-title">
-
-                            <h5>專案說明文</h5>
-
-                        </div>
-
-                        <textarea name="other" id="summernote" ><?php echo $other?></textarea>
-
-                    </div>
+                                
+                                <div class="form-group"><label class="col-sm-2 control-label">專案說明文 :</label>
+                                    <div class="col-sm-8">
+                                    <textarea name="other" id="summernote" class="form-control" ><?php echo $other?></textarea>
+                                    </div>
+                                </div>
 
                      <div class="hr-line-dashed"></div>
-
                                 <div class="form-group">
-
                                     <div class="col-sm-4 col-sm-offset-2">
-
                                         <button id="build_back" class="btn btn-white" type="button">取消</button>
-
                                         <button id="build_save" class="btn btn-primary" type="submit">儲存</button>
-
                                     </div>
-
                                 </div>
 
                                 <!--<input id="other_in" name="other" type="hidden" value="">-->  <!-- 存放見案說明文 -->
