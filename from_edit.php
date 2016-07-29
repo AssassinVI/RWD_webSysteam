@@ -87,10 +87,13 @@
       #twzipcode select, #twzipcode input{ font-size: 15px; padding:3px;  }
       .view_p{ padding:5px 0px; margin:15px 0px 0px 0px;}
       .view_span{ padding: 5px; color: #fff; background-color: #43c4aa; border: 1px solid #1ab394;}
-      .view_div{ white-space: pre-wrap; padding: 10px; border: 1px solid #78dcc8; }
+      .view_div{ white-space: pre-wrap; padding: 10px; border: 1px solid #78dcc8; width: 100%; }
       #inter_hr{ border-color: #1ab394; }
       #interview{ height: 150px; }
       .new_text{ padding: 2px 7px; }
+      .call_a{ float: right; margin-left: 10px; font-size: 17px;}
+      .call_del{ color: red; }
+      .call_del:hover{ color:#800101; }
      
       @media only screen and (max-width:420px){
          .img_logo{ width: 100%; }
@@ -194,6 +197,48 @@
       echo "$('[value=\"".$is_buy."\"]').attr('checked', 'checked');";
      ?>
     });
+
+       /* ============================ 更新訪談紀錄 ================================= */
+       function update_call(call_id) {
+         event.preventDefault();
+         if (confirm("是否要更新??")) {
+
+           $.ajax({
+           url: 'from_all/from_sql.php?sql_type=call_update',
+           type: 'GET',
+           data: {
+                    callback_id: call_id, 
+                    back_content: $("#"+call_id).val(),
+                    back_type:$("#sl_"+call_id).val()
+                  },
+            success:function (date) {
+                alert('更新成功');
+                location.replace('from_list.php?record_id=<?php echo $record_id;?>');
+            }
+          });//ajax
+         }//confirm
+       }
+
+       /* ============================ 更新訪談紀錄 ================================= */
+       function delete_call(call_id) {
+         event.preventDefault();
+         if (confirm("是否要刪除??")) {
+
+           $.ajax({
+           url: 'from_all/from_sql.php?sql_type=call_delete',
+           type: 'GET',
+           data: {
+                    callback_id: call_id, 
+                  },
+            success:function (date) {
+                alert('成功刪除');
+                location.replace('from_list.php?record_id=<?php echo $record_id;?>');
+            }
+          });//ajax
+         }//confirm
+       }
+
+      
 
     </script>
 </head>
@@ -353,13 +398,13 @@
 
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">現住房屋型態：</label>
-                                    <div id="house_type" class="col-sm-2">
-                                       <input type="radio" id="house_type1" value="公寓" name="house_type"><label for="house_type1">公寓</label><br>
-                                       <input type="radio" id="house_type2" value="大樓" name="house_type"><label for="house_type2">大樓</label><br>
-                                       <input type="radio" id="house_type3" value="套房" name="house_type"><label for="house_type3">套房</label><br>
-                                       <input type="radio" id="house_type4" value="租屋" name="house_type"><label for="house_type4">租屋</label><br>
-                                       <input type="radio" id="house_type4" value="華廈" name="house_type"><label for="house_type4">華廈</label><br>
-                                       <input type="radio" id="house_type4" value="透天" name="house_type"><label for="house_type4">透天</label><br>
+                                    <div id="house_type" class="col-sm-4">
+                                       <input type="radio" id="house_type1" value="公寓" name="house_type"><label for="house_type1">公寓</label>　
+                                       <input type="radio" id="house_type2" value="大樓" name="house_type"><label for="house_type2">大樓</label>　
+                                       <input type="radio" id="house_type3" value="套房" name="house_type"><label for="house_type3">套房</label>　
+                                       <input type="radio" id="house_type4" value="租屋" name="house_type"><label for="house_type4">租屋</label>　
+                                       <input type="radio" id="house_type5" value="華廈" name="house_type"><label for="house_type5">華廈</label>　
+                                       <input type="radio" id="house_type6" value="透天" name="house_type"><label for="house_type6">透天</label><br>
                                        屋齡<input type="text" name="house_old" class="new_text" value="<?php echo $house_old;?>">年
                                     </div>
                                 </div>
@@ -590,7 +635,7 @@
                                     <label class="col-sm-4 control-label"></label>
                                     <div class="col-sm-4">
                                     	<button id="build_back" class="btn btn-white" type="button">取消</button>
-                                        <button id="build_save" class="btn btn-primary" type="submit">儲存</button>
+                                        <button id="build_save"  class="btn btn-primary" type="submit">儲存</button>
                                     </div>
                                 </div>
                                 <input type="hidden" name="sql_type" value="update"> <!-- 更新 -->
@@ -603,20 +648,41 @@
                                 <div class="form-group">
                                    <label class="col-sm-2 control-label">訪談紀錄：</label>
                                     <div class="col-sm-7">
+                                        <select class="new_text" name="back_type">
+                                          <option value="現場回訪">現場回訪</option>
+                                          <option value="電話回訪">電話回訪</option>
+                                        </select>
                                        　<textarea id="interview" name="interview" class="form-control"></textarea>
 
                       <?php 
 
                               /* ==================================== 訪談紀錄 ======================================= */
                                  $pdo=pdo_conn(); //資料庫連線
-                                 $sql_q=$pdo->prepare("SELECT * FROM from_callback WHERE from_id=:from_id");
+                                 $sql_q=$pdo->prepare("SELECT * FROM from_callback WHERE from_id=:from_id ORDER BY back_time DESC");
                                  $sql_q->bindparam(":from_id", $from_id);
                                  $sql_q->execute();
                                  while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+                                    $callback_id=$row['callback_id'];
                                     $back_content=$row['back_content'];
                                     $back_time=$row['back_time'];
-                                    echo '<p class="view_p"><span class="view_span">'.$back_time.'</span></p>';
-                                    echo '<div class="view_div">'.$back_content.'</div>';
+                                    $back_type=$row['back_type'];
+                                    echo '<p class="view_p"><span class="view_span">'.$back_time.'</span>';
+                                    echo '<select id="sl_'.$callback_id.'" class="new_text" >';
+
+                                    if ($back_type=='現場回訪') {
+                                      echo '<option value="現場回訪" selected="selected">現場回訪</option>';
+                                      echo '<option value="電話回訪">電話回訪</option>';
+                                    }else{
+                                      echo '<option value="現場回訪">現場回訪</option>';
+                                      echo '<option value="電話回訪" selected="selected">電話回訪</option>';
+                                    }
+
+                                    echo '</select>';
+                                    echo '<a class="call_a call_del" href="#" onclick="delete_call(\''.$callback_id.'\')"><i class="fa fa-ban"></i>刪除</a>';
+                                    echo '<a class="call_a" href="#" onclick="update_call(\''.$callback_id.'\')"><i class="fa fa-edit"></i>更新</a>';
+                                    echo '</p>';
+                                    echo '<textarea id="'.$callback_id.'" class="view_div">'.$back_content.'</textarea>';
+
                                  }
                                 $pdo=NULL;
 

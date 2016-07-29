@@ -10,7 +10,7 @@
 
             <!-- facebook分享 -->
 
-            <a href="https://www.facebook.com/dialog/feed?app_id=563666290458260&display=popup&link=<?php echo $URL;?>&redirect_uri=https://www.facebook.com/" onclick="ga('send', 'event', 'facebook分享', 'click', 'tool_bar')"> <img style="background:#fff; width: 48px;height:48px;border-radius: 30px 30px" src="../../assets/images/RWD/icom/04/fb.svg" alt=""></a>
+            <a href="<?php echo $bu_fb;?>" onclick="ga('send', 'event', 'facebook分享', 'click', 'tool_bar')"> <img style="background:#fff; width: 48px;height:48px;border-radius: 30px 30px" src="../../assets/images/RWD/icom/04/fb.svg" alt=""></a>
 
             <!-- GOOGLEMAP -->
 

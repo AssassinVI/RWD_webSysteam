@@ -12,7 +12,7 @@
 
             <!-- facebook分享 -->
 
-            <a id="fb_btn" class="tool_lay_base" href="https://www.facebook.com/dialog/feed?app_id=563666290458260&display=popup&link=<?php echo $URL;?>&redirect_uri=https://www.facebook.com/" onclick="ga('send', 'event', 'fb分享', 'click', 'tool_bar')"> <img src="../../assets/images/RWD/icom/04/fb.svg" alt=""></a>
+            <a id="fb_btn" class="tool_lay_base" href="<?php echo $bu_fb;?>" onclick="ga('send', 'event', 'fb分享', 'click', 'tool_bar')"> <img src="../../assets/images/RWD/icom/04/fb.svg" alt=""></a>
 
             <!-- GOOGLEMAP -->
 

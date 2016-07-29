@@ -29,7 +29,8 @@ if ($_GET['NewOrEdit']=='edit') {
     $bu_phone=$row['bu_phone'];
     $line_tool=$row['line_tool'];
     $bu_line=$row['bu_line'];
-    //$bu_fb=$row['bu_fb'];
+    $bu_fb=$row['bu_fb'];
+    $fb_type=empty($bu_fb) ? 'share_fb' : 'fans_fb';
     $activity_img=$row['activity_img'];
     $activity_song=$row['activity_song'];
     $case_logo=$row['case_logo'];
@@ -269,7 +270,30 @@ if ($_GET['NewOrEdit']=='edit') {
                });
 
 
+               /* facebook 功能選擇 */
+
+              $("#sel_fb [value='<?php echo $fb_type;?>']").attr('selected', 'selected');
+
+               if ($("#sel_fb").val()=='fans_fb') {
+                    $("#fb_txt").css('display', 'block');
+                  }
+                  else{
+                    $("#fb_txt").css('display', 'none');
+                  }
+
+               $("#sel_fb").change(function(event) {
+                  
+                  if ($("#sel_fb :selected").val()=='fans_fb') {
+                    $("#fb_txt").css('display', 'block');
+                  }
+                  else{
+                    $("#fb_txt").css('display', 'none');
+                  }
+               });//change
+
+
                
+                                   
 
             }); //jquery END
 
@@ -457,12 +481,25 @@ if ($_GET['NewOrEdit']=='edit') {
         }
         ?>
                                   </div>
+                            <!-- FACEBOOK 功能選擇 -->
+                                 <div class="form-group">
+                                    <label class="col-sm-2 control-label">FACEBOOK功能選擇 :</label>
+                                    <div class="col-sm-4">
+                                       <select id="sel_fb" class="form-control">
+                                          <option value="">請選擇</option>
+                                          <option value="share_fb">分享臉書</option>
+                                          <option value="fans_fb">臉書粉絲團</option>
+                                       </select>
+                                    </div>
+                                </div>
+                                <div id="fb_txt" class="form-group">
+                                   <label class="col-sm-2 control-label">粉絲團網址 :</label>
+                                   <div class="col-sm-4"><input name="bu_fb" type="text" class="form-control" placeholder="請輸入臉書紛絲團網址" value="<?php echo $bu_fb;?>"></div>
+                                </div>
 
                                   <div class="form-group">
                                     <label class="col-sm-2 control-label">電 話 :</label>
-
                                     <div class="col-sm-4"><input name="bu_phone" type="text" class="form-control" value="<?php echo $bu_phone;?>"></div>
-
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">基地位置 :</label>

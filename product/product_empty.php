@@ -46,6 +46,16 @@
     }
    }
 
+// -- facebook 分享 或 紛絲團 --
+   if (empty($case['bu_fb'])) { //分享
+     
+      $bu_fb='https://www.facebook.com/dialog/feed?app_id=563666290458260&display=popup&link='.$URL.'>&redirect_uri=https://www.facebook.com/';
+   }
+   else{
+      
+      $bu_fb=$case['bu_fb'];
+   }
+
 ?>
 
 
@@ -246,7 +256,7 @@
         <a href="<?php echo $bu_line;?>" onclick="ga('send', 'event', '加LINE或Line分享', 'click', 'tool_bar')"><img  class="LINE_tool" src="../../assets/images/svg/line.svg" alt=""></a>
         
         <!-- FB按鈕 -->
-        <a href="https://www.facebook.com/dialog/feed?app_id=563666290458260&display=popup&link=<?php echo $URL;?>&redirect_uri=https://www.facebook.com/" onclick="ga('send', 'event', 'facebook分享', 'click', 'tool_bar')"><img  class="FB_tool" src="../../assets/images/svg/FB.svg" alt=""></a>
+        <a href="<?php echo $bu_fb;?>" onclick="ga('send', 'event', 'facebook分享', 'click', 'tool_bar')"><img  class="FB_tool" src="../../assets/images/svg/FB.svg" alt=""></a>
 
         <!-- ====================== TOP按鈕 ======================= -->
         <div class="scor_top">

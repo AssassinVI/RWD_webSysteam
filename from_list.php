@@ -21,7 +21,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>顧客問卷表單(假)</title>
+    <title>顧客問卷表單</title>
 
     <!-- ================================== 外掛and CSS ====================================== -->
     <?php include 'shared_php/script_style.php';?>
@@ -36,7 +36,9 @@
         font-family: 微軟正黑體;
         font-size: 15px;
       }
-     
+      .ibox-title h5{ font-size: 16px; }
+      #from_search{ color: #337ab7; font-size: 18px; }
+      #from_search:hover{ color: #204a6e; }
 
     </style>
     <script type="text/javascript">
@@ -54,7 +56,6 @@
                   info=info+"<td >"+this['set_time']+"</td>";                    //填表日期
                   info=info+"<td><?php echo $case_name;?></td>";                     //專案名稱
                   info=info+"<td>"+this['name']+"</td>";                                    //顧客姓名
-                  info=info+"<td class='no_display768'></td>";          //連絡電話
                   info=info+"<td class='no_display768'>"+this['phone']+"</td>";          //行動電話
                   info=info+"<td><a href='from_all/from_print.php?from_id="+this['from_id']+"' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
                   info=info+"<td class='no_display768'><a href='from_edit.php?from_id="+this['from_id']+"'><i class='fa fa-edit'></i>編輯</a></td>";
@@ -96,7 +97,7 @@
                         <div class="ibox-title">
                             <h5>顧客問卷資料表 </h5>
                            <div class="ibox-tools">
-                          
+                           <a id="from_search" href="from_search.php"><i class='fa fa-search'></i>條件查詢</a>
                         </div>
                         </div>
                         <div class="ibox-content">
@@ -107,7 +108,6 @@
                                     <th>填表日期</th>
                                     <th>專案名稱</th>
                                     <th>顧客姓名</th>
-                                    <th class="no_display768">連絡電話</th>
                                     <th class="no_display768">行動電話</th>
                                     <th>列印</th>
                                     <th class="no_display768">編輯</th>

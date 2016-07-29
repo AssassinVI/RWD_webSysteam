@@ -2,7 +2,21 @@
 header("Content-type: image/jpeg");
 header("Content-Disposition: attachment; filename='QR_code.png'"); //filename檔案名稱
 //QR_Code
-$image_data = file_get_contents($_POST['qr_url']);
+
+ // 建立CURL連線
+      $ch = curl_init();
+      // 設定擷取的URL網址
+      curl_setopt($ch, CURLOPT_URL, $_POST['qr_url']);
+      curl_setopt($ch, CURLOPT_HEADER, false);
+      //將curl_exec()獲取的訊息以文件流的形式返回，而不是直接輸出。
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+      // 執行
+      $image_data=curl_exec($ch);
+      // 關閉CURL連線
+      curl_close($ch);
+
+
+//$image_data = file_get_contents($_POST['qr_url']);
 $image = imagecreatefromstring($image_data);
 
 //Logo

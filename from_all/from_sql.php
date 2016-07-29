@@ -336,6 +336,9 @@ if ($_POST) {
 
 /* ============================================================ GET ============================================================= */
 
+
+/* ============================================================ 顧客表單list ============================================================= */
+
 if ($_GET) {
    
    if ($_GET['type']=='list') {  //---------------- 顧客表單 ------------------
@@ -380,17 +383,24 @@ if ($_GET) {
      location_up('../from_list.php?record_id='.$_SESSION['record_id'], $txt);
    }
 
-  elseif ($_GET['sql_type']=='callback') { //--------------------------- 回訪紀錄 ----------------------------------
+  /* =================================================== 回訪紀錄 =============================================================== */
+
+  elseif ($_GET['sql_type']=='callback') { //--------------------------- 新增回訪紀錄 ----------------------------------
     
      date_default_timezone_set('Asia/Taipei');
      $back_time=date('Y-m-d H:i:s');
      $back_content=$_GET['interview'];
      $from_id=$_GET['from_id'];
-     $back_type='基本訪談';
+     $back_type=$_GET['back_type'];
+
+    $rand=rand(0,99);
+    $rand=$rand<10 ? '0'.$rand : $rand;
+    $callback_id="cb".date("YmdHis").$rand;
 
     $pdo=pdo_conn();
-    $sql_q=$pdo->prepare("INSERT INTO from_callback (from_id, back_type, back_content, back_time) VALUES (:from_id, :back_type, :back_content, :back_time)");
+    $sql_q=$pdo->prepare("INSERT INTO from_callback (from_id, callback_id, back_type, back_content, back_time) VALUES (:from_id, :callback_id, :back_type, :back_content, :back_time)");
     $sql_q->bindparam(":from_id", $from_id);
+    $sql_q->bindparam(":callback_id", $callback_id);
     $sql_q->bindparam(":back_type", $back_type);
     $sql_q->bindparam(":back_content", $back_content);
     $sql_q->bindparam(":back_time", $back_time);
@@ -398,10 +408,40 @@ if ($_GET) {
     $pdo=NULL;
 
      $txt=iconv('utf-8', 'big5', '新增訪談紀錄');
-     location_up('../from_edit.php?from_id='.$from_id,$txt);
+     location_up('../from_list.php?record_id='.$_SESSION['record_id'], $txt);
   }
 
-  elseif ($_GET['type']=='project_ph') {
+
+  elseif ($_GET['sql_type']=='call_update') { //--------------------------- 回訪紀錄更新 ----------------------------------
+   
+    $callback_id=$_GET['callback_id'];
+    $back_content=$_GET['back_content'];
+    $back_type=$_GET['back_type'];
+
+
+    $pdo=pdo_conn();
+    $sql_q=$pdo->prepare("UPDATE from_callback SET back_content=:back_content, back_type=:back_type WHERE callback_id=:callback_id");
+    $sql_q->bindparam(":callback_id", $callback_id);
+    $sql_q->bindparam(":back_content", $back_content);
+    $sql_q->bindparam(":back_type", $back_type);
+    $sql_q->execute();
+    $pdo=NULL;
+  }
+
+  elseif ($_GET['sql_type']=='call_delete') { // ------------------------ 刪除回訪紀錄 ------------------------------
+
+     $callback_id=$_GET['callback_id'];
+    $pdo=pdo_conn();
+    $sql_q=$pdo->prepare("DELETE FROM from_callback WHERE callback_id=:callback_id");
+    $sql_q->bindparam(":callback_id", $callback_id);
+    $sql_q->execute();
+    $pdo=NULL;
+  }
+
+
+ /* ================================================== 手機板問卷分析 ========================================================== */ 
+
+  elseif ($_GET['type']=='project_ph') { // ------------------------------- 手機客戶資料顯示 -------------------------------
     
      $com_id=$_GET['com_id'];
      $case_id=$_GET['case_id'];
@@ -411,24 +451,49 @@ if ($_GET) {
      $pdo=pdo_conn();
      if (!empty($com_id)) {
        
-       $sql_q=$pdo->prepare("SELECT bc.case_logo, bc.case_name, er.record_id, count(*) as total FROM build_case as bc INNER JOIN expand_record as er ON bc.case_id=er.case_id INNER JOIN from_question as fq ON er.record_id=fq.record_id  WHERE bc.com_id=:com_id AND er.tool_id='tool20160624002' AND er.is_use='1'");
+       $sql_q=$pdo->prepare("SELECT bc.case_logo, bc.case_name, er.record_id, count(*) as total , 
+                                (SELECT COUNT( * ) AS oneday
+                                 FROM build_case AS bc
+                                 INNER JOIN expand_record AS er ON bc.case_id = er.case_id
+                                 INNER JOIN from_question AS fq ON er.record_id = fq.record_id
+                                 WHERE bc.com_id =  :com_id
+                                 AND er.tool_id =  'tool20160624002'
+                                 AND er.is_use =  '1'
+                                 AND fq.set_time = CURDATE( )) as oneday
+                             FROM build_case as bc 
+                             INNER JOIN expand_record as er ON bc.case_id=er.case_id 
+                             INNER JOIN from_question as fq ON er.record_id=fq.record_id  
+                             WHERE bc.com_id=:com_id 
+                             AND er.tool_id='tool20160624002' 
+                             AND er.is_use='1'");
         $sql_q->bindparam(":com_id", $com_id);
      }else{
 
-       $sql_q=$pdo->prepare("SELECT bc.case_logo, bc.case_name, er.record_id, count(*) as total FROM build_case as bc INNER JOIN expand_record as er ON bc.case_id=er.case_id INNER JOIN from_question as fq ON er.record_id=fq.record_id  WHERE bc.case_id=:case_id AND er.tool_id='tool20160624002' AND er.is_use='1'");
+       $sql_q=$pdo->prepare("SELECT bc.case_logo, bc.case_name, er.record_id, count(*) as total , 
+                                (SELECT COUNT( * ) AS oneday
+                                 FROM build_case AS bc
+                                 INNER JOIN expand_record AS er ON bc.case_id = er.case_id
+                                 INNER JOIN from_question AS fq ON er.record_id = fq.record_id
+                                 WHERE bc.case_id =  :case_id
+                                 AND er.tool_id =  'tool20160624002'
+                                 AND er.is_use =  '1'
+                                 AND fq.set_time = CURDATE( )) as oneday
+                             FROM build_case as bc 
+                             INNER JOIN expand_record as er ON bc.case_id=er.case_id 
+                             INNER JOIN from_question as fq ON er.record_id=fq.record_id  
+                             WHERE bc.case_id=:case_id 
+                             AND er.tool_id='tool20160624002' 
+                             AND er.is_use='1'");
        $sql_q->bindparam(":case_id", $case_id);
      }
      
-    
-     
      $sql_q->execute();
      while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
-
-      $record_id=$row['record_id'];
        
         array_push($from_array, array('case_logo'=>$row['case_logo'], 
                                       'case_name'=>$row['case_name'], 
-                                          'total'=>$row['total']
+                                          'total'=>$row['total'], 
+                                         'oneday'=>$row['oneday']
                                       ));
      }
      $pdo=NULL;

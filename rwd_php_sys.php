@@ -275,7 +275,7 @@ if ($_POST) {
 		$bu_phone=mysql_real_escape_string($_POST['bu_phone']);
     $line_tool=mysql_real_escape_string($_POST['line_tool']);
 		$bu_line=mysql_real_escape_string($_POST['bu_line']);
-		//$bu_fb=mysql_real_escape_string($_POST['bu_fb']);
+		$bu_fb=mysql_real_escape_string($_POST['bu_fb']);
     $activity_img=mysql_real_escape_string($_POST['activity_img']);
     $activity_song=mysql_real_escape_string($_POST['activity_song']);
     $old_case_logo=mysql_real_escape_string($_POST['old_case_logo']);
@@ -316,7 +316,7 @@ if ($_POST) {
 
           if (!empty($_FILES['case_logo']['name'])) { $case_logo=$case_id.".jpg"; }
 
-        	$result = db_conn("INSERT INTO build_case (User_id, com_id, case_name, google_an, google_code, google_view_code, build_com, Consignment, marquee,format, floor, build_adds, bu_phone, line_tool, bu_line, activity_img, activity_song, case_logo, other, case_id) VALUES ('$User_id', '$com_id', '$case_name', '$google_an', '$google_view_code', '$google_code', '$build_com', '$Consignment', '$marquee','$format', '$floor', '$build_adds', '$bu_phone', '$line_tool', '$bu_line', '$activity_img', '$activity_song', '$case_logo', '$other', '$case_id') ");
+        	$result = db_conn("INSERT INTO build_case (User_id, com_id, case_name, google_an, google_code, google_view_code, build_com, Consignment, marquee,format, floor, build_adds, bu_phone, line_tool, bu_line, bu_fb, activity_img, activity_song, case_logo, other, case_id) VALUES ('$User_id', '$com_id', '$case_name', '$google_an', '$google_view_code', '$google_code', '$build_com', '$Consignment', '$marquee','$format', '$floor', '$build_adds', '$bu_phone', '$line_tool', '$bu_line', '$bu_fb', '$activity_img', '$activity_song', '$case_logo', '$other', '$case_id') ");
 
            create_dir('../product_html/'.$case_id);
 
@@ -343,7 +343,7 @@ if ($_POST) {
 
         	
 
-        	$result = db_conn("UPDATE build_case SET com_id='$com_id', case_name='$case_name', google_an='$google_an', google_code='$google_code', google_view_code='$google_view_code', build_com='$build_com', Consignment='$Consignment', marquee='$marquee', format='$format', floor='$floor', build_adds='$build_adds', bu_phone='$bu_phone', line_tool='$line_tool', bu_line='$bu_line', activity_img='$activity_img', activity_song='$activity_song', case_logo='$case_logo', other='$other' WHERE case_id='".$case_id."'");
+        	$result = db_conn("UPDATE build_case SET com_id='$com_id', case_name='$case_name', google_an='$google_an', google_code='$google_code', google_view_code='$google_view_code', build_com='$build_com', Consignment='$Consignment', marquee='$marquee', format='$format', floor='$floor', build_adds='$build_adds', bu_phone='$bu_phone', line_tool='$line_tool', bu_line='$bu_line', bu_fb='$bu_fb', activity_img='$activity_img', activity_song='$activity_song', case_logo='$case_logo', other='$other' WHERE case_id='".$case_id."'");
 
             
            /* $file=fopen('../product_html/'.$case_id.'/caseId.php', "w");

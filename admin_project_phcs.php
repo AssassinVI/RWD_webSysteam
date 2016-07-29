@@ -44,8 +44,9 @@
      .logo_div{ display: block; width: 90px; height: 80px; padding: 5px; font-size: 24px; text-align: center; background-color: #bbbbbb; color: #dedede; }
      .logo_img{ display: block; width: 90px; height: 80px; }
      .logo_img img{ width: 100%; height: 100%; }
+     .logo_img div, .logo_div div{ position: absolute; width: 40px; text-align: center;  padding: 5px 0px; color: rgba(255, 255, 255, 0.5); font-size: 20px; background-color: rgba(255, 255, 255, 0.35); border-radius: 50px; margin:27px; }
+     .logo_img div:hover, .logo_div div:hover{ color: rgb(43, 243, 203); }
      .case_tr1{ font-size: 50px; }
-     .case_td1, .case_td2{ padding-top: 15px; }
      #case_title{ font-size: 17px; }
      .case_tr1>td>span{ font-size: 12px; }
      .case_name{ padding-top: 8px; float: left; }
@@ -103,6 +104,7 @@
 
     case 'case':
       echo 'select_case("'.$_SESSION['case_id'].'")';
+      echo 'select_case_from("'.$_SESSION['case_id'].'")';
       break;
   }
  ?>
@@ -123,7 +125,7 @@
  }); //jquery END
 
  
-
+var head_btn='<div><i class="fa fa-hand-o-up"></i></div>'; 
  /* ==================== 抓取建案(公司) ======================= */
 
      function select_com(com_id) {
@@ -135,15 +137,15 @@
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
 
                     
-                     info=info+'<td class="case_td1">'+this['month_user']+'<span>人</span></td>';  //每日人數
-                     info=info+'<td class="case_td2">'+this['total_user']+'<span>人</span></td>'; //總人數
+                     info=info+'<td style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>';  //每日人數
+                     info=info+'<td style="padding-top: 25px;">'+this['total_user']+'<span>人</span></td>'; //總人數
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -164,13 +166,13 @@
                       var info='<tr class="case_tr1">';
 
                      if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'"><img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
-                     info=info+'<td class="case_td1">'+this['month_user']+'<span>人</span></td>';  //每日人數
-                     info=info+'<td class="case_td2">'+this['total_user']+'<span>人</span></td>'; //總人數
+                     info=info+'<td style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>';  //每日人數
+                     info=info+'<td style="padding-top: 25px;">'+this['total_user']+'<span>人</span></td>'; //總人數
                      info=info+'</tr>';
                     $("#all_project").append(info);                    
                 }); 
@@ -189,14 +191,41 @@
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="">專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href=""><img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
 
-                     info=info+'<td class="case_td1"><span>人</span></td>';  //每日人數
-                     info=info+'<td class="case_td2">'+this['total']+'<span>人</span></td>'; //總人數
+                     info=info+'<td style="padding-top: 25px;">'+this['oneday']+'<span>人</span></td>';  //每日人數
+                     info=info+'<td style="padding-top: 25px;">'+this['total']+'<span>人</span></td>'; //總人數
+                     info=info+'</tr>';
+
+                    $("#all_from").append(info);
+                }); 
+          });
+     } //fun END
+
+
+     /* ==================== 抓取建案(專案)-問卷 ======================= */
+
+     function select_case_from(case_id) {
+          $.getJSON('from_all/from_sql.php?type=project_ph&case_id='+case_id, function(json) {
+                $.each(json.from_array, function() {
+
+                  var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/'+this['case_logo']+'&h=80&w=90&zc=1';
+
+                      var info='<tr class="case_tr1">';
+
+                      if (this['case_logo']=='') {
+                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                      }
+                      else{
+                        info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
+                      }
+
+                     info=info+'<td style="padding-top: 25px;">'+this['oneday']+'<span>人</span></td>';  //每日人數
+                     info=info+'<td style="padding-top: 25px;">'+this['total']+'<span>人</span></td>'; //總人數
                      info=info+'</tr>';
 
                     $("#all_from").append(info);
