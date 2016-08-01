@@ -76,27 +76,29 @@
                         </div>
                         </div>
                         <div class="ibox-content">
-                          <form method="POST" action="" class="form-horizontal">
+                          <form method="POST" action="from_all/search_sql.php" class="form-horizontal">
                             <div class="form-group">
                                    <label class="col-sm-2 control-label">顧客姓名：</label>
                                     <div class="col-sm-2">
-                                       <input name="name" type="text" class="form-control" value="">
+                                       <input name="bs_name" type="text" class="form-control" value="">
                                     </div>
                                     <label class="col-sm-1 control-label">手機：</label>
                                     <div class="col-sm-2">
-                                       <input name="name" type="text" class="form-control" value="">
+                                       <input name="bs_phone" type="text" class="form-control" value="">
                                     </div>
                                     <label class="col-sm-1 control-label">E-mail：</label>
                                     <div class="col-sm-2">
-                                       <input name="name" type="text" class="form-control" value="">
+                                       <input name="email" type="text" class="form-control" value="">
                                     </div>
-                                    <input id="buy_yes" type="radio" value="已購" name="is_buy"> <label for="buy_yes">已購</label>
-                                    <input id="buy_no" type="radio" value="未購" name="is_buy"> <label for="buy_no">未購</label>
+                                    <input id="buy_yes" type="radio" value="已購" name="bs_is_buy"> <label for="buy_yes">已購</label>
+                                    <input id="buy_no" type="radio" value="未購" name="bs_is_buy"> <label for="buy_no">未購</label>
                                 </div>
                               <div class="form-group">
                                 <label class="col-sm-10" ></label>
                                 <button id="search_btn" class="btn btn-primary" type="submit">查詢</button>
                               </div>
+
+                              <input type="hidden" name="type" value="bs_search"> <!-- 簡易查詢 -->
                             </form>
                         </div>
                     </div>
@@ -112,7 +114,7 @@
                         </div>
                         </div>
                         <div class="ibox-content">
-                          <form method="POST" action="" class="form-horizontal">
+                          <form method="POST" action="from_all/search_sql.php" class="form-horizontal">
                             <div class="form-group">
                                    <label class="col-sm-2 control-label">顧客姓名：</label>
                                     <div class="col-sm-2">
@@ -294,6 +296,8 @@
                                 <label class="col-sm-10" ></label>
                                 <button id="search_btn" class="btn btn-primary" type="submit">查詢</button>
                               </div>
+
+                              <input type="hidden" name="type" value="adv_search"> <!-- 進階查詢 -->
                             </form>
                         </div>
                     </div>
