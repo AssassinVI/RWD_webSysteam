@@ -6,6 +6,12 @@ session_start();
 
 $record_id=$_GET['record_id'];
 
+$pdo=pdo_conn();
+  $sql_n=$pdo->prepare("SELECT case_name FROM build_case AS bs INNER JOIN expand_record AS er ON bs.case_id=er.case_id WHERE record_id=:record_id");
+  $sql_n->bindparam(":record_id", $record_id);
+  $sql_n->execute();
+  $case_name=$sql_n->fetch(PDO::FETCH_ASSOC);
+$pdo=NULL;
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +25,7 @@ $record_id=$_GET['record_id'];
 	<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">
 	<style type="text/css">
 	    body{ font-family: Microsoft JhengHei; font-size: 18px; }
-		#wid_steps{ padding-top: 30px; }
+		#wid_steps{  }
 		.input_div{ padding:10px;  }
 		.input_div label{  }
 		input[type="text"]{ padding: 11px 20px; width: 90%; border-radius: 10px;  }
@@ -36,15 +42,17 @@ $record_id=$_GET['record_id'];
 		.check_div2{ padding:5px;  }
 		.check_div2 label{ width: 145px; }
     .big_select{ width: 100%; }
+    #case_name{text-align: center; font-size: 30px; padding: 5px;}
 	</style>
 </head>
 <body>
 <form id="view_form" action="from_sql.php" method="POST">
+ <div id="case_name"><?php echo $case_name['case_name']?></div>
 	<div id="wid_steps">
     <h3>基本資料</h3>
     <section>
         <div class="input_div"><label>顧客姓名：</label><input type="text" name="name" placeholder="姓名"></div>
-        <div class="input_div"><label>性別：</label><input type="radio" value="m" name="gender"> 先生　<input type="radio" value="f" name="gender"> 小姐</div>
+        <div class="input_div"><label>性別：</label><input id="gender1" type="radio" value="m" name="gender"> <label for="gender1">先生</label>　<input   id="gender2" type="radio" value="f" name="gender"> <label for="gender2">小姐</label> </div>
         <div><hr></div>
         <div class="input_div"><label>電話：</label><input type="text" name="phone" placeholder="電話"></div>
         <div class="input_div"><label>E-mail：</label><input type="text" name="email" placeholder="E-mail"></div>
@@ -82,9 +90,9 @@ $record_id=$_GET['record_id'];
     <section>
        <div class="input_div">
            <label>婚姻狀況：</label><br>
-            <input type="radio" value="已婚" name="mar_state" > 已婚　
-            <input type="radio" value="已婚無子" name="mar_state" > 已婚無子　 
-            <input type="radio" value="未婚" name="mar_state" > 未婚　 
+            <input id="mar_state1" type="radio" value="已婚" name="mar_state" > <label for="mar_state1">已婚</label>　
+            <input id="mar_state2" type="radio" value="已婚無子" name="mar_state" > <label for="mar_state2">已婚無子</label>　 
+            <input id="mar_state3" type="radio" value="未婚" name="mar_state" > <label for="mar_state3">未婚</label>　 
             <br>
             <label></label> 
             <input type="text" name="mar_child" placeholder="幾個小孩">
@@ -138,14 +146,14 @@ $record_id=$_GET['record_id'];
         <div class="input_div">
            <label>現住房屋型態：</label><br>
            <div class="check_div">
-              <input type="radio" value="公寓" name="house_type" > 公寓　
-              <input type="radio" value="大樓" name="house_type" > 大樓　
-              <input type="radio" value="套房" name="house_type" > 套房　
+              <input id="house_type1" type="radio" value="公寓" name="house_type" > <label for="house_type1">公寓</label>　
+              <input id="house_type2" type="radio" value="大樓" name="house_type" > <label for="house_type2">大樓</label>　
+              <input id="house_type3" type="radio" value="套房" name="house_type" > <label for="house_type3">套房</label>　
            </div>
            <div class="check_div">
-             <input type="radio" value="租屋" name="house_type" > 租屋　
-             <input type="radio" value="華廈" name="house_type" > 華廈　
-             <input type="radio" value="透天" name="house_type" > 透天　
+             <input id="house_type4" type="radio" value="租屋" name="house_type" > <label for="house_type4">租屋</label>　
+             <input id="house_type5" type="radio" value="華廈" name="house_type" > <label for="house_type5">華廈</label>　
+             <input id="house_type6" type="radio" value="透天" name="house_type" > <label for="house_type6">透天</label>　
            </div>
             <label>屋齡：</label><input type="text" name="house_old" placeholder="幾年"> 
        </div>
@@ -320,9 +328,9 @@ $record_id=$_GET['record_id'];
 
         <div class="input_div">
            <label>欲購屋時間：</label><br>
-            <input type="radio" value="立即購買" name="pay_time" > 立即購買　
-            <input type="radio" value="半年之內" name="pay_time" > 半年之內　
-            <input type="radio" value="半年~二年" name="pay_time" > 半年~二年　
+            <input id="pay_time1" type="radio" value="立即購買" name="pay_time" > <label for="pay_time1">立即購買</label>　
+            <input id="pay_time2" type="radio" value="半年之內" name="pay_time" > <label for="pay_time2">半年之內</label>　
+            <input id="pay_time3" type="radio" value="半年~二年" name="pay_time" > <label for="pay_time3">半年~二年</label>　
        </div>
     </section>
 
@@ -385,6 +393,12 @@ $record_id=$_GET['record_id'];
   <script type="text/javascript" src="../js/plugins/twzipcode/jquery.twzipcode.js"></script>
     <script type="text/javascript">
 $(document).ready(function() {
+
+  <?php 
+    if (empty($record_id)) {
+      echo 'location.replace("../500.html");';
+    }
+  ?>
 	
    $("#wid_steps").steps({
            headerTag: "h3",

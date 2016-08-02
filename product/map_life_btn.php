@@ -25,11 +25,11 @@
 
         <!-- GOOGLEMAP 食 -->
 
-            <a id="gm_food_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/餐廳/@<?php echo trim($map_ps['map_position']);?>,16z?hl=zh-TW" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
+            <a id="gm_food_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/小吃/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
 
         <!-- GOOGLEMAP 醫 -->
 
-            <a id="gm_phl_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/醫院/@<?php echo trim($map_ps['map_position']);?>,16z?hl=zh-TW" onclick="ga('send', 'event', '地圖(醫)', 'click', 'tool_bar')">醫</a>
+            <a id="gm_phl_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/醫院/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(醫)', 'click', 'tool_bar')">醫</a>
 
         <!-- GOOGLEMAP 住 -->
 
@@ -41,11 +41,11 @@
 
         <!-- GOOGLEMAP 育 -->
 
-            <a id="gm_school_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/學校/@<?php echo trim($map_ps['map_position']);?>,16z?hl=zh-TW" onclick="ga('send', 'event', '地圖(育)', 'click', 'tool_bar')">育</a>
+            <a id="gm_school_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/學校/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(育)', 'click', 'tool_bar')">育</a>
 
         <!-- GOOGLEMAP 樂 -->
 
-            <a id="gm_fun_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/百貨公司/@<?php echo trim($map_ps['map_position']);?>,16z?hl=zh-TW" onclick="ga('send', 'event', '地圖(樂)', 'click', 'tool_bar')">樂</a>
+            <a id="gm_fun_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/百貨公司/@<?php echo trim($map_ps['map_position']);?>,14z?hl=zh-TW" onclick="ga('send', 'event', '地圖(樂)', 'click', 'tool_bar')">樂</a>
 
               
             <?php 

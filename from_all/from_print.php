@@ -3,7 +3,45 @@
 
       $from_id=$_GET['from_id'];
 
-$pdo=pdo_conn(); //資料庫連線
+      $search_id=explode(',', $_POST['search_id']);
+?>
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+	<title>列印</title>
+<style type="text/css">
+    
+	.td_sty{ width: 11%; background-color: #dadada; text-align: center; }
+	.view_td{ background-color: #e5c4b8; }
+	.tb_title{ font-size: 25px; text-align: center; }
+</style>
+<script type="text/javascript">
+	print(document);
+</script>
+</head>
+<body>
+
+<?php
+
+if (!empty($from_id)) {
+	
+	print_from($from_id);
+}
+elseif(!empty($search_id)){
+
+	for ($i=0; $i <count($search_id) ; $i++) { 
+		
+		print_from($search_id[$i]);
+	}
+}
+
+
+function print_from($from_id)
+{
+	
+    $pdo=pdo_conn(); //資料庫連線
       $sql_q=$pdo->prepare("SELECT * FROM from_question WHERE from_id=:from_id");
       $sql_q->bindparam(':from_id', $from_id);
       $sql_q->execute();
@@ -60,180 +98,172 @@ $pdo=pdo_conn(); //資料庫連線
          $buy_name=$row['buy_name'];
 
          if ($job=="其他") { $job=$job_txt; }
-      }
 
-?>
 
-<!DOCTYPE html>
-<html lang="zh-tw">
-<head>
-	<meta charset="UTF-8">
-	<title>列印</title>
-<style type="text/css">
-    
-	.td_sty{ width: 11%; background-color: #dadada; text-align: center; }
-	.view_td{ background-color: #e5c4b8; }
-	.tb_title{ font-size: 25px; text-align: center; }
-</style>
-<script type="text/javascript">
-	print(document);
-</script>
-</head>
-<body>
-	<div>
-	    <div class="tb_title"><?php echo $_SESSION['case_name'];?></div>
+         $table_txt=
+         '<div>
+	    <div class="tb_title">'.$_SESSION['case_name'].'</div>
 		<table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:12px;">
 			<tbody>
 				<tr>
 					<td class="td_sty">表單序號</td>
-					<td colspan="5"><?php echo $from_id;?></td>
+					<td colspan="5">'.$from_id.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">填表日期</td>
-					<td colspan="5"><?php echo $set_time;?></td>
+					<td colspan="5">'.$set_time.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">專案名稱</td>
-					<td colspan="5"><?php echo $_SESSION['case_name'];?></td>
+					<td colspan="5">'.$_SESSION['case_name'].'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">顧客姓名</td>
-					<td colspan="5"><?php echo $name;?> <?php echo $gender;?></td>
+					<td colspan="5">'.$name.' '.$gender.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">電話</td>
 					<td colspan="5">
-					  <p>手機：<?php echo $phone;?></p>
-					  <p>E-mail：<?php echo $email;?></p>
+					  <p>手機：'.$phone.'</p>
+					  <p>E-mail：'.$email.'</p>
 					</td>
 				</tr>
 				<tr>
 					<td class="td_sty">住址</td>
-					<td colspan="5"><?php echo $adds;?></td>
+					<td colspan="5">'.$adds.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">職業</td>
-					<td><?php echo $job;?></td>
+					<td>'.$job.'</td>
 
 					<td class="td_sty">職稱</td>
-					<td><?php echo $job_title;?></td>
+					<td>'.$job_title.'</td>
 
 					<td class="td_sty">年齡</td>
-					<td><?php echo $cust_old;?></td>
+					<td>'.$cust_old.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">公司名稱</td>
-					<td colspan="5"><?php echo $job_company;?></td>
+					<td colspan="5">'.$job_company.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">婚姻狀況</td>
-					<td><?php echo $mar_state;?> <?php echo $mar_child;?></td>
+					<td>'.$mar_state.' '.$mar_child.'</td>
 
 					<td class="td_sty">月收入</td>
-					<td><?php echo $mon_income;?></td>
+					<td>'.$mon_income.'</td>
 
 					<td class="td_sty">交通工具</td>
-					<td><?php echo $transportation;?></td>
+					<td>'.$transportation.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">家庭成員數</td>
-					<td><?php echo $live_people;?>人</td>
+					<td>'.$live_people.'人</td>
 
 					<td class="td_sty">現住房屋</td>
-					<td><?php echo $homeowner;?></td>
+					<td>'.$homeowner.'</td>
 
 					<td class="td_sty">現住房屋型態</td>
-					<td><?php echo $house_type;?></td>
+					<td>'.$house_type.'</td>
 
 				</tr>
 				<tr>
 					<td class="td_sty">現住</td>
-					<td><?php echo $house_pattern;?>房</td>
+					<td>'.$house_pattern.'房</td>
 
 					<td class="td_sty">室內</td>
-					<td ><?php echo $floor_num;?>坪</td>
+					<td >'.$floor_num.'坪</td>
 
 					<td class="td_sty">屋齡</td>
-					<td><?php echo $house_old;?>年</td>
+					<td>'.$house_old.'年</td>
 				</tr>
 				<tr>
 					<td class="td_sty">媒體(複)</td>
-					<td colspan="5"><?php echo $media;?></td>
+					<td colspan="5">'.$media.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">產品需求(複)</td>
-					<td><?php echo $dem_product;?></td>
+					<td>'.$dem_product.'</td>
 
 					<td >格局需求</td>
-					<td colspan="3"><?php echo $dem_pattern;?>房</td>
+					<td colspan="3">'.$dem_pattern.'房</td>
 				</tr>
 				<tr>
 					<td class="td_sty">坪數需求</td>
-					<td ><?php echo $dem_floor_num;?></td>
+					<td >'.$dem_floor_num.'</td>
 
 					<td>車位需求</td>
-					<td colspan="3"><?php echo $dem_car_txt;?> <?php echo $dem_car_num;?></td>
+					<td colspan="3">'.$dem_car_txt.' '.$dem_car_num.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">購物預算(複)</td>
-					<td ><?php echo $dem_money;?></td>
+					<td >'.$dem_money.'</td>
 
 					<td>樓層需求(複)</td>
-					<td colspan="3"><?php echo $dem_floor;?></td>
+					<td colspan="3">'.$dem_floor.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">希望月付款(複)</td>
-					<td><?php echo $dem_mon_pay;?></td>
+					<td> '.$dem_mon_pay.'</td>
 
 					<td>座向需求(複)</td>
-					<td colspan="3"><?php echo $dem_side;?></td>
+					<td colspan="3">'.$dem_side.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">自備款(複)</td>
-					<td><?php echo $dem_have;?></td>
+					<td>'.$dem_have.'</td>
 
 					<td>購屋次數</td>
-					<td colspan="3"><?php echo $pay_num;?>次</td>
+					<td colspan="3">'.$pay_num次.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">購屋動機(複)</td>
-					<td><?php echo $pay_motive;?></td>
+					<td>'.$pay_motive.'</td>
 
 					<td>介紹戶別</td>
-					<td colspan="3"><?php echo $Introduction;?></td>
+					<td colspan="3">'.$Introduction.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">欲購屋時間</td>
-					<td colspan="5"><?php echo $pay_time;?></td>
+					<td colspan="5"> '.$pay_time.'</td>
 				</tr>
 
 				<tr>
 					<td width="10%" style="background-color: #7e5d52; color: #fff;" >訪談紀錄</td>
 					<td ></td>
-				</tr>
+				</tr>';
 
-	    <?php 
 
-        $sql_call=$pdo->prepare("SELECT * FROM from_callback WHERE from_id=:from_id");
+             $sql_call=$pdo->prepare("SELECT * FROM from_callback WHERE from_id=:from_id");
            $sql_call->bindparam(":from_id", $from_id);
            $sql_call->execute();
            while ($row=$sql_call->fetch(PDO::FETCH_ASSOC)) {
               $back_content=$row['back_content'];
               $back_time=$row['back_time'];
-              echo '<tr>';
-              echo '<td width="10%" class="view_td" >'.$back_time.'</td>';
-              echo '<td colspan="5" style="white-space: pre-wrap;">'.$back_content.'</td>';
-              echo '</tr>';
+              $table_txt.= '<tr>';
+              $table_txt.= '<td width="10%" class="view_td" >'.$back_time.'</td>';
+              $table_txt.= '<td colspan="5" style="white-space: pre-wrap;">'.$back_content.'</td>';
+              $table_txt.= '</tr>';
               }
 
-        $pdo=NULL;
+          $pdo=NULL;
+	    
 
-	    ?>
-				
-			</tbody>
+ $table_txt.='</tbody>
 		</table>
-
-
 	</div>
+	<p style="page-break-after:always"></p>'; // 列印分頁
+			
+        echo $table_txt;
+      }
+
+} //FUN END
+ 
+?>
+
+	
+
+    
+	
 </body>
 </html>

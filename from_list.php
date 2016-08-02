@@ -39,10 +39,12 @@
         font-size: 15px;
       }
       .ibox-title h5{ font-size: 16px; }
-      #bs_search, #adv_search{ color: #337ab7; font-size: 18px; margin-left: 15px; }
-      #bs_search:hover, #adv_search:hover{ color: #204a6e; }
+      #bs_search, #adv_search, #search_print{ color: #337ab7; font-size: 18px; margin-left: 15px; }
+      #bs_search:hover, #adv_search:hover ,#search_print:hover{ color: #204a6e; }
       #twzipcode select, #twzipcode input{ font-size: 15px; padding:3px;  }
       .dis_none{ display: none; }
+      .check_print{ width: 55px; height: 20px; }
+
 
     </style>
     <script type="text/javascript">
@@ -57,24 +59,78 @@
          $("#bs_search").click(function(event) {
             event.preventDefault();
              $("#bs_div").slideToggle('500');
+             $("#adv_div").slideUp('500');
          });
 
          $("#adv_search").click(function(event) {
             event.preventDefault();
              $("#adv_div").slideToggle('500');
+             $("#bs_div").slideUp('500');
          });
 
 
-         $("#bs_search_btn").click(function(event) {
+         $("#bs_search_btn").click(function(event) { //簡易查詢按鈕
              bs_search();
          });
 
-         $("#adv_search_btn").click(function(event) {
+         $("#adv_search_btn").click(function(event) { //進階查詢按鈕
              adv_search();
          });
-       
+
+
+         //-------- 選取列印按鈕 ----------
+        $("#search_print").click(function(event) {
+            event.preventDefault();
+           $("#search_id").val($(":checked[name='check_print']").map(function() { return $(this).val(); }).get().join(','));
+           $("#search_pr_from").submit();
+        });
+      
+      
+
        
      }); //JQUERY END
+
+     function check_print() {  //選取列印按鈕顯示
+            if ($(":checked[name='check_print']").length>0) {
+               $("#search_print").css('display', 'inline');
+            }
+            else{
+              $("#search_print").css('display', 'none');
+            }
+     }
+
+
+  /* ================================= checkbox 全選 ======================================== */
+    var p_num=1;
+     function all_search(name) {
+      var allvalue = document.getElementsByName(name);
+      if (p_num%2!=0) {
+        for (var i = 0; i < allvalue.length; i++) {        
+           if (allvalue[i].type == "checkbox"){             
+                allvalue[i].checked = true;             
+             }  
+          }  
+       }else{
+
+          for (var i = 0; i < allvalue.length; i++) {        
+           if (allvalue[i].type == "checkbox"){             
+                allvalue[i].checked = false;             
+             }  
+          } 
+       }
+       check_print();
+       p_num+=1;
+     }
+
+
+
+     function bs_search_con() {
+        $("#bs_div").slideToggle('500');
+     }
+
+     function adv_search_con() {
+        $("#adv_div").slideToggle('500');
+     }
 
      function from_list() {
        
@@ -83,6 +139,7 @@
               $.each(json.from_array, function() {
               
                    var info="<tr>";
+                  info=info+"<td ><input type='checkbox' class='check_print' name='check_print' onclick='check_print()' value="+this['from_id']+"></td>"; //選取列印
                   info=info+"<td class='no_display768'>"+this['from_id']+"</td>"; //表單ID
                   info=info+"<td >"+this['set_time']+"</td>";                    //填表日期
                   info=info+"<td><?php echo $case_name;?></td>";                     //專案名稱
@@ -121,6 +178,7 @@
                 $.each(json.search_array, function() {
               
                    var info="<tr>";
+                  info=info+"<td ><input type='checkbox' class='check_print' name='check_print' onclick='check_print()' value="+this['from_id']+"></td>"; //選取列印
                   info=info+"<td class='no_display768'>"+this['from_id']+"</td>"; //表單ID
                   info=info+"<td >"+this['set_time']+"</td>";                    //填表日期
                   info=info+"<td><?php echo $case_name;?></td>";                     //專案名稱
@@ -183,6 +241,7 @@
                 $.each(json.search_array, function() {
               
                    var info="<tr>";
+                  info=info+"<td ><input type='checkbox' class='check_print' name='check_print' onclick='check_print()' value="+this['from_id']+"></td>"; //選取列印
                   info=info+"<td class='no_display768'>"+this['from_id']+"</td>"; //表單ID
                   info=info+"<td >"+this['set_time']+"</td>";                    //填表日期
                   info=info+"<td><?php echo $case_name;?></td>";                     //專案名稱
@@ -233,6 +292,7 @@
                         <div class="ibox-title">
                             <h5>基本查尋 </h5>
                            <div class="ibox-tools">
+                           <button  type="button" class="btn btn-default" onclick="bs_search_con();">關閉查詢</button>
                         </div>
                         </div>
                         <div class="ibox-content">
@@ -250,8 +310,9 @@
                                     <div class="col-sm-2">
                                        <input name="email" type="text" class="form-control" value="">
                                     </div>
-                                    <input id="buy_yes" type="radio" value="已購" name="bs_is_buy"> <label for="buy_yes">已購</label>
-                                    <input id="buy_no" type="radio" value="未購" name="bs_is_buy"> <label for="buy_no">未購</label>
+                                    <input id="buy_yes" type="radio" value="已購" name="bs_is_buy"> <label for="buy_yes">已購</label>　
+                                    <input id="buy_no" type="radio" value="未購" name="bs_is_buy"> <label for="buy_no">未購</label>　
+                                    <input id="buy" type="radio" value="" name="bs_is_buy"> <label for="buy">無</label>
                                 </div>
                               <div class="form-group">
                                 <label class="col-sm-10" ></label>
@@ -269,7 +330,7 @@
                         <div class="ibox-title">
                             <h5>進階查尋 </h5>
                            <div class="ibox-tools">
-                          
+                          <button  type="button" class="btn btn-default" onclick="adv_search_con();">關閉查詢</button>
                         </div>
                         </div>
                         <div class="ibox-content">
@@ -424,6 +485,7 @@
                                     <div class="col-sm-10">
                                        <input type="radio" id="is_buy1" name="is_buy" value="已購"> <label for="is_buy1">已購</label>　
                                        <input type="radio" id="is_buy2" name="is_buy" value="未購"> <label for="is_buy2">未購</label>　
+                                       <input type="radio" id="is_buy3" name="is_buy" value=""> <label for="is_buy3">無</label>
                                     </div>
                                 </div>
 
@@ -468,6 +530,12 @@
                         <div class="ibox-title">
                             <h5>顧客問卷資料表 </h5>
                            <div class="ibox-tools">
+
+                           <form id="search_pr_from" method="POST" action="from_all/from_print.php" target="_blank" style="display:inline;">
+                             <a id="search_print" class="dis_none" href="#"><i class='fa fa-print'></i>選取列印</a>
+                             <input type="hidden" id="search_id" name="search_id">
+                           </form>
+                           
                            <a id="bs_search" href="#"><i class='fa fa-search'></i>簡易查詢</a>
                            <a id="adv_search" href="#"><i class='fa fa-search'></i>進階查詢</a>
                         </div>
@@ -476,6 +544,7 @@
                             <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
                                 <thead>
                                 <tr>
+                                    <th>選取列印</th><input id="all_check" type="checkbox" onclick="all_search('check_print')"><label for="all_check">全選</label>
                                     <th class="no_display768">表單ID</th>
                                     <th>填表日期</th>
                                     <th>專案名稱</th>
