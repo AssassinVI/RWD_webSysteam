@@ -109,7 +109,14 @@
                     ],
 
                     type : 'pie'
-                }
+                },
+                pie: {
+                label: {
+                          format: function (value, ratio, id) {
+                          return value+"人";
+                         }
+                       }
+                  }
             });
       
       //使用者年齡
@@ -141,9 +148,10 @@
                     colors:{
                         使用人數: '#1ab394',
                     },
-                    type: 'bar'
+                    type: 'bar',
+                    labels: true
                 },
-                axis:{
+           axis:{
                    x:{
                      type:'category'
                    }
@@ -162,7 +170,8 @@
                     colors:{
                         使用人數: '#1ab394',
                     },
-                    type: 'bar'
+                    type: 'bar',
+                    labels: true
                 },
                 axis:{
                    x:{
@@ -260,7 +269,7 @@
                         data1: '#1ab394',
                         
                     },
-                    type: 'line'
+                    type: 'line',
                 },
                 axis:{
                    x:{

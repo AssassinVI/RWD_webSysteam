@@ -44,7 +44,7 @@
       #twzipcode select, #twzipcode input{ font-size: 15px; padding:3px;  }
       .dis_none{ display: none; }
       .check_print{ width: 55px; height: 20px; }
-
+      #all_check{ width: 28px; height: 18px; }
 
     </style>
     <script type="text/javascript">
