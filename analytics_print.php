@@ -42,6 +42,7 @@
      }
 ?>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -66,6 +67,7 @@
         <style type="text/css">
       body{
         font-family: 微軟正黑體;
+        background-color:#fff;
       }
 
      .p_txt{
@@ -93,8 +95,9 @@
     }
     .c3 svg{ font-size: 15px; }
     .c3-legend-item{ font-size: 13px; }
+    #page-wrapper{ margin: 0px; }
 
-    #print_web{ color: #1ab394; font-size: 16px; padding: 7px; }
+    @page { margin: 3cm;} /* 列印邊距 */
     
  </style>
 
@@ -314,42 +317,22 @@ google.charts.load('current', {'packages':['table']});
         var table = new google.visualization.Table(document.getElementById('chart_div'));
 
         table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+
+        window.print();
       }
  </script>
 </head>
 <body>
-
+  
 <div id="wrapper">
-
-     <!-- ============================== 導航欄位 =================================== -->
-    <?php include 'shared_php/navbar-default.php';?>
-
     <div id="page-wrapper" class="gray-bg">
-
-    <!-- ============================== TOP欄位+ =================================== -->
-        <?php include 'shared_php/top_bar.php';?>
-
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-              <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>分析結果 </h5>
-                           <div class="ibox-tools">
 
-                         <a id="print_web" target="_blank" href="analytics_print.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class='fa fa-print'></i>列印報表</a>
+              <h2><?php echo $case_name?>-分析</h2>
 
-                        </div>
-                        </div>
-                        <div class="ibox-content ">
-                          <h2><?php echo $case_name?>-分析</h2>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4">
+                <div style="width:30%;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>一周瀏覽人數</h5>
@@ -363,7 +346,7 @@ google.charts.load('current', {'packages':['table']});
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div style="width:30%;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>一個月瀏覽人數</h5>
@@ -377,7 +360,7 @@ google.charts.load('current', {'packages':['table']});
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div style="width:30%;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>總瀏覽人數</h5>
@@ -392,7 +375,7 @@ google.charts.load('current', {'packages':['table']});
                 </div>
 
 
-                <div class="col-lg-6">
+                <div style="width:350px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>使用者性別</h5>
@@ -407,7 +390,7 @@ google.charts.load('current', {'packages':['table']});
                 </div>
 
 
-                <div class="col-lg-6">
+                <div style="width:350px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>使用者年齡</h5>
@@ -422,7 +405,7 @@ google.charts.load('current', {'packages':['table']});
                 </div>
 
 
-                <div class="col-lg-6">
+                <div style="width:350px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>使用的媒體</h5>
@@ -437,7 +420,7 @@ google.charts.load('current', {'packages':['table']});
                 </div>
 
 
-                <div class="col-lg-6">
+                <div style="width:350px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>使用的功能鈕</h5>
@@ -452,7 +435,7 @@ google.charts.load('current', {'packages':['table']});
                 </div>
 
                 
-                <div class="col-lg-6">
+                <div style="width:350px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>流量來源</h5>
@@ -466,7 +449,7 @@ google.charts.load('current', {'packages':['table']});
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div style="width:350px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>地區使用人數</h5>
@@ -480,7 +463,7 @@ google.charts.load('current', {'packages':['table']});
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div style="width:700px;float:left;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>每日使用人數</h5>
@@ -497,8 +480,7 @@ google.charts.load('current', {'packages':['table']});
             </div>
         </div>
 
-        <!-- ============================== footer =================================== -->
-        <?php include 'shared_php/footer.php';?>
+        
 
     </div>
 </div>

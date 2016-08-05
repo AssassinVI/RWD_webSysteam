@@ -18,7 +18,7 @@
 	.tb_title{ font-size: 25px; text-align: center; }
 </style>
 <script type="text/javascript">
-	print(document);
+	print(document);//列印
 </script>
 </head>
 <body>
@@ -240,8 +240,9 @@ function print_from($from_id)
            while ($row=$sql_call->fetch(PDO::FETCH_ASSOC)) {
               $back_content=$row['back_content'];
               $back_time=$row['back_time'];
+              $back_type=$row['back_type'];
               $table_txt.= '<tr>';
-              $table_txt.= '<td width="10%" class="view_td" >'.$back_time.'</td>';
+              $table_txt.= '<td width="10%" class="view_td" >'.$back_time.'<br>'.$back_type.'</td>';
               $table_txt.= '<td colspan="5" style="white-space: pre-wrap;">'.$back_content.'</td>';
               $table_txt.= '</tr>';
               }
