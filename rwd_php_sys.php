@@ -966,6 +966,83 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
     
   }
 
+
+/* =============================================== 圖片牆 ======================================================= */
+  /*elseif ($_POST['page'] == 'imgwall'){
+
+    $case_id=$_POST['case_id'];//建案ID
+    $sort=$_POST['rel_sort'];//排序
+    $fun_id=$_POST['fun_id'];//功能區塊ID
+    $img_file=$_POST['img_file']//多圖片檔
+    $newFileIndex=new_showIndex('img_wall_tb','img_file');
+    $pdo=pdo_conn();
+    $sql_q=$pdo->prepare("SELECT count(*) FROM img_wall_tb ");
+    $sql_q->bindparam(":fun_id", $fun_id);
+    $sql_q->execute();
+    $rowcount=$sql_q->fetchColumn(); //
+
+    //========================= 新增圖片牆 ===============================
+
+ if ($rowcount<1){
+
+     for ($i=0; $i < count($_FILES['wall']['name']); $i++) { 
+      $newFileName=$fun_id."_".$newFileIndex.".jpg";
+      $img_file.=$newFileName.","; //多圖檔名
+      file_upload('wall',$newFileName,$i,$case_id);
+     $newFileIndex=$newFileIndex+1;
+
+     }
+
+   //################# 新增索引資料 ##################
+    rel_insert($case_id, 'img_wall_tb', $fun_id, $sort);
+    $sql_in=$pdo->prepare("INSERT INTO img_wall_tb (fun_id, case_id, img_file) VALUES (:fun_id, :case_id, :img_file)");
+    $sql_in->bindparam(":fun_id", $fun_id);
+    $sql_in->bindparam(":case_id", $case_id);
+    $sql_in->bindparam(":img_file", $img_file);
+    $sql_in->execute();
+
+  }
+  else{
+     
+     $sql_fi=$pdo->prepare("SELECT * FROM img_wall_tb WHERE fun_id=:fun_id");
+     $sql_fi->bindparam(":fun_id", $fun_id);
+     $sql_fi->execute();
+     while ($row=$sql_fi->fetch(PDO::FETCH_ASSOC)) {
+       $more_img=explode(',', $row['img_file']) ;
+      for ($i=0; $i <count($more_img)-1 ; $i++) { 
+
+// ####### 判斷刪除圖檔 ######## 
+
+         if (empty($_POST['noDelete_img'.$i]) ) {
+           unlink('../product_html/'.$case_id.'/assets/images/'.iconv('utf-8', 'big5',  $more_img[$i]));
+         }else{
+            $img_file.=$_POST['noDelete_img'.$i].",";
+         }
+      }
+     }
+
+// ############# 新增圖檔 ############      
+
+for ($i=0; $i < count($_FILES['wall']['name']); $i++) { 
+
+      $newFileName=$fun_id."_".$newFileIndex.".jpg";
+      $img_file.=$newFileName.","; //多圖檔名
+      file_upload('wall',$newFileName,$i,$case_id);
+     $newFileIndex=$newFileIndex+1;
+
+     }
+
+    //################# 更新幻燈片 ################## 
+
+    $sql_up=$pdo->prepare("UPDATE img_wall_tb SET img_file=:img_file WHERE fun_id=:fun_id");
+    $sql_up->bindparam(":fun_id", $fun_id);
+    $sql_up->bindparam(":img_file", $img_file);
+    $sql_up->execute();
+ }
+ $pdo=NULL;
+ location_up('iframe_imgwall.php?funId='.$fun_id.'&caseId='.$case_id , '更新圖檔');
+}*/
+
  mysql_close($conn);
 }//$_POST END
 

@@ -222,6 +222,35 @@ body {
         margin:0px;
     }
 
+     /*===================================== 瀑布流 ================================================ */
+    .grid { position: relative; margin: 0 auto; width: 100%; }
+
+    .grid-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+       /* fluffy */
+       width: 300px;
+       height: 180px;
+       border-radius: 3px;
+       background-color: #536DFE;
+       overflow: hidden;
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-position: 50% 50%;
+       /* end fluffy */
+       -webkit-transition: .3s ease-in-out;
+       -o-transition: .3s ease-in-out;
+       transition: .3s ease-in-out;
+    }
+     #item2{ height: 366px; }
+     #item3{ height: 200px; }
+     #item5{ height: 386px; }
+     #item7{ height: 140px; }
+     #item8{ height: 220px; }
+     #item9{ height: 200px; }
+     #item10{ height: 200px;}
+
     /* ===================== 內容字體 =========================== */
      h2,
     .p_txt,
@@ -516,6 +545,7 @@ body {
     .show_height{
         max-height: 850px;
     }
+
     
     }
 
@@ -538,6 +568,14 @@ body {
             font-size: 30px;
         }
 
+        .grid-item{ width: 200px; height: 130px;}
+     #item2{ height: calc(366px - 50px); }
+     #item3{ height: calc(200px - 50px); }
+     #item5{ height: calc(386px - 100px); }
+     #item7{ height: calc(140px - 50px); }
+     #item8{ height: calc(220px - 50px); }
+     #item9{ height: calc(200px - 50px); }
+     #item10{ height: calc(200px - 100px);}
     }
 
      /* =============================== 小電腦畫面 =========================================== */
@@ -577,6 +615,14 @@ body {
     width: 35%;
     margin: 5px;
    }
+   .grid-item{ width: 170px; }
+     #item2{ height: calc(366px - 50px); }
+     #item3{ height: calc(200px - 50px); }
+     #item5{ height: calc(386px - 100px); }
+     #item7{ height: calc(140px - 50px); }
+     #item8{ height: calc(220px - 50px); }
+     #item9{ height: calc(200px - 50px); }
+     #item10{ height: calc(200px - 100px);}
 
     }
 
@@ -749,6 +795,14 @@ body {
     .tool_btn{
         display: block;
     }
+    .grid-item{ width: 150px; height:calc(130px - 25px);  }
+     #item2{ height: calc(366px - 75px); }
+     #item3{ height: calc(200px - 75px); }
+     #item5{ height: calc(386px - 150px); }
+     #item7{ height: calc(140px - 75px); }
+     #item8{ height: calc(220px - 75px); }
+     #item9{ height: calc(200px - 75px); }
+     #item10{ height: calc(200px - 150px);}
     }
     /* ====================================== 7吋平板畫面 ======================================================= */
     
@@ -765,6 +819,7 @@ body {
         #close_top{
             display: block;
         }
+        .grid-item{ width: 120px; }
     }
     /* ====================================== 手機畫面 ======================================================= */
     
@@ -913,4 +968,8 @@ body {
             margin-left: 9%;
         }
     #logo_a a{ font-size: 25px; }
+    }
+    @media only screen and (max-width:420px){
+       .grid-item{ width: 130px; }
+       #item8{ height: calc(220px - 35px); }
     }

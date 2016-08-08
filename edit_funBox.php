@@ -142,6 +142,10 @@
               // ## 電子報 ##
               funBox_in('btn_newsletter','iframe_news.php','btn-success','fa-edit','電子報','del_btn(this)','<?php echo $case_id?>');
             }
+            else if ($("#fun_sel").val()=='imgwall') {
+              // ## 圖片牆 ##
+              funBox_in('btn_imgwall','iframe_imgwall.php','btn-warning','fa-edit','圖片牆','del_btn(this)','<?php echo $case_id?>');
+            }
 
         });
 
@@ -261,6 +265,10 @@
       // ## 電子報 ##
       echo "funBox_in('btn_newsletter', 'iframe_news.php?funId=".$fun_id."', 'btn-success', 'fa-edit', '電子報', 'old_del_btn(this)', '".$case_id."', '".$fun_id."');";
 
+    }elseif ($row['fun_name']=='imgwall') {
+      
+      // ## 圖片牆 ##
+      echo "funBox_in('btn_imgwall', 'iframe_imgwall.php?funId=".$fun_id."', 'btn-warning', 'fa-edit', '圖片牆', 'old_del_btn(this)', '".$case_id."', '".$fun_id."');";
     }
  }
 }
@@ -411,6 +419,7 @@
                                     <option value="map">GoogleMap</option>
                                     <option value="call">聯絡我們</option>
                                     <option value="view720">720環景</option>
+                                    <option value="imgwall">圖片牆</option>
                         <?php 
 
                          $result_ex=db_conn("SELECT * FROM expand_tb as tb INNER JOIN expand_record as re ON tb.tool_id=re.tool_id WHERE case_id='$case_id' AND re.is_use='1' AND tb.values!=''");
