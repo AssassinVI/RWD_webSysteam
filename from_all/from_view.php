@@ -20,20 +20,25 @@ $pdo=NULL;
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>顧客問卷</title>
+	<link rel="stylesheet" type="text/css" href="../css/plugins/mobile_themes/mobile.css">
+	<link rel="stylesheet" type="text/css" href="../css/plugins/mobile_themes/jquery.mobile.icons.min.css">
+	<link rel="stylesheet" type="text/css" href="../js/plugins/jquery_mobile/jquery.mobile.structure-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/normalize.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/main.css">
-	<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">
+	<!--<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">-->
+	<!--<link rel="stylesheet" type="text/css" href="../js/plugins/jquery_mobile/jquery.mobile-1.4.5.min.css">-->
 	<style type="text/css">
 	    body{ font-family: Microsoft JhengHei; font-size: 18px; }
+	    #view_form{ padding: 10px 40px; }
 		#wid_steps{  }
 		.input_div{ padding:10px;  }
-		.input_div label{  }
-		input[type="text"]{ padding: 11px 20px; width: 90%; border-radius: 10px;  }
+		/*input[type="text"]{ padding: 11px 20px; width: 90%; border-radius: 10px;  }
 		input[type="text"]:focus{  border:1px solid #3C3C3C; }
 		input[type="radio"]{ width: 20px; height: 20px; }
-		input[type="checkbox"]{ width: 20px; height: 20px; }
+		input[type="checkbox"]{ width: 20px; height: 20px; }*/
 
 		#twzipcode input{ width: 20%; }
+		#twzipcode input[name="zipcode"]{ padding: 9px; border-radius: 10px; }
 		select{ padding:10px; margin-right: 5px; border-radius: 10px; }
 		#twzipcode{ display: inline-block; }
 		.check_div{ padding:5px;  }
@@ -46,13 +51,18 @@ $pdo=NULL;
 	</style>
 </head>
 <body>
-<form id="view_form" action="from_sql.php" method="POST">
- <div id="case_name"><?php echo $case_name['case_name']?></div>
-	<div id="wid_steps">
+<form id="view_form" action="from_sql.php" method="POST" data-ajax="false">
+ <div id="case_name" data-role="header" data-position="fixed" data-theme="a"><?php echo $case_name['case_name']?></div>
+	<div data-role="collapsibleset" id="wid_steps">
+	<div data-role="collapsible" data-collapsed="false">
     <h3>基本資料</h3>
     <section>
         <div class="input_div"><label>顧客姓名：</label><input type="text" name="name" placeholder="姓名"></div>
-        <div class="input_div"><label>性別：</label><input id="gender1" type="radio" value="m" name="gender"> <label for="gender1">先生</label>　<input   id="gender2" type="radio" value="f" name="gender"> <label for="gender2">小姐</label> </div>
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+              <legend>性別：</legend>
+               <input id="gender1" type="radio" value="m" name="gender"> <label for="gender1">先生</label>　
+               <input   id="gender2" type="radio" value="f" name="gender"> <label for="gender2">小姐</label> 
+        </fieldset>
         <div><hr></div>
         <div class="input_div"><label>電話：</label><input type="text" name="phone" placeholder="電話"></div>
         <div class="input_div"><label>E-mail：</label><input type="text" name="email" placeholder="E-mail"></div>
@@ -60,8 +70,9 @@ $pdo=NULL;
         <div class="input_div"><label>住址：</label><div id="twzipcode"></div></div>
         <div class="input_div"><input type="text" name="adds" placeholder="詳細地址"></div>
     </section>
+    </div>
 
-
+    <div data-role="collapsible">
     <h3>公司資料</h3>
     <section>
         <div class="input_div"><label>職業：</label>
@@ -84,19 +95,18 @@ $pdo=NULL;
         <!--<div class="input_div"><label>工作區域：</label><input type="text" name="job_area" placeholder="工作區域"></div>-->
         <div class="input_div"><label>公司名稱：</label><input type="text" name="job_company" placeholder="公司名稱"></div>
     </section>
+    </div>
 
-
+    <div data-role="collapsible">
     <h3>目前狀況</h3>
     <section>
-       <div class="input_div">
-           <label>婚姻狀況：</label><br>
+       <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>婚姻狀況：</legend>
             <input id="mar_state1" type="radio" value="已婚" name="mar_state" > <label for="mar_state1">已婚</label>　
             <input id="mar_state2" type="radio" value="已婚無子" name="mar_state" > <label for="mar_state2">已婚無子</label>　 
             <input id="mar_state3" type="radio" value="未婚" name="mar_state" > <label for="mar_state3">未婚</label>　 
-            <br>
-            <label></label> 
-            <input type="text" name="mar_child" placeholder="幾個小孩">
-       </div>
+       </fieldset>
+       <input type="text" name="mar_child" placeholder="幾個小孩">
        <div class="input_div">
           <label>月收入：</label>
           <select name="mon_income" class="big_select">
@@ -143,22 +153,22 @@ $pdo=NULL;
           </select>
          </div>
 
-        <div class="input_div">
-           <label>現住房屋型態：</label><br>
-           <div class="check_div">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>現住房屋型態：</legend><br>
+           
               <input id="house_type1" type="radio" value="公寓" name="house_type" > <label for="house_type1">公寓</label>　
               <input id="house_type2" type="radio" value="大樓" name="house_type" > <label for="house_type2">大樓</label>　
               <input id="house_type3" type="radio" value="套房" name="house_type" > <label for="house_type3">套房</label>　
-           </div>
-           <div class="check_div">
+           
+           
              <input id="house_type4" type="radio" value="租屋" name="house_type" > <label for="house_type4">租屋</label>　
              <input id="house_type5" type="radio" value="華廈" name="house_type" > <label for="house_type5">華廈</label>　
              <input id="house_type6" type="radio" value="透天" name="house_type" > <label for="house_type6">透天</label>　
-           </div>
-            <label>屋齡：</label><input type="text" name="house_old" placeholder="幾年"> 
-       </div>
+           
+       </fieldset>
+         <div class="input_div"><label>屋齡：</label><input type="text" name="house_old" placeholder="幾年"></div> 
 
-       <div class="input_div"><label>現住：</label><input type="text" name="house_pattern" placeholder="幾房"><br>
+       <div class="input_div"><label>現住：</label><input type="text" name="house_pattern" placeholder="幾房">
                                   <!-- <label></label><input type="text" name="house_pattern2" placeholder="幾廳"><br>
                                    <label></label><input type="text" name="house_pattern2" placeholder="幾衛浴">-->
         </div>
@@ -166,230 +176,223 @@ $pdo=NULL;
 
 
     </section>
+    </div>
 
-
+    
+    <div data-role="collapsible">
     <h3>需求</h3>
     <section>
-        <div class="input_div">
-          <label>您如何知道(可複選)：</label>
-                              <div class="check_div">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+          <legend>您如何知道(可複選)：</legend>
+                              
                               	<input type="checkbox" id="media1" name="media[]" value="中時"> <label for="media1"> 中時</label>
                                 <input type="checkbox" id="media2" name="media[]" value="聯合"> <label for="media2"> 聯合</label>
                                 <input type="checkbox" id="media3" name="media[]" value="自由"> <label for="media3"> 自由</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="media4" name="media[]" value="聯晚"> <label for="media4"> 聯晚</label>
                                 <input type="checkbox" id="media5" name="media[]" value="蘋果日報"> <label for="media5"> 蘋果日報</label>
                                 <input type="checkbox" id="media6" name="media[]" value="網路"> <label for="media6"> 網路</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="media7" name="media[]" value="車箱"> <label for="media7"> 車箱</label>
                                 <input type="checkbox" id="media8" name="media[]" value="廣告"> <label for="media8"> 廣告</label>
                                 <input type="checkbox" id="media9" name="media[]" value="CF"> <label for="media9"> CF</label>
-                              </div>  
-                              <div class="check_div">
+                                
+                              
                               	<input type="checkbox" id="media10" name="media[]" value="RD"> <label for="media10">  RD</label>
                                 <input type="checkbox" id="media11" name="media[]" value="POP"> <label for="media11">  POP</label>
                                 <input type="checkbox" id="media12" name="media[]" value="雜誌"> <label for="media12">  雜誌</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="media13" name="media[]" value="派報"> <label for="media13"> 派報</label>
                                 <input type="checkbox" id="media14" name="media[]" value="夾報"> <label for="media14"> 夾報</label>
                                 <input type="checkbox" id="media15" name="media[]" value="介紹"> <label for="media15"> 介紹</label>
-                              </div>
-                              <div class="check_div">
-                              	<input type="checkbox" id="media16" name="media[]" value="其他"> <label for="media16"> 其他</label>
+                              
+                              
+                              	<input type="checkbox" id="media16" name="media[]" value="其他"> 
+        </fieldset>
+                                <label for="media16"> 其他</label>
                                 <input type="text" name="media_txt" value="" placeholder="其他媒體">
-                              </div>
-
-        </div>
 
         <div><hr></div>
 
-        <div class="input_div">
-           <label>產品需求(可複選)：</label>
-                              <div class="check_div">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>產品需求(可複選)：</legend>
+                              
                               	<input type="checkbox" id="dem_product1" name="dem_product[]" value="大樓"> <label for="dem_product1"> 大樓</label>
                                 <input type="checkbox" id="dem_product2" name="dem_product[]" value="透天"> <label for="dem_product2"> 透天</label>
                                 <input type="checkbox" id="dem_product3" name="dem_product[]" value="套房"> <label for="dem_product3"> 套房</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="dem_product4" name="dem_product[]" value="店面"> <label for="dem_product4"> 店面</label>
                                 <input type="checkbox" id="dem_product5" name="dem_product[]" value="辦公室"> <label for="dem_product5"> 辦公室</label>
                                 <input type="checkbox" id="dem_product6" name="dem_product[]" value="其他"> <label for="dem_product6"> 其他</label>
-                              </div>
-                              <div class="check_div">
-                              	<input type="text" name="dem_product_txt" value="" placeholder="其他產品">
-                              </div>
-              
-        </div>
+                              
+        </fieldset>
+                              <input type="text" name="dem_product_txt" value="" placeholder="其他產品">
 
         <div><hr></div>
 
-        <div class="input_div">
-            <label>坪數需求(可複選)：</label>
-                               <div class="check_div">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>坪數需求(可複選)：</legend>
+                               
                               	<input type="checkbox" id="dem_floor_num1" name="dem_floor_num[]" value="30坪以下"> <label for="dem_floor_num1"> 30坪以下</label>
                                 <input type="checkbox" id="dem_floor_num2" name="dem_floor_num[]" value="31~40坪"> <label for="dem_floor_num2"> 31~40坪</label>
                                 <input type="checkbox" id="dem_floor_num3" name="dem_floor_num[]" value="41~50坪"> <label for="dem_floor_num3"> 41~50坪</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="dem_floor_num4" name="dem_floor_num[]" value="51~70坪"> <label for="dem_floor_num4"> 51~70坪</label>
                                 <input type="checkbox" id="dem_floor_num5" name="dem_floor_num[]" value="71~90坪"> <label for="dem_floor_num5"> 71~90坪</label>
                                 <input type="checkbox" id="dem_floor_num6" name="dem_floor_num[]" value="91坪以上"> <label for="dem_floor_num6"> 91坪以上</label>
-                              </div>
             
-        </div>
+        </fieldset>
 
         <div><hr></div>
 
-        <div class="input_div"> 
-                  <label>購屋預算(可複選)：</label>
-                              <div class="check_div2">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal"> 
+                  <legend>購屋預算(可複選)：</legend>
+                              
                               	<input type="checkbox" id="dem_money1" name="dem_money[]" value="301~400萬"> <label for="dem_money1"> 301~400萬</label>
                                 <input type="checkbox" id="dem_money2" name="dem_money[]" value="401~600萬"> <label for="dem_money2"> 401~600萬</label>
-                              </div>
-                              <div class="check_div2">
+                              
+                              
                                 <input type="checkbox" id="dem_money3" name="dem_money[]" value="601~800萬"> <label for="dem_money3"> 601~800萬</label>
                               	<input type="checkbox" id="dem_money4" name="dem_money[]" value="801~1200萬"> <label for="dem_money4"> 801~1200萬</label>
-                              </div>
-                              <div class="check_div2">
+                              
+                              
                                 <input type="checkbox" id="dem_money5" name="dem_money[]" value="1201~2000萬"> <label for="dem_money5"> 1201~2000萬</label>
                                 <input type="checkbox" id="dem_money6" name="dem_money[]" value="2001~3000萬"> <label for="dem_money6"> 2001~3000萬</label>
-                              </div>
-                              <div class="check_div2">
-                              	<input type="checkbox" id="dem_money7" name="dem_money[]" value="3001萬以上"> <label for="dem_money7"> 3001萬以上</label>
-                              </div>
-                  
-        </div>
+                              
+                              
+                              	<input type="checkbox" id="dem_money7" name="dem_money[]" value="3001萬以上"> <label for="dem_money7"> 3001萬以上</label>                  
+        </fieldset>
 
         <div><hr></div>
 
-        <div class="input_div">
-                  <label>希望月付款(可複選)：</label>
-                             <div class="check_div2">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+                  <legend>希望月付款(可複選)：</legend>
+                             
                               	<input type="checkbox" id="dem_mon_pay1" name="dem_mon_pay[]" value="20000以下"> <label for="dem_mon_pay1"> 20,000以下</label>
                                 <input type="checkbox" id="dem_mon_pay2" name="dem_mon_pay[]" value="20001~27000"> <label for="dem_mon_pay2"> 20,001~27,000</label>
-                              </div>
-                              <div class="check_div2">
+                              
+                              
                                 <input type="checkbox" id="dem_mon_pay3" name="dem_mon_pay[]" value="27001~35000"> <label for="dem_mon_pay3"> 27,001~35,000</label>
                               	<input type="checkbox" id="dem_mon_pay4" name="dem_mon_pay[]" value="35001~42000"> <label for="dem_mon_pay4"> 35,001~42,000</label>
-                              </div>
-                              <div class="check_div2">
+                              
+                              
                                 <input type="checkbox" id="dem_mon_pay5" name="dem_mon_pay[]" value="42001~50000"> <label for="dem_mon_pay5"> 42,001~50,000</label>
                                 <input type="checkbox" id="dem_mon_pay6" name="dem_mon_pay[]" value="50001~60000"> <label for="dem_mon_pay6"> 50,001~60,000</label>
-                              </div>
-                              <div class="check_div2">
+                              
+                              
                               	<input type="checkbox" id="dem_mon_pay7" name="dem_mon_pay[]" value="60000以上"> <label for="dem_mon_pay7"> 60,000以上</label>
-                              </div>
-        </div>
+                              
+        </fieldset>
 
           <div><hr></div>
 
-        <div class="input_div">
-            <label>自備款(可複選)：</label>
-                               <div class="check_div2">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>自備款(可複選)：</legend>
+                               
                               	<input type="checkbox" id="dem_have1" name="dem_have[]" value="50萬以下"> <label for="dem_have1"> 50萬以下</label>
                                 <input type="checkbox" id="dem_have2" name="dem_have[]" value="51~100萬"> <label for="dem_have2"> 51~100萬</label>
-                              </div>
-                              <div class="check_div2">
+                              
+                              
                                 <input type="checkbox" id="dem_have3" name="dem_have[]" value="101~200萬"> <label for="dem_have3"> 101~200萬</label>
                               	<input type="checkbox" id="dem_have4" name="dem_have[]" value="201~300萬"> <label for="dem_have4"> 201~300萬</label>
-                              </div>
-                               <div class="check_div2">
+                              
+                               
                                 <input type="checkbox" id="dem_have5" name="dem_have[]" value="300萬以上"> <label for="dem_have5"> 300萬以上</label>
-                              </div>
+                              
 
-        </div>
+        </fieldset>
 
          <div><hr></div>
 
-        <div class="input_div">
-            <label>購屋動機(可複選)：</label>
-                               <div class="check_div">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>購屋動機(可複選)：</legend>
+                               
                               	<input type="checkbox" id="pay_motive1" name="pay_motive[]" value="交通因素"> <label for="pay_motive1"> 交通因素</label>
                                 <input type="checkbox" id="pay_motive2" name="pay_motive[]" value="工作因素"> <label for="pay_motive2"> 工作因素</label>
                                 <input type="checkbox" id="pay_motive3" name="pay_motive[]" value="環境因素"> <label for="pay_motive3"> 環境因素</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="pay_motive4" name="pay_motive[]" value="投資置產"> <label for="pay_motive4"> 投資置產</label>
                                 <input type="checkbox" id="pay_motive5" name="pay_motive[]" value="小換大"> <label for="pay_motive5"> 小換大</label>
                                 <input type="checkbox" id="pay_motive6" name="pay_motive[]" value="新婚用"> <label for="pay_motive6"> 新婚用</label>
-                              </div>
-                              <div class="check_div">
+                              
+                              
                               	<input type="checkbox" id="pay_motive7" name="pay_motive[]" value="營業用"> <label for="pay_motive7"> 營業用</label>
                                 <input type="checkbox" id="pay_motive8" name="pay_motive[]" value="舊換新"> <label for="pay_motive8"> 舊換新</label>
                                 <input type="checkbox" id="pay_motive9" name="pay_motive[]" value="其他"> <label for="pay_motive9"> 其他</label>
-                              </div>
+                              
             
-        </div>
+        </fieldset>
 
          <div><hr></div>
 
-        <div class="input_div">
-           <label>欲購屋時間：</label><br>
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>欲購屋時間：</legend>
             <input id="pay_time1" type="radio" value="立即購買" name="pay_time" > <label for="pay_time1">立即購買</label>　
             <input id="pay_time2" type="radio" value="半年之內" name="pay_time" > <label for="pay_time2">半年之內</label>　
             <input id="pay_time3" type="radio" value="半年~二年" name="pay_time" > <label for="pay_time3">半年~二年</label>　
-       </div>
+       </fieldset>
     </section>
+    </div>
 
+
+    <div data-role="collapsible">
     <h3>需求2</h3>
     <section>
-        <div class="input_div"><label>格局需求：</label><input type="text" name="dem_pattern" placeholder="幾房"><br>
+        <div class="input_div"><label>格局需求：</label><input type="text" name="dem_pattern" placeholder="幾房">
                                    <!--<label></label><input type="text" name="dem_pattern2" placeholder="幾廳"><br>
                                    <label></label><input type="text" name="dem_pattern3" placeholder="幾衛浴">-->
         </div>
 
-        <div class="input_div">
-           <label>車位需求：</label><br>　 
-            <input type="radio" value="n" name="dem_car" > 不需要　 
-            <input type="radio" value="y" name="dem_car" > 需要　<br>
-            <label></label> 
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>車位需求：</legend>　 
+            <input type="radio" value="n" id="dem_car1" name="dem_car" > <label for="dem_car1">不需要</label>
+            <input type="radio" value="y" id="dem_car2" name="dem_car" ><label for="dem_car2">需要</label>
+       </fieldset>
             <input type="text" name="dem_car_txt" placeholder="幾位">
-       </div>
 
-       <div class="input_div">
-            <label>樓層需求(可複選)：</label>
-                               <div class="check_div">
+       <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>樓層需求(可複選)：</legend>
+                               
                               	<input type="checkbox" id="dem_floor1" name="dem_floor[]" value="低樓層"><label for="dem_floor1"> 低樓層</label>
                                 <input type="checkbox" id="dem_floor2" name="dem_floor[]" value="中樓層"><label for="dem_floor2"> 中樓層</label>
                                 <input type="checkbox" id="dem_floor3" name="dem_floor[]" value="高樓層"><label for="dem_floor3"> 高樓層</label>
-                              </div>
                               
-            
-        </div>
+        </fieldset>
 
-        <div class="input_div">
-            <label>座向需求(可複選)：</label>
-                               <div class="check_div">
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>座向需求(可複選)：</legend>
+                               
                               	<input type="checkbox" id="dem_side1" name="dem_side[]" value="東"><label for="dem_side1"> 東</label>
                                 <input type="checkbox" id="dem_side2" name="dem_side[]" value="南"><label for="dem_side2"> 南</label>
                                 <input type="checkbox" id="dem_side3" name="dem_side[]" value="西"><label for="dem_side3" >西</label>
-                              </div>
-                              <div class="check_div">
                               	<input type="checkbox" id="dem_side4" name="dem_side[]" value="北"><label for="dem_side4">北</label>
-                              </div>
                               
-            
-        </div>
-
+                              
+        </fieldset>
         <div><hr></div>
-
         <div class="input_div"><label>購屋次數：</label><input type="text" name="pay_num" placeholder="幾次"></div>
-
         <div class="input_div"><label>介紹人、戶別：</label><input type="text" name="Introduction" ></div>
 
-        
     </section>
+    </div>
 
+      <div data-role="footer" data-position="fixed" style="text-align: center;">
+        <button id="sub_from" type="submit" class="ui-btn" style="font-size: 15px;">送出表單</button>
+      </div>
     <input type="hidden" name="sql_type" value="insert">
     <input type="hidden" name="record_id" value="<?php echo $record_id?>">
   </div>
 </form>
 
 	<script type="text/javascript" src="../js/jquery-2.1.1.js"></script>
-	<script type="text/javascript" src="../js/jquery.steps.js"></script>
+	<!--<script type="text/javascript" src="../js/jquery.steps.js"></script>-->
+	<script type="text/javascript" src="../js/plugins/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="../js/plugins/twzipcode/jquery.twzipcode.js"></script>
     <script type="text/javascript">
 $(document).ready(function() {
@@ -400,18 +403,17 @@ $(document).ready(function() {
     }
   ?>
 	
-   $("#wid_steps").steps({
+ /*  $("#wid_steps").steps({
            headerTag: "h3",
            bodyTag: "section",
            transitionEffect: "slideLeft",
            stepsOrientation: "vertical"
-});
+});*/
 
-   $("[href='#finish']").click(function(event) {
-        
-        if (confirm('是否確定送出')) {
-           $("#view_form").submit();
-        }
+   $("#sub_from").click(function(event) {
+          if (confirm("確定要送出表單??")) {
+          	$("#view_form").submit();
+          }
    });
 
    $("#twzipcode").twzipcode();
