@@ -6,6 +6,7 @@
     }else{
       $case_id=htmlspecialchars($_GET['caseId']);
     }
+
 ?>
 
 
@@ -75,8 +76,7 @@
                        }
                        else{
                           
-                          var fun_id=$("#fun_id").attr('value');
-                         location.replace('iframe_imgwall.php?funId='+fun_id+'&caseId=<?php echo $case_id;?>');
+                         location.replace('iframe_imgwall.php?funId=<?php echo $_GET['funId'];?>&caseId=<?php echo $case_id;?>');
                        }
                       
                     });

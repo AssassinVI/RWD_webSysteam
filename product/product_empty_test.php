@@ -182,8 +182,12 @@
       @media only screen and (max-width:800px) {
          .big_txt b{
             color: #fff;
+
           }
         }
+
+        .imgwall{ width: 100%; height: 100%; display: block; }
+
     </style>
 
 </head>
@@ -504,21 +508,29 @@
          } 
 
 
+       // ============================================= 圖片牆 ======================================================= 
+         
+        elseif ($fun_name=='iw') {
+
+        	$img_wall=select_imgwall($fun_id[$i]);
+        	$images=explode(',', $img_wall['img_file']);
+        	$wall_txt='<div class="grid">';
+
+            for ($m=0; $m <count($images)-1 ; $m++) { 
+            	
+            	$wall_txt.='<div id="item'.($m+1).'" class="grid-item" style="background-image: url(\'assets/images/'.$images[$m].'\');">
+                              <a class="imgwall" rel="wall" href="assets/images/'.$images[$m].'"></a>
+                           </div>';
+            }
+            $wall_txt.='</div>';
+
+            echo $wall_txt;
+         } 
+
    }//for-end
 ?>
 
-<div class="grid">
-            <div id="item1" class="grid-item" ></div>
-            <div id="item2" class="grid-item" ></div>
-            <div id="item3" class="grid-item"></div>
-            <div id="item4" class="grid-item"></div>
-            <div id="item5" class="grid-item"></div>
-            <div id="item6" class="grid-item"></div>
-            <div id="item7" class="grid-item"></div>
-            <div id="item8" class="grid-item"></div>
-            <div id="item9" class="grid-item"></div>
-            <div id="item10" class="grid-item"></div>
-          </div>
+          
             </div>
         </div>
     </div>
@@ -949,6 +961,17 @@
                'transitionIn'          : 'none',
                'transitionOut'          : 'none',
                'type'                    : 'iframe'
+          });
+
+/* ================================= 圖片牆 ======================================= */
+          $(".imgwall").fancybox({
+               'padding'               :'0',
+               'width'                 : '100%',
+               'height'               : '100%',
+               'autoScale'               : false,
+               'transitionIn'          : 'none',
+               'transitionOut'          : 'none',
+               'type'                    : 'image'
           });
 
 

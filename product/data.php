@@ -134,6 +134,21 @@
      return $view720;
    }
 
+
+   /* ==================================== 圖片牆 ================================================== */
+   function select_imgwall($fun_id)
+   {
+     $pdo=pdo_conn();
+     $sql_q=$pdo->prepare("SELECT * FROM img_wall_tb WHERE fun_id=:fun_id");
+     $sql_q->bindparam(":fun_id", $fun_id);
+     $sql_q->execute();
+     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+        
+        $imgwall=array('img_file'=>$row['img_file']);
+     }
+     return $imgwall;
+   }
+
   
   /* ==================================== 顏色更改 ================================================== */
    function select_color($case_id)
@@ -174,6 +189,9 @@
      }
      return $map_btn;
    }
+
+  
+  
 
   /* ============================ 聯絡我們新增 ==================================== */
  //  db_conn("INSERT INTO call_us_tb (call_name, call_ph, call_em, call_q, call_ti, call_con) VALUES ('$call_name', '$call_ph', '$call_em', '$call_q', '$call_ti', '$call_con')");

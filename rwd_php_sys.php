@@ -969,16 +969,17 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
 
 
+
 /* =============================================== 圖片牆 ======================================================= */
   elseif ($_POST['page'] == 'imgwall'){
 
     $case_id=$_POST['case_id'];//建案ID
     $sort=$_POST['rel_sort'];//排序
     $fun_id=$_POST['fun_id'];//功能區塊ID
-    $img_file=$_POST['img_file'];//多圖片檔
+   
     $newFileIndex=new_showIndex('img_wall_tb','img_file');
     $pdo=pdo_conn();
-    $sql_q=$pdo->prepare("SELECT count(*) FROM img_wall_tb ");
+    $sql_q=$pdo->prepare("SELECT count(*) FROM img_wall_tb WHERE fun_id=:fun_id");
     $sql_q->bindparam(":fun_id", $fun_id);
     $sql_q->execute();
     $rowcount=$sql_q->fetchColumn(); //
@@ -1044,6 +1045,11 @@ for ($i=0; $i < count($_FILES['wall']['name']); $i++) {
  $pdo=NULL;
  location_up('iframe_imgwall.php?funId='.$fun_id.'&caseId='.$case_id , '更新圖檔');
 }
+
+
+
+
+
 
 
 
@@ -1425,16 +1431,24 @@ $result = db_conn("INSERT INTO Related_tb (case_id, fun_name, fun_id, sort) VALU
 
 /* =============================== 產生檔名索引 ======================================== */
 
-function new_showIndex($Dt,$col )
+function new_showIndex($Dt,$col)
 {
 
-   $fun_id=addslashes($_POST['fun_id']);//功能區塊ID
+   $fun_id=mysql_real_escape_string($_POST['fun_id']);//功能區塊ID
 
-     $result=db_conn("SELECT $col FROM $Dt WHERE fun_id='$fun_id'");
+     $result=db_conn("SELECT ".$col." FROM ".$Dt." WHERE fun_id='$fun_id'");
 
        if (mysql_num_rows($result)>0){
+
       while ($row=mysql_fetch_array($result)) {
-         $new_imgIndex=substr($row[$col], -6,1);
+
+         if (substr($row[$col], -7,1)=='_') {
+            $new_imgIndex=substr($row[$col], -6,1);
+         }
+         else{
+            $new_imgIndex=substr($row[$col], -7,2);
+         }
+         
          $new_imgIndex=(int)$new_imgIndex;
          $new_imgIndex=$new_imgIndex+1;
      }

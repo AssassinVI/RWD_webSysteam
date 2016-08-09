@@ -25,8 +25,8 @@ $pdo=NULL;
 	<link rel="stylesheet" type="text/css" href="../js/plugins/jquery_mobile/jquery.mobile.structure-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/normalize.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/main.css">
-	<!--<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">-->
-	<!--<link rel="stylesheet" type="text/css" href="../js/plugins/jquery_mobile/jquery.mobile-1.4.5.min.css">-->
+    <link rel="stylesheet" type="text/css" href="../js/plugins/search_box/tinyselect.css">
+    	<!--<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">-->
 	<style type="text/css">
 	    body{ font-family: Microsoft JhengHei; font-size: 18px; }
 	    #view_form{ padding: 10px 40px; }
@@ -68,7 +68,9 @@ $pdo=NULL;
         <div class="input_div"><label>E-mail：</label><input type="text" name="email" placeholder="E-mail"></div>
         <div><hr></div>
         <div class="input_div"><label>住址：</label><div id="twzipcode"></div></div>
-        <div class="input_div"><input type="text" name="adds" placeholder="詳細地址"></div>
+        <div class="input_div">
+           <input type="text" name="adds" placeholder="詳細地址">
+        </div>
     </section>
     </div>
 
@@ -394,6 +396,7 @@ $pdo=NULL;
 	<!--<script type="text/javascript" src="../js/jquery.steps.js"></script>-->
 	<script type="text/javascript" src="../js/plugins/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="../js/plugins/twzipcode/jquery.twzipcode.js"></script>
+  <script type="text/javascript" src="../js/plugins/search_box/tinyselect.min.js"></script>
     <script type="text/javascript">
 $(document).ready(function() {
 
@@ -417,6 +420,9 @@ $(document).ready(function() {
    });
 
    $("#twzipcode").twzipcode();
+
+   $("#search_sel").tinyselect();
+
 
 });//JQUERY END
     	
