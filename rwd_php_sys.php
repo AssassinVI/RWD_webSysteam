@@ -967,13 +967,15 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
   }
 
 
+
+
 /* =============================================== 圖片牆 ======================================================= */
-  /*elseif ($_POST['page'] == 'imgwall'){
+  elseif ($_POST['page'] == 'imgwall'){
 
     $case_id=$_POST['case_id'];//建案ID
     $sort=$_POST['rel_sort'];//排序
     $fun_id=$_POST['fun_id'];//功能區塊ID
-    $img_file=$_POST['img_file']//多圖片檔
+    $img_file=$_POST['img_file'];//多圖片檔
     $newFileIndex=new_showIndex('img_wall_tb','img_file');
     $pdo=pdo_conn();
     $sql_q=$pdo->prepare("SELECT count(*) FROM img_wall_tb ");
@@ -1032,7 +1034,7 @@ for ($i=0; $i < count($_FILES['wall']['name']); $i++) {
 
      }
 
-    //################# 更新幻燈片 ################## 
+    //################# 更新圖片牆 ################## 
 
     $sql_up=$pdo->prepare("UPDATE img_wall_tb SET img_file=:img_file WHERE fun_id=:fun_id");
     $sql_up->bindparam(":fun_id", $fun_id);
@@ -1041,7 +1043,9 @@ for ($i=0; $i < count($_FILES['wall']['name']); $i++) {
  }
  $pdo=NULL;
  location_up('iframe_imgwall.php?funId='.$fun_id.'&caseId='.$case_id , '更新圖檔');
-}*/
+}
+
+
 
  mysql_close($conn);
 }//$_POST END
@@ -1496,7 +1500,9 @@ function file_upload($Name,$fileName,$i,$case_id)
             //location_up('iframe_show.php?funId='.$fun_id, '檔案上傳失敗'.$_FILES[$Name]["error"][$i]);
         }
         else{
+          
            move_uploaded_file($_FILES[$Name]['tmp_name'][$i], '../product_html/'.$case_id.'/assets/images/'.iconv("utf-8", "big5",$fileName ));
+          
         }
 }
 

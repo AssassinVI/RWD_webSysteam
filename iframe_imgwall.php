@@ -7,6 +7,86 @@
       $case_id=htmlspecialchars($_GET['caseId']);
     }
 ?>
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+	<title>圖片牆</title>
+	<!-- ================================== 外掛and CSS ====================================== -->
+    <?php include 'shared_php/script_style.php';?>
+    <style type="text/css">
+    body{
+    	height: auto;
+    	background-color: rgb(243,243,244);
+      font-family: 微軟正黑體;
+    }
+   #con_box p{
+      font-size: 20px;
+    }
+    .dz-default{
+        display: none;
+      }
+      .dz-message{
+        display: :none;
+      }
+      .del_img_file{float: left;}
+      .del_img_file i{ font-size: 20px; }
+      .del_img_file p{ margin:0px; }
+    </style>
+
+    <script type="text/javascript">
+
+       $(document).ready(function() {
+
+              Dropzone.options.myAwesomeDropzone = {
+                paramName:'wall',
+                addRemoveLinks:true,
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 100,
+                maxFiles: 100,
+                acceptedFiles:'image/jpeg',
+                clickable: "#update_img",
+                previewsContainer:".showImg",
+                // Dropzone settings
+                init: function() {
+                    var myDropzone = this;
+
+                    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                     /* 判斷有無新檔案 */
+                      if (myDropzone.getAcceptedFiles()!="") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+
+                      }
+                                               
+                    });
+                    this.on("sendingmultiple", function() {
+                    });
+                    this.on("successmultiple", function(files, response) {
+                       var funId='<?php echo $_GET['funId'];?>';
+
+                       alert('新增圖片牆');
+                       if (funId=="") {
+                          window.parent.location.replace('edit_funBox.php?case_id=<?php echo $_POST['case_id'];?>');
+                       }
+                       else{
+                          
+                          var fun_id=$("#fun_id").attr('value');
+                         location.replace('iframe_imgwall.php?funId='+fun_id+'&caseId=<?php echo $case_id;?>');
+                       }
+                      
+                    });
+                    this.on("errormultiple", function(files, response) {
+                     
+                    });
+                }
+            }
+
+
 <?php
 
  $rel_sort=htmlspecialchars($_POST['rel_sort']);
@@ -68,83 +148,7 @@ echo "$('.dropzone-previews').append('".$txt."');";
 
   }
 
-  
-
 ?>
-
-<!DOCTYPE html>
-<html lang="zh-tw">
-<head>
-	<meta charset="UTF-8">
-	<title>圖片牆</title>
-	<!-- ================================== 外掛and CSS ====================================== -->
-    <?php include 'shared_php/script_style.php';?>
-    <style type="text/css">
-    body{
-    	height: auto;
-    	background-color: rgb(243,243,244);
-      font-family: 微軟正黑體;
-    }
-   #con_box p{
-      font-size: 20px;
-    }
-    .dz-default{
-        display: none;
-      }
-      .dz-message{
-        display: :none;
-      }
-    
-    </style>
-
-    <script type="text/javascript">
-       $(document).ready(function() {
-
-              Dropzone.options.myAwesomeDropzone = {
-                paramName:'wall',
-                addRemoveLinks:true,
-                autoProcessQueue: false,
-                uploadMultiple: true,
-                parallelUploads: 100,
-                maxFiles: 100,
-                acceptedFiles:'image/*',
-                clickable: "#update_img",
-                previewsContainer:".showImg",
-                // Dropzone settings
-                init: function() {
-                    var myDropzone = this;
-
-                    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
-                     /* 判斷有無新檔案 */
-                      if (myDropzone.getAcceptedFiles()!="") {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        myDropzone.processQueue();
-
-                      }
-                                               
-                    });
-                    this.on("sendingmultiple", function() {
-                    });
-                    this.on("successmultiple", function(files, response) {
-                       var funId='<?php echo $_GET['funId'];?>';
-
-                       alert('新增圖片牆');
-                       if (funId=="") {
-                          window.parent.location.replace('edit_funBox.php?case_id=<?php echo $_POST['case_id'];?>');
-                       }
-                       else{
-                          
-                          var fun_id=$("#fun_id").attr('value');
-                         location.replace('iframe_show.php?funId='+fun_id+'&caseId=<?php echo $case_id;?>');
-                       }
-                      
-                    });
-                    this.on("errormultiple", function(files, response) {
-                     
-                    });
-                }
-            }
            
        });
     </script>

@@ -265,7 +265,7 @@
       // ## 電子報 ##
       echo "funBox_in('btn_newsletter', 'iframe_news.php?funId=".$fun_id."', 'btn-success', 'fa-edit', '電子報', 'old_del_btn(this)', '".$case_id."', '".$fun_id."');";
 
-    }elseif ($row['fun_name']=='imgwall') {
+    }elseif ($row['fun_name']=='img_wall_tb') {
       
       // ## 圖片牆 ##
       echo "funBox_in('btn_imgwall', 'iframe_imgwall.php?funId=".$fun_id."', 'btn-warning', 'fa-edit', '圖片牆', 'old_del_btn(this)', '".$case_id."', '".$fun_id."');";
