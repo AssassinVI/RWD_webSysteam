@@ -16,13 +16,27 @@ if ($_POST) {
     $search_array=array();
 
     $pdo=pdo_conn();
-    $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id");
+
+    if ($_POST['start_num']=='undefined' OR $_POST['many_num']=='all' OR empty($_POST['start_num'])) {
+        
+        $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id");
+    }
+    else{
+        $start_num=(int)$_POST['start_num'];
+        $many_num=(int)$_POST['many_num'];
+        $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id LIMIT :start_num, :many_num");
+
+        $sql_q->bindparam(':start_num',$start_num, PDO::PARAM_INT);
+        $sql_q->bindparam(':many_num',$many_num, PDO::PARAM_INT);
+    }
+    
     $sql_q->bindparam(':name',$name);
     $sql_q->bindparam(':phone',$phone);
     $sql_q->bindparam(':email',$email);
     $sql_q->bindparam(':is_buy',$is_buy);
     $sql_q->bindparam(':record_id',$record_id);
     $sql_q->execute();
+
     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
     	
        array_push($search_array, array('name'=>$row['name'], 'phone'=>$row['phone'], 'from_id'=>$row['from_id'], 'set_time'=>$row['set_time']));
@@ -106,6 +120,14 @@ if ($_POST) {
     for ($i=0; $i < count($media); $i++) { 
     	$sql_query.=" AND media LIKE '%".$media[$i]."%'";
     }
+
+   //----------------------------- 取其他資料筆數 -----------------------------------
+    if ($_POST['many_num']!='all' OR !empty($_POST['start_num'])) {
+
+        $start_num=(int)$_POST['start_num'];
+        $many_num=(int)$_POST['many_num'];
+        $sql_query.=" LIMIT :start_num, :many_num";
+    }
    
    $search_array=array();
 
@@ -118,6 +140,13 @@ if ($_POST) {
     $sql_q->bindparam(':dem_car', $dem_car);
     $sql_q->bindparam(':dem_car_txt', $dem_car_txt);
     $sql_q->bindparam(':is_buy', $is_buy);
+   
+   //----------------------------- 取其他資料筆數 -----------------------------------
+    if ($_POST['start_num']!='undefined' AND $_POST['many_num']!='all') {
+        
+     $sql_q->bindparam(':start_num', $start_num, PDO::PARAM_INT);
+     $sql_q->bindparam(':many_num', $many_num, PDO::PARAM_INT);
+    }
     $sql_q->execute();
     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
     	

@@ -208,7 +208,8 @@
             </button>
             <!-- 跑馬燈 -->
             <!--<div class="marquee_lay"></div>-->
-            <marquee class="ph_mar marquee_box"><?php echo $case['marquee']?></marquee>
+            <!--<marquee class="ph_mar marquee_box"><?php echo $case['marquee']?></marquee>-->
+            <div class="ph_mar marquee_box" style="text-align: center; padding: 0px;"><img style="width:58%;" src="assets/LOGO.jpg" alt=""></div>
             <!-- 背景音樂按鈕 -->
     <?php 
       if (!empty($case['activity_song'])) {

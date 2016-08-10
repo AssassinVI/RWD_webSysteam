@@ -346,8 +346,22 @@ if ($_GET) {
        $from_array=array();
 
        $pdo=pdo_conn();
-       $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id");
-       $sql_q->bindparam(":record_id", $_GET['record_id']);
+
+       if ($_GET['many_num']=='all' OR $_GET['start_num']=='undefined') {
+         
+         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id ");
+         $sql_q->bindparam(":record_id", $_GET['record_id']);
+       }
+       else{
+
+         $many_num=(int)$_GET['many_num'];
+         $start_num=(int)$_GET['start_num'];
+         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id LIMIT :start_num,:many_num");
+         $sql_q->bindparam(":record_id", $_GET['record_id']);
+         $sql_q->bindparam(":many_num", $many_num, PDO::PARAM_INT);
+         $sql_q->bindparam(":start_num", $start_num, PDO::PARAM_INT);
+       }
+       
        $sql_q->execute();
        while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
            
