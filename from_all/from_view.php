@@ -25,7 +25,7 @@ $pdo=NULL;
 	<link rel="stylesheet" type="text/css" href="../js/plugins/jquery_mobile/jquery.mobile.structure-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/normalize.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/main.css">
-    <link rel="stylesheet" type="text/css" href="../js/plugins/search_box/tinyselect.css">
+   
     	<!--<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">-->
 	<style type="text/css">
 	    body{ font-family: Microsoft JhengHei; font-size: 18px; }
@@ -55,13 +55,13 @@ $pdo=NULL;
  <div id="case_name" data-role="header" data-position="fixed" data-theme="a"><?php echo $case_name['case_name']?></div>
 	<div data-role="collapsibleset" id="wid_steps">
 	<div data-role="collapsible" data-collapsed="false">
-    <h3>基本資料</h3>
+    <h3 class="scor_top">基本資料</h3>
     <section>
         <div class="input_div"><label>顧客姓名：</label><input type="text" name="name" placeholder="姓名"></div>
         <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
-              <legend>性別：</legend>
+              <legend>性別：</legend><br>
                <input id="gender1" type="radio" value="m" name="gender"> <label for="gender1">先生</label>　
-               <input   id="gender2" type="radio" value="f" name="gender"> <label for="gender2">小姐</label> 
+               <input id="gender2" type="radio" value="f" name="gender"> <label for="gender2">小姐</label> 
         </fieldset>
         <div><hr></div>
         <div class="input_div"><label>電話：</label><input type="text" name="phone" placeholder="電話"></div>
@@ -69,13 +69,38 @@ $pdo=NULL;
         <div><hr></div>
         <div class="input_div"><label>住址：</label><div id="twzipcode"></div></div>
         <div class="input_div">
-           <input type="text" name="adds" placeholder="詳細地址">
+           <input id="adds_txt" type="text" name="adds" placeholder="詳細地址">
+            <input id="inset-autocomplete-input" data-type="search" placeholder="詳細地址">
+<ul id="list_ul" data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#inset-autocomplete-input">
+<li><a class="search_txt" href="#">桃園市</a></li>
+<li><a class="search_txt" href="#">台北市</a></li>
+<li><a class="search_txt" href="#">台中市</a></li>
+<li><a class="search_txt" href="#">高雄市</a></li>
+<li><a class="search_txt" href="#">台南市</a></li>
+<li><a class="search_txt" href="#">Dodge</a></li>
+<li><a class="search_txt" href="#">Ferrari</a></li>
+<li><a class="search_txt" href="#">Ford</a></li>
+<li><a href="#">GMC</a></li>
+<li><a href="#">Honda</a></li>
+<li><a href="#">Hyundai</a></li>
+<li><a href="#">Infiniti</a></li>
+<li><a href="#">Jeep</a></li>
+<li><a href="#">Kia</a></li>
+<li><a href="#">Lexus</a></li>
+<li><a href="#">Mini</a></li>
+<li><a href="#">Nissan</a></li>
+<li><a href="#">Porsche</a></li>
+<li><a href="#">Subaru</a></li>
+<li><a href="#">Toyota</a></li>
+<li><a href="#">Volkswagen</a></li>
+<li><a href="#">Volvo</a></li>
+</ul>
         </div>
     </section>
     </div>
 
     <div data-role="collapsible">
-    <h3>公司資料</h3>
+    <h3 class="scor_top">公司資料</h3>
     <section>
         <div class="input_div"><label>職業：</label>
           <select name="job" class="big_select">
@@ -100,10 +125,10 @@ $pdo=NULL;
     </div>
 
     <div data-role="collapsible">
-    <h3>目前狀況</h3>
+    <h3 class="scor_top">目前狀況</h3>
     <section>
        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
-           <legend>婚姻狀況：</legend>
+           <legend>婚姻狀況：</legend><br>
             <input id="mar_state1" type="radio" value="已婚" name="mar_state" > <label for="mar_state1">已婚</label>　
             <input id="mar_state2" type="radio" value="已婚無子" name="mar_state" > <label for="mar_state2">已婚無子</label>　 
             <input id="mar_state3" type="radio" value="未婚" name="mar_state" > <label for="mar_state3">未婚</label>　 
@@ -182,7 +207,7 @@ $pdo=NULL;
 
     
     <div data-role="collapsible">
-    <h3>需求</h3>
+    <h3 class="scor_top">需求</h3>
     <section>
         <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
           <legend>您如何知道(可複選)：</legend>
@@ -334,7 +359,7 @@ $pdo=NULL;
          <div><hr></div>
 
         <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
-           <legend>欲購屋時間：</legend>
+           <legend>欲購屋時間：</legend><br>
             <input id="pay_time1" type="radio" value="立即購買" name="pay_time" > <label for="pay_time1">立即購買</label>　
             <input id="pay_time2" type="radio" value="半年之內" name="pay_time" > <label for="pay_time2">半年之內</label>　
             <input id="pay_time3" type="radio" value="半年~二年" name="pay_time" > <label for="pay_time3">半年~二年</label>　
@@ -344,7 +369,7 @@ $pdo=NULL;
 
 
     <div data-role="collapsible">
-    <h3>需求2</h3>
+    <h3 class="scor_top">需求2</h3>
     <section>
         <div class="input_div"><label>格局需求：</label><input type="text" name="dem_pattern" placeholder="幾房">
                                    <!--<label></label><input type="text" name="dem_pattern2" placeholder="幾廳"><br>
@@ -396,7 +421,6 @@ $pdo=NULL;
 	<!--<script type="text/javascript" src="../js/jquery.steps.js"></script>-->
 	<script type="text/javascript" src="../js/plugins/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="../js/plugins/twzipcode/jquery.twzipcode.js"></script>
-  <script type="text/javascript" src="../js/plugins/search_box/tinyselect.min.js"></script>
     <script type="text/javascript">
 $(document).ready(function() {
 
@@ -421,8 +445,22 @@ $(document).ready(function() {
 
    $("#twzipcode").twzipcode();
 
-   $("#search_sel").tinyselect();
+  
 
+   var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
+        //指定視窗物件
+
+    $(".scor_top").click(function() {
+            $body.animate({
+                scrollTop: 0
+            }, 500);
+        });
+
+   //搜尋方框
+   $(".search_txt").click(function(event) {
+      $("#inset-autocomplete-input").val($(this).text());
+      $("#list_ul").hide();
+   });
 
 });//JQUERY END
     	

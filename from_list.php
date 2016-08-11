@@ -47,8 +47,11 @@
       #all_check{ width: 28px; height: 18px; }
       #many_div{ padding: 0px 20px; }
       #num_bar ul{ list-style:none ; }
-      #num_bar ul li{ display: inline-block; width: 35px; height: 35px; text-align: center; line-height: 33px; border-radius: 5px; border: 1px solid #1ab394; }
-      #num_bar ul li a{ display: block; }
+      #num_bar ul li{ display: inline-block; text-align: center; line-height: 23px; border-radius: 5px;  }
+      .num_btn{  display: block; background-color: #fff; border: 1px solid #1ab394; color: #1ab394;  }
+      .num_btn:hover{  background-color: #1ab394; color: #fff; }
+      
+      #active{ background-color: #1ab394; color: #fff; border: 1px solid #1ab394; }
     </style>
     <script type="text/javascript">
      $(document).ready(function() {
@@ -57,7 +60,7 @@
 
          $("#twzipcode").twzipcode();
 
-         from_list(); //基本顯示
+         from_list('0'); //基本顯示
          many_fun('from_list'); //資料筆數
          from_list_count();
 
@@ -76,14 +79,16 @@
 
 
          $("#bs_search_btn").click(function(event) { //簡易查詢按鈕
-             bs_search();
+           $('#many_div :selected').val('all');
+             bs_search('0');
              many_fun('bs_search');//資料筆數
              bs_search_count();
              
          });
 
          $("#adv_search_btn").click(function(event) { //進階查詢按鈕
-             adv_search();
+          $('#many_div :selected').val('all');
+             adv_search('0');
              many_fun('adv_search');//資料筆數
              adv_search_count();
          });
@@ -95,6 +100,7 @@
            $("#search_id").val($(":checked[name='check_print']").map(function() { return $(this).val(); }).get().join(','));
            $("#search_pr_from").submit();
         });
+
       
       
 
@@ -170,14 +176,14 @@
               });
        });
 
-        topbar('from_list');
+        topbar('from_list',start);
      }
 
 
     //----------------------------------------------------- List筆數 -------------------------------------------------------------
      function from_list_count() {
  
-     	 var href='from_all/from_sql.php?type=list&record_id=<?php echo $record_id;?>&start_num=undefined';
+     	 var href='from_all/from_sql.php?type=list&record_id=<?php echo $record_id;?>&many_num=all';
        
         $.getJSON( href ,  function(json) {
         	var list_count=json.from_array.length;
@@ -228,7 +234,7 @@
               });
             }
           });
-         topbar('bs_search');
+         topbar('bs_search',start);
      }
 
     /* ============================================== 簡易查詢筆數 ====================================================== */
@@ -246,7 +252,7 @@
                     phone: $('[name="bs_phone"]').val(), 
                     email: $('[name="email"]').val(), 
                     is_buy: $(':checked[name="bs_is_buy"]').val(),
-                    start_num: 'undefined'
+                    many_num: 'all'
                   },
             success:function (json) {
 
@@ -321,7 +327,7 @@
               });
             }
           });
-         topbar('adv_search');
+         topbar('adv_search',start);
      }
 
 
@@ -359,7 +365,7 @@
 
                     media: $(':checked[name="media"]').map(function() { return $(this).val(); }).get().join(','), 
                   
-                start_num: 'undefined'
+                many_num: 'all'
                   },
             success:function (json) {
 
@@ -372,48 +378,8 @@
 
 
 
-        /* ============================================== 分頁欄AJAX ====================================================== */
-     function num_search(start,many) {
-      
-          $.ajax({
-            url: 'from_all/search_sql.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                    type:'num_search',
-                    record_id: '<?php echo $record_id;?>',
-                    start_num: start,
-                    many_num: many
-                    
-                  },
-            success:function (json) {
-
-                 $("#com_tb").html('');
-             
-                $.each(json.search_array, function() {
-              
-                   var info="<tr>";
-                  info=info+"<td ><input type='checkbox' class='check_print' name='check_print' onclick='check_print()' value="+this['from_id']+"></td>"; //選取列印
-                  info=info+"<td class='no_display768'>"+this['from_id']+"</td>"; //表單ID
-                  info=info+"<td >"+this['set_time']+"</td>";                    //填表日期
-                  info=info+"<td><?php echo $case_name;?></td>";                     //專案名稱
-                  info=info+"<td>"+this['name']+"</td>";                                    //顧客姓名
-                  info=info+"<td class='no_display768'>"+this['phone']+"</td>";          //行動電話
-                  info=info+"<td><a href='from_all/from_print.php?from_id="+this['from_id']+"' target='_blank' ><i class='fa fa-print'></i>列印</a></td>";
-                  info=info+"<td class='no_display768'><a href='from_edit.php?from_id="+this['from_id']+"'><i class='fa fa-edit'></i>編輯</a></td>";
-                  info=info+"<td class='no_display768'><a class='del_from_"+this['from_id']+"' href='javascript:del_from(\""+this['from_id']+"\");'><i class='fa fa-ban'></i>刪除</a></td>";
-                  info=info+"</tr>";
-
-                    $("#com_tb").append(info);
-                    
-              });
-            }
-          });
-         
-     }
-
       /* ============================================== 分頁欄 ====================================================== */
-      function topbar(type) {
+      function topbar(type,start) {
 
          var sel_num=$('#many_div :selected').val();
 
@@ -425,13 +391,19 @@
 
             if (sel_num!='all') {
 
-              var bar_num='<li><a href="#" onclick="'+type+'(0)"><<</a></li>';
+              var bar_num='<li><button class="num_btn" onclick="'+type+'(0)"><i class="fa fa-backward"></i></button></li>';
 
               for (var i = 0; i < avg_num; i++) {
                    var next_num=(i*parseInt(sel_num)==0) ? 0 : i*parseInt(sel_num);
-                       bar_num=bar_num+'<li><a href="#" onclick="'+type+'('+next_num+')">'+(i+1)+'</a></li>';
+
+                   if (start==next_num) {
+                      bar_num=bar_num+'<li><button id="active" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>';
+                   }
+                   else{
+                      bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>';
+                   }
               }
-                       bar_num=bar_num+'<li><a href="#" onclick="'+type+'('+(avg_num-1)*parseInt(sel_num)+')">>></a></li>';
+                       bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+(avg_num-1)*parseInt(sel_num)+')"><i class="fa fa-forward"></i></button></li>';
 
                $("#num_bar ul").html(bar_num);
             }

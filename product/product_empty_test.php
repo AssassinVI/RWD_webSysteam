@@ -114,6 +114,9 @@
     <link href="../../assets/js/plugins/styleswitcher/styleswitcher.css" rel="stylesheet" type="text/css" />
     <!-- Morenizr -->
     <script type="text/javascript" src="../../assets/js/plugins/modernizr.min.js"></script>
+
+
+    <!--<link rel="stylesheet" type="text/css" href="framework.css">-->
    
    <!-- 新工具欄 new_toolBar -->
    <?php 
@@ -638,6 +641,10 @@
     <!-- 瀑布流工具 -->
     <script type="text/javascript" src="../../assets/js/minigrid.js"></script>
 
+         <script type="text/javascript" src="jquery.videoBG.js"></script>
+    
+
+   
     <!-- 新工具欄 -->
     <?php
      if ($map_life_btn['btn_style']=='0') {
@@ -1171,6 +1178,7 @@
 
 
 
+
     }); //JQUERY END
 
 var wow = new WOW({ boxClass: 'wow', animateClass: 'animated', offset: 0, mobile: false, live: true });
@@ -1220,6 +1228,8 @@ var wow = new WOW({ boxClass: 'wow', animateClass: 'animated', offset: 0, mobile
   ga('require', 'displayfeatures');  //客層分析
   ga('send', 'pageview');
     </script>
+
+
 </body>
 </html>
 

@@ -29,6 +29,15 @@
           $map_ps=select_map($fun_id[$i]);
        }
    }
+  
+  //-- 刊頭 --
+    for ($i=0; $i <count($fun_id) ; $i++) { 
+     $sel_fun=substr($fun_id[$i], 0,2);
+       if ($sel_fun=='bs') {
+          $bs_img1=$fun_id[$i]."_1.jpg";
+          break;
+       }
+   }
 
 
 // -- LINE 分享 或 加LINE群組 --
@@ -81,7 +90,7 @@
     <meta property="og:url" content="<?php echo $URL;?>" />
 
     <!-- 分享主圖 -->
-    <meta property="og:image" content="http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/<?php echo $case_id;?>.jpg" />
+    <meta property="og:image" content="http://rx.znet.tw/rwd_system/product_html/<?php echo $case_id?>/assets/images/<?php echo $bs_img1?>" />
     <meta property="og:type" content="website" />
     <meta name="description" content="<?php echo $other;?>" />
     <meta name="Author" content="聯創數位整合" />
@@ -769,7 +778,6 @@
         /* ============================ Top 按鈕 ================================= */
 
         var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
-        
         //指定視窗物件
 
        $(".scor_top").click(function() {

@@ -17,7 +17,7 @@ if ($_POST) {
 
     $pdo=pdo_conn();
 
-    if ($_POST['start_num']=='undefined' OR $_POST['many_num']=='all') {
+    if ($_POST['many_num']=='undefined' OR $_POST['many_num']=='all') {
         
         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id");
     }
@@ -122,7 +122,7 @@ if ($_POST) {
     }
 
    //----------------------------- 取其他資料筆數 -----------------------------------
-    if ($_POST['many_num']!='all' OR !empty($_POST['start_num'])) {
+    if ($_POST['many_num']!='all') {
 
         $start_num=(int)$_POST['start_num'];
         $many_num=(int)$_POST['many_num'];
@@ -142,11 +142,12 @@ if ($_POST) {
     $sql_q->bindparam(':is_buy', $is_buy);
    
    //----------------------------- 取其他資料筆數 -----------------------------------
-    if ($_POST['start_num']!='undefined' AND $_POST['many_num']!='all') {
+    if ($_POST['many_num']!='all') {
         
      $sql_q->bindparam(':start_num', $start_num, PDO::PARAM_INT);
      $sql_q->bindparam(':many_num', $many_num, PDO::PARAM_INT);
     }
+
     $sql_q->execute();
     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
     	

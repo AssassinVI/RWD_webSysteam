@@ -347,7 +347,7 @@ if ($_GET) {
 
        $pdo=pdo_conn();
 
-       if ($_GET['many_num']=='all' OR $_GET['start_num']=='undefined') {
+       if ($_GET['many_num']=='all' OR $_GET['many_num']=='undefined') {
          
          $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id ");
          $sql_q->bindparam(":record_id", $_GET['record_id']);
