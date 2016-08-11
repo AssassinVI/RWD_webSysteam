@@ -59,6 +59,7 @@
 
          from_list(); //基本顯示
          many_fun('from_list'); //資料筆數
+         from_list_count();
 
 
          $("#bs_search").click(function(event) {
@@ -84,6 +85,7 @@
          $("#adv_search_btn").click(function(event) { //進階查詢按鈕
              adv_search();
              many_fun('adv_search');//資料筆數
+             adv_search_count();
          });
 
 
@@ -167,17 +169,19 @@
                     $("#com_tb").append(info);
               });
        });
+
+        topbar('from_list');
      }
 
 
     //----------------------------------------------------- List筆數 -------------------------------------------------------------
      function from_list_count() {
  
-     	 var href='from_all/from_sql.php?type=list&record_id=<?php echo $record_id;?>';
+     	 var href='from_all/from_sql.php?type=list&record_id=<?php echo $record_id;?>&start_num=undefined';
        
         $.getJSON( href ,  function(json) {
-
         	var list_count=json.from_array.length;
+          $("#now_num").val(list_count);
        });
      }
 
@@ -224,9 +228,8 @@
               });
             }
           });
-         
+         topbar('bs_search');
      }
-
 
     /* ============================================== 簡易查詢筆數 ====================================================== */
      function bs_search_count() {
@@ -243,11 +246,12 @@
                     phone: $('[name="bs_phone"]').val(), 
                     email: $('[name="email"]').val(), 
                     is_buy: $(':checked[name="bs_is_buy"]').val(),
+                    start_num: 'undefined'
                   },
             success:function (json) {
 
-              
-              //alert(json.search_array.length);
+              var list_count=json.search_array.length;
+              $("#now_num").val(list_count);
             }
           });
          
@@ -317,7 +321,7 @@
               });
             }
           });
-
+         topbar('adv_search');
      }
 
 
@@ -354,16 +358,13 @@
                    is_buy: $(':checked[name="is_buy"]').val(),
 
                     media: $(':checked[name="media"]').map(function() { return $(this).val(); }).get().join(','), 
-
+                  
+                start_num: 'undefined'
                   },
             success:function (json) {
 
-                 
-             
-                $.each(json.search_array, function() {
-              
-                    
-              });
+             var list_count=json.search_array.length;
+              $("#now_num").val(list_count);
             }
           });
 
@@ -410,6 +411,36 @@
           });
          
      }
+
+      /* ============================================== 分頁欄 ====================================================== */
+      function topbar(type) {
+
+         var sel_num=$('#many_div :selected').val();
+
+        if (sel_num!=undefined ) {
+
+          var avg_num=parseInt($("#now_num").val()) / parseInt($('#many_div :selected').val());
+              avg_num=Math.ceil(avg_num); //無條件進位
+
+
+            if (sel_num!='all') {
+
+              var bar_num='<li><a href="#" onclick="'+type+'(0)"><<</a></li>';
+
+              for (var i = 0; i < avg_num; i++) {
+                   var next_num=(i*parseInt(sel_num)==0) ? 0 : i*parseInt(sel_num);
+                       bar_num=bar_num+'<li><a href="#" onclick="'+type+'('+next_num+')">'+(i+1)+'</a></li>';
+              }
+                       bar_num=bar_num+'<li><a href="#" onclick="'+type+'('+(avg_num-1)*parseInt(sel_num)+')">>></a></li>';
+
+               $("#num_bar ul").html(bar_num);
+            }
+            else{
+              
+              $("#num_bar ul").html('');
+            }
+        }
+  }
 
 
     /* ================================================= 資料筆數 ================================================ */
@@ -485,7 +516,7 @@
                                     <input id="buy_no" type="radio" value="未購" name="bs_is_buy"> <label for="buy_no">未購</label>　
                                     <input id="buy" type="radio" value="" name="bs_is_buy"> <label for="buy">無</label>
                                 </div>
-                              <div class="form-group">
+                              <div class="form-group" >
                                 <label class="col-sm-10" ></label>
                                 <button id="bs_search_btn" class="btn btn-primary" type="button">查詢</button>
                               </div>
@@ -737,19 +768,11 @@
 
                           <div id="num_bar">
                           	 <ul>
-                          	 	<li><a href="#"><<</a></li>
-                          	 	<li><a href="#">1</a></li>
-                          	 	<li><a href="#">2</a></li>
-                          	 	<li><a href="#">3</a></li>
-                          	 	<li><a href="#">4</a></li>
-                          	 	<li><a href="#">5</a></li>
-                          	 	<li><a href="#">6</a></li>
-                          	 	<li><a href="#">7</a></li>
-                          	 	<li><a href="#">8</a></li>
-                          	 	<li><a href="#">9</a></li>
-                          	 	<li><a href="#">10</a></li>
-                          	 	<li><a href="#">>></a></li>
+                          	 	
+                          	 	
+                          	 	
                           	 </ul>
+                             <input type="hidden" id="now_num" name="now_num">
                           </div>
 
                         </div>

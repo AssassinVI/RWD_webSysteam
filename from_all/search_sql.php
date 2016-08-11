@@ -17,7 +17,7 @@ if ($_POST) {
 
     $pdo=pdo_conn();
 
-    if ($_POST['start_num']=='undefined' OR $_POST['many_num']=='all' OR empty($_POST['start_num'])) {
+    if ($_POST['start_num']=='undefined' OR $_POST['many_num']=='all') {
         
         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id");
     }
