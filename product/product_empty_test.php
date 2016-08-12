@@ -116,7 +116,6 @@
     <script type="text/javascript" src="../../assets/js/plugins/modernizr.min.js"></script>
 
 
-    <!--<link rel="stylesheet" type="text/css" href="framework.css">-->
    
    <!-- 新工具欄 new_toolBar -->
    <?php 
@@ -641,7 +640,6 @@
     <!-- 瀑布流工具 -->
     <script type="text/javascript" src="../../assets/js/minigrid.js"></script>
 
-         <script type="text/javascript" src="jquery.videoBG.js"></script>
     
 
    

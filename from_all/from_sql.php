@@ -46,7 +46,7 @@ if ($_POST) {
 
 
 	$mar_state=!empty($_POST['mar_state']) ? $_POST['mar_state'] : "" ;
-	$mar_child=$_POST['mar_child'];
+	$mar_child=!empty($_POST['mar_child']) ? $_POST['mar_child'] : "" ;
 	$mon_income=$_POST['mon_income'];
     $transportation=$_POST['transportation'];
 
@@ -54,12 +54,12 @@ if ($_POST) {
     $live_people=$_POST['live_people'];
     $homeowner=$_POST['homeowner'];
     $house_type=!empty($_POST['house_type']) ? $_POST['house_type'] : "" ;
-    $house_old=$_POST['house_old'];
+    $house_old=!empty($_POST['house_old']) ? $_POST['house_old'] : "" ;
 
 
-    $house_pattern=$_POST['house_pattern'];
+    $house_pattern=!empty($_POST['house_pattern']) ? $_POST['house_pattern'] : "" ;
 
-    $floor_num=$_POST['floor_num'];
+    $floor_num=!empty($_POST['floor_num']) ? $_POST['floor_num'] : "" ;
 
    if (!empty($_POST['media'])) {
     
@@ -108,8 +108,11 @@ if ($_POST) {
     $pay_time=!empty($_POST['pay_time']) ? $_POST['pay_time'] : "";
     
 
-
-    $dem_pattern=$_POST['dem_pattern'];
+ if (!empty($_POST['dem_pattern'])) {
+   $dem_pattern=implode(',', $_POST['dem_pattern']);
+ }
+ else{$dem_pattern=""; }
+    
 
     if (!empty($_POST['dem_car'])) {
      
@@ -131,7 +134,7 @@ if ($_POST) {
     }
     else{ $dem_side=""; }
     
-    $pay_num=$_POST['pay_num'];
+    $pay_num=!empty($_POST['pay_num']) ? $_POST['pay_num'] : "" ;
     $Introduction=$_POST['Introduction'];
 
 

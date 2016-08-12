@@ -169,13 +169,13 @@ function print_from($from_id)
 				</tr>
 				<tr>
 					<td class="td_sty">現住</td>
-					<td>'.$house_pattern.'房</td>
+					<td>'.$house_pattern.'</td>
 
 					<td class="td_sty">室內</td>
-					<td >'.$floor_num.'坪</td>
+					<td >'.$floor_num.'</td>
 
 					<td class="td_sty">屋齡</td>
-					<td>'.$house_old.'年</td>
+					<td>'.$house_old.'</td>
 				</tr>
 				<tr>
 					<td class="td_sty">媒體(複)</td>

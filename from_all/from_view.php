@@ -111,7 +111,17 @@ $pdo=NULL;
             <input id="mar_state2" type="radio" value="已婚無子" name="mar_state" > <label for="mar_state2">已婚無子</label>　 
             <input id="mar_state3" type="radio" value="未婚" name="mar_state" > <label for="mar_state3">未婚</label>　 
        </fieldset>
-       <input type="text" name="mar_child" placeholder="幾個小孩">
+
+       <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>幾個小孩：</legend><br>
+            <input id="mar_child6" type="radio" value="" name="mar_child" > <label for="mar_child6">無</label>
+            <input id="mar_child1" type="radio" value="1個" name="mar_child" > <label for="mar_child1">1個</label>　
+            <input id="mar_child2" type="radio" value="2個" name="mar_child" > <label for="mar_child2">2個</label>　 
+            <input id="mar_child3" type="radio" value="3個" name="mar_child" > <label for="mar_child3">3個</label>　
+            <input id="mar_child4" type="radio" value="4個" name="mar_child" > <label for="mar_child4">4個</label>
+            <input id="mar_child5" type="radio" value="4個以上" name="mar_child" > <label for="mar_child5">4個以上</label> 
+       </fieldset>
+
        <div class="input_div">
           <label>月收入：</label>
           <select name="mon_income" class="big_select">
@@ -171,14 +181,37 @@ $pdo=NULL;
              <input id="house_type6" type="radio" value="透天" name="house_type" > <label for="house_type6">透天</label>　
            
        </fieldset>
-         <div class="input_div"><label>屋齡：</label><input type="text" name="house_old" placeholder="幾年"></div> 
 
-       <div class="input_div"><label>現住：</label><input type="text" name="house_pattern" placeholder="幾房">
+       <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+          <legend>屋齡：</legend>
+             <input id="house_old1" type="radio" value="10年以下" name="house_old" > <label for="house_old1">10年以下</label>
+             <input id="house_old2" type="radio" value="11~20年" name="house_old" > <label for="house_old2">11~20年</label>
+             <input id="house_old3" type="radio" value="21~30年" name="house_old" > <label for="house_old3">21~30年</label>
+             <input id="house_old4" type="radio" value="31~40年" name="house_old" > <label for="house_old4">31~40年</label>
+             <input id="house_old5" type="radio" value="41~50年" name="house_old" > <label for="house_old5">41~50年</label>
+             <input id="house_old6" type="radio" value="50年以上" name="house_old" > <label for="house_old6">50年以上</label>
+       </fieldset>
+
+       <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+          <legend>現住幾房：</legend>
+             <input id="house_pattern1" type="radio" value="1" name="house_pattern" > <label for="house_pattern1">1房</label>
+             <input id="house_pattern2" type="radio" value="2" name="house_pattern" > <label for="house_pattern2">2房</label>
+             <input id="house_pattern3" type="radio" value="3" name="house_pattern" > <label for="house_pattern3">3房</label>
+             <input id="house_pattern4" type="radio" value="4" name="house_pattern" > <label for="house_pattern4">4房</label>
+             <input id="house_pattern5" type="radio" value="5" name="house_pattern" > <label for="house_pattern5">5房</label>
+       </fieldset>
                                   <!-- <label></label><input type="text" name="house_pattern2" placeholder="幾廳"><br>
                                    <label></label><input type="text" name="house_pattern2" placeholder="幾衛浴">-->
-        </div>
-        <div class="input_div"><label>坪數：</label><input type="text" name="floor_num"></div>
-
+       
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+          <legend>坪數：</legend>
+             <input id="floor_num1" type="radio" value="30坪以下" name="floor_num" > <label for="floor_num1">30坪以下</label>
+             <input id="floor_num2" type="radio" value="31~40坪" name="floor_num" > <label for="floor_num2">31~40坪</label>
+             <input id="floor_num3" type="radio" value="41~50坪" name="floor_num" > <label for="floor_num3">41~50坪</label>
+             <input id="floor_num4" type="radio" value="51~70坪" name="floor_num" > <label for="floor_num4">51~70坪</label>
+             <input id="floor_num5" type="radio" value="71~90坪" name="floor_num" > <label for="floor_num5">71~90坪</label>
+             <input id="floor_num6" type="radio" value="91坪以上" name="floor_num" > <label for="floor_num6">91坪以上</label>
+       </fieldset>
 
     </section>
     </div>
@@ -349,17 +382,33 @@ $pdo=NULL;
     <div data-role="collapsible">
     <h3 class="scor_top">需求2</h3>
     <section>
-        <div class="input_div"><label>格局需求：</label><input type="text" name="dem_pattern" placeholder="幾房">
-                                   <!--<label></label><input type="text" name="dem_pattern2" placeholder="幾廳"><br>
-                                   <label></label><input type="text" name="dem_pattern3" placeholder="幾衛浴">-->
-        </div>
+        
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>格局需求(可複選)：</legend>
+                               
+            <input type="checkbox" id="dem_pattern1" name="dem_pattern[]" value="1"><label for="dem_pattern1"> 1房</label>
+            <input type="checkbox" id="dem_pattern2" name="dem_pattern[]" value="2"><label for="dem_pattern2"> 2房</label>
+            <input type="checkbox" id="dem_pattern3" name="dem_pattern[]" value="3"><label for="dem_pattern3"> 3房</label>
+            <input type="checkbox" id="dem_pattern4" name="dem_pattern[]" value="4"><label for="dem_pattern4"> 4房</label>
+            <input type="checkbox" id="dem_pattern5" name="dem_pattern[]" value="5"><label for="dem_pattern5"> 5房</label>
+                              
+        </fieldset>
 
         <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
            <legend>車位需求：</legend>　 
             <input type="radio" value="n" id="dem_car1" name="dem_car" > <label for="dem_car1">不需要</label>
             <input type="radio" value="y" id="dem_car2" name="dem_car" ><label for="dem_car2">需要</label>
        </fieldset>
-            <input type="text" name="dem_car_txt" placeholder="幾位">
+
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>幾個車位：</legend>　 
+            <input type="radio" value="1" id="dem_car_txt1" name="dem_car_txt" > <label for="dem_car_txt1">1</label>
+            <input type="radio" value="2" id="dem_car_txt2" name="dem_car_txt" ><label for="dem_car_txt2">2</label>
+            <input type="radio" value="3" id="dem_car_txt3" name="dem_car_txt" ><label for="dem_car_txt3">3</label>
+            <input type="radio" value="4" id="dem_car_txt4" name="dem_car_txt" ><label for="dem_car_txt4">4</label>
+            <input type="radio" value="5" id="dem_car_txt5" name="dem_car_txt" ><label for="dem_car_txt5">5</label>
+       </fieldset>
+            
 
        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
             <legend>樓層需求(可複選)：</legend>
@@ -381,14 +430,29 @@ $pdo=NULL;
                               
         </fieldset>
         <div><hr></div>
-        <div class="input_div"><label>購屋次數：</label><input type="text" name="pay_num" placeholder="幾次"></div>
+
+         <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <legend>購屋次數：</legend>
+            <input type="radio" value="0" id="pay_num11" name="pay_num" > <label for="pay_num11">0</label>
+            <input type="radio" value="1" id="pay_num1" name="pay_num" > <label for="pay_num1">1</label>
+            <input type="radio" value="2" id="pay_num2" name="pay_num" ><label for="pay_num2">2</label>
+            <input type="radio" value="3" id="pay_num3" name="pay_num" ><label for="pay_num3">3</label>
+            <input type="radio" value="4" id="pay_num4" name="pay_num" ><label for="pay_num4">4</label>
+            <input type="radio" value="5" id="pay_num5" name="pay_num" ><label for="pay_num5">5</label>
+            <input type="radio" value="6" id="pay_num6" name="pay_num" ><label for="pay_num6">6</label>
+            <input type="radio" value="7" id="pay_num7" name="pay_num" ><label for="pay_num7">7</label>
+            <input type="radio" value="8" id="pay_num8" name="pay_num" ><label for="pay_num8">8</label>
+            <input type="radio" value="9" id="pay_num9" name="pay_num" ><label for="pay_num9">9</label>
+            <input type="radio" value="10" id="pay_num10" name="pay_num" ><label for="pay_num10">10</label>
+        </fieldset>
+        
         <div class="input_div"><label>介紹人、戶別：</label><input type="text" name="Introduction" ></div>
 
     </section>
     </div>
 
       <div data-role="footer" data-position="fixed" style="text-align: center;">
-        <button id="sub_from" type="submit" class="ui-btn" style="font-size: 15px;">送出表單</button>
+        <button id="sub_from" type="submit" class="ui-btn" style="font-size: 15px;">送出</button>
       </div>
     <input type="hidden" name="sql_type" value="insert">
     <input type="hidden" name="record_id" value="<?php echo $record_id?>">
