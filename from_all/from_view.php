@@ -69,31 +69,9 @@ $pdo=NULL;
         <div><hr></div>
         <div class="input_div"><label>住址：</label><div id="twzipcode"></div></div>
         <div class="input_div">
-           <input id="adds_txt" type="text" name="adds" placeholder="詳細地址">
-            <input id="inset-autocomplete-input" data-type="search" placeholder="詳細地址">
+        <input id="inset-autocomplete-input" data-type="search" placeholder="詳細地址" name="adds">
 <ul id="list_ul" data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#inset-autocomplete-input">
-<li><a class="search_txt" href="#">桃園市</a></li>
-<li><a class="search_txt" href="#">台北市</a></li>
-<li><a class="search_txt" href="#">台中市</a></li>
-<li><a class="search_txt" href="#">高雄市</a></li>
-<li><a class="search_txt" href="#">台南市</a></li>
-<li><a class="search_txt" href="#">Dodge</a></li>
-<li><a class="search_txt" href="#">Ferrari</a></li>
-<li><a class="search_txt" href="#">Ford</a></li>
-<li><a href="#">GMC</a></li>
-<li><a href="#">Honda</a></li>
-<li><a href="#">Hyundai</a></li>
-<li><a href="#">Infiniti</a></li>
-<li><a href="#">Jeep</a></li>
-<li><a href="#">Kia</a></li>
-<li><a href="#">Lexus</a></li>
-<li><a href="#">Mini</a></li>
-<li><a href="#">Nissan</a></li>
-<li><a href="#">Porsche</a></li>
-<li><a href="#">Subaru</a></li>
-<li><a href="#">Toyota</a></li>
-<li><a href="#">Volkswagen</a></li>
-<li><a href="#">Volvo</a></li>
+
 </ul>
         </div>
     </section>
@@ -457,12 +435,44 @@ $(document).ready(function() {
         });
 
    //搜尋方框
-   $(".search_txt").click(function(event) {
-      $("#inset-autocomplete-input").val($(this).text());
-      $("#list_ul").hide();
+
+   $("#list_ul").on('click', '.search_txt', function(event) {
+   	event.preventDefault();
+   	$("#inset-autocomplete-input").val($(this).text());
+      $("#list_ul li").addClass('ui-screen-hidden');
+   });
+
+
+   $("#twzipcode [name='county']").change(function(event) {
+   	    adds_detial();
+   });
+
+   $("#twzipcode [name='district']").change(function(event) {
+   	    adds_detial();
    });
 
 });//JQUERY END
+
+function adds_detial() {
+
+	$.ajax({
+   	  	url: 'from_sql.php',
+   	  	type: 'GET',
+   	  	dataType: 'json',
+   	  	data: {
+   	  		    type: 'adds_detial',
+   	  		    zipcode: $("#twzipcode [name='zipcode']").val()
+   	  		  },
+   	    success:function (json) {
+
+   	    	$("#list_ul").html('');
+   	    	 
+   	    	$.each(json.adds_array, function() {
+   	    		 $("#list_ul").append('<li class="ui-screen-hidden"><a class="search_txt" href="#">'+this['road']+'</a></li>');
+   	    	});
+   	    }
+   	  });
+}
     	
     </script>
 </body>

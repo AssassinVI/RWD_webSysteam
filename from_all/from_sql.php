@@ -513,6 +513,26 @@ if ($_GET) {
      $pdo=NULL;
      echo json_encode(array('from_array'=>$from_array));
   }
+
+
+//--------------------------------------------------- 詳細地址查詢 ----------------------------------------------
+  elseif ($_GET['type']=='adds_detial') {
+    
+    $zipcode=$_GET['zipcode'];
+
+    $adds_array=array();
+
+     $pdo=pdo_conn();
+     $sql_q=$pdo->prepare("SELECT road FROM streetname WHERE zipcode=:zipcode");
+     $sql_q->bindparam(":zipcode", $zipcode);
+     $sql_q->execute();
+     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+       
+        array_push($adds_array, array('road'=>$row['road']));
+     }
+     $pdo=NULL;
+     echo json_encode(array('adds_array'=>$adds_array));
+  }
 }
 
 
