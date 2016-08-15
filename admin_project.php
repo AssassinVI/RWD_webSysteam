@@ -233,7 +233,7 @@ $("#sel_com").change(function(event) {
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>專案管理</h5>
-                            
+
                             <div class="ibox-tools">
                               <span class="no_display768">(點新增產生新建案)</span>
                                 <a href="edit_project.php?NewOrEdit=new" >

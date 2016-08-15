@@ -181,14 +181,21 @@
           background-color: <?php echo $map_life_btn['map_fun']; ?>;
        }
 
-      @media only screen and (max-width:800px) {
-         .big_txt b{
-            color: #fff;
 
-          }
-        }
 
         .imgwall{ width: 100%; height: 100%; display: block; }
+        .content{ width: 100%; }
+        /* ================== 幻燈片 720環景 基本圖文 google地圖  ====================== */
+        .img_box, .view_div, .base_div, .gmap_div, .tool_div, .you_div{ width:68%; margin:auto; }
+
+        @media only screen and (max-width:800px) {
+        	
+         .big_txt b { color: #fff; }
+        .img_box, .view_div, .base_div, .gmap_div, .tool_div, .you_div{ width:95%; margin:auto; }
+        }
+
+
+
 
     </style>
 
@@ -286,7 +293,7 @@
        elseif ($fun_name=='yu') { 
           $you_all=select_you($fun_id[$i]);
            $you_adds=explode("=", $you_all['you_adds']);
-            $you_html="";
+            $you_html="<div class='you_div'>";
            if (!empty($you_all['you_title'])) {
 
               $you_title=explode("(*)", $you_all['you_title']);
@@ -303,6 +310,7 @@
            $you_html.='';
            $you_html.='<h3 class="back_caseName"><hr class="back_hr"/>'.$case['case_name'].'<hr class="back_hr"/></h3>';//底色建案名稱
            $you_html.='';
+           $you_html.='</div>';
            $you_html.='</div>';
         echo $you_html;
        }
@@ -357,7 +365,7 @@
             $base_html.='<div class="p_txt"></div>';
            }
           
-          $base_html.='</div>';
+          
 
            $base_img=explode(',', $base_all['base_img']);
            for ($j=0; $j <count($base_img)-1 ; $j++) { 
@@ -384,7 +392,8 @@
 
            if ($base_all['line_show']=='y') {
               $base_html.='<h3 class="back_caseName"><hr class="back_hr"/>'.$case['case_name'].'<hr class="back_hr"/></h3>';//底色建案名稱
-           }          
+           }   
+           $base_html.='</div>';       
          echo $base_html;
          //echo "$('.content').find('p').addClass('p_txt');";
 
@@ -397,7 +406,7 @@
        elseif ($fun_name=='gm') { 
 
            $map_all=select_map($fun_id[$i]);
-            $map_div="";
+            $map_div="<div class='gmap_div'>";
            if (!empty($map_all['map_title'])) {
 
             $map_title=explode("(*)", $map_all['map_title']);
@@ -411,6 +420,7 @@
            $map_div.='<a id="map_placeholder" href="https://www.google.com/maps/dir//'.$map_all['map_position'].'/@ '.$map_all['map_position'].',17z/data=!4m5!1m4!3m3!1s0x0:0x0!2zMjXCsDAyJzE4LjkiTiAxMjHCsDE3JzM2LjEiRQ!3b1?hl=zh-TW">';
            $map_div.='<img src="../../assets/images/RWD/icom/placeholder.svg" alt="">';
            $map_div.=' 導航-基地位置</a>';
+           $map_div.='</div>';
            echo $map_div;
 
        }
@@ -427,7 +437,7 @@
           $point_txt=explode(',', $view720['point_txt']); //名稱
           $point_link=explode(',', $view720['point_link']); //連結
 
-          $view_txt='';
+          $view_txt='<div class="view_div">';
 
           if (!empty($view720['view720_title'])) {
 
@@ -465,6 +475,7 @@
           $view_txt.='<h3 class="back_caseName"><hr class="back_hr"/>'.$case['case_name'].'<hr class="back_hr"/></h3>'; //底色建案名稱
           $view_txt.='';
           $view_txt.='</div>';
+          $view_txt.='</div>';
 
           echo $view_txt;
          
@@ -483,14 +494,14 @@
     // ============================================= 房貸試算 ======================================================= 
          
         elseif ($fun_name=='hm') {
-           $hm_txt='<a class="nw_btn tool_btn" href="../../assets/php/house_math.php">房貸試算</a>';
+           $hm_txt='<div class="tool_div"><a class="nw_btn tool_btn" href="../../assets/php/house_math.php">房貸試算</a></div>';
            echo $hm_txt;
          } 
 
       // ============================================= 索取DM ======================================================= 
          
         elseif ($fun_name=='dm') {
-           $dm_txt='<a class="nw_btn tool_btn" href="../../assets/php/catch_DM.php?case_id='.$case_id.'&case_name='.$case['case_name'].'">索取DM</a>';
+           $dm_txt='<div class="tool_div"><a class="nw_btn tool_btn" href="../../assets/php/catch_DM.php?case_id='.$case_id.'&case_name='.$case['case_name'].'">索取DM</a></div>';
            echo $dm_txt;
          } 
 
@@ -498,7 +509,7 @@
       // ============================================= 電子報 ======================================================= 
          
         elseif ($fun_name=='nw') {
-           $nw_txt='<a class="nw_btn tool_btn" href="../../assets/php/newsletter.php?case_id='.$case_id.'&case_name='.$case['case_name'].'">索取電子報</a>';
+           $nw_txt='<div class="tool_div"><a class="nw_btn tool_btn" href="../../assets/php/newsletter.php?case_id='.$case_id.'&case_name='.$case['case_name'].'">索取電子報</a></div>';
            echo $nw_txt;
          } 
 
@@ -506,7 +517,7 @@
       // ============================================= 聯絡我們 ======================================================= 
          
         elseif ($fun_name=='ca') {
-           $nw_txt='<a class="nw_btn tool_btn" href="../../assets/php/call_we.php?fun_id='.$fun_id[$i].'&case_name='.$case['case_name'].'">聯絡我們</a>';
+           $nw_txt='<div class="tool_div"><a class="nw_btn tool_btn" href="../../assets/php/call_we.php?fun_id='.$fun_id[$i].'&case_name='.$case['case_name'].'">聯絡我們</a></div>';
            echo $nw_txt;
          } 
 

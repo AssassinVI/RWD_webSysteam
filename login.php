@@ -7,7 +7,7 @@ session_start();
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="zh-tw">
 
 <head>
 

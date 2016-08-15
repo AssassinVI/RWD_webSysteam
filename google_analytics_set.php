@@ -79,15 +79,15 @@ $sql_query="SELECT * FROM build_case LEFT JOIN google_analytics ON build_case.ca
            while ($row=mysql_fetch_array($re_set_all)) {
             
             if (!empty($row['google_view_code'])) {
-                 $i+=500;
+                 $i+=1000;
                echo 'var t'.$i.'=setTimeout("get_analytics(\''.$row['google_view_code'].'\', \''.$row['case_id'].'\')",'.$i.');';
                  $i+=1000;
                echo 'var t'.$i.'_1=setTimeout("ajax_analytics()",'.$i.');';
-                 $i+=500;
+                 $i+=1000;
                echo 'var t'.$i.'_2=setTimeout(\'$("input:hidden").val("")\','.$i.');';
             }
            } 
-            $i+=500;
+            $i+=1000;
            echo 'var t'.$i.'=setTimeout("location_web(\'google_analytics_set.php\',\'全部更新完成\')",'.$i.');';
            echo 'var t'.$i.'=setTimeout("$(\'#loading\').css(\'display\', \'none\')",'.$i.');';
          ?>
