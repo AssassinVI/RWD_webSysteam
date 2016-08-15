@@ -1,0 +1,132 @@
+#tool_box_btn{
+	display: none;
+  position: fixed;	
+  background-color: #0072E3;
+  left: 44%;
+  bottom: 0px;
+  padding: 10px;
+  z-index: 999;
+  border-radius: 40px 40px 0px 0px;
+  padding: 14px;
+ text-decoration: none;
+ margin:0px;
+
+}
+
+.tool_box{
+ /*background-color: rgba(0,0,0,0);*/
+}
+.tool_lay{
+position: fixed;
+width: 45px;
+height: 45px;
+border-radius: 30px 30px;
+  left: 44%;
+  bottom: 0px;
+transform: rotate(180deg);
+-ms-transform: rotate(180deg);   /* IE 9 */
+-webkit-transform: rotate(180deg); /* Safari and Chrome */
+-o-transform: rotate(180deg);    /* Opera */
+-moz-transform: rotate(180deg);    /* Firefox */
+opacity: 0;
+
+transition:transform 0.5s ,opacity 0.3s;
+ -webkit-transition: -webkit-transform 0.5s ,opacity 0.3s ;/* google*/
+ -moz-transition:-moz-transform 0.5s ,opacity 0.3s;/* Firefox 4*/
+ -o-transition:-o-transform 0.5s ,opacity 0.3s;/* Opera*/
+}
+.tool_lay_base{
+  width: 45px;
+  height: 45px;
+  border-radius: 30px 30px;
+}
+.tool_lay_base img{
+ border-radius: 30px 30px;
+ width: 45px;
+ height: 45px;	
+}
+.btn_lay{
+  padding-top: 10px;
+  text-align: center;
+  font-size: 21px;
+}
+
+
+#phone_btn{ /* 電話 */
+ 
+  background-color: #00D6D6;
+  text-align: center;
+  font-size: 23px;
+  margin-left:6%;
+}
+#LINE_btn{ /* LINE */
+  margin-left:7%;
+}
+#fb_btn{ /* FB */
+background-color: #fff;
+ margin-left:23%;
+} 
+#gm_btn{ /* map */
+ margin-left:7%;
+}
+
+
+
+#gm_phl_btn{ /* 醫 */
+  background-color: #7f7f7f;
+  margin:0px;
+  text-align: center;
+  font-size: 20px;
+}
+#gm_home_btn{ /* 住 */
+background-color: #c33d3d;
+margin:0px;
+
+}
+#gm_school_btn{ /* 育 */
+    background-color: #2c6697;
+    margin:0px;
+}
+#gm_fun_btn{ /* 樂 */
+background-color: #adcf1d;
+margin:0px;
+}
+#gm_food_btn{ /* 食 */
+
+  background-color:rgb(255, 148, 88);
+  margin:0px;
+}
+
+.tool_lay.rotate{
+opacity: 100;
+
+  transform: rotate(0deg);
+-ms-transform: rotate(0deg);   /* IE 9 */
+-webkit-transform: rotate(0deg); /* Safari and Chrome */
+-o-transform: rotate(0deg);    /* Opera */
+-moz-transform: rotate(0deg);    /* Firefox */
+}
+
+ @media only screen and (max-width:768px){
+  #tool_box_btn{
+  	display: block;
+  }
+  #phone_btn{ /* 電話 */
+
+  margin-left:17%;
+}
+ }
+
+ @media only screen and (max-width:640px){
+
+  #phone_btn{ /* 電話 */
+
+  margin-left:15%;
+}
+ @media only screen and (max-width:430px){
+
+  #phone_btn{ /* 電話 */
+
+  margin-left:7%;
+}
+}
