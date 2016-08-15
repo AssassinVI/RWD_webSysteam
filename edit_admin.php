@@ -70,7 +70,7 @@ if ($_SESSION['competence']!='admin') {
               $("#sel_case_div").css('display', 'none');
 
            }
-           else if(select=='case'){
+           else if(select=='case' || select=='employee'){
               get_case_com();
               $("#sel_com_div").css('display', 'none');
               $("#sel_case_div").css('display', 'block');
@@ -97,7 +97,7 @@ if ($_SESSION['competence']!='admin') {
           
           echo '$("#sel_com_div").css("display", "block");';
        }
-       elseif ($competence=='case') {
+       elseif ($competence=='case' OR $competence=='employee') {
          
           echo '$("#sel_case_div").css("display", "block");';
        }
@@ -202,6 +202,7 @@ if ($_SESSION['competence']!='admin') {
                                           <option value="user">最大使用者</option>
                                           <option value="company">公司權限</option>
                                           <option value="case">專案權限</option>
+                                          <option value="employee">專員</option>
                                       </select>
                                     </div>
                                 </div>
@@ -261,7 +262,7 @@ if ($_SESSION['competence']!='admin') {
                                           
                                       <?php 
                                          
-                                         if ($competence=='case'){
+                                         if ($competence=='case' OR $competence=='employee'){
 
                                             $reslut_com=db_conn("SELECT com_id, com_name FROM company");
                                             while ($row=mysql_fetch_array($reslut_com)) {
@@ -287,7 +288,7 @@ if ($_SESSION['competence']!='admin') {
                                           
                                        <?php
                                       
-                                      if ($competence=='case'){
+                                      if ($competence=='case' OR $competence=='employee'){
 
                                          $result_case=db_conn("SELECT case_id, case_name FROM build_case WHERE com_id='$com_id'");
                                         if (mysql_num_rows($result_case)>0) {

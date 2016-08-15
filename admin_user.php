@@ -129,8 +129,9 @@ if ($_SESSION['competence']!='admin') {
                               <select id="sel_user">
                                 <option value="admin">管理者</option>
                                 <option value="user">最大使用者</option>
-                                <option value="company">公司權限</option>
+                                <option value="company">群組權限</option>
                                 <option value="case">專案權限</option>
+                                <option value="employee">專員</option>
                               </select>
                              </div>
                         </div>

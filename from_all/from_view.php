@@ -25,6 +25,8 @@ $pdo=NULL;
 	<link rel="stylesheet" type="text/css" href="../js/plugins/jquery_mobile/jquery.mobile.structure-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/normalize.css">
     <link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/main.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
    
     	<!--<link rel="stylesheet" type="text/css" href="../css/plugins/jquery_step/jquery.steps.css">-->
 	<style type="text/css">
@@ -80,20 +82,23 @@ $pdo=NULL;
     <div data-role="collapsible">
     <h3 class="scor_top">公司資料</h3>
     <section>
-        <div class="input_div"><label>職業：</label>
-          <select name="job" class="big_select">
-            <option value="">請選擇</option>
-            <option value="作業員">作業員</option>
-            <option value="農林漁牧">農林漁牧</option>
-            <option value="交通運輸業">交通運輸業</option>
-            <option value="餐旅業">餐旅業</option>
-            <option value="工程師">工程師</option>
-            <option value="服務業">服務業</option>
-            <option value="公職">公職</option>
-            <option value="軍人">軍人</option>
-            <option value="其他">其他</option>
-          </select>
-        </div>
+
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>職業：</legend><br>
+            <input id="job1" type="radio" value="作業員" name="job" > <label for="job1">作業員</label>　
+            <input id="job2" type="radio" value="農林漁牧" name="job" > <label for="job2">農林漁牧</label>　 
+            <input id="job3" type="radio" value="交通運輸業" name="job" > <label for="job3">交通運輸業</label>　
+            <input id="job4" type="radio" value="餐旅業" name="job" > <label for="job4">餐旅業</label>
+            <input id="job5" type="radio" value="工程師" name="job" > <label for="job5">工程師</label>
+       </fieldset>
+        
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+            <input id="job6" type="radio" value="服務業" name="job" > <label for="job6">服務業</label>
+            <input id="job7" type="radio" value="公職人員" name="job" > <label for="job7">公職人員</label>
+            <input id="job8" type="radio" value="軍人" name="job" > <label for="job8">軍人</label>
+            <input id="job9" type="radio" value="其他" name="job" > <label for="job9">其他</label>
+        </fieldset>
+
         <div class="input_div"><input type="text" name="job_txt" placeholder="其他職業"></div>
         <div class="input_div"><label>職稱：</label><input type="text" name="job_title" placeholder="職稱"></div>
         <div class="input_div"><label>年齡：</label><input type="text" name="cust_old" placeholder="年齡"></div>
@@ -122,51 +127,43 @@ $pdo=NULL;
             <input id="mar_child5" type="radio" value="4個以上" name="mar_child" > <label for="mar_child5">4個以上</label> 
        </fieldset>
 
-       <div class="input_div">
-          <label>月收入：</label>
-          <select name="mon_income" class="big_select">
-             <option value="">請選擇</option>
-             <option value="2萬~3萬">2萬~3萬</option>
-             <option value="3萬~5萬">3萬~5萬</option>
-             <option value="5萬~8萬">5萬~8萬</option>
-             <option value="8萬~12萬">8萬~12萬</option>
-             <option value="12萬~20萬">12萬~20萬</option>
-             <option value="20萬以上">20萬以上</option>
-          </select>
-       </div>
-       <div class="input_div">
-          <label>交通工具：</label>
-          <select name="transportation" class="big_select">
-             <option value="">請選擇</option>
-       	     <option value="汽車">汽車</option>
-       	     <option value="機車">機車</option>
-       	     <option value="大眾運輸">大眾運輸</option>
-       	     <option value="其他">其他</option>
-          </select>
-         </div>
-       <div class="input_div">
-          <label>家庭成員人數：</label>
-            <select name="live_people" class="big_select">
-               <option value="">請選擇</option>
-               <option value="1">1人</option>
-               <option value="2">2人</option>
-               <option value="3">3人</option>
-               <option value="4">4人</option>
-               <option value="5">5人以上</option>
-            </select>
-       </div>
-       <div class="input_div">
-          <label>現住房屋：</label>
-          <select name="homeowner" class="big_select">
-             <option value="">請選擇</option>
-       	     <option value="租賃">租賃</option>
-       	     <option value="宿舍">宿舍</option>
-       	     <option value="父母所有">父母所有</option>
-       	     <option value="配偶所有">配偶所有</option>
-       	     <option value="本人所有">本人所有</option>
-       	     <option value="其他">其他</option>
-          </select>
-         </div>
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>月收入：</legend><br>
+            
+            <input id="mon_income1" type="radio" value="3萬~5萬" name="mon_income" > <label for="mon_income1">3萬~5萬</label>　
+            <input id="mon_income2" type="radio" value="5萬~8萬" name="mon_income" > <label for="mon_income2">5萬~8萬</label>　 
+            <input id="mon_income3" type="radio" value="8萬~12萬" name="mon_income" > <label for="mon_income3">8萬~12萬</label>　
+            <input id="mon_income4" type="radio" value="12萬~20萬" name="mon_income" > <label for="mon_income4">12萬~20萬</label>
+            <input id="mon_income5" type="radio" value="20萬以上" name="mon_income" > <label for="mon_income5">20萬以上</label> 
+       </fieldset>
+
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>交通工具：</legend><br>
+            <input id="transportation1" type="radio" value="汽車" name="transportation" > <label for="transportation1">汽車</label>　
+            <input id="transportation2" type="radio" value="機車" name="transportation" > <label for="transportation2">機車</label>　 
+            <input id="transportation3" type="radio" value="大眾運輸" name="transportation" > <label for="transportation3">大眾運輸</label>　
+            <input id="transportation4" type="radio" value="其他" name="transportation" > <label for="transportation4">其他</label>
+       </fieldset>
+
+        <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>家庭成員人數：</legend><br>
+            <input id="live_people1" type="radio" value="1" name="live_people" > <label for="live_people1">1人</label>　
+            <input id="live_people2" type="radio" value="2" name="live_people" > <label for="live_people2">2人</label>　 
+            <input id="live_people3" type="radio" value="3" name="live_people" > <label for="live_people3">3人</label>　
+            <input id="live_people4" type="radio" value="4" name="live_people" > <label for="live_people4">4人</label>
+            <input id="live_people5" type="radio" value="5+" name="live_people" > <label for="live_people5">5人以上</label>
+       </fieldset>
+
+       <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
+           <legend>現住房屋：</legend><br>
+            <input id="homeowner1" type="radio" value="租賃" name="homeowner" > <label for="homeowner1">租賃</label>　
+            <input id="homeowner2" type="radio" value="宿舍" name="homeowner" > <label for="homeowner2">宿舍</label>　 
+            <input id="homeowner3" type="radio" value="父母所有" name="homeowner" > <label for="homeowner3">父母所有</label>　
+            <input id="homeowner4" type="radio" value="配偶所有" name="homeowner" > <label for="homeowner4">配偶所有</label>
+            <input id="homeowner5" type="radio" value="本人所有" name="homeowner" > <label for="homeowner5">本人所有</label>
+            <input id="homeowner6" type="radio" value="其他" name="homeowner" > <label for="homeowner6">其他</label>
+       </fieldset>
+    
 
         <fieldset class="input_div" data-role="controlgroup" data-type="horizontal">
            <legend>現住房屋型態：</legend><br>
@@ -493,9 +490,10 @@ $(document).ready(function() {
         //指定視窗物件
 
     $(".scor_top").click(function() {
-            $body.animate({
-                scrollTop: 0
-            }, 500);
+            $body.animate({ scrollTop: 0 }, 500);
+            
+            $(".scor_top").next().removeClass('fadeInDown');
+            $(this).next().addClass('animated fadeInDown');
         });
 
    //搜尋方框

@@ -352,14 +352,14 @@ if ($_GET) {
 
        if ($_GET['many_num']=='all' OR $_GET['many_num']=='undefined') {
          
-         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id ");
+         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id ORDER BY set_time DESC ");
          $sql_q->bindparam(":record_id", $_GET['record_id']);
        }
        else{
 
          $many_num=(int)$_GET['many_num'];
          $start_num=(int)$_GET['start_num'];
-         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id LIMIT :start_num,:many_num");
+         $sql_q=$pdo->prepare("SELECT from_id, set_time, name, tel_H, phone FROM from_question WHERE record_id=:record_id ORDER BY set_time DESC LIMIT :start_num,:many_num ");
          $sql_q->bindparam(":record_id", $_GET['record_id']);
          $sql_q->bindparam(":many_num", $many_num, PDO::PARAM_INT);
          $sql_q->bindparam(":start_num", $start_num, PDO::PARAM_INT);

@@ -19,12 +19,12 @@ if ($_POST) {
 
     if ($_POST['many_num']=='undefined' OR $_POST['many_num']=='all') {
         
-        $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id");
+        $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id ORDER BY set_time DESC");
     }
     else{
         $start_num=(int)$_POST['start_num'];
         $many_num=(int)$_POST['many_num'];
-        $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id LIMIT :start_num, :many_num");
+        $sql_q=$pdo->prepare("SELECT from_id, set_time, name, phone FROM from_question WHERE name LIKE :name AND phone LIKE :phone AND email LIKE :email AND is_buy LIKE :is_buy AND record_id=:record_id ORDER BY set_time DESC LIMIT :start_num, :many_num");
 
         $sql_q->bindparam(':start_num',$start_num, PDO::PARAM_INT);
         $sql_q->bindparam(':many_num',$many_num, PDO::PARAM_INT);
@@ -120,6 +120,8 @@ if ($_POST) {
     for ($i=0; $i < count($media); $i++) { 
     	$sql_query.=" AND media LIKE '%".$media[$i]."%'";
     }
+
+        $sql_query.=" ORDER BY set_time DESC";
 
    //----------------------------- 取其他資料筆數 -----------------------------------
     if ($_POST['many_num']!='all') {
