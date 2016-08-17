@@ -50,6 +50,7 @@ if ($_POST) {
   elseif ($_POST['type']=='adv_search') {  
 
   	$record_id=$_POST['record_id']; 
+    $user_name='%'.$_POST['user_name'].'%';
   	$name='%'.$_POST['name'].'%';
   	$set_time_start=$_POST['set_time_start'];
   	$set_time_end=$_POST['set_time_end'];
@@ -71,7 +72,7 @@ if ($_POST) {
     $is_buy='%'.$_POST['is_buy'].'%';
     $media=explode(',', $_POST['media']);
 
-    $sql_query="SELECT from_id, set_time, name, phone FROM from_question WHERE record_id=:record_id AND name LIKE :name ";
+    $sql_query="SELECT from_id, set_time, name, phone FROM from_question WHERE record_id=:record_id AND user_name LIKE :user_name AND name LIKE :name ";
 
     if (!empty($_POST['set_time_start'])) {
     	$sql_query.=" AND set_time>='".$set_time_start."'";
@@ -136,6 +137,7 @@ if ($_POST) {
     $pdo=pdo_conn();
     $sql_q=$pdo->prepare($sql_query);
     $sql_q->bindparam(':record_id', $record_id);
+    $sql_q->bindparam(':user_name', $user_name);
     $sql_q->bindparam(':name', $name);
     $sql_q->bindparam(':phone', $phone);
     $sql_q->bindparam(':adds', $adds);

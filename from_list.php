@@ -277,6 +277,7 @@
             data: {
                      type: 'adv_search',
                 record_id: '<?php echo $record_id;?>',
+                user_name: $('[name="user_name"]').val(),
                      name: $('[name="name"]').val(), 
            set_time_start: $('[name="set_time_start"]').val(),
              set_time_end: $('[name="set_time_end"]').val(),
@@ -509,6 +510,12 @@
                         </div>
                         <div class="ibox-content">
                           <form method="POST" action="from_all/search_sql.php" class="form-horizontal">
+                            <div class="form-group">
+                                   <label class="col-sm-2 control-label">專員姓名：</label>
+                                    <div class="col-sm-2">
+                                       <input name="user_name" type="text" class="form-control" value="">
+                                    </div>
+                                </div>
                             <div class="form-group">
                                    <label class="col-sm-2 control-label">顧客姓名：</label>
                                     <div class="col-sm-2">
