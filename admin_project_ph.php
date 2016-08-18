@@ -39,10 +39,10 @@
      .logo_img img{ width: 100%; height: 100%; }
 
      .logo_img div, .logo_div div{ position: absolute; width: 40px; text-align: center;  padding: 5px 0px; color: rgba(26, 179, 148, 0.5); font-size: 20px; background-color: rgba(255, 255, 255, 0.6); border-radius: 50px; margin:27px; }
+     .name_td{  font-size: 30px; }
+     .name_td a{ display: block; padding:20px 0px; text-align: center; background-color: #22b295; border-radius: 10px; color: #fff; box-shadow: 2px 2px 3px #b3b3b3;}
 
-     .name_td{  font-size: 20px; }
-
-     .name_td a{ display: block; padding:25px 0px; }
+     .name_td a:hover{ color:#fff; background:#009688; box-shadow: none; }
 
      #case_tital{ font-size: 17px; }
 
@@ -68,17 +68,6 @@
 select_com();
 
 
- /* ============================== 燈箱 ===================================== */
-
-          $(".iframe_box").fancybox({
-
-               'width'                 : '50%',
-               'autoScale'               : false,
-               'transitionIn'          : 'none',
-               'transitionOut'          : 'none',
-               'type'                    : 'iframe'
-          });
-
  }); //jquery END
 
  
@@ -88,19 +77,19 @@ select_com();
           $.getJSON('rwd_php_sys.php?admin=company', function(json) {
                 $.each(json.com_array, function() {
 
-                  var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/com_logo/'+this['com_logo']+'&h=80&w=90&zc=1';
+                 // var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/com_logo/'+this['com_logo']+'&h=80&w=90&zc=1';
 
                       var info='<tr>';
-                      if (this['com_logo']=='') { 
+                      /*if (this['com_logo']=='') { 
 
                          info=info+'<td><a href="admin_project_phcs.php?com_id='+this['com_id']+'" class="logo_div"><div><i class="fa fa-hand-o-up"></i></div>公司LOGO</a></td>';
                        }
                        else{
 
                          info=info+'<td><a href="admin_project_phcs.php?com_id='+this['com_id']+'" class="logo_img"><div><i class="fa fa-hand-o-up"></i></div><img src="'+small_img+'"></a></td>';
-                       }
+                       }*/
 
-                     info=info+'<td><div class="name_td"><a href="admin_project_phcs.php?com_id='+this['com_id']+'">'+this['com_name']+'</a></div></td>';
+                     info=info+'<td><div class="name_td"><a href="admin_phcs_list.php?com_id='+this['com_id']+'">'+this['com_name']+'</a></div></td>';
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
@@ -215,16 +204,16 @@ select_com();
                                 <div class="col-lg-12 no_padding">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>公司</h5>
-                            <p style="float:right;">點擊LOGO查看專案</p>
+                            <h5>組</h5>
+                            
                         </div>
                         <div class="ibox-content">
 
                             <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
                                 <thead>
                                 <tr id="case_tital">
-                                    <th>公司LOGO</th>
-                                    <th>公司名稱</th>
+                                   <!-- <th>公司LOGO</th>-->
+                                    <th>組名稱</th>
                                 </tr>
                                 </thead>
                                 <tbody id="all_project">

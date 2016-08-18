@@ -41,7 +41,7 @@
       margin-left: 30px;
       font-size: 12px;
      }
-     .logo_div{ display: block; width: 90px; height: 80px; padding: 5px; font-size: 24px; text-align: center; background-color: #bbbbbb; color: #dedede; }
+     .logo_div{ display: block; width: 90px; height: 80px; padding-top: 5px; font-size: 24px; text-align: center; background-color: #bbbbbb; color: #dedede; }
      .logo_img{ display: block; width: 90px; height: 80px; }
      .logo_img img{ width: 100%; height: 100%; }
      .logo_img div, .logo_div div{ position: absolute; width: 40px; text-align: center;  padding: 5px 0px; color: rgba(255, 255, 255, 0.5); font-size: 20px; background-color: rgba(255, 255, 255, 0.35); border-radius: 50px; margin:27px; }
@@ -137,7 +137,7 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                       else{
                         info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
@@ -166,7 +166,7 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                       var info='<tr class="case_tr1">';
 
                      if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                       else{
                         info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
@@ -191,7 +191,7 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                       else{
                         info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
@@ -218,7 +218,7 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span>'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                       else{
                         info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';

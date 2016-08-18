@@ -79,7 +79,7 @@ if ($_POST) {
       echo "alert('".$txt."');";
 
       /* ============================ 權限判斷 ================================== */
-      if (check_mobile()) {
+      if (check_mobile()) { //手機判斷
         
          if ($competence=='admin') {
            echo "location.replace('admin_user.php');";
@@ -88,7 +88,7 @@ if ($_POST) {
            echo "location.replace('admin_project_ph.php');";
          }
          elseif(($competence=='case') OR ($competence=='company')){
-           echo "location.replace('admin_project_phcs.php');";
+           echo "location.replace('admin_phcs_list.php');";
          }
       }
       else{
@@ -1180,7 +1180,7 @@ if ($_GET) {
     }
   }
 
-  /* ======================================== 專案(手機板) ================================================ */
+  /* ======================================== 專案分析(手機板) ================================================ */
 elseif($_GET['admin']=='project_ph'){
 
   $com_id=mysql_real_escape_string($_GET['com_id']);
@@ -1216,6 +1216,59 @@ elseif($_GET['admin']=='project_ph'){
     }
    echo json_encode(array('pro_ph_array'=>$pro_ph_array));
 }
+
+
+  /* ======================================== 專案(手機板) ================================================ */
+elseif($_GET['admin']=='phcs_list'){
+
+  $com_id=mysql_real_escape_string($_GET['com_id']);
+    $case_id=mysql_real_escape_string($_GET['case_id']);
+    $pro_ph_array=array();
+    
+    if (!empty($com_id)) {
+      
+       $result = db_conn("SELECT case_id, case_name, case_logo FROM build_case WHERE com_id='$com_id'" );
+    }
+    else{
+
+        $result = db_conn("SELECT case_id, case_name, case_logo FROM build_case WHERE case_id='$case_id'" );
+    }
+
+    while ($row=mysql_fetch_array($result)) {
+       
+       $case_logo=$row['case_logo'];
+       $case_id=$row['case_id'];
+       $case_name=$row['case_name'];
+         
+           array_push($pro_ph_array, array(    'case_id'=> $case_id,
+                                             'case_name'=> $case_name,
+                                             'case_logo'=> $case_logo,
+                                             ));
+        
+       
+    }
+   echo json_encode(array('pro_ph_array'=>$pro_ph_array));
+}
+
+
+
+
+/* =================================== 功能判斷 ========================================== */
+elseif($_GET['admin']=='check_tool'){
+     $case_id=mysql_real_escape_string($_GET['case_id']);
+     $tool_array=array();
+
+        $result = db_conn("SELECT tool_id, record_id FROM expand_record WHERE case_id='$case_id' AND is_use='1'" );
+        while ($row=mysql_fetch_array($result)) {
+          
+           array_push($tool_array, array(   'tool_id'=> $row['tool_id'],
+                                          'record_id'=> $row['record_id']
+                                         ));
+        }
+    echo json_encode(array('tool_array'=>$tool_array));  
+}
+
+
 
 /* ========================================= all刪除 ============================================ */
    elseif ($_GET['delete'] == 'admin_user') {
