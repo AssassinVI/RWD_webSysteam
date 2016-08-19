@@ -65,15 +65,28 @@ if ($_SESSION['competence']!='admin') {
      $(document).ready(function() {
          $("#admin_user").addClass('active');
          $('.footable').footable();
+
+
         select_user('admin'); //讀取管理者資料
 
         $("#sel_user").change(function(event) { //
-            var now_user=$(":selected").val();
+            var now_user=$("#sel_user :selected").val();
              $("#user_tb").html("");
             select_user(now_user);
         });
 
+        // --------------- 停權資料 ------------------
+        select_is_use('admin');
+
+        $("#is_sel_user").change(function(event) { //
+            var now_user=$("#is_sel_user :selected").val();
+             $("#is_user_tb").html("");
+            select_is_use(now_user);
+        });
+
      });
+
+     var now_user_id='<?php echo $_SESSION['user_id'];?>';
 
      function select_user(competence) {
               $.getJSON('rwd_php_sys.php?admin=user&competence='+competence,  function(json) {
@@ -83,10 +96,27 @@ if ($_SESSION['competence']!='admin') {
                   info=info+"<td>"+this['User_Name']+"</td>";
                   info=info+"<td class='no_display1024'>"+this['User_phone']+"</td>";
                   info=info+"<td class='no_display1024'>"+this['User_adds']+"</td>";
-                  info=info+"<td class='no_display768'><a href='admin_expand.php?User_id="+this['User_id']+"'>擴充</a></td>";
-                  info=info+"<td><a href='admin_project.php?User_id="+this['User_id']+"&com_id="+this['com_id']+"'>管理</a></td>";
+
+                  if ($("#sel_user :selected").val()=='employee') {
+                     info=info+"<td class='no_display768'>無</td>";
+                     info=info+"<td>無</td>";
+                  }
+                  else{
+                     info=info+"<td class='no_display768'><a href='admin_expand.php?User_id="+this['User_id']+"'>擴充</a></td>";
+                     info=info+"<td><a href='admin_project.php?User_id="+this['User_id']+"&com_id="+this['com_id']+"'>管理</a></td>";
+                  }
+                  
                   info=info+"<td><a href='edit_admin.php?User_id="+this['User_id']+"'>修改</a></td>";
-                  info=info+"<td class='no_display768'><a class='del_user_"+this['User_id']+"' href='#'>刪除</a></td>";
+
+                  if (now_user_id==this['User_id']) {
+                     info=info+"<td class='no_display768'>無</td>";
+                     info=info+"<td class='no_display768'>無</td>";
+                  }
+                  else{
+                     info=info+"<td class='no_display768'><a class='del_user_"+this['User_id']+"' href='#'>刪除</a></td>";
+                     info=info+"<td class='no_display768'><a class='is_use_"+this['User_id']+"' href='#'>停權</a></td>";
+                  }
+                  
                   info=info+"</tr>";
                     $("#user_tb").append(info);
 
@@ -95,6 +125,36 @@ if ($_SESSION['competence']!='admin') {
                     $(".del_user_"+userId).click(function() {
                         if (confirm('確定要刪除??')) {
                             location.href="rwd_php_sys.php?delete=admin_user&User_id="+userId;
+                        }
+                    });
+
+                    $(".is_use_"+userId).click(function() {
+                        if (confirm('是否停權??')) {
+                            location.href="rwd_php_sys.php?delete=is_use&active=0&User_id="+userId;
+                        }
+                    });
+              });
+       });
+     }
+
+
+/* ======================================== 停權名單 ======================================== */
+          function select_is_use(competence) {
+              $.getJSON('rwd_php_sys.php?admin=is_use&competence='+competence,  function(json) {
+              $.each(json.user_array, function() {
+                   var info="<tr>";
+                  info=info+"<td class='no_display768'>"+this['User_id']+"</td>";
+                  info=info+"<td>"+this['User_Name']+"</td>";
+                  info=info+"<td class='no_display768'><a class='active_use_"+this['User_id']+"' href='#'>啟用</a></td>";
+                  
+                  info=info+"</tr>";
+                    $("#is_user_tb").append(info);
+
+                    var userId=this['User_id'];
+
+                    $(".active_use_"+userId).click(function() {
+                        if (confirm('是否啟用??')) {
+                            location.href="rwd_php_sys.php?delete=is_use&active=1&User_id="+userId;
                         }
                     });
               });
@@ -148,10 +208,54 @@ if ($_SESSION['competence']!='admin') {
                                     <th>專案管理</th>
                                     <th>修改</th>
                                     <th class='no_display768'>刪除</th>
+                                    <th class='no_display768'>停權</th>
                                 </tr>
                                 </thead>
 
                                 <tbody id="user_tb">
+
+                                </tbody>
+                               <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                              <div class="col-lg-10 no_padding">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>停權資料表 </h5>
+                           <div class="ibox-tools">
+
+                            <div id="sel_user_div">
+                              <label for="is_sel_user">權限: </label>
+                              <select id="is_sel_user">
+                                <option value="admin">管理者</option>
+                                <option value="user">最大使用者</option>
+                                <option value="company">群組權限</option>
+                                <option value="case">專案權限</option>
+                                <option value="employee">專員</option>
+                              </select>
+                             </div>
+                        </div>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                                <thead>
+                                <tr>
+                                    <th class="no_display768">使用者ID</th>
+                                    <th>使用者名稱</th>
+                                    <th class='no_display768'>恢復權限</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="is_user_tb">
 
                                 </tbody>
                                <tfoot>

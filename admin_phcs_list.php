@@ -131,14 +131,14 @@
                       }
 
                      info=info+'<td id="tool_td">'; //功能
-                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
+                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
 
                      info=info+'</td>';
                      info=info+'</tr>';
 
                     $("#all_project").append(info);
 
-                    check_tool(this['case_id']);//功能判斷
+                    check_tool(this['case_id'],com_id);//功能判斷
                 }); 
           });
      } //fun END
@@ -162,7 +162,7 @@
                         info=info+'<td><div class="logo_img"><img src="'+small_img+'"></div><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                      info=info+'<td >'; //功能
-                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
+                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
                      
                      info=info+'</td>';
                      info=info+'</tr>';
@@ -176,14 +176,14 @@
 
 
      /* ========================== 功能判斷 ============================= */
-     function check_tool(case_id) {
+     function check_tool(case_id,com_id) {
         $.getJSON('rwd_php_sys.php?admin=check_tool&case_id='+case_id, function(json){
               
               $.each(json.tool_array, function() {
                 
                   if (this['tool_id']=='tool20160624002') {
                     // $("#fq_btn_"+case_id).css('backgroundColor', '#248fc3');
-                     var info='<a id="fq_btn_'+case_id+'" style="background:#248fc3;" href="#"><i class="fa fa-edit"></i>問卷</a>';
+                     var info='<a id="fq_btn_'+case_id+'" style="background:#248fc3;" href="admin_project_phcs.php?com_id='+com_id+'&type=form"><i class="fa fa-edit"></i>問卷</a>';
                      $("#tool_td").append(info);
                   }
               });

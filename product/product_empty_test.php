@@ -117,6 +117,18 @@
     <script type="text/javascript" src="../../assets/js/plugins/modernizr.min.js"></script>
 
 
+
+
+
+
+<!-- 影片背景 -->
+  <link href="http://vjs.zencdn.net/5.10.8/video-js.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="bigvideo.css">
+
+
+
+
+
    
    <!-- 新工具欄 new_toolBar -->
    <?php 
@@ -160,7 +172,8 @@
         box-shadow: none;
        }
       body #wrapper{
-        background-color: <?php echo $color['back_color'];?>;/* 背景 */
+       /* background-color: <?php echo $color['back_color'];?>;*//* 背景 */
+        background-color: rgba(38, 38, 38, 0);/* 背景 */
        }
 
        #gm_food_btn{
@@ -361,6 +374,17 @@
     <script type="text/javascript" src="../../assets/js/minigrid.js"></script>
 
     
+   
+
+
+
+  <!-- 影片背景 -->
+   <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.min.js"   integrity="sha256-eEa1kEtgK9ZL6h60VXwDsJ2rxYCwfxi40VZ9E0XwoEA=" crossorigin="anonymous"></script>
+      <script src="http://vjs.zencdn.net/5.10.8/video.js"></script>
+      <script type="text/javascript" src="bigvideo.js"></script>
+
+
+
 
    
     <!-- 新工具欄 -->
@@ -892,6 +916,21 @@
             effect : "fadeIn",
             placeholder : "../../assets/images/grey.gif"
         });
+
+
+
+
+
+
+
+var BV = new $.BigVideo();
+    BV.init();
+    BV.show('loop5_360.mp4',{ambient:true});
+
+
+
+
+
 
 
 

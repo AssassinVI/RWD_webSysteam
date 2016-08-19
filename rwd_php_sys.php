@@ -56,7 +56,7 @@ if ($_POST) {
 
 		$user_id = mysql_real_escape_string($_POST['user_id']);
 		$user_pwd = mysql_real_escape_string($_POST['user_pwd']);
-		$result = db_conn("SELECT User_Name, User_id, competence, com_id, case_id FROM admin_user WHERE login_id='$user_id' and login_pwd='$user_pwd'");
+		$result = db_conn("SELECT User_Name, User_id, competence, com_id, case_id FROM admin_user WHERE login_id='$user_id' AND login_pwd='$user_pwd' AND is_use='1'");
 
 		if (mysql_num_rows($result)>0) {
 			while ($row = mysql_fetch_array($result)) {
@@ -1113,7 +1113,7 @@ if ($_GET) {
   elseif ($_GET['admin']=='user'){
     $competence=mysql_real_escape_string($_GET['competence']);
     $user_array=array();
-  $result=db_conn("SELECT User_id, User_Name, User_phone, User_adds, com_id, case_id FROM admin_user WHERE competence='$competence'");
+  $result=db_conn("SELECT User_id, User_Name, User_phone, User_adds, com_id, case_id FROM admin_user WHERE competence='$competence' AND is_use='1'");
   if (mysql_num_rows($result)>0) {
       while ($row=mysql_fetch_array($result)) {
            array_push($user_array, array('User_id'=>$row['User_id'], 
@@ -1127,6 +1127,23 @@ if ($_GET) {
       echo json_encode(array('user_array'=>$user_array));
     }
   }
+
+
+   /* =================================== 停權表格 ============================================== */ 
+  elseif ($_GET['admin']=='is_use'){
+    $competence=mysql_real_escape_string($_GET['competence']);
+    $user_array=array();
+  $result=db_conn("SELECT User_id, User_Name FROM admin_user WHERE competence='$competence' AND is_use='0'");
+  if (mysql_num_rows($result)>0) {
+      while ($row=mysql_fetch_array($result)) {
+           array_push($user_array, array('User_id'=>$row['User_id'], 
+                                       'User_Name'=>$row['User_Name']
+                                        ));
+      }
+      echo json_encode(array('user_array'=>$user_array));
+    }
+  }
+
 
 
    /* =================================== 公司表格 ============================================== */ 
@@ -1282,6 +1299,27 @@ elseif($_GET['admin']=='check_tool'){
     db_conn("INSERT INTO delete_record ( User_id, del_time, del_user) VALUES ( '$se_user_id', '$del_time' ,'$User_id')");//刪除紀錄
 
     $txt=iconv('utf-8', 'big5', '成功刪除使用者!!');
+    location_up('admin_user.php', $txt);
+
+   }
+
+
+
+/* ========================================= 使用者停權 ============================================ */
+   elseif ($_GET['delete'] == 'is_use') {
+
+    $User_id=mysql_real_escape_string($_GET['User_id']);
+    $active=mysql_real_escape_string($_GET['active']);
+    
+    db_conn("UPDATE admin_user SET is_use='$active' WHERE User_id='$User_id'");
+   
+   if ($active=='0') {
+     $txt=iconv('utf-8', 'big5', '成功停權!!');
+   }
+   elseif ($active=='1') {
+     $txt=iconv('utf-8', 'big5', '已啟用!!');
+   }
+    
     location_up('admin_user.php', $txt);
 
    }

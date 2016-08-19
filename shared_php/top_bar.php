@@ -21,7 +21,7 @@
           }
         ?>
                     <li>
-                        <a href="login.php?logout=1">
+                        <a id="logout_btn" href="#">
                             <i class="fa fa-sign-out"></i> 登出
                         </a>
                     </li>
@@ -30,7 +30,7 @@
 
               if (check_mobile()) {
                   
-                  $back='<li>';
+                  $back='<li style=" float: right; margin-right: 10px;">';
                  $back.=   '<a href="javascript:history.back()">'; 
                  $back.=      '<i class="fa fa-reply"></i> 返回'; 
                  $back.=   '</a>'; 
@@ -43,4 +43,12 @@
 
             </nav>
         </div>
+        <script type="text/javascript">
+            $("#logout_btn").click(function(event) {
+               event.preventDefault();
+               if (confirm("是否要登出??")) {
+                   location.replace('login.php?logout=1');
+               }
+            });
+        </script>
     
