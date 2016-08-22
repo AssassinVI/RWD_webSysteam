@@ -133,6 +133,8 @@
                      info=info+'<td id="tool_td">'; //功能
                      info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
 
+                     //---------------- 聯絡我們 -------------------
+                     info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
                      info=info+'</td>';
                      info=info+'</tr>';
 
@@ -162,8 +164,10 @@
                         info=info+'<td><div class="logo_img"><img src="'+small_img+'"></div><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                      info=info+'<td >'; //功能
-                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
-                     
+                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php??com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
+
+                     //---------------- 聯絡我們 -------------------
+                     info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
                      info=info+'</td>';
                      info=info+'</tr>';
                     $("#all_project").append(info);  
@@ -180,12 +184,20 @@
         $.getJSON('rwd_php_sys.php?admin=check_tool&case_id='+case_id, function(json){
               
               $.each(json.tool_array, function() {
-                
+                  //------------------------------- 問卷 ---------------------------
                   if (this['tool_id']=='tool20160624002') {
-                    // $("#fq_btn_"+case_id).css('backgroundColor', '#248fc3');
+
                      var info='<a id="fq_btn_'+case_id+'" style="background:#248fc3;" href="admin_project_phcs.php?com_id='+com_id+'&type=form"><i class="fa fa-edit"></i>問卷</a>';
                      $("#tool_td").append(info);
                   }
+
+                  //------------------------------- 電子報 ---------------------------
+                  if (this['tool_id']=='tool20160630003') {
+
+                     var info='<a id="enews_btn_'+case_id+'" style="background:#a6a6a6;" href="admin_project_phcs.php?com_id='+com_id+'&type=form"><i class="fa fa-newspaper-o"></i>電報</a>';
+                     $("#tool_td").append(info);
+                  }
+
               });
         });
      }

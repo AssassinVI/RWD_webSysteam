@@ -838,6 +838,7 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
   elseif($_POST['page'] == 'call_we'){
     $fun_id=$_POST['fun_id'];
     $case_name= $_POST['case_name'];
+    $case_id=$_POST['case_id'];
     $call_name= $_POST['call_name'];
     $call_mail= $_POST['call_mail'];
     $call_phone= $_POST['call_phone'];
@@ -909,6 +910,24 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
 
     $mail->Body = $mail_body;
   $mail->Send();
+
+
+  //--- 儲存訪客mail資料 ---
+    $rand=rand(0,99);
+    $rand=$rand<10 ? '0'.$rand : $rand;
+    $cr_id="cr".date("YmdHis").$rand;
+
+  $pdo=pdo_conn();
+  $sql_q=$pdo->prepare("INSERT INTO call_record_tb (cr_id, case_id, use_name, use_mail, q_type, call_title, call_content) VALUES (:cr_id, :case_id, :use_name, :use_mail, :q_type, :call_title, :call_content)");
+  $sql_q->bindparam(":cr_id", $cr_id);
+  $sql_q->bindparam(":case_id", $case_id);
+  $sql_q->bindparam(":use_name", $call_name);
+  $sql_q->bindparam(":use_mail", $call_mail);
+  $sql_q->bindparam(":q_type", $q_And_a);
+  $sql_q->bindparam(":call_title", $call_title);
+  $sql_q->bindparam(":call_content", $call_contant);
+  $sql_q->execute();
+
    
   }
 
@@ -1283,6 +1302,33 @@ elseif($_GET['admin']=='check_tool'){
                                          ));
         }
     echo json_encode(array('tool_array'=>$tool_array));  
+}
+
+
+
+/* =================================== 聯絡我們資料表單 ========================================== */
+elseif ($_GET['admin']=='call_ph_list') {
+  
+     $case_id=mysql_real_escape_string($_GET['case_id']);
+     $pro_ph_array=array();
+
+     $pdo=pdo_conn();
+     $sql_q=$pdo->prepare("SELECT * FROM call_record_tb WHERE case_id=:case_id");
+     $sql_q->bindparam(":case_id", $case_id);
+     $sql_q->execute();
+     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+         
+         array_push($pro_ph_array, array( 'use_name'=> $row['use_name'],
+                                          'use_mail'=> $row['use_mail'],
+                                          'is_process'=> $row['is_process'],
+                                          'cr_id'=> $row['cr_id'],
+
+                                          'q_type'=> $row['q_type'],
+                                          'call_title'=> $row['call_title'],
+                                          'call_content'=> $row['call_content']
+                                           ));
+     }
+     echo json_encode(array('pro_ph_array'=>$pro_ph_array));
 }
 
 

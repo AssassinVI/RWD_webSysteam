@@ -1,5 +1,6 @@
 <?php 
   $fun_id=htmlspecialchars($_GET['fun_id']);
+  $case_id=htmlspecialchars($_GET['case_id']);
   $case_name=htmlspecialchars($_GET['case_name']);
     
 ?>
@@ -120,6 +121,7 @@
      		data: {page: 'call_we',
      		    fun_id: '<?php echo $fun_id;?>',
      		  case_name: '<?php echo $case_name;?>',
+     		    case_id: $("#case_id").val(),
      		    call_name: $("#call_name").val(),
      		    call_mail: $("#call_mail").val(),
      		   call_phone: $("#call_phone").val(),
@@ -199,7 +201,7 @@
                 <button id="enter_DM" class="btn" type="submit">送出</button>
              </div>
               <input type="hidden" name="page" value="call_we">
-              <input type="hidden" name="case_id" value="<?php echo $case_id;?>">
+              <input type="hidden" id="case_id" name="case_id" value="<?php echo $case_id;?>">
               <input type="hidden" name="case_name" value="<?php echo $case_name;?>">
             </form>
 		</div>
