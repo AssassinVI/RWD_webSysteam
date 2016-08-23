@@ -381,11 +381,6 @@
 
    <script type="text/javascript">
        $(document).ready(function() {
-
-        minigrid('.grid', '.grid-item', 6, null, null);
-        window.addEventListener('resize', function(){
-          minigrid('.grid', '.grid-item');
-        });
    
 <?php
 
@@ -431,6 +426,14 @@
                $an_txt.='</a>';
                $an_txt.='</li>';
                echo "$('#nav_ul').append('".$an_txt."');";
+            }
+            elseif ($fun_name=='iw') {
+               
+               $iw_txt="minigrid('.grid', '.grid-item', 6, null, null);";
+               $iw_txt.="window.addEventListener('resize', function(){
+                              minigrid('.grid', '.grid-item');
+                         });";
+              echo $iw_txt;
             }
       }
 

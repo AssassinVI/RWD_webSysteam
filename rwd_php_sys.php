@@ -932,6 +932,49 @@ $title=$title1."(*)".$title2."(*)".$title3;//使用"(*)"做分斷
   }
 
 
+/* ======================================== 回覆顧客 ============================================== */
+elseif ($_POST['page'] == 'call_detail') {
+  
+   $call_us_content=$_POST['call_us_content'];
+   $case_name=$_POST['case_name'];
+   $case_id=$_POST['case_id'];
+   $cr_id=$_POST['cr_id'];
+   $use_mail=$_POST['use_mail'];
+   $use_name=$_POST['use_name'];
+    $mail = new PHPMailer();                        // 建立新物件        
+
+    $mail->IsSMTP();                                // 設定使用SMTP方式寄信        
+    $mail->SMTPAuth = true;                         // 設定SMTP需要驗證
+
+   // $mail->SMTPSecure = "ssl";                      // Gmail的SMTP主機需要使用SSL連線   
+    $mail->Host = "rx.znet.tw";                 // Gmail的SMTP主機        
+    $mail->Port = 25;                              // Gmail的SMTP主機的port為465      
+    $mail->CharSet = "utf-8";                       // 設定郵件編碼   
+    $mail->Encoding = "base64";
+    $mail->WordWrap = 50;                           // 每50個字元自動斷行
+          
+    $mail->Username = "work_test@rx.znet.tw";     // 設定驗證帳號        
+    $mail->Password = "xm20926056565";              // 設定驗證密碼        
+          
+    $mail->From = "work_test@rx.znet.tw";         // 設定寄件者信箱        
+    $mail->FromName = $case_name."客服人員";                 // 設定寄件者姓名        
+          
+    $mail->Subject =$case_name."感謝您的來信" ;                  // 設定郵件標題        
+      
+    $mail->IsHTML(true);                            // 設定郵件內容為HTML  
+    $mail->AddAddress($use_mail, $use_name );
+    $mail->Body = $call_us_content;
+    $mail->Send();
+
+    $pdo=pdo_conn();
+    $sql_q=$pdo->prepare("UPDATE call_record_tb SET is_process='1' WHERE cr_id=:cr_id ");
+    $sql_q->bindparam(":cr_id", $cr_id);
+    $sql_q->execute();
+   $txt=iconv('utf-8', 'big5', '已送出回覆');
+   location_up('call_ph_list.php?case_id='.$case_id, $txt);
+}
+
+
 /* ======================================== 顏色修改 ============================================== */
   elseif($_POST['page'] == 'color'){
  
@@ -1331,6 +1374,27 @@ elseif ($_GET['admin']=='call_ph_list') {
      echo json_encode(array('pro_ph_array'=>$pro_ph_array));
 }
 
+
+
+/* ========================================= DM資料名單 ================================================== */
+elseif ($_GET['admin']=='DM_ph_list'){
+    
+    $case_id=mysql_real_escape_string($_GET['case_id']);
+    $pro_ph_array=array();
+
+    $pdo=pdo_conn();
+     $sql_q=$pdo->prepare("SELECT * FROM catch_DM WHERE case_id=:case_id");
+     $sql_q->bindparam(":case_id", $case_id);
+     $sql_q->execute();
+     while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
+
+        array_push($pro_ph_array, array( 'dm_name'=>$row['dm_name'],
+                                         'dm_mail'=>$row['dm_mail']
+
+                                           ));
+     }
+     echo json_encode(array('pro_ph_array'=>$pro_ph_array));
+}
 
 
 /* ========================================= all刪除 ============================================ */

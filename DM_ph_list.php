@@ -69,23 +69,14 @@
      /* ==================== 抓取建案(個案) ======================= */
 
      function select_case(case_id) {
-          $.getJSON('rwd_php_sys.php?admin=call_ph_list&case_id='+case_id, function(json) {
+          $.getJSON('rwd_php_sys.php?admin=DM_ph_list&case_id='+case_id, function(json) {
                 $.each(json.pro_ph_array, function() {
 
                       var info='<tr class="case_tr1">';
 
-                     info=info+'<td >'+this['use_name']+'</td>'; 
-                     info=info+'<td class="no_display768">'+this['use_mail']+'</td>';
-                     info=info+'<td class="no_display768">'+this['q_type']+'</td>';
-
-                     if (this['is_process']=='0') {
-                       info=info+'<td ><span style="color:red;">未處理</span></td>';
-                     }
-                     else if(this['is_process']=='1'){
-                       info=info+'<td ><span style="color:#4caf50;">已處理</span></td>';
-                     }
-
-                     info=info+'<td ><a href="call_ph_detail.php?cr_id='+this['cr_id']+'&case_id='+case_id+'">內容</a></td>';
+                     info=info+'<td >'+this['dm_name']+'</td>'; 
+                     info=info+'<td >'+this['dm_mail']+'</td>';
+                   
                      
                      info=info+'</tr>';
                     $("#all_project").append(info);  
@@ -115,7 +106,7 @@
                                 <div class="col-lg-12 no_padding">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>顧客意見表單</h5>
+                            <h5>DM發送名單</h5>
                             
                         </div>
                         <div class="ibox-content">
@@ -128,10 +119,8 @@
                                 <thead>
                                 <tr id="case_title">
                                     <th>顧客姓名</th>
-                                    <th class="no_display768">E-mail</th>
-                                    <th class="no_display768">問題類型</th>
-                                    <th>狀態</th>  
-                                    <th>詳細</th>
+                                    <th >E-mail</th>
+                                   
                                 </tr>
                                 </thead>
                                 <tbody id="all_project">

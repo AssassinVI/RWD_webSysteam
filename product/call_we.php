@@ -131,8 +131,7 @@
      	           },
      	     success: function () {
      	     	alert("資料已送出!!");
-     	     	$("#form_div").find('input').val("");
-     	     	$("#form_div").find('textarea').val("");
+     	     	parent.$.fancybox.close();
      	     }
      	});
    	  }

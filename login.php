@@ -23,6 +23,8 @@ session_start();
         font-size: 80px;
         text-shadow: 2px 2px 3px #6C6C6C;
     }
+    small a{ color: #9E9E9E; }
+    small a:hover{ color: #3C3C3C; }
 </style>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -54,7 +56,7 @@ session_start();
               
                 
             </form>
-            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+            <p class="m-t"> <small><a href="privacy_txt.html">隱私權政策</a> | <a href="service_txt.html">服務條款</a></small> </p>
         </div>
     </div>
 </body>

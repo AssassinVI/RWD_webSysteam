@@ -134,7 +134,7 @@
                      info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
 
                      //---------------- 聯絡我們 -------------------
-                     info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
+                     info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
                      info=info+'</td>';
                      info=info+'</tr>';
 
@@ -167,7 +167,7 @@
                      info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php??com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
 
                      //---------------- 聯絡我們 -------------------
-                     info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
+                     info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
                      info=info+'</td>';
                      info=info+'</tr>';
                     $("#all_project").append(info);  
@@ -191,10 +191,10 @@
                      $("#tool_td").append(info);
                   }
 
-                  //------------------------------- 電子報 ---------------------------
-                  if (this['tool_id']=='tool20160630003') {
+                  //------------------------------- DM ---------------------------
+                  if (this['tool_id']=='tool20160630002') {
 
-                     var info='<a id="enews_btn_'+case_id+'" style="background:#a6a6a6;" href="admin_project_phcs.php?com_id='+com_id+'&type=form"><i class="fa fa-newspaper-o"></i>電報</a>';
+                     var info='<a id="DM_btn_'+case_id+'" style="background:#a6a6a6;" href="DM_ph_list.php?case_id='+case_id+'"><i class="fa fa-newspaper-o"></i>DM</a>';
                      $("#tool_td").append(info);
                   }
 

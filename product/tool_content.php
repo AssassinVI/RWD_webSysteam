@@ -269,7 +269,7 @@
       // ============================================= 聯絡我們 ======================================================= 
          
         elseif ($fun_name=='ca') {
-           $nw_txt='<div class="tool_div"><a class="nw_btn tool_btn" href="../../assets/php/call_we.php?fun_id='.$fun_id[$i].'&case_name='.$case['case_name'].'">聯絡我們</a></div>';
+           $nw_txt='<div class="tool_div"><a class="nw_btn tool_btn" href="../../assets/php/call_we.php?case_id='.$case_id.'&fun_id='.$fun_id[$i].'&case_name='.$case['case_name'].'">聯絡我們</a></div>';
            echo $nw_txt;
          } 
 
