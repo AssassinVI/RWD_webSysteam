@@ -75,7 +75,7 @@
                       var info='<tr class="case_tr1">';
 
                      info=info+'<td >'+this['use_name']+'</td>'; 
-                     info=info+'<td class="no_display768">'+this['use_mail']+'</td>';
+                     info=info+'<td class="no_display768">'+this['set_time']+'</td>';
                      info=info+'<td class="no_display768">'+this['q_type']+'</td>';
 
                      if (this['is_process']=='0') {
@@ -128,7 +128,7 @@
                                 <thead>
                                 <tr id="case_title">
                                     <th>顧客姓名</th>
-                                    <th class="no_display768">E-mail</th>
+                                    <th class="no_display768">時間</th>
                                     <th class="no_display768">問題類型</th>
                                     <th>狀態</th>  
                                     <th>詳細</th>

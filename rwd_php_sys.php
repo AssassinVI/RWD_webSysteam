@@ -1365,7 +1365,7 @@ elseif ($_GET['admin']=='call_ph_list') {
                                           'use_mail'=> $row['use_mail'],
                                           'is_process'=> $row['is_process'],
                                           'cr_id'=> $row['cr_id'],
-
+                                          'set_time'=> $row['set_time'],
                                           'q_type'=> $row['q_type'],
                                           'call_title'=> $row['call_title'],
                                           'call_content'=> $row['call_content']
