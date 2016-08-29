@@ -76,13 +76,21 @@ if ($_SESSION['competence']!='admin') {
         });
 
         // --------------- 停權資料 ------------------
-        select_is_use('admin');
+        select_is_use('');
 
         $("#is_sel_user").change(function(event) { //
             var now_user=$("#is_sel_user :selected").val();
              $("#is_user_tb").html("");
-            select_is_use(now_user);
+             select_is_use(now_user);
+            
         });
+ 
+        $("#is_use_div [name='user_type']").click(function(event) {
+          var now_user=$("#is_use_div :checked").val();
+          $("#is_user_tb").html("");
+          select_is_use(now_user);
+        });
+
 
      });
 
@@ -142,9 +150,16 @@ if ($_SESSION['competence']!='admin') {
           function select_is_use(competence) {
               $.getJSON('rwd_php_sys.php?admin=is_use&competence='+competence,  function(json) {
               $.each(json.user_array, function() {
+
+                     if (this['competence']=='admin') { var competence='管理者'; }
+                else if (this['competence']=='user') { var competence='最大使用者'; }
+                else if (this['competence']=='company') { var competence='群組權限'; }
+                else if (this['competence']=='case') { var competence='專案權限'; }
+                else if (this['competence']=='employee') { var competence='專員'; }
                    var info="<tr>";
                   info=info+"<td class='no_display768'>"+this['User_id']+"</td>";
                   info=info+"<td>"+this['User_Name']+"</td>";
+                  info=info+"<td>"+competence+"</td>";
                   info=info+"<td class='no_display768'><a class='active_use_"+this['User_id']+"' href='#'>啟用</a></td>";
                   
                   info=info+"</tr>";
@@ -233,15 +248,13 @@ if ($_SESSION['competence']!='admin') {
                             <h5>停權資料表 </h5>
                            <div class="ibox-tools">
 
-                            <div id="sel_user_div">
-                              <label for="is_sel_user">權限: </label>
-                              <select id="is_sel_user">
-                                <option value="admin">管理者</option>
-                                <option value="user">最大使用者</option>
-                                <option value="company">群組權限</option>
-                                <option value="case">專案權限</option>
-                                <option value="employee">專員</option>
-                              </select>
+                            <div id="is_use_div">
+                              <input id="user_type6" type="radio" checked name="user_type" value=""><label for="user_type6">ALL</label>　
+                              <input id="user_type1" type="radio" checked name="user_type" value="admin"><label for="user_type1">管理者</label>　
+                              <input id="user_type2" type="radio" checked name="user_type" value="user"><label for="user_type2">最大使用者</label>　
+                              <input id="user_type3" type="radio" checked name="user_type" value="company"><label for="user_type3">群組權限</label>　
+                              <input id="user_type4" type="radio" checked name="user_type" value="case"><label for="user_type4">專案權限</label>　
+                              <input id="user_type5" type="radio" checked name="user_type" value="employee"><label for="user_type5">專員</label>　
                              </div>
                         </div>
                         </div>
@@ -251,6 +264,7 @@ if ($_SESSION['competence']!='admin') {
                                 <tr>
                                     <th class="no_display768">使用者ID</th>
                                     <th>使用者名稱</th>
+                                    <th>權限</th>
                                     <th class='no_display768'>恢復權限</th>
                                 </tr>
                                 </thead>

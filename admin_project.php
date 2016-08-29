@@ -102,7 +102,10 @@
  ?>
 
  
- 
+ var competence="<?php echo $_SESSION['competence'];?>"; //權限
+ if (competence!="admin") {
+ 	$(".ibox-tools").css('display', 'none');
+ }
  
 
 $("#sel_com").change(function(event) {
@@ -138,9 +141,15 @@ $("#sel_com").change(function(event) {
                      info=info+'<td class="pro_case_id">'+this['case_id']+'</td>';
                      info=info+'<td>'+this['case_name']+'</td>';
                      info=info+'<td class="pro_bu_phone">'+this['bu_phone']+'</td>';
-                     info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
 
-                     if (this['record_id']!=null) {
+                      if (competence=="admin"){
+                      	 info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
+                      }else{
+                      	 info=info+'<td class="no_display768"></td>';
+                      }
+                     
+
+                     if (this['record_id']!='') {
                         info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'&case_name='+this['case_name']+'">顧客表單</a></td>';
                      }else{
                         info=info+'<td>無擴充</td>';
@@ -149,9 +158,10 @@ $("#sel_com").change(function(event) {
                      info=info+'<td><a class="iframe_box" href="edit_expand.php?case_id='+this['case_id']+'">新功能</a></td>';
                      info=info+'<td><a class="iframe_box" href="catch_web.php?case_id='+this['case_id']+'">取網址</a></td>';
                      info=info+'<td><a href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">分析</a></td>';
-                     info=info+'<td><a href="edit_project.php?NewOrEdit=edit&case='+this['case_id']+'">修改</a></td>';
+                 
                      
                      if (competence=="admin") {//權限判斷
+                       info=info+'<td><a href="edit_project.php?NewOrEdit=edit&case='+this['case_id']+'">修改</a></td>';
                        info=info+'<td class="no_display768"><a class="del_btn_'+this['case_id']+'" href="#">刪除</a></td>';
                      }
 
@@ -182,9 +192,15 @@ $("#sel_com").change(function(event) {
                      info=info+'<td class="pro_case_id">'+this['case_id']+'</td>';
                      info=info+'<td>'+this['case_name']+'</td>';
                      info=info+'<td class="pro_bu_phone">'+this['bu_phone']+'</td>';
-                     info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
 
-                     if (this['record_id']!=null) {
+                     if (competence=="admin") {
+                     	info=info+'<td class="no_display768"><a href="edit_funBox.php?case_name='+this['case_name']+'&case_id='+this['case_id']+'">功能區塊</a> <span> (點我進入功能編輯) </span></td>';
+                     }else{
+                      	 info=info+'<td class="no_display768"></td>';
+                      }
+                     
+
+                     if (this['record_id']!='') {
                         info=info+'<td><a href="from_list.php?record_id='+this['record_id']+'&case_name='+this['case_name']+'">顧客表單</a></td>';
                      }else{
                         info=info+'<td>無擴充</td>';
@@ -193,9 +209,10 @@ $("#sel_com").change(function(event) {
                      info=info+'<td><a class="iframe_box" href="edit_expand.php?case_id='+this['case_id']+'">新功能</a></td>';
                      info=info+'<td><a class="iframe_box" href="catch_web.php?case_id='+this['case_id']+'">取網址</a></td>';
                      info=info+'<td><a href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">分析</a></td>';
-                     info=info+'<td><a href="edit_project.php?NewOrEdit=edit&case='+this['case_id']+'">修改</a></td>';
+                    
                      
                      if (competence=="admin") {//權限判斷
+                        info=info+'<td><a href="edit_project.php?NewOrEdit=edit&case='+this['case_id']+'">修改</a></td>';
                        info=info+'<td class="no_display768"><a class="del_btn_'+this['case_id']+'" href="#">刪除</a></td>';
                      }
 

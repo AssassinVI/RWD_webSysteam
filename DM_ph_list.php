@@ -75,7 +75,7 @@
                       var info='<tr class="case_tr1">';
 
                      info=info+'<td >'+this['dm_name']+'</td>'; 
-                     info=info+'<td >'+this['dm_mail']+'</td>';
+                     info=info+'<td >'+this['dm_adds']+'</td>';
                    
                      
                      info=info+'</tr>';
@@ -118,8 +118,8 @@
                             <table id="web_tb" class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                 <thead>
                                 <tr id="case_title">
-                                    <th>顧客姓名</th>
-                                    <th >E-mail</th>
+                                    <th style="width:80px;">姓名</th>
+                                    <th >地址</th>
                                    
                                 </tr>
                                 </thead>

@@ -47,13 +47,14 @@
      .logo_img img{ width: 100%; height: 100%; }
      .logo_img div, .logo_div div{ position: absolute; width: 40px; text-align: center;  padding: 5px 0px; color: rgba(255, 255, 255, 0.5); font-size: 20px; background-color: rgba(255, 255, 255, 0.35); border-radius: 50px; margin:27px; }
      .logo_img div:hover, .logo_div div:hover{ color: rgb(43, 243, 203); }
-     .case_tr1{ font-size: 50px; }
+     .case_tr1{ font-size: 50px; text-align: right; }
      #case_title{ font-size: 17px; }
      .case_tr1>td>span{ font-size: 12px; }
      .case_name{ padding-top: 8px; float: left; }
      .ibox-title h5 span{ color: rgb(26, 179, 148); }
      .active_btn{ background-color: rgb(28, 195, 162); }
      .dis_none{ display: none; }
+     
     </style>
 
     <!-- FooTable -->
@@ -110,8 +111,6 @@ elseif($type=='form'){
   }
 }
 
-
-
  ?>
 
 
@@ -147,11 +146,18 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                       else{
                         info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
-
                     
-                     info=info+'<td style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>';  //每日人數
-                     info=info+'<td style="padding-top: 25px;">'+this['total_user']+'<span>人</span></td>'; //總人數
+                    var total_num=parseInt(this['total_user']);
+                    var day_num=parseInt(this['month_user']);
+                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['month_user']+'<span>人</span></td>';  }//每日人數
+                      else{  info=info+'<td  style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>'; }
+
+                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total_user']+'<span>人</span></td>';  }//總人數
+                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total_user']+'<span>人</span></td>'; }
+
                      info=info+'</tr>';
+
+                     
 
                     $("#all_project").append(info);
                     $("#web_tb").removeClass('dis_none');
@@ -177,9 +183,19 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                       else{
                         info=info+'<td><a class="logo_img" href="admin_analytics.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
-                     info=info+'<td style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>';  //每日人數
-                     info=info+'<td style="padding-top: 25px;">'+this['total_user']+'<span>人</span></td>'; //總人數
+                     
+                     var total_num=parseInt(this['total_user']);
+                     var day_num=parseInt(this['month_user']);
+                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['month_user']+'<span>人</span></td>';  }//每日人數
+                      else{  info=info+'<td  style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>'; }
+
+                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total_user']+'<span>人</span></td>';  }//總人數
+                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total_user']+'<span>人</span></td>'; }
+
                      info=info+'</tr>';
+
+                     
+
                     $("#all_project").append(info);      
                     $("#web_tb").removeClass('dis_none');              
                 }); 
@@ -204,9 +220,18 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                         info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
 
-                     info=info+'<td style="padding-top: 25px;">'+this['oneday']+'<span>人</span></td>';  //每日人數
-                     info=info+'<td style="padding-top: 25px;">'+this['total']+'<span>人</span></td>'; //總人數
+                     
+                     var total_num=parseInt(this['total_user']);
+                    var day_num=parseInt(this['month_user']);
+                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['month_user']+'<span>人</span></td>';  }//每日人數
+                      else{  info=info+'<td  style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>'; }
+
+                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total_user']+'<span>人</span></td>';  }//總人數
+                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total_user']+'<span>人</span></td>'; }
+
                      info=info+'</tr>';
+
+                    
 
                     $("#all_from").append(info);
                     $("#from_tb").removeClass('dis_none');
@@ -232,9 +257,17 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                         info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
 
-                     info=info+'<td style="padding-top: 25px;">'+this['oneday']+'<span>人</span></td>';  //每日人數
-                     info=info+'<td style="padding-top: 25px;">'+this['total']+'<span>人</span></td>'; //總人數
+                     var total_num=parseInt(this['total_user']);
+                    var day_num=parseInt(this['month_user']);
+                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['month_user']+'<span>人</span></td>';  }//每日人數
+                      else{  info=info+'<td  style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>'; }
+
+                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total_user']+'<span>人</span></td>';  }//總人數
+                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total_user']+'<span>人</span></td>'; }
+
+
                      info=info+'</tr>';
+                     
 
                     $("#all_from").append(info);
                     $("#from_tb").removeClass('dis_none');
@@ -273,7 +306,7 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                             <table id="web_tb" class="dis_none footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                 <thead>
                                 <tr id="case_title">
-                                    <th>專案LOGO</th>
+                                    <th>LOGO</th>
                                     <th>當日</th>
                                     <th>總數</th>
                                 </tr>
@@ -297,7 +330,7 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                             <table id="from_tb" class="dis_none footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                 <thead>
                                 <tr id="case_title">
-                                    <th>專案LOGO</th>
+                                    <th>LOGO</th>
                                     <th>當日</th>
                                     <th>總數</th>
                                     

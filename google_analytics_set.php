@@ -226,24 +226,24 @@ $sql_query="SELECT * FROM build_case LEFT JOIN google_analytics ON build_case.ca
         $("#case_no").val(case_id);
 
          // ============================ 熱門點擊 ====================================
-  queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:uniqueEvents', 'ga:eventCategory', '#event_name', '#event_num');
+  queryCoreReportingApi(ids, '360daysAgo', 'today', 'ga:uniqueEvents', 'ga:eventCategory', '#event_name', '#event_num');
              
           // ============================ 連線裝置 ====================================
-  queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'ga:deviceCategory', '#device_name', '#device_num');
+  queryCoreReportingApi(ids, '360daysAgo', 'today', 'ga:sessions', 'ga:deviceCategory', '#device_name', '#device_num');
 
           // ============================ 地區瀏覽 ====================================
-  queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'ga:city', '#city_name', '#city_num');
+  queryCoreReportingApi(ids, '360daysAgo', 'today', 'ga:sessions', 'ga:city', '#city_name', '#city_num');
 
           // ============================ 年齡 ====================================
-  queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'ga:userAgeBracket', '#years_zone', '#year_num');
+  queryCoreReportingApi(ids, '360daysAgo', 'today', 'ga:sessions', 'ga:userAgeBracket', '#years_zone', '#year_num');
 
 
           // ============================ 性別 ====================================
-             queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'ga:userGender', '#sex_name', '#sex_num');
+             queryCoreReportingApi(ids, '360daysAgo', 'today', 'ga:sessions', 'ga:userGender', '#sex_name', '#sex_num');
 
 
           // ============================ 流量 ====================================
-             queryCoreReportingApi(ids, '30daysAgo', 'today', 'ga:sessions', 'ga:sourceMedium', '#src_name', '#src_num');
+             queryCoreReportingApi(ids, '360daysAgo', 'today', 'ga:sessions', 'ga:sourceMedium', '#src_name', '#src_num');
 
 
           // ============================ 網頁停留時間 ====================================

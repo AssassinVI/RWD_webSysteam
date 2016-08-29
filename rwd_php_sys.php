@@ -1152,6 +1152,8 @@ if ($_GET) {
             if (mysql_num_rows($result_expand)>0) {
 
               while ($row_quest=mysql_fetch_array($result_expand)) { $record_id=$row_quest['record_id']; }
+            }else{
+              $record_id="";
             }
 
           	array_push($pro_array, array('case_id'=>$row['case_id'], 
@@ -1193,13 +1195,22 @@ if ($_GET) {
 
    /* =================================== 停權表格 ============================================== */ 
   elseif ($_GET['admin']=='is_use'){
-    $competence=mysql_real_escape_string($_GET['competence']);
+
+    if (empty($_GET['competence'])) {
+      $result=db_conn("SELECT User_id, User_Name, competence FROM admin_user WHERE is_use='0'");
+    }
+    else{
+          $competence=mysql_real_escape_string($_GET['competence']);
+           $result=db_conn("SELECT User_id, User_Name, competence FROM admin_user WHERE competence='$competence' AND is_use='0'");
+    }
+
     $user_array=array();
-  $result=db_conn("SELECT User_id, User_Name FROM admin_user WHERE competence='$competence' AND is_use='0'");
+  
   if (mysql_num_rows($result)>0) {
       while ($row=mysql_fetch_array($result)) {
            array_push($user_array, array('User_id'=>$row['User_id'], 
-                                       'User_Name'=>$row['User_Name']
+                                       'User_Name'=>$row['User_Name'],
+                                       'competence'=>$row['competence']
                                         ));
       }
       echo json_encode(array('user_array'=>$user_array));
@@ -1389,7 +1400,8 @@ elseif ($_GET['admin']=='DM_ph_list'){
      while ($row=$sql_q->fetch(PDO::FETCH_ASSOC)) {
 
         array_push($pro_ph_array, array( 'dm_name'=>$row['dm_name'],
-                                         'dm_mail'=>$row['dm_mail']
+                                         'dm_mail'=>$row['dm_mail'],
+                                         'dm_adds'=>$row['dm_adds']
 
                                            ));
      }

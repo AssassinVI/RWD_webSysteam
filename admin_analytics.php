@@ -95,6 +95,13 @@
     .c3-legend-item{ font-size: 13px; }
 
     #print_web{ color: #1ab394; font-size: 16px; padding: 7px; }
+
+    .ibox-content a{ background: #1bbb9b; padding: 5px 15px; border-radius: 4px; color: #fff; font-size: 17px; }
+    .ibox-content a:hover{ background: #b8efe4; color: #1bbb9b; }
+
+    @media only screen and (max-width:1024px) {
+       #print_web{ display: none; }
+    }
     
  </style>
 
@@ -221,10 +228,17 @@
                      <?php 
                       
                       for ($i=0; $i <count($src_name)-1 ; $i++) { 
-                        
                         $name=$src_name[$i];
                         $num=$src_num[$i];
-                        echo "['".$name."', ".$num."],";
+                        if (count($src_name)>10) {
+                          if ($num>20) {
+                            echo "['".$name."', ".$num."],";
+                          }
+                        }else{
+
+                          echo "['".$name."', ".$num."],";
+                        }
+                        
                       }
 
                     ?>
@@ -335,15 +349,29 @@ google.charts.load('current', {'packages':['table']});
               <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>分析結果 </h5>
+                            <h5><span style="color:#1ec1a0">網頁分析</span>結果 </h5>
                            <div class="ibox-tools">
 
                          <a id="print_web" target="_blank" href="analytics_print.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class='fa fa-print'></i>列印報表</a>
 
                         </div>
                         </div>
-                        <div class="ibox-content ">
-                          <h2><?php echo $case_name?>-分析</h2>
+                        <div class="ibox-content">
+                          <h2><?php echo $case_name?>-分析　</h2>
+                          <?php 
+
+                               $pdo=pdo_conn();
+                               $sql_q=$pdo->prepare("SELECT record_id FROM expand_record WHERE case_id=:case_id AND tool_id='tool20160624002' AND is_use='1'");
+                               $sql_q->bindparam(":case_id", $case_id);
+                               $sql_q->execute();
+                               if ($sql_q->rowCount()>0) {
+                                 $row=$sql_q->fetch();
+                                 $txt='<a href="from_analytics.php?record_id='.$row[0].'&case_id='.$case_id.'&case_name='.$case_name.'"><i class="fa fa-line-chart"></i>問卷分析</a>';
+                                 echo $txt;
+                               }
+
+                              $pdo=NULL;
+                             ?>
                         </div>
                     </div>
                 </div>

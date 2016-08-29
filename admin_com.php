@@ -77,7 +77,12 @@
               });
        });
 
-     });
+ var competence="<?php echo $_SESSION['competence'];?>"; //權限
+ if (competence!="admin") {
+  $(".ibox-tools").css('display', 'none');
+ }
+
+     });//JQUERY END
  </script>
 </head>
 <body>
