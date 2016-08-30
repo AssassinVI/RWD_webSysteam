@@ -210,24 +210,25 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                 $.each(json.from_array, function() {
 
                   var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/'+this['case_logo']+'&h=80&w=90&zc=1';
+                  var href_txt='from_analytics.php?record_id='+this['record_id']+'&case_id='+this['case_id']+'&case_name='+this['case_name'];
 
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="'+href_txt+'">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_img" href="'+href_txt+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
 
                      
-                     var total_num=parseInt(this['total_user']);
-                    var day_num=parseInt(this['month_user']);
-                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['month_user']+'<span>人</span></td>';  }//每日人數
-                      else{  info=info+'<td  style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>'; }
+                     var total_num=parseInt(this['total']);
+                    var day_num=parseInt(this['oneday']);
+                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['oneday']+'<span>人</span></td>';  }//每日人數
+                      else{  info=info+'<td  style="padding-top: 25px;">'+this['oneday']+'<span>人</span></td>'; }
 
-                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total_user']+'<span>人</span></td>';  }//總人數
-                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total_user']+'<span>人</span></td>'; }
+                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total']+'<span>人</span></td>';  }//總人數
+                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total']+'<span>人</span></td>'; }
 
                      info=info+'</tr>';
 
@@ -247,23 +248,24 @@ var head_btn='<div><i class="fa fa-hand-o-up"></i></div>';
                 $.each(json.from_array, function() {
 
                   var small_img='shared_php/timthumb.php?src=http://rx.znet.tw/rwd_system/Static_Seed_Project/img/case_logo/'+this['case_logo']+'&h=80&w=90&zc=1';
+                  var href_txt='from_analytics.php?record_id='+this['record_id']+'&case_id='+this['case_id']+'&case_name='+this['case_name'];
 
                       var info='<tr class="case_tr1">';
 
                       if (this['case_logo']=='') {
-                        info=info+'<td><a class="logo_div" href="">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_div" href="'+href_txt+'">'+head_btn+'專案LOGO</a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                       else{
-                        info=info+'<td><a class="logo_img" href="">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
+                        info=info+'<td><a class="logo_img" href="'+href_txt+'">'+head_btn+'<img src="'+small_img+'"></a><span class="case_name">'+this['case_name']+'</span></td>';
                       }
 
-                     var total_num=parseInt(this['total_user']);
-                    var day_num=parseInt(this['month_user']);
-                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['month_user']+'<span>人</span></td>';  }//每日人數
-                      else{  info=info+'<td  style="padding-top: 25px;">'+this['month_user']+'<span>人</span></td>'; }
+                     var total_num=parseInt(this['total']);
+                    var day_num=parseInt(this['oneday']);
+                      if (day_num>99) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['oneday']+'<span>人</span></td>';  }//每日人數
+                      else{  info=info+'<td  style="padding-top: 25px;">'+this['oneday']+'<span>人</span></td>'; }
 
-                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total_user']+'<span>人</span></td>';  }//總人數
-                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total_user']+'<span>人</span></td>'; }
+                      if (total_num>999) { info=info+'<td  style="padding-top: 35px; font-size:40px;">'+this['total']+'<span>人</span></td>';  }//總人數
+                      else{ info=info+'<td  style="padding-top: 25px; ">'+this['total']+'<span>人</span></td>'; }
 
 
                      info=info+'</tr>';

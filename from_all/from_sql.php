@@ -510,7 +510,9 @@ if ($_GET) {
         array_push($from_array, array('case_logo'=>$row['case_logo'], 
                                       'case_name'=>$row['case_name'], 
                                           'total'=>$row['total'], 
-                                         'oneday'=>$row['oneday']
+                                         'oneday'=>$row['oneday'],
+                                      'record_id'=>$row['record_id'],
+                                        'case_id'=>$case_id
                                       ));
      }
      $pdo=NULL;

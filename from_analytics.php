@@ -418,6 +418,9 @@
     @media only screen and (max-width:1024px) {
        #print_web{ display: none; }
     }
+    @media only screen and (max-width:420px){ 
+       .cp_btn{ display: none; }
+     }
     
  </style>
 
@@ -821,7 +824,7 @@
                         </div>
                         <div class="ibox-content ">
                           <h2><?php echo $case_name?>-分析　</h2>
-                          <a href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
+                          <a class="cp_btn" href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
                         </div>
                     </div>
                 </div>

@@ -102,6 +102,9 @@
     @media only screen and (max-width:1024px) {
        #print_web{ display: none; }
     }
+    @media only screen and (max-width:420px){
+       .cp_btn{ display: none; }
+    }
     
  </style>
 
@@ -366,7 +369,7 @@ google.charts.load('current', {'packages':['table']});
                                $sql_q->execute();
                                if ($sql_q->rowCount()>0) {
                                  $row=$sql_q->fetch();
-                                 $txt='<a href="from_analytics.php?record_id='.$row[0].'&case_id='.$case_id.'&case_name='.$case_name.'"><i class="fa fa-line-chart"></i>問卷分析</a>';
+                                 $txt='<a class="cp_btn" href="from_analytics.php?record_id='.$row[0].'&case_id='.$case_id.'&case_name='.$case_name.'"><i class="fa fa-line-chart"></i>問卷分析</a>';
                                  echo $txt;
                                }
 
