@@ -364,7 +364,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專案分析</title>
+    <title>問卷分析</title>
 
     <!-- ================================== 外掛and CSS ====================================== -->
     <?php include 'shared_php/script_style.php';?>
@@ -385,7 +385,7 @@
       }
 
      .p_txt{
-        text-align: center;
+        text-align: left;
         font-size: 40px;
      }
      .tootl_btn{
@@ -409,21 +409,18 @@
     }
     .c3 svg{ font: 15px Microsoft JhengHei;  }
     .c3-legend-item{ font-size: 16px; }
-    .ibox-title h5{ font-size: 18px; }
+    .ibox-title h5{ font-size: 18px;  }
 
     #print_web{ color: #1ab394; font-size: 16px; padding: 7px; }
 
     .ibox-content a{ background: #1bbb9b; padding: 5px 15px; border-radius: 4px; color: #fff; font-size: 17px; }
     .ibox-content a:hover{ background: #b8efe4; color: #1bbb9b; }
     #com_tb, #title_tb{ font-size: 18px; }
-
-    @media only screen and (max-width:1024px) {
-       #print_web{ display: none; }
-    }
-    @media only screen and (max-width:420px){ 
-       .cp_btn{ display: none; }
-       tspan{ font-size: 10px; }
-     }
+    #page-wrapper{ margin: 0px; }
+    
+    .print_div4{ width: 25%; float: left; }
+    .print_div700{ width: 700px; float: left; }
+    .print_div350{ width: 350px; float: left; }
     
  </style>
 
@@ -791,49 +788,37 @@
                       }
                    }
                 }
+
             });
 
+     win_pr();
+      
    });//JQUERY END
 
-        
-
-
+    function win_pr() {
+      var t=setTimeout("window.print()",1000);
+          
+        }    
  </script>
+
+
+
 </head>
 <body>
 
 <div id="wrapper">
 
-     <!-- ============================== 導航欄位 =================================== -->
-    <?php include 'shared_php/navbar-default.php';?>
-
     <div id="page-wrapper" class="gray-bg">
-
-    <!-- ============================== TOP欄位+ =================================== -->
-        <?php include 'shared_php/top_bar.php';?>
 
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-              <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5><span style="color:#1ec1a0">問卷分析</span>結果 </h5>
-                           <div class="ibox-tools">
-
-                         <a id="print_web" target="_blank" href="from_analytics_print.php?record_id=<?php echo $record_id;?>&case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class='fa fa-print'></i>列印報表</a>
-
-                        </div>
-                        </div>
-                        <div class="ibox-content ">
-                          <h2><?php echo $case_name?>-分析　</h2>
-                          <a class="cp_btn" href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
-                        </div>
-                    </div>
-                </div>
+            <h5><span style="color:#1ec1a0">問卷分析</span>結果 </h5>
+            <h2><?php echo $case_name?>-分析　</h2>
 
 
-                <div class="col-lg-3">
+
+                <div class="print_div4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>今日人數</h5>
@@ -847,7 +832,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="print_div4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>一周人數</h5>
@@ -861,7 +846,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="print_div4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>一月人數</h5>
@@ -875,7 +860,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="print_div4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>總人數</h5>
@@ -889,7 +874,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="print_div700">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>每日人數</h5>
@@ -903,7 +888,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="print_div700">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>每日回訪人數</h5>
@@ -917,7 +902,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="print_div350">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>媒體</h5>
@@ -931,7 +916,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="print_div350">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>性別</h5>
@@ -946,7 +931,7 @@
                 </div>
 
 
-                <div class="col-lg-6">
+                <div class="print_div700">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>年齡</h5>
@@ -960,8 +945,9 @@
                     </div>
                 </div>
 
+<p style='page-break-after:always'> </p>
 
-                <div class="col-lg-6">
+                <div class="print_div700">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>月收入</h5>
@@ -976,7 +962,8 @@
                 </div>
 
 
-                <div class="col-lg-6">
+
+                <div class="print_div350">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>縣市地區</h5>
@@ -1022,7 +1009,7 @@
                 </div>
                 
 
-                <div class="col-lg-6">
+                <div class="print_div350">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>產品需求</h5>
@@ -1036,7 +1023,9 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+<p style='page-break-after:always'> </p>
+
+                <div class="print_div350">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>坪數需求</h5>
@@ -1050,7 +1039,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="print_div350">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>購屋預算</h5>
@@ -1064,7 +1053,9 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+
+
+                <div class="print_div700">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>購屋動機</h5>
@@ -1078,8 +1069,9 @@
                     </div>
                 </div>
 
+<p style='page-break-after:always'> </p>
 
-                <div class="col-lg-6">
+                <div class="print_div700">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>格局需求</h5>

@@ -92,18 +92,20 @@
       text-align: center;
     }
     .c3 svg{ font-size: 15px; }
-    .c3-legend-item{ font-size: 13px; }
+    .c3-legend-item{ font-size: 15px; }
 
     #print_web{ color: #1ab394; font-size: 16px; padding: 7px; }
 
     .ibox-content a{ background: #1bbb9b; padding: 5px 15px; border-radius: 4px; color: #fff; font-size: 17px; }
     .ibox-content a:hover{ background: #b8efe4; color: #1bbb9b; }
+    #com_tb, #title_tb{ font-size: 18px; }
 
     @media only screen and (max-width:1024px) {
        #print_web{ display: none; }
     }
     @media only screen and (max-width:420px){
        .cp_btn{ display: none; }
+        tspan{ font-size: 10px; }
     }
     
  </style>
@@ -201,10 +203,15 @@
                     <?php 
                       
                       for ($i=0; $i <count($event_name)-1 ; $i++) { 
-                        
                         $name=$event_name[$i];
                         $num=$event_num[$i];
-                        echo "['".$name."', ".$num."],";
+                        if (count($event_name)>10) {
+                           if ($num>20) { echo "['".$name."', ".$num."],"; }
+                        }
+                        else{
+                           echo "['".$name."', ".$num."],";
+                        }
+                        
                       }
 
                     ?>
@@ -306,32 +313,7 @@
 
         
 
-google.charts.load('current', {'packages':['table']});
-      google.charts.setOnLoadCallback(drawTable);
 
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '地名');
-        data.addColumn('number', '人數');
-        
-        data.addRows([
-
-        <?php 
-          for ($i=0; $i <count($city_name)-1 ; $i++) { 
-
-            if ($city_num[$i]>5) {
-              echo "['".$city_name[$i]."',    ".$city_num[$i]." ],";
-            }
-          }
-
-        ?>
-
-        ]);
-
-        var table = new google.visualization.Table(document.getElementById('chart_div'));
-
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-      }
  </script>
 </head>
 <body>
@@ -506,7 +488,31 @@ google.charts.load('current', {'packages':['table']});
                         </div>
                         </div>
                         <div class="ibox-content">
-                           <div id="chart_div"></div>
+                           <div id="chart_div">
+                              <table class="table table-hover ">
+                                <thead id="title_tb">
+                                <tr>                               
+                                    <th>地名</th>
+                                    <th>人數</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody id="com_tb">
+                                   <?php
+
+      //-- 縣市地區 --
+         for ($i=0; $i <count($city_name)-1 ; $i++){
+
+          if ($city_num[$i]>5){
+              echo '<tr><td>'.$city_name[$i].'</td><td>'.$city_num[$i].'</td></tr>';
+          }
+         }
+      
+                                   ?>
+                                </tbody>
+                            </table>
+      
+                           </div>
                         </div>
                     </div>
                 </div>

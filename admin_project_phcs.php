@@ -54,6 +54,7 @@
      .ibox-title h5 span{ color: rgb(26, 179, 148); }
      .active_btn{ background-color: rgb(28, 195, 162); }
      .dis_none{ display: none; }
+      #case_title th{ text-align: center; }
      
     </style>
 

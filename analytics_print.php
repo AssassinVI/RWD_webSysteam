@@ -224,10 +224,17 @@
                      <?php 
                       
                       for ($i=0; $i <count($src_name)-1 ; $i++) { 
-                        
                         $name=$src_name[$i];
                         $num=$src_num[$i];
-                        echo "['".$name."', ".$num."],";
+                        if (count($src_name)>10) {
+                          if ($num>20) {
+                            echo "['".$name."', ".$num."],";
+                          }
+                        }else{
+
+                          echo "['".$name."', ".$num."],";
+                        }
+                        
                       }
 
                     ?>
@@ -320,6 +327,7 @@ google.charts.load('current', {'packages':['table']});
 
         window.print();
       }
+      
  </script>
 </head>
 <body>

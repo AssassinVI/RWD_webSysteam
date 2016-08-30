@@ -131,7 +131,7 @@
                       }
 
                      info=info+'<td id="tool_td">'; //功能
-                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
+                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php?com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>網頁</a>';
 
                      //---------------- 聯絡我們 -------------------
                      info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';
@@ -164,7 +164,7 @@
                         info=info+'<td><div class="logo_img"><img src="'+small_img+'"></div><span class="case_name">'+this['case_name']+'</span></td>';
                       }
                      info=info+'<td >'; //功能
-                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php??com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>分析</a>';
+                     info=info+     '<a id="an_btn_'+this['case_id']+'" href="admin_project_phcs.php??com_id='+com_id+'&type=web" style="background: #ff8e15;"><i class="fa fa-line-chart"></i>網頁</a>';
 
                      //---------------- 聯絡我們 -------------------
                      info=info+     '<a id="call_btn_'+this['case_id']+'" href="call_ph_list.php?case_id='+this['case_id']+'&case_name='+this['case_name']+'" style="background: #13b997;"><i class="fa fa-phone"></i>聯絡</a>';

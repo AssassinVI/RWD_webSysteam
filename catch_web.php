@@ -203,14 +203,6 @@
    <h3>簡訊短網址:</h3>
    <p><a target="_blank" id="ph_short_url"></a></p>
 
-   <?php
-
-    if (!empty($record_id)) {
-      
-      echo '<h3>顧客問卷網址:</h3>';
-      echo '<p><a target="_blank" href="from_all/from_view.php?record_id='.$record_id.'" >http://rx.znet.tw/rwd_system/Static_Seed_Project/from_all/from_view.php?record_id='.$record_id.'</a></p>';
-    }
-   ?>
    
   <hr><!-- 分隔線 -->
 <h3>QR Code:</h3>

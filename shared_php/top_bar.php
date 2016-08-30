@@ -1,14 +1,22 @@
+<?php require_once 'check_phone.php';?>
+
 <div class="row border-bottom">
             <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
 
+        <?php  
+
+         if (!check_mobile()) {
+          
+           echo '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>';
+         }
+
+        ?>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
 
         <?php 
 
-          require_once 'check_phone.php';
 
           if ($_SESSION['competence']=="admin") {
   
@@ -22,7 +30,7 @@
         ?>
                     <li>
                         <a id="logout_btn" href="#">
-                            <i class="fa fa-sign-out"></i> 登出
+                            <i class="fa fa-sign-out"></i>登出
                         </a>
                     </li>
             
@@ -30,9 +38,9 @@
 
               if (check_mobile()) {
                   
-                  $back='<li style=" float: right; margin-right: 10px;">';
-                 $back.=   '<a href="javascript:history.back()">'; 
-                 $back.=      '<i class="fa fa-reply"></i> 返回'; 
+                  $back='<li style=" float: right; ">';
+                 $back.=   '<a id=backout_btn href="javascript:history.back()">'; 
+                 $back.=      '<i class="fa fa-reply"></i>返回'; 
                  $back.=   '</a>'; 
                  $back.='</li>';
                  echo $back;
