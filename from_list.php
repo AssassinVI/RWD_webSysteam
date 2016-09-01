@@ -384,6 +384,7 @@
 
          var sel_num=$('#many_div :selected').val();
 
+
         if (sel_num!=undefined ) {
 
           var avg_num=parseInt($("#now_num").val()) / parseInt($('#many_div :selected').val());
@@ -397,12 +398,13 @@
               for (var i = 0; i < avg_num; i++) {
                    var next_num=(i*parseInt(sel_num)==0) ? 0 : i*parseInt(sel_num);
 
-                   if (start==next_num) {
-                      bar_num=bar_num+'<li><button id="active" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>';
-                   }
+
+                   if (start==next_num) { bar_num=bar_num+'<li><button id="active" >'+(i+1)+'</button></li>'; }
                    else{
-                      bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>';
-                   }
+                         bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>';
+                       }
+
+
               }
                        bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+(avg_num-1)*parseInt(sel_num)+')"><i class="fa fa-forward"></i></button></li>';
 
@@ -416,11 +418,19 @@
   }
 
 
+  /* ============================================== 換頁 ========================================================= */
+  function turn_bar(type,start,i_num,next_num) {
+    topbar(type,start,i_num);
+
+  }
+
+
+
     /* ================================================= 資料筆數 ================================================ */
      function many_fun(type) {
      	
-     	var info= '<label>資料筆數:</label>';
-     	info=info+'<select id="many_num" name="many_num" onchange="'+type+'(\'0\');">';
+     	var info= '<label>資料筆數：</label>';
+     	info=info+'<select id="many_num" name="many_num" onchange="'+type+'(0);">';
      	info=info+'<option value="all">全部</option>';
      	info=info+'<option value="2">2</option>';
      	info=info+'<option value="4">4</option>';

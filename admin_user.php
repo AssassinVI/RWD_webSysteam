@@ -104,15 +104,24 @@ if ($_SESSION['competence']!='admin') {
                   info=info+"<td>"+this['User_Name']+"</td>";
                   info=info+"<td class='no_display1024'>"+this['User_phone']+"</td>";
                   info=info+"<td class='no_display1024'>"+this['User_adds']+"</td>";
-
-                  if ($("#sel_user :selected").val()=='employee') {
+                 
+                 // ------- 擴充權限 ----------
+                  if ($("#sel_user :selected").val()=='employee' || $("#sel_user :selected").val()=='case' || $("#sel_user :selected").val()=='company') {
                      info=info+"<td class='no_display768'>無</td>";
-                     info=info+"<td>無</td>";
                   }
                   else{
                      info=info+"<td class='no_display768'><a href='admin_expand.php?User_id="+this['User_id']+"'>擴充</a></td>";
+                  }
+
+                  // -------- 管理權限 ---------- 
+                  if ($("#sel_user :selected").val()=='employee' || $("#sel_user :selected").val()=='case') {  
+                     info=info+"<td>無</td>";
+                  }
+                  else{
                      info=info+"<td><a href='admin_project.php?User_id="+this['User_id']+"&com_id="+this['com_id']+"'>管理</a></td>";
                   }
+                  
+
                   
                   info=info+"<td><a href='edit_admin.php?User_id="+this['User_id']+"'>修改</a></td>";
 
@@ -250,11 +259,11 @@ if ($_SESSION['competence']!='admin') {
 
                             <div id="is_use_div">
                               <input id="user_type6" type="radio" checked name="user_type" value=""><label for="user_type6">ALL</label>　
-                              <input id="user_type1" type="radio" checked name="user_type" value="admin"><label for="user_type1">管理者</label>　
-                              <input id="user_type2" type="radio" checked name="user_type" value="user"><label for="user_type2">最大使用者</label>　
-                              <input id="user_type3" type="radio" checked name="user_type" value="company"><label for="user_type3">群組權限</label>　
-                              <input id="user_type4" type="radio" checked name="user_type" value="case"><label for="user_type4">專案權限</label>　
-                              <input id="user_type5" type="radio" checked name="user_type" value="employee"><label for="user_type5">專員</label>　
+                              <input id="user_type1" type="radio"  name="user_type" value="admin"><label for="user_type1">管理者</label>　
+                              <input id="user_type2" type="radio"  name="user_type" value="user"><label for="user_type2">最大使用者</label>　
+                              <input id="user_type3" type="radio"  name="user_type" value="company"><label for="user_type3">群組權限</label>　
+                              <input id="user_type4" type="radio"  name="user_type" value="case"><label for="user_type4">專案權限</label>　
+                              <input id="user_type5" type="radio"  name="user_type" value="employee"><label for="user_type5">專員</label>　
                              </div>
                         </div>
                         </div>

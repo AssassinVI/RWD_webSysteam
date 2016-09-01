@@ -46,6 +46,7 @@
       margin-left: 30px;
       font-size: 12px;
      }
+     #new_case_btn{ display:inline; }
     </style>
     <!-- FooTable -->
 <script src="js/footable.all.min.js"></script>
@@ -104,7 +105,7 @@
  
  var competence="<?php echo $_SESSION['competence'];?>"; //權限
  if (competence!="admin") {
- 	$(".ibox-tools").css('display', 'none');
+ 	$("#new_case_btn").css('display', 'none');
  }
  
 
@@ -252,10 +253,13 @@ $("#sel_com").change(function(event) {
                             <h5>專案管理</h5>
 
                             <div class="ibox-tools">
-                              <span class="no_display768">(點新增產生新建案)</span>
+                             <div id="new_case_btn">
+                                <span class="no_display768">(點新增產生新建案)</span>
                                 <a href="edit_project.php?NewOrEdit=new" >
                                 <i class="fa fa-plus-square"> 新增</i>
-                            </a>
+                                </a>
+                             </div>
+
                             <div id="sel_com">
                             <label for="sel_com">公司: </label>
                             <select >
