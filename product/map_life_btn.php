@@ -23,6 +23,8 @@
 
 <button class="tool_box_btn" type="button">功能</button>
 
+ <div id="tool_btn_div">
+
         <!-- GOOGLEMAP 食 -->
 
             <a id="gm_food_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/小吃/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
@@ -70,5 +72,7 @@
                   echo $contant;
               }
             ?>
+
+  </div>
 
  

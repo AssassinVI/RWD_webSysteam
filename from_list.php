@@ -381,31 +381,74 @@
 
       /* ============================================== 分頁欄 ====================================================== */
       function topbar(type,start) {
-
+         
+         //選擇幾個分一頁
          var sel_num=$('#many_div :selected').val();
+         //一頁的數量
+         var onebar_num=5; 
+         //一頁的數量平均(無條件捨去)
+         var onebar_avg=Math.floor(onebar_num/2);
 
 
         if (sel_num!=undefined ) {
-
+          
+          //分頁數量
           var avg_num=parseInt($("#now_num").val()) / parseInt($('#many_div :selected').val());
               avg_num=Math.ceil(avg_num); //無條件進位
 
 
             if (sel_num!='all') {
 
+             var start_num=start/parseInt(sel_num);
               var bar_num='<li><button class="num_btn" onclick="'+type+'(0)"><i class="fa fa-backward"></i></button></li>';
+             
+             //分頁欄開頭
+              if (start_num-onebar_avg<0) { 
 
-              for (var i = 0; i < avg_num; i++) {
+                 var new_onebar_num=(onebar_num>avg_num) ? avg_num : onebar_num; //判斷分頁數量小於onebar_num以avg_num為主
+                 
+                  for (var i = 0; i < new_onebar_num; i++) {
+
                    var next_num=(i*parseInt(sel_num)==0) ? 0 : i*parseInt(sel_num);
+                   if (start==next_num) { bar_num=bar_num+'<li><button id="active" >'+(i+1)+'</button></li>'; }
+                   else{ bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>'; }
+                   
+                   if (i==onebar_num-1) { bar_num=bar_num+'<li><button class="num_btn" >...</button></li>'; }
+                  }
 
+              }
+              //分頁欄結尾
+              else if (start_num+onebar_avg+1>avg_num) { 
+
+                 var new_onebar_num=(onebar_num>avg_num) ? avg_num : onebar_num; //判斷分頁數量小於onebar_num以avg_num為主
+
+                  if ((avg_num-new_onebar_num)!=0) { bar_num=bar_num+'<li><button class="num_btn" >...</button></li>'; }
+
+                   for (var i = avg_num-new_onebar_num ; i < avg_num; i++) {
+
+                   var next_num=(i*parseInt(sel_num)==0) ? 0 : i*parseInt(sel_num);
+                   if (start==next_num) { bar_num=bar_num+'<li><button id="active" >'+(i+1)+'</button></li>'; }
+                   else{ bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>'; }
+
+                  }
+              }
+              //分頁欄中間
+              else{  
+
+                   bar_num=bar_num+'<li><button class="num_btn" >...</button></li>';
+
+                   for (var i = start_num-onebar_avg ; i < start_num+onebar_avg+1; i++) {
+                   var next_num=(i*parseInt(sel_num)==0) ? 0 : i*parseInt(sel_num);
 
                    if (start==next_num) { bar_num=bar_num+'<li><button id="active" >'+(i+1)+'</button></li>'; }
                    else{
                          bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+next_num+')">'+(i+1)+'</button></li>';
                        }
+                  }
 
-
+                  bar_num=bar_num+'<li><button class="num_btn" >...</button></li>';
               }
+
                        bar_num=bar_num+'<li><button class="num_btn" onclick="'+type+'('+(avg_num-1)*parseInt(sel_num)+')"><i class="fa fa-forward"></i></button></li>';
 
                $("#num_bar ul").html(bar_num);
@@ -418,11 +461,8 @@
   }
 
 
-  /* ============================================== 換頁 ========================================================= */
-  function turn_bar(type,start,i_num,next_num) {
-    topbar(type,start,i_num);
+  /* ============================================== 分頁數 ========================================================= */
 
-  }
 
 
 
