@@ -413,8 +413,10 @@
 
     #print_web{ color: #1ab394; font-size: 16px; padding: 7px; }
 
-    .ibox-content a{ background: #1bbb9b; padding: 5px 15px; border-radius: 4px; color: #fff; font-size: 17px; }
-    .ibox-content a:hover{ background: #b8efe4; color: #1bbb9b; }
+    .cp_btn{ background: #1bbb9b; padding: 5px 15px; border-radius: 4px; color: #fff; font-size: 17px; }
+
+    #def_btn{ background: #c1c1c1; box-shadow: 1px 3px 3px rgba(33, 33, 33, 0.5); }
+    #def_btn:hover{ box-shadow: 0px 0px 0px rgba(33, 33, 33, 0.5); color: #fff;}
     #com_tb, #title_tb{ font-size: 18px; }
 
     @media only screen and (max-width:1024px) {
@@ -500,35 +502,6 @@
                    }
                 }
             });
-
-      //縣市地區
-    /*  c3.generate({
-                bindto: '#adds',
-                data:{
-                    columns: [
-
-                    <?php 
-                      
-                      for ($i=0; $i <count($event_name)-1 ; $i++) { 
-                        
-                        $name=$event_name[$i];
-                        $num=$event_num[$i];
-                        echo "['".$name."', ".$num."],";
-                      }
-
-                    ?>
-                    
-                    ],
-                    type : 'pie'
-                },
-                pie: {
-                label: {
-                          format: function (value, ratio, id) {
-                          return value+"人";
-                         }
-                       }
-                  }
-            });*/
 
       //媒體
       c3.generate({
@@ -827,7 +800,9 @@
                         </div>
                         <div class="ibox-content ">
                           <h2><?php echo $case_name?>-分析　</h2>
-                          <a class="cp_btn" href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
+                          <span style="font-size:15px;">切換分析：</span>
+                          <span class="cp_btn" ><i class="fa fa-line-chart"></i>問卷分析</span>
+                          <a id="def_btn" class="cp_btn" href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
                         </div>
                     </div>
                 </div>
