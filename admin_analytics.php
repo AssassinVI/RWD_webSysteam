@@ -105,7 +105,7 @@
        #print_web{ display: none; }
     }
     @media only screen and (max-width:420px){
-       .cp_btn{ display: none; }
+       .ph_none{ display: none; }
         tspan{ font-size: 10px; }
     }
     
@@ -353,11 +353,11 @@
                                if ($sql_q->rowCount()>0) {
                                  $row=$sql_q->fetch();
                                  
-                                 $txt='<span style="font-size:15px;">切換分析：</span>';
+                                 $txt='<span class="ph_none" style="font-size:15px;">切換分析：</span>';
 
-                                 $txt.='<a id="def_btn" class="cp_btn" href="from_analytics.php?record_id='.$row[0].'&case_id='.$case_id.'&case_name='.$case_name.'"><i class="fa fa-line-chart"></i>問卷分析</a>';
+                                 $txt.='<a id="def_btn" class="cp_btn ph_none" href="from_analytics.php?record_id='.$row[0].'&case_id='.$case_id.'&case_name='.$case_name.'"><i class="fa fa-line-chart"></i>問卷分析</a>';
 
-                                 $txt.='<span class="cp_btn" ><i class="fa fa-line-chart"></i>網頁分析</span>';
+                                 $txt.='<span class="cp_btn ph_none" ><i class="fa fa-line-chart"></i>網頁分析</span>';
                                  echo $txt;
                                }
 

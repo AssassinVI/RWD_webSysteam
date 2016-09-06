@@ -423,7 +423,7 @@
        #print_web{ display: none; }
     }
     @media only screen and (max-width:420px){ 
-       .cp_btn{ display: none; }
+       .ph_none{ display: none; }
        tspan{ font-size: 10px; }
      }
     
@@ -800,9 +800,9 @@
                         </div>
                         <div class="ibox-content ">
                           <h2><?php echo $case_name?>-分析　</h2>
-                          <span style="font-size:15px;">切換分析：</span>
-                          <span class="cp_btn" ><i class="fa fa-line-chart"></i>問卷分析</span>
-                          <a id="def_btn" class="cp_btn" href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
+                          <span class="ph_none" style="font-size:15px;">切換分析：</span>
+                          <span class="cp_btn ph_none" ><i class="fa fa-line-chart"></i>問卷分析</span>
+                          <a id="def_btn" class="cp_btn ph_none" href="admin_analytics.php?case_id=<?php echo $case_id;?>&case_name=<?php echo $case_name;?>"><i class="fa fa-area-chart"></i>網頁分析</a>
                         </div>
                     </div>
                 </div>
