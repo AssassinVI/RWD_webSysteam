@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>專案管理</title>
+    <link rel="shortcut icon" href="favicon.ico" />
    <!-- 外掛AND CSS -->
     <?php include 'shared_php/script_style.php';?>
     <!-- FooTable -->

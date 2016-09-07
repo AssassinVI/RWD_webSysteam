@@ -57,6 +57,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>720環景</title>
+  <link rel="shortcut icon" href="favicon.ico" />
 		<!-- ================================== 外掛and CSS ====================================== -->
     <?php include 'shared_php/script_style.php';?>
 

@@ -61,6 +61,7 @@
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>YouTube影片</title>
+  <link rel="shortcut icon" href="favicon.ico" />
 
 	<!-- ================================== 外掛and CSS ====================================== -->
 

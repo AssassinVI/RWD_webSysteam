@@ -18,6 +18,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>取網址</title>
+  <link rel="shortcut icon" href="favicon.ico" />
 	<!-- 外掛AND CSS -->
     <?php include 'shared_php/script_style.php';?>
     <style type="text/css">
