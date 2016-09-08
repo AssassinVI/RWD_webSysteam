@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>google地圖附近景點</title>
+	<style type="text/css">
+		#map{ 
+		width: 100%;
+		height: 500px; }
+		.del_div{ width: 33%; height: 300px; float: left; }
+	</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="detial"></div>
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV1hk5SfQxLdftm38V5_3l4lY70jMg6w4&libraries=places"></script>
+
+<script type="text/javascript">
+var map;
+var infowindow;
+
+// ============================= 專案座標 ==============================
+  var pyrmont = {lat: 24.972681, lng: 121.258243};
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: pyrmont,
+    zoom: 15
+  });
+
+  infowindow = new google.maps.InfoWindow();
+
+    var cen_mark=new google.maps.Marker({
+    position: pyrmont,
+    map: map,
+    icon:'https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=home|ffeb3b',
+  });
+
+    google.maps.event.addListener(cen_mark, 'click', function() {
+    infowindow.setContent('合雄心情天');
+    infowindow.open(map, this);
+  });
+
+
+// =========================== 地點搜尋 ==================================
+var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: pyrmont,
+    radius: '500',
+    //query:'restaurant',
+    types: ['food'] //百貨商店    
+  }, callback);
+
+
+function callback(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+    	createMarker(results[i]);
+    
+    }
+  }
+}
+
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: placeLoc
+  });
+   
+   if (place.photos!=undefined){
+     $("#detial").append('<div class="del_div"><h3>'+place.name+'</h3><img src="'+place.photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150})+'"></div>');
+   }
+   else{
+     $("#detial").append('<div class="del_div"><h3>'+place.name+'</h3></div>');
+   }
+
+  		google.maps.event.addListener(marker, 'click', function() { 
+        if (place.photos!=undefined) {
+          infowindow.setContent(place.name+'<br><img src="'+place.photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150})+'">');
+        }
+        else{
+          infowindow.setContent(place.name);
+        }
+       infowindow.open(map, this);
+     });
+
+  	
+  	
+
+  
+
+  
+}
+
+
+</script>
+</body>
+</html>
