@@ -1,11 +1,37 @@
-<?php
+<?php require_once 'config.php';
+ 
+$pdo=pdo_conn();
+$sql_q=$pdo->prepare("SELECT case_name FROM build_case WHERE case_id=:case_id");
+$sql_q->bindparam(":case_id", $_GET['case_id']);
+$sql_q->execute();
+$row=$sql_q->fetch(PDO::FETCH_ASSOC);
+
 
  if ($_GET) {
    $place_loc=$_GET['place_loc'];
    $type=$_GET['type'];
    $radius=$_GET['radius'];
    $zoom=$_GET['zoom'];
+
+    switch ($type) {
+ 	case 'food': //食
+ 		$type_name='食';
+ 		break;
+    case 'doctor': //醫
+ 		$type_name='醫';
+ 		break;
+ 	case 'bus_station': //行
+ 		$type_name='行';
+ 		break;
+ 	case 'school':  //育
+ 		$type_name='育';
+ 		break;
+ 	case 'store':  //樂
+ 		$type_name='樂';
+ 		break;
+  }
  }
+
 
 ?>
 
@@ -16,12 +42,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>附近景點</title>
 	<style type="text/css">
-  body{ font-family: Microsoft JhengHei; background-color: hsla(16,13%,25%,1); }
-		#map{ width: 100%;height: 500px; }
+    body{ font-family: Microsoft JhengHei; background-color: hsla(16,13%,25%,1); margin: 0px; }
+		#map{ width: 100%;height: 500px; margin-top: 45px; }
     #detial{ width: 98%; margin: auto; }
+    #title{ text-align: center; background-color: #715e57; padding: 10px 0px; font-size: 20px; color: #fff; position: fixed; top: 0px; width: 100%; z-index: 1000;  box-shadow: 0px 2px 10px rgba(0,0,0,0.67);}
+
 		.del_div{ width: 32%; height: 380px; display: inline-block; text-align: center; margin: 10px 0px 0px 10px; background-color: #5f4f49; color: #fff; }
 
     .del_div a{ display: inline-block; padding: 12px 45px; margin: 8px 11px; background: #b39c94; text-decoration: none; color: #5f4f49; font-size: 20px; font-weight: 700; border-radius: 4px; }
+
     .no_photo{margin: 0px; width: 100%; height: 250px; background: #9E9E9E; }
 
     #back_btn{ position: fixed; bottom: 60px; right: 0px; text-decoration: none; background-color: rgba(255, 255, 255, 0.65); padding: 10px 21px; color: #483c37; font-size: 20px; border-radius: 30px 0px 0px 30px; font-weight: 600;  box-shadow: 1px 3px 4px rgb(0, 0, 0);}
@@ -38,12 +67,14 @@
 
 @media only screen and (max-width:420px){
    #map{ height: 350px; }
+   #title{ padding:13px 0px;  }
 }
 </style>
 </head>
 <body>
+<div id="title"><?php echo $row["case_name"].' 附近景點 ('.$type_name.')'?> </div>
 
-<div id="map" ></div>
+<div id="map"></div>
 
 <div id="detial"></div>
 
@@ -77,7 +108,7 @@ var latLng='<?php echo $place_loc?>';
   });
 
     google.maps.event.addListener(cen_mark, 'click', function() {
-    infowindow.setContent('合雄心情天');
+    infowindow.setContent('<?php echo $row["case_name"];?>');
     infowindow.open(map, this);
   });
 

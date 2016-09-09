@@ -27,11 +27,11 @@
 
         <!-- GOOGLEMAP 食 -->
 
-            <a id="gm_food_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=food&radius=1000&zoom=14" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
+            <a id="gm_food_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=food&radius=1000&zoom=14&case_id=<?php echo $case_id?>" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
 
         <!-- GOOGLEMAP 醫 -->
 
-            <a id="gm_phl_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=doctor&radius=1000&zoom=14" onclick="ga('send', 'event', '地圖(醫)', 'click', 'tool_bar')">醫</a>
+            <a id="gm_phl_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=doctor&radius=1000&zoom=14&case_id=<?php echo $case_id?>" onclick="ga('send', 'event', '地圖(醫)', 'click', 'tool_bar')">醫</a>
 
         <!-- GOOGLEMAP 住 -->
 
@@ -39,17 +39,16 @@
 
         <!-- GOOGLEMAP 行 -->
 
-            <a id="gm_work_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=bus_station&radius=500&zoom=16" onclick="ga('send', 'event', '地圖(行)', 'click', 'tool_bar')">行</a>
+            <a id="gm_work_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=bus_station&radius=500&zoom=16&case_id=<?php echo $case_id?>" onclick="ga('send', 'event', '地圖(行)', 'click', 'tool_bar')">行</a>
 
         <!-- GOOGLEMAP 育 -->
 
-            <a id="gm_school_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=school&radius=1000&zoom=14" onclick="ga('send', 'event', '地圖(育)', 'click', 'tool_bar')">育</a>
+            <a id="gm_school_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=school&radius=1000&zoom=14&case_id=<?php echo $case_id?>" onclick="ga('send', 'event', '地圖(育)', 'click', 'tool_bar')">育</a>
 
         <!-- GOOGLEMAP 樂 -->
 
-            <a id="gm_fun_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=store&radius=2500&zoom=14" onclick="ga('send', 'event', '地圖(樂)', 'click', 'tool_bar')">樂</a>
+            <a id="gm_fun_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=store&radius=2500&zoom=14&case_id=<?php echo $case_id?>" onclick="ga('send', 'event', '地圖(樂)', 'click', 'tool_bar')">樂</a>
 
-              
             <?php 
 
               if (!empty($map_life_btn['who_other'])) {
