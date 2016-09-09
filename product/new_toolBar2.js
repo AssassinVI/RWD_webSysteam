@@ -22,6 +22,18 @@
            i+=1;
          });
 
+
+       // =========================== 燈箱 ===========================
+         $(".iframe_box").fancybox({
+               'padding'               :'0',
+               'width'                 : '100%',
+               'height'               : '100%',
+               'autoScale'               : false,
+               'transitionIn'          : 'none',
+               'transitionOut'          : 'none',
+               'type'                    : 'iframe'
+          });
+
       });
 
       $(window).load(function() {

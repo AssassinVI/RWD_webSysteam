@@ -27,27 +27,27 @@
 
         <!-- GOOGLEMAP 食 -->
 
-            <a id="gm_food_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/小吃/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
+            <a id="gm_food_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=food&radius=1000&zoom=14" onclick="ga('send', 'event', '地圖(食)', 'click', 'tool_bar')">食</a>
 
         <!-- GOOGLEMAP 醫 -->
 
-            <a id="gm_phl_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/醫院/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(醫)', 'click', 'tool_bar')">醫</a>
+            <a id="gm_phl_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=doctor&radius=1000&zoom=14" onclick="ga('send', 'event', '地圖(醫)', 'click', 'tool_bar')">醫</a>
 
         <!-- GOOGLEMAP 住 -->
 
-            <a id="gm_home_btn" class="tool_lay btn_lay" href="https://www.google.com/maps/dir//<?php echo $map_ps['map_position'];?>/@<?php echo $map_ps['map_position'];?>,17z/data=!4m5!1m4!3m3!1s0x0:0x0!2zMjXCsDAyJzE4LjkiTiAxMjHCsDE3JzM2LjEiRQ!3b1?hl=zh-TW" onclick="ga('send', 'event', '地圖(住)', 'click', 'tool_bar')">住</a>
+            <a id="gm_home_btn" class="tool_lay btn_lay " href="https://www.google.com/maps/dir//<?php echo $map_ps['map_position'];?>/@<?php echo $map_ps['map_position'];?>,17z/data=!4m5!1m4!3m3!1s0x0:0x0!2zMjXCsDAyJzE4LjkiTiAxMjHCsDE3JzM2LjEiRQ!3b1?hl=zh-TW" onclick="ga('send', 'event', '地圖(住)', 'click', 'tool_bar')">住</a>
 
         <!-- GOOGLEMAP 行 -->
 
-            <a id="gm_work_btn" class="tool_lay btn_lay" href="<?php echo $map_life_btn['traffic_url'];?>" onclick="ga('send', 'event', '地圖(行)', 'click', 'tool_bar')">行</a>
+            <a id="gm_work_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=bus_station&radius=500&zoom=16" onclick="ga('send', 'event', '地圖(行)', 'click', 'tool_bar')">行</a>
 
         <!-- GOOGLEMAP 育 -->
 
-            <a id="gm_school_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/學校/@<?php echo trim($map_ps['map_position']);?>,15z?hl=zh-TW" onclick="ga('send', 'event', '地圖(育)', 'click', 'tool_bar')">育</a>
+            <a id="gm_school_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=school&radius=1000&zoom=14" onclick="ga('send', 'event', '地圖(育)', 'click', 'tool_bar')">育</a>
 
         <!-- GOOGLEMAP 樂 -->
 
-            <a id="gm_fun_btn" class="tool_lay btn_lay" href="https://www.google.com.tw/maps/search/百貨公司/@<?php echo trim($map_ps['map_position']);?>,14z?hl=zh-TW" onclick="ga('send', 'event', '地圖(樂)', 'click', 'tool_bar')">樂</a>
+            <a id="gm_fun_btn" class="tool_lay btn_lay " href="../../assets/php/googlemap_place.php?place_loc=<?php echo trim($map_ps['map_position']);?>&type=store&radius=2500&zoom=14" onclick="ga('send', 'event', '地圖(樂)', 'click', 'tool_bar')">樂</a>
 
               
             <?php 
